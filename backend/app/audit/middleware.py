@@ -35,6 +35,9 @@ def _should_skip(method: str, path: str, status_code: int) -> bool:
 
 def _extract_user_id(request: Request) -> uuid.UUID | None:
     """Extract user_id from JWT Bearer token in Authorization header."""
+    native_actor = getattr(request.state, "native_actor_id", None)
+    if isinstance(native_actor, uuid.UUID):
+        return native_actor
     auth_header = request.headers.get("authorization", "")
     if not auth_header.startswith("Bearer "):
         return None

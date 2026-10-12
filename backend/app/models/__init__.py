@@ -13,7 +13,8 @@ from app.models.user import Base, User, UserRole
 # Phase 2 models
 from app.models.departments import Department
 from app.models.fees import FeeSchedule, FeeLineItem, FeeWaiver
-from app.models.request_workflow import RequestTimeline, RequestMessage, ResponseLetter
+from app.models.request_workflow import RequestTimeline, RequestMessage, ResponseLetter, RequestPublicStatus
+from app.models.records_evidence import RequestEvidenceNote, RequestExemptionDecision
 from app.models.notifications import NotificationTemplate, NotificationLog
 # Phase 2 Step 5c: PromptTemplate now lives in civiccore.llm.templates.
 # Re-export here so existing imports (`from app.models import PromptTemplate`)
@@ -34,7 +35,8 @@ __all__ = [
     "ExemptionRule", "ExemptionFlag", "DisclosureTemplate", "RuleType", "FlagStatus",
     # Phase 2
     "Department", "FeeSchedule", "FeeLineItem", "FeeWaiver",
-    "RequestTimeline", "RequestMessage", "ResponseLetter",
+    "RequestTimeline", "RequestMessage", "ResponseLetter", "RequestPublicStatus",
+    "RequestEvidenceNote", "RequestExemptionDecision",
     "NotificationTemplate", "NotificationLog",
     "PromptTemplate", "CityProfile",
     "SystemCatalog", "ConnectorTemplate",

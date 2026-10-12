@@ -33,8 +33,8 @@ class NotificationLog(Base):
     request_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("records_requests.id", ondelete="SET NULL")
     )
-    channel: Mapped[str] = mapped_column(String(20))
-    subject: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    channel: Mapped[str] = mapped_column(Text)
+    subject: Mapped[str | None] = mapped_column(Text, nullable=True)
     body: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[str] = mapped_column(String(20), default="queued")  # queued/sent/failed
     sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
@@ -42,3 +42,6 @@ class NotificationLog(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    legacy_id: Mapped[str | None] = mapped_column(Text)
+    module_id: Mapped[str | None] = mapped_column(Text)
+    audience: Mapped[str | None] = mapped_column(Text)
