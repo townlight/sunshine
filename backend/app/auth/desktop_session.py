@@ -19,6 +19,22 @@ _ROLE_MODULES: dict[str, frozenset[str] | None] = {
 }
 
 
+def validate_native_public_proof(proof: str | None, *, profile_root: Path) -> None:
+    """Authenticate the local shell, not a resident identity or staff role."""
+    try:
+        admin = _json_file(profile_root / "config" / "first-admin.json")
+        if not isinstance(admin, dict) or not admin.get("email"):
+            raise ValueError("Setup incomplete")
+        key = bytes.fromhex((profile_root / "session-mac-secret.key").read_text().strip())
+        if len(key) != 32 or not isinstance(proof, str):
+            raise ValueError("Invalid proof")
+        expected = hmac.new(key, b"townlight-native-public-records-v1", hashlib.sha256).hexdigest()
+        if not hmac.compare_digest(expected, proof):
+            raise ValueError("Invalid proof")
+    except (OSError, ValueError, TypeError):
+        raise PermissionError("Public Records requires the configured local application.") from None
+
+
 @dataclass(frozen=True)
 class NativeDesktopPrincipal:
     email: str

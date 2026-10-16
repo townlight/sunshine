@@ -5,6 +5,11 @@ from app.requests import workflow
 
 
 async def apply_command(session, req, actor, command):
+    if isinstance(command, dto.FinishCommand):
+        from app.requests import artifacts
+        if command.action == "close-records-request":
+            return await artifacts.close(session, req, actor)
+        return await artifacts.fulfill(session, req, actor)
     workflow.ensure_active(req)
     data = command.payload
     if isinstance(command, dto.AssignCommand):

@@ -220,10 +220,15 @@ class ApprovalCommand(NativePayload):
     payload: ApprovalPayload = Field(default_factory=ApprovalPayload)
 
 
+class FinishCommand(NativePayload):
+    action: Literal["fulfill-records-request", "close-records-request"]
+    payload: NativePayload = Field(default_factory=NativePayload)
+
+
 RecordsCommand = Annotated[
     AssignCommand | DeadlineCommand | CalculateDeadlineCommand | ClarificationCommand | MessageCommand
     | SearchNoteCommand | SearchReceiptCommand | ExemptionNoteCommand | ExemptionDecisionCommand
-    | FeeEstimateCommand | FeeLineCommand | FeeWaiverCommand | DraftCommand | ApprovalCommand,
+    | FeeEstimateCommand | FeeLineCommand | FeeWaiverCommand | DraftCommand | ApprovalCommand | FinishCommand,
     Field(discriminator="action"),
 ]
 
@@ -296,6 +301,7 @@ class SearchReceiptView(NativeView):
 
 class RecordsView(NativeView):
     # Presentation boundary, not a second persisted representation.
+    request_id: str
     id: str
     public_tracking_number: str
     requester: str
@@ -318,6 +324,8 @@ class RecordsView(NativeView):
     response_draft: str
     approval_notes: list[str]
     exports: list[str]
+    documents: list["RecordsDocumentView"] = Field(default_factory=list)
+    release_packages: list["ReleasePackageView"] = Field(default_factory=list)
     timeline: list[TimelineView]
     public_status_events: list[PublicStatusView]
     messages: list[MessageView]
@@ -332,3 +340,146 @@ class RecordsOperationRead(NativeView):
     action: str
     message: str
     request: RecordsView
+
+
+class RecordsStateRead(NativeView):
+    records_requests: list[RecordsView]
+    notification_events: list["NotificationView"] = Field(default_factory=list)
+    publication_events: list["PublicationView"] = Field(default_factory=list)
+    audit_entries: list["AuditView"] = Field(default_factory=list)
+
+
+class ManagedFileReceipt(NativePayload):
+    original_path: str = Field(min_length=1)
+    stored_path: str = Field(min_length=1)
+    file_name: str = Field(min_length=1, max_length=500)
+    sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    size_bytes: int = Field(ge=0, le=2147483647, strict=True)
+
+
+class AttachDocument(NativePayload):
+    title: str = Field(min_length=1)
+    citation: str = ""
+    file: ManagedFileReceipt
+
+
+class AttachReleaseCopy(NativePayload):
+    status: Literal["release-ready copy", "redacted copy"]
+    note: str = ""
+    added_by: str = ""
+    file: ManagedFileReceipt
+
+
+class RecordsDocumentView(NativeView):
+    id: str
+    attachment_id: str
+    title: str
+    original_path: str
+    stored_path: str
+    citation: str
+    sha256: str
+    size_bytes: int
+    status: str
+    added_by: str
+    created_at_unix_seconds: int
+    release_original_path: str = ""
+    release_stored_path: str = ""
+    release_file_name: str = ""
+    release_sha256: str = ""
+    release_size_bytes: int = 0
+    release_status: str = ""
+    release_note: str = ""
+    release_added_by: str = ""
+    release_added_at_unix_seconds: int | None = None
+
+
+class ReleasePackageView(NativeView):
+    id: str
+    export_path: str
+    package_hash: str
+    document_count: int
+    release_artifact_count: int
+    search_session_count: int
+    release_count: int
+    redacted_count: int
+    exempt_count: int
+    created_at_unix_seconds: int
+
+
+class PrepareArtifact(NativePayload):
+    kind: Literal["response", "release-package"]
+
+
+class ArtifactPlan(NativeView):
+    artifact_id: str
+    file_name: str
+    content: str
+    sha256: str
+    created_at_unix_seconds: int
+
+
+class CompleteArtifact(NativePayload):
+    export_path: str = Field(min_length=1)
+
+
+class PublicIntake(NativePayload):
+    requester: str = Field(min_length=1)
+    requesterContact: str = Field(min_length=1)
+    summary: str = Field(min_length=1)
+    deadline: str = ""
+
+
+class PublicLookup(NativePayload):
+    trackingNumber: str = Field(min_length=1)
+    requesterContact: str = Field(min_length=1)
+
+
+class PublicMessage(PublicLookup):
+    publicRequestMessage: str = Field(min_length=1)
+
+
+class GeneratedDraft(NativePayload):
+    text: str = Field(min_length=1)
+    model: str = Field(min_length=1)
+    previous_response_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class NotificationView(NativeView):
+    id: str
+    notification_id: str
+    module_id: str
+    record_id: str
+    audience: str
+    channel: str
+    subject: str
+    body: str
+    status: str
+    created_at_unix_seconds: int
+    sent_at_unix_seconds: int | None
+
+
+class PublicationView(NativeView):
+    id: str
+    source_module: str
+    source_record_id: str
+    record_type: str
+    public_payload: str
+    payload_hash: str
+    published_at_unix_seconds: int
+    retracted_at_unix_seconds: int | None = None
+    retracted_by: str = ""
+
+
+class AuditView(NativeView):
+    id: str
+    module_id: str
+    action: str
+    summary: str
+    created_at_unix_seconds: int
+    previous_hash: str
+    entry_hash: str
+
+
+RecordsView.model_rebuild()
+RecordsOperationRead.model_rebuild()
+RecordsStateRead.model_rebuild()

@@ -42,7 +42,7 @@ class RecordsRequest(Base):
         default=RequestStatus.RECEIVED,
     )
     assigned_to: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
-    created_by: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    created_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     response_draft: Mapped[str | None] = mapped_column(Text, nullable=True)
     review_notes: Mapped[str | None] = mapped_column(Text, nullable=True)

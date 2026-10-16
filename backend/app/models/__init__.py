@@ -15,6 +15,8 @@ from app.models.departments import Department
 from app.models.fees import FeeSchedule, FeeLineItem, FeeWaiver
 from app.models.request_workflow import RequestTimeline, RequestMessage, ResponseLetter, RequestPublicStatus
 from app.models.records_evidence import RequestEvidenceNote, RequestExemptionDecision
+from app.models.records_files import RequestFileEvidence, RequestReleaseCopy
+from app.models.records_artifacts import RequestArtifact, RequestPublication
 from app.models.notifications import NotificationTemplate, NotificationLog
 # Phase 2 Step 5c: PromptTemplate now lives in civiccore.llm.templates.
 # Re-export here so existing imports (`from app.models import PromptTemplate`)

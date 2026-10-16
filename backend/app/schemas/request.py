@@ -28,7 +28,7 @@ class RequestRead(BaseModel):
     description: str
     status: RequestStatus
     assigned_to: uuid.UUID | None
-    created_by: uuid.UUID
+    created_by: uuid.UUID | None
     created_at: datetime
     response_draft: str | None
     review_notes: str | None

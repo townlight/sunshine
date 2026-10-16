@@ -32,7 +32,7 @@ async def create_records_request(
     session: AsyncSession,
     data: RequestIntake,
     *,
-    actor: User,
+    actor: User | None,
     assigned_to: uuid.UUID | None,
     department_id: uuid.UUID | None,
     audit_action: str = "create_request",
@@ -49,7 +49,7 @@ async def create_records_request(
         requester_phone=data.requester_phone, requester_type=data.requester_type,
         description=data.description, statutory_deadline=data.statutory_deadline,
         scope_assessment=data.scope_assessment, priority=data.priority,
-        created_by=actor.id, assigned_to=assigned_to, department_id=department_id,
+        created_by=actor.id if actor else None, assigned_to=assigned_to, department_id=department_id,
     )
     session.add(req)
     await session.flush()
@@ -66,7 +66,7 @@ async def create_records_request(
         )
     await write_audit_log(
         session=session, action=audit_action, resource_type="request",
-        resource_id=str(req.id), user_id=actor.id,
+        resource_id=str(req.id), user_id=actor.id if actor else None,
         details={"requester": data.requester_name, "description": data.description[:100],
                  **({"native_role": native_role} if native_role is not None else {})},
         commit=False,

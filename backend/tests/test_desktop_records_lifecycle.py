@@ -36,6 +36,43 @@ async def operation(api, proof, request_id, action, payload=None, expected_statu
 
 
 @pytest.mark.asyncio
+async def test_generated_draft_and_outbox_use_current_authority(native_api):
+    api, proof, _, app = native_api
+    request_id = await intake(api, proof)
+    headers = {"X-Townlight-Session": proof}
+    context_url = f"/desktop/v1/requests/{request_id}/draft-context"
+    assert (await api.get(context_url, headers=headers)).status_code == 400
+    await operation(api, proof, request_id, "draft-records-response", {"responseDraft": "Original", "citation": "SYN-1"})
+    await operation(api, proof, request_id, "approve-records-response", {"approvalNote": "Original human approval"})
+    context = (await api.get(context_url, headers=headers)).json()
+    # Generation is native runtime transport. Merely requesting context does
+    # not modify text or approval, including when native generation then fails.
+    before = (await api.get(f"/desktop/v1/requests/{request_id}/view", headers=headers)).json()
+    assert before["response_draft"] == "Original" and before["approved_at_unix_seconds"] is not None
+    result = await api.post(f"/desktop/v1/requests/{request_id}/generated-draft", headers=headers, json={
+        "text": "Generated replacement", "model": "synthetic-test-output-not-real-inference",
+        "previous_response_sha256": context["previous_response_sha256"],
+    })
+    assert result.status_code == 200, result.text
+    assert result.json()["request"]["approved_at_unix_seconds"] is None
+    assert result.json()["request"]["approval_notes"] == ["Original human approval"]
+    stale = await api.post(f"/desktop/v1/requests/{request_id}/generated-draft", headers=headers, json={
+        "text": "Stale overwrite", "model": "synthetic-test-output-not-real-inference",
+        "previous_response_sha256": context["previous_response_sha256"],
+    })
+    assert stale.status_code == 409
+    snapshot = (await api.get("/desktop/v1/records-state", headers=headers)).json()
+    assert snapshot["records_requests"][0]["response_draft"] == "Generated replacement"
+    notification = snapshot["notification_events"][0]
+    url = f"/desktop/v1/notifications/{notification['notification_id']}/sent"
+    assert (await api.post(url)).status_code == 401
+    logged = await api.post(url, headers=headers)
+    assert logged.status_code == 200, logged.text
+    assert logged.json()["notification_events"][0]["sent_at_unix_seconds"] is not None
+    assert (await api.post(url, headers=headers)).status_code == 400
+
+
+@pytest.mark.asyncio
 async def test_existing_non_file_lifecycle_uses_canonical_relations(native_api):
     api, proof, actor_id, _ = native_api
     request_id = await intake(api, proof)
@@ -164,6 +201,13 @@ async def test_runtime_readiness_requires_the_lifecycle_schema(client, monkeypat
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
     from civicsuite_runtime.services import _domain_database_status
 
+    from civicaccess.access_review import AccessibilityReviewRepository
+    from civicsuite_runtime.access_bridge import ensure_native_schema
+    repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
+    try:
+        ensure_native_schema(repository.engine)
+    finally:
+        repository.engine.dispose()
     assert _domain_database_status()["ok"] is True
     async with session_factory() as session:
         await session.execute(text("ALTER TABLE request_evidence_notes RENAME COLUMN content TO unavailable_content"))
