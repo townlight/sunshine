@@ -15,8 +15,28 @@ from civicsuite_runtime.records_import_store import ensure_schema, import_snapsh
 from app.desktop_bridge.projection import request_view
 from app.models.request import RecordsRequest
 from tests.conftest import TEST_DATABASE_URL, test_session_maker as session_factory
-from tests.test_desktop_records import native_api, native_profile  # noqa: F401
+from tests.test_desktop_records import native_api, native_profile, INTAKE  # noqa: F401
 from tests.test_records_import_preflight import sample, source
+
+
+@pytest.mark.parametrize("entrypoint", ["records_cutover", "records_demo"])
+def test_native_cli_initializes_profile_before_backend_imports(tmp_path, entrypoint):
+    """Installed CLI has no TESTING/env secrets inherited from pytest."""
+    import os
+    import subprocess
+    import sys
+    env = os.environ.copy()
+    for key in ("TESTING", "JWT_SECRET", "JWT_SECRET_FILE", "FIRST_ADMIN_PASSWORD",
+                "FIRST_ADMIN_PASSWORD_FILE", "ENCRYPTION_KEY", "TOWNLIGHT_MIGRATION_PROOF"):
+        env.pop(key, None)
+    env.update(TOWNLIGHT_PROFILE_ROOT=str(tmp_path), CIVICSUITE_DATA_DIR=str(tmp_path / "Data"),
+               DATABASE_URL="postgresql+asyncpg://unused:unused@127.0.0.1:1/unused")
+    result = subprocess.run([sys.executable, "-m", f"civicsuite_runtime.{entrypoint}"],
+                            env=env, cwd=tmp_path, capture_output=True, text=True, timeout=30)
+    assert result.returncode == 1  # No native activation journal/proof: refuse, do not connect.
+    assert "Traceback" not in result.stderr
+    assert "preserved" in result.stdout
+    assert len((tmp_path / "config/secrets/jwt_secret.txt").read_text().strip()) >= 32
 
 
 def storage_schema():
@@ -28,6 +48,32 @@ def storage_schema():
         metadata.create_all(repository.engine)
     finally:
         repository.engine.dispose()
+
+
+@pytest.mark.asyncio
+async def test_import_retains_native_public_intake_status(native_api):
+    api, proof, actor_id, app = native_api
+    root = app.state.desktop_profile_root
+    storage_schema()
+    data = sample()
+    data["records_requests"][0].update(status="public intake received",
+        public_tracking_number="REQ-0002", submitted_via="public intake",
+        approved_at_unix_seconds=None, approval_notes=[])
+    path = source(root, data)
+    backup = root / "preserved-public-intake.json"
+    backup.write_bytes(path.read_bytes())
+    snapshot = preflight(root)
+    async with session_factory() as session:
+        await import_snapshot(session, root, snapshot.source_sha256, backup, actor_id)
+    async with session_factory() as session:
+        req = await session.get(RecordsRequest, uuid.UUID(snapshot.records[0].request_id))
+        assert req.status.value == "received"
+        assert await request_view(session, req) == snapshot.records[0]
+    for tracking in ("REQ-0003", "REQ-0004"):
+        response = await api.post("/desktop/v1/requests", json=INTAKE,
+            headers={"X-Townlight-Session": proof})
+        assert response.status_code == 201, response.text
+        assert response.json()["public_tracking_number"] == tracking
 
 
 def full_sample(root):
@@ -69,7 +115,7 @@ def full_sample(root):
     data["access"] = {"reviews":[dict(review_id="review-1", title="Historical notice", body="Review me",
         has_alt_text=False, language="en", status="needs-review", findings=[], disclaimer="Advisory",
         ai_analysis="Historical advisory", ai_analysis_model="historical-model", created_at_unix_seconds=1000)],
-        "audit_events":[dict(event_id="access-event-1", action="review.create", subject_id="review-1", actor="historical actor", created_at_unix_seconds=1000)]}
+        "audit_events":[dict(event_id="access-audit-f724aa17-c39c-47e4-accf-83cdbf504995", action="review.create", subject_id="review-1", actor="historical actor", created_at_unix_seconds=1000)]}
     data["demo_fixture"] = {"fixture_id":"synthetic-test", "watermark":"SYNTHETIC"}
     return data
 

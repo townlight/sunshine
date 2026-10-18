@@ -83,3 +83,23 @@ def test_preflight_verifies_document_bytes_and_retains_them_on_failure(tmp_path)
     with pytest.raises(ValueError): preflight(tmp_path)
     assert file.read_bytes() == b"Changed evidence"
     assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize("suffix", [".sha256.json", ".manifest.json"])
+def test_preflight_preserves_and_validates_export_receipt_formats(tmp_path, suffix):
+    data = sample()
+    export = tmp_path / "Data" / "exports" / "records" / "approved.md"
+    export.parent.mkdir(parents=True)
+    export.write_bytes(b"Approved historical text")
+    digest = hashlib.sha256(export.read_bytes()).hexdigest()
+    receipt = export.with_name(export.name + suffix)
+    receipt.write_text(json.dumps(dict(schema_version=1, export_file=export.name,
+        size_bytes=export.stat().st_size, sha256=digest)))
+    data["records_requests"][0]["exports"] = [str(export)]
+    path = source(tmp_path, data)
+    original = path.read_bytes(), receipt.read_bytes()
+    assert preflight(tmp_path).verified_files == ((str(export), digest, export.stat().st_size),)
+    export.write_bytes(b"Changed historical text")
+    with pytest.raises(ValueError, match="hash/size"):
+        preflight(tmp_path)
+    assert (path.read_bytes(), receipt.read_bytes()) == original
