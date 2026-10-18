@@ -343,6 +343,7 @@ class RecordsOperationRead(NativeView):
 
 
 class RecordsStateRead(NativeView):
+    demo_fixture: dict | None = None
     records_requests: list[RecordsView]
     notification_events: list["NotificationView"] = Field(default_factory=list)
     publication_events: list["PublicationView"] = Field(default_factory=list)

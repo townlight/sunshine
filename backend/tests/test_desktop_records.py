@@ -242,6 +242,10 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
     repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
     try:
         ensure_native_schema(repository.engine)
+        from civicsuite_runtime.records_import_store import ensure_schema
+        from civicsuite_runtime.native_accounts import metadata
+        ensure_schema(repository.engine)
+        metadata.create_all(repository.engine)
     finally:
         repository.engine.dispose()
     root, _ = native_profile

@@ -44,28 +44,33 @@ def native_public_shell(request: Request, proof: str | None = Header(default=Non
 
 
 @router.get("/public/records-state", dependencies=[Depends(native_public_shell)], response_model=RecordsStateRead)
-async def public_records_state(session: AsyncSession = Depends(get_async_session)):
-    return RecordsStateRead(records_requests=await native_public.public_state(session))
+async def public_records_state(request: Request, session: AsyncSession = Depends(get_async_session)):
+    return RecordsStateRead(records_requests=await native_public.public_state(session), demo_fixture=await demo_marker(request, session))
+
+
+async def demo_marker(request, session):
+    loader = getattr(request.app.state, "desktop_demo_marker", None)
+    return await loader(session) if loader is not None else None
 
 
 @router.post("/public/requests", dependencies=[Depends(native_public_shell)])
-async def public_records_intake(data: PublicIntake, session: AsyncSession = Depends(get_async_session)):
+async def public_records_intake(data: PublicIntake, request: Request, session: AsyncSession = Depends(get_async_session)):
     req = await native_public.submit(session, data)
     result = {"accepted": True, "message": f"Public records request {req.public_tracking_number} received.",
-              "state": RecordsStateRead(records_requests=await native_public.public_state(session, req))}
+              "state": RecordsStateRead(records_requests=await native_public.public_state(session, req), demo_fixture=await demo_marker(request, session))}
     await session.commit()
     return result
 
 
 @router.post("/public/lookup", dependencies=[Depends(native_public_shell)])
-async def public_records_lookup(data: PublicLookup, session: AsyncSession = Depends(get_async_session)):
+async def public_records_lookup(data: PublicLookup, request: Request, session: AsyncSession = Depends(get_async_session)):
     req = await native_public.find_request(session, data.trackingNumber, data.requesterContact)
     return {"accepted": req is not None, "message": "Status found" if req else "No local request matched that request number and submitted contact.",
-            "state": RecordsStateRead(records_requests=await native_public.public_state(session, req))}
+            "state": RecordsStateRead(records_requests=await native_public.public_state(session, req), demo_fixture=await demo_marker(request, session))}
 
 
 @router.post("/public/messages", dependencies=[Depends(native_public_shell)])
-async def public_records_message(data: PublicMessage, session: AsyncSession = Depends(get_async_session)):
+async def public_records_message(data: PublicMessage, request: Request, session: AsyncSession = Depends(get_async_session)):
     req = await native_public.find_request(session, data.trackingNumber, data.requesterContact, lock=True)
     if req is not None:
         try:
@@ -74,7 +79,7 @@ async def public_records_message(data: PublicMessage, session: AsyncSession = De
             await session.rollback()
             raise HTTPException(400, str(error)) from None
     result = {"accepted": req is not None, "message": "Requester message saved." if req else "No local request matched that request number and submitted contact.",
-              "state": RecordsStateRead(records_requests=await native_public.public_state(session, req))}
+              "state": RecordsStateRead(records_requests=await native_public.public_state(session, req), demo_fixture=await demo_marker(request, session))}
     await session.commit()
     return result
 
@@ -163,7 +168,8 @@ async def prepare_native_artifact(
     if req is None:
         raise HTTPException(404, "Records request not found.")
     try:
-        result = await artifacts.prepare_artifact(session, req, RecordsActor(actor, request.state.native_role), data.kind)
+        result = await artifacts.prepare_artifact(session, req, RecordsActor(actor, request.state.native_role), data.kind,
+            demo_fixture=await demo_marker(request, session))
         await session.commit()
         return result
     except ValueError as error:

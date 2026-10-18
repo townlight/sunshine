@@ -58,7 +58,7 @@ def render(view, kind):
     return header + body
 
 
-async def prepare_artifact(session, req, actor, kind):
+async def prepare_artifact(session, req, actor, kind, *, demo_fixture=None):
     workflow.ensure_active(req)
     view = await request_view(session, req)
     counts = dict(document_count=len(view.documents), release_artifact_count=sum(bool(doc.release_sha256) for doc in view.documents),
@@ -78,6 +78,12 @@ async def prepare_artifact(session, req, actor, kind):
                 if counts[key] and not any(doc.release_status == required and doc.release_sha256 for doc in view.documents):
                     raise ValueError(f"Attach a {required} before packaging these decisions.")
     content = render(view, kind)
+    if demo_fixture is not None:
+        content = ("## Demo Fixture Identity\n"
+            f"Municipality: {demo_fixture['municipality_name']}\n"
+            f"Fixture: {demo_fixture['fixture_id']} v{demo_fixture['fixture_version']}\n"
+            f"Fixture SHA-256: {demo_fixture['fixture_sha256']}\n"
+            f"Watermark: {demo_fixture['watermark']}\n\n" + content)
     if kind == "release-package":
         content += "\n## Package Counts\n" + "\n".join(f"{key.replace('_', ' ').title()}: {value}" for key, value in counts.items()) + "\n"
     artifact = RequestArtifact(id=uuid.uuid4(), request_id=req.id, kind=kind, content=content,

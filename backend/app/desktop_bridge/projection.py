@@ -101,7 +101,7 @@ async def request_view(session, req):
         documents.append(item)
     artifacts = (await session.execute(select(RequestArtifact).where(
         RequestArtifact.request_id == req.id, RequestArtifact.completed_at.is_not(None)
-    ).order_by(RequestArtifact.completed_at, RequestArtifact.id))).scalars().all()
+    ).order_by(RequestArtifact.position.asc().nulls_last(), RequestArtifact.completed_at, RequestArtifact.id))).scalars().all()
     return RecordsView(
         release_packages=[dict(id=legacy_id(row, "records-release-package"), export_path=row.export_path,
                                package_hash=row.sha256, created_at_unix_seconds=epoch(row.completed_at),

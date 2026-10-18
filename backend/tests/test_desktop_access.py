@@ -7,6 +7,7 @@ import hmac
 import json
 
 import pytest
+pytest.importorskip("civicsuite_runtime", reason="Requires the paired installed Townlight runtime")
 from sqlalchemy import select
 
 from app.models.audit import AuditLog
@@ -22,6 +23,8 @@ async def test_access_review_uses_existing_engine_and_keeps_capabilities_separat
     repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
     try:
         ensure_native_schema(repository.engine)
+        from civicsuite_runtime.records_import_store import ensure_schema
+        ensure_schema(repository.engine)
     finally:
         repository.engine.dispose()
     app.include_router(router)

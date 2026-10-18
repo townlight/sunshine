@@ -11,6 +11,7 @@ class RequestArtifact(Base):
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     request_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("records_requests.id"), index=True)
     legacy_id: Mapped[str | None] = mapped_column(Text)
+    position: Mapped[int | None] = mapped_column(Integer)
     kind: Mapped[str] = mapped_column(Text)
     content: Mapped[str] = mapped_column(Text)
     sha256: Mapped[str] = mapped_column(Text)
