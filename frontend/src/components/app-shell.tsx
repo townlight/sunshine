@@ -124,7 +124,7 @@ export function AppShell({ children, onSignOut, userEmail, userRole }: AppShellP
           <DialogPrimitive.Popup
             id="app-mobile-nav"
             aria-label="Primary navigation"
-            className="fixed inset-y-0 left-0 z-50 flex flex-col w-[280px] max-w-[85vw] bg-card border-r outline-none md:hidden data-open:animate-in data-open:slide-in-from-left data-closed:animate-out data-closed:slide-out-to-left"
+            className="fixed inset-y-0 left-0 z-50 flex flex-col w-[280px] max-w-[85vw] bg-card border-r outline-hidden md:hidden data-open:animate-in data-open:slide-in-from-left data-closed:animate-out data-closed:slide-out-to-left"
           >
             <DialogPrimitive.Title className="sr-only">
               Primary navigation

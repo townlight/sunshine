@@ -478,7 +478,7 @@ export default function DataSources({ token }: { token: string }) {
                                 const nextEl = document.getElementById(`ds-type-${nextType}`);
                                 nextEl?.focus();
                               }}
-                              className={`p-3 rounded-lg border text-center transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${selected ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
+                              className={`p-3 rounded-lg border text-center transition-colors focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 ${selected ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}
                             >
                               <Icon className="h-5 w-5 mx-auto mb-1" />
                               <span className="text-xs font-medium">{label}</span>

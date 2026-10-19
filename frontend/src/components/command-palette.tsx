@@ -60,7 +60,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             <button
               key={command.path}
               type="button"
-              className="rounded-md px-3 py-2 text-left text-sm hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+              className="rounded-md px-3 py-2 text-left text-sm hover:bg-muted focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               onClick={() => runCommand(command.path)}
             >
               {command.label}

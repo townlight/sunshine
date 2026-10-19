@@ -94,7 +94,7 @@ export function RichTextEditor({ content, onChange, disabled = false }: RichText
       {/* Editor */}
       <EditorContent
         editor={editor}
-        className="min-h-[240px] px-3 py-2 text-sm leading-relaxed prose prose-sm max-w-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[220px]"
+        className="min-h-[240px] px-3 py-2 text-sm leading-relaxed prose prose-sm max-w-none [&_.ProseMirror]:outline-hidden [&_.ProseMirror]:min-h-[220px]"
       />
     </div>
   );
