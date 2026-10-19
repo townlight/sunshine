@@ -192,11 +192,10 @@ async def test_existing_web_writer_cannot_leave_native_approval_on_replaced_text
 async def test_runtime_readiness_requires_the_lifecycle_schema(client, monkeypatch):
     """An intake-only schema is no longer enough for the changed domain app."""
     from sqlalchemy import text
-    from tests.conftest import TEST_DATABASE_URL
+    from tests.conftest import TEST_DATABASE_URL, DESKTOP_RUNTIME_ROOT
 
-    runtime_root = Path(__file__).resolve().parents[3] / "townlight/desktop/runtime/python-services"
-    if not runtime_root.is_dir():
-        pytest.skip("The runtime readiness proof requires the paired Townlight checkout.")
+    runtime_root = DESKTOP_RUNTIME_ROOT
+    assert runtime_root is not None, "Install the pinned paired Townlight runtime for desktop tests"
     monkeypatch.syspath_prepend(str(runtime_root))
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
     from civicsuite_runtime.services import _domain_database_status

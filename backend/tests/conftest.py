@@ -10,6 +10,9 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from sqlalchemy.pool import NullPool
 
 import os
+import sys
+from pathlib import Path
+
 # Set a proper-length JWT secret before importing settings to suppress warnings
 os.environ.setdefault("JWT_SECRET", "a" * 64)
 os.environ["TESTING"] = "1"
@@ -35,6 +38,18 @@ from app.main import create_app
 from app.models.user import User, UserRole
 from app.models.departments import Department
 from app.models.sync_failure import SyncFailure, SyncRunLog  # noqa: F401 — registers with Base.metadata
+
+# Cross-repository desktop tests use the same pinned runtime as the installer.
+# CI supplies installed sibling packages; local work uses the adjacent checkout.
+_runtime_override = os.environ.get("TOWNLIGHT_TEST_RUNTIME_ROOT")
+DESKTOP_RUNTIME_ROOT = Path(_runtime_override) if _runtime_override else next(
+    (parent / "townlight/desktop/runtime/python-services"
+     for parent in Path(__file__).resolve().parents
+     if (parent / "townlight/desktop/runtime/python-services").is_dir()), None)
+if DESKTOP_RUNTIME_ROOT is not None:
+    if not DESKTOP_RUNTIME_ROOT.is_dir():
+        raise RuntimeError("Configured paired Townlight runtime is missing")
+    sys.path.insert(0, str(DESKTOP_RUNTIME_ROOT))
 
 # Build test database URL — replace only the database name (last segment)
 _base = settings.database_url.rsplit("/", 1)[0]

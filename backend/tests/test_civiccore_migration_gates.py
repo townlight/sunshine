@@ -49,6 +49,7 @@ import os
 import subprocess
 import uuid
 from collections.abc import Iterator
+from importlib.metadata import version
 from pathlib import Path
 from typing import Final
 
@@ -93,11 +94,13 @@ RECORDS_TABLES: Final[frozenset[str]] = frozenset({
     "request_messages", "request_timeline", "response_letters",
 })  # 15 total — see ADR-0003 §Context records list
 
-CIVICCORE_BASELINE_REV: Final[str] = "civiccore_0002_llm"
-# Phase 2 added civiccore_0002_llm (ALTER prompt_templates) on top of the
-# baseline. The civiccore head after v0.2.0 ships is civiccore_0002_llm; the
-# constant name is retained for backwards-compat with prior phase 1 docs but
-# now reflects the current civiccore head, not just the baseline.
+# The standalone web dependency is Core 1.2.0; the pinned desktop runtime
+# uses 1.2.1 with the local task queue. Keep explicit expected revisions for
+# both supported packages, rather than deriving the expectation from the DB.
+CIVICCORE_BASELINE_REV: Final[str] = {
+    "1.2.0": "civiccore_0002_llm",
+    "1.2.1": "civiccore_0003_local_task_queue",
+}[version("civiccore")]
 
 # v1.3.0 operator's civiccore-side starting revision. v1.3.0 shipped with
 # civiccore pinned at the 0001 baseline (v0.1.x); Phase 2 (v0.2.0) introduced
@@ -105,10 +108,9 @@ CIVICCORE_BASELINE_REV: Final[str] = "civiccore_0002_llm"
 # alembic_version_civiccore so the upgrade path runs from a properly stamped
 # starting point — a real v1.3.0 operator's DB always has this row.
 CIVICCORE_V1_3_0_STARTING_REV: Final[str] = "civiccore_0001_baseline_v1"
-# City-core first-login hardening added 021_first_admin_rotate on top of the
-# Phase 2 020 backfill. The records-side head moves to 021; v1.3.0 fixture
-# starts at 019 (see V1_3_0_HEAD_REVISION).
-RECORDS_HEAD_REV: Final[str] = "021_first_admin_rotate"
+# Records convergence adds migrations 022 through 027 after first-login
+# hardening. The historical v1.3.0 fixture still starts at 019.
+RECORDS_HEAD_REV: Final[str] = "027_import_artifact_order"
 
 # v1.3.0 tag's records-side alembic head, captured 2026-04-25 from the v1.3.0
 # git worktree using a Postgres testcontainer + pg_dump --schema-only. Source of
@@ -117,9 +119,7 @@ RECORDS_HEAD_REV: Final[str] = "021_first_admin_rotate"
 # the live capture DB held this exact revision before pg_dump.
 # Intentionally separate from RECORDS_HEAD_REV: this constant marks the operator's
 # STARTING revision (v1.3.0); RECORDS_HEAD_REV marks the EXPECTED revision after
-# upgrade. They happen to be equal today because v1.3.0's records-side head IS 019
-# — but if v1.4.0 adds a new records migration, only RECORDS_HEAD_REV moves; this
-# stays pinned to the v1.3.0 fixture.
+# upgrade. Only RECORDS_HEAD_REV advances; this stays pinned to the v1.3.0 fixture.
 V1_3_0_HEAD_REVISION: Final[str] = "019_encrypt_connection_config"
 
 V1_3_0_FIXTURE_PATH: Final[Path] = (

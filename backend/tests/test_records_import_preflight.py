@@ -2,18 +2,10 @@
 import copy
 import hashlib
 import json
-from pathlib import Path
-import sys
 
 import pytest
 
-runtime_root = next((parent / "townlight/desktop/runtime/python-services"
-    for parent in Path(__file__).resolve().parents
-    if (parent / "townlight/desktop/runtime/python-services").is_dir()), None)
-if runtime_root is None:
-    pytest.skip("Requires the paired Townlight runtime checkout", allow_module_level=True)
-sys.path.insert(0, str(runtime_root))
-from civicsuite_runtime.records_import import preflight  # noqa: E402 - optional paired runtime path
+from civicsuite_runtime.records_import import preflight
 
 
 def source(root, data):

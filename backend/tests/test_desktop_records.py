@@ -230,12 +230,11 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
     import sys
     import time
     import httpx
-    from tests.conftest import TEST_DATABASE_URL
+    from tests.conftest import TEST_DATABASE_URL, DESKTOP_RUNTIME_ROOT
     from app.audit.logger import verify_chain
 
-    runtime_root = Path(__file__).resolve().parents[3] / "townlight/desktop/runtime/python-services"
-    if not runtime_root.is_dir():
-        pytest.skip("This cross-repository runtime proof requires the paired Townlight checkout.")
+    runtime_root = DESKTOP_RUNTIME_ROOT
+    assert runtime_root is not None, "Install the pinned paired Townlight runtime for desktop tests"
     from civicaccess.access_review import AccessibilityReviewRepository
     sys.path.insert(0, str(runtime_root))
     from civicsuite_runtime.access_bridge import ensure_native_schema

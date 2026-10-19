@@ -6,7 +6,6 @@ import json
 import uuid
 
 import pytest
-pytest.importorskip("civicsuite_runtime", reason="Requires paired Townlight runtime")
 from sqlalchemy import select, func
 from civicaccess.access_review import AccessibilityReviewRepository
 from civicsuite_runtime.access_bridge import ensure_native_schema, state as access_state

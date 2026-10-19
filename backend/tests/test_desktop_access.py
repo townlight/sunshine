@@ -7,7 +7,6 @@ import hmac
 import json
 
 import pytest
-pytest.importorskip("civicsuite_runtime", reason="Requires the paired installed Townlight runtime")
 from sqlalchemy import select
 
 from app.models.audit import AuditLog
