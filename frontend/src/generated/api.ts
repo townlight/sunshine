@@ -2819,11 +2819,8 @@ export interface components {
             status: components["schemas"]["RequestStatus"];
             /** Assigned To */
             assigned_to: string | null;
-            /**
-             * Created By
-             * Format: uuid
-             */
-            created_by: string;
+            /** Created By */
+            created_by: string | null;
             /**
              * Created At
              * Format: date-time

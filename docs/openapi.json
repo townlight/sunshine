@@ -9015,8 +9015,15 @@
             "title": "Assigned To"
           },
           "created_by": {
-            "type": "string",
-            "format": "uuid",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Created By"
           },
           "created_at": {
