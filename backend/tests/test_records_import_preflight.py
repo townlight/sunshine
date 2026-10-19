@@ -7,8 +7,10 @@ import sys
 
 import pytest
 
-runtime_root = Path(__file__).resolve().parents[3] / "townlight/desktop/runtime/python-services"
-if not runtime_root.is_dir():
+runtime_root = next((parent / "townlight/desktop/runtime/python-services"
+    for parent in Path(__file__).resolve().parents
+    if (parent / "townlight/desktop/runtime/python-services").is_dir()), None)
+if runtime_root is None:
     pytest.skip("Requires the paired Townlight runtime checkout", allow_module_level=True)
 sys.path.insert(0, str(runtime_root))
 from civicsuite_runtime.records_import import preflight  # noqa: E402 - optional paired runtime path
