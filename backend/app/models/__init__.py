@@ -39,6 +39,7 @@ __all__ = [
     "Department", "FeeSchedule", "FeeLineItem", "FeeWaiver",
     "RequestTimeline", "RequestMessage", "ResponseLetter", "RequestPublicStatus",
     "RequestEvidenceNote", "RequestExemptionDecision",
+    "RequestFileEvidence", "RequestReleaseCopy", "RequestArtifact", "RequestPublication",
     "NotificationTemplate", "NotificationLog",
     "PromptTemplate", "CityProfile",
     "SystemCatalog", "ConnectorTemplate",

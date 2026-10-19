@@ -15,7 +15,7 @@ from civicsuite_runtime.records_import_store import ensure_schema, import_snapsh
 from app.desktop_bridge.projection import request_view
 from app.models.request import RecordsRequest
 from tests.conftest import TEST_DATABASE_URL, test_session_maker as session_factory
-from tests.test_desktop_records import native_api, native_profile, INTAKE  # noqa: F401
+from tests.test_desktop_records import native_api as native_api, native_profile as native_profile, INTAKE # noqa: F401
 from tests.test_records_import_preflight import sample, source
 
 

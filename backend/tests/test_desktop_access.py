@@ -12,7 +12,7 @@ from sqlalchemy import select
 
 from app.models.audit import AuditLog
 from tests.conftest import TEST_DATABASE_URL, test_session_maker as session_factory
-from tests.test_desktop_records import native_api, native_profile  # noqa: F401
+from tests.test_desktop_records import native_api as native_api, native_profile as native_profile # noqa: F401
 
 
 @pytest.mark.asyncio

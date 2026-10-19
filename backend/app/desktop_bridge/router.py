@@ -1,14 +1,11 @@
 """Native authentication/translation only; Records owns the domain operation."""
 
 from datetime import date, datetime, time, timezone
-from pathlib import Path
 import uuid
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
-from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.auth.desktop_session import validate_native_session
 from app.database import get_async_session
 from app.desktop_bridge.schemas import NativeRequestRead, RecordsCommand, RecordsOperationRead, RecordsStateRead, RecordsView, StaffRecordsIntake
 from app.desktop_bridge.projection import request_view, records_state
@@ -16,7 +13,7 @@ from app.models.notifications import NotificationLog
 from app.audit.logger import write_audit_log
 from app.desktop_bridge.records import apply_command
 from app.models.request import RecordsRequest
-from app.models.user import User, UserRole
+from app.models.user import User
 from app.requests import service
 from app.requests.workflow import RecordsActor
 from app.requests import files

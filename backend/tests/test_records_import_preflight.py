@@ -11,7 +11,7 @@ runtime_root = Path(__file__).resolve().parents[3] / "townlight/desktop/runtime/
 if not runtime_root.is_dir():
     pytest.skip("Requires the paired Townlight runtime checkout", allow_module_level=True)
 sys.path.insert(0, str(runtime_root))
-from civicsuite_runtime.records_import import preflight
+from civicsuite_runtime.records_import import preflight  # noqa: E402 - optional paired runtime path
 
 
 def source(root, data):
@@ -54,15 +54,21 @@ def test_preflight_preserves_source_defaults_ids_approval_and_hashes(tmp_path):
 @pytest.mark.parametrize("change", ["future-schema", "unknown-field", "bad-audit", "duplicate-id", "private-visibility"])
 def test_preflight_refuses_lossy_or_corrupt_inputs_without_changes(tmp_path, change):
     data = sample()
-    if change == "future-schema": data["schema_version"] = 2
-    elif change == "unknown-field": data["records_requests"][0]["new_domain_field"] = "Do not drop me"
-    elif change == "bad-audit": data["audit_entries"][0]["summary"] = "Altered evidence"
-    elif change == "duplicate-id": data["records_requests"].append(copy.deepcopy(data["records_requests"][0]))
-    else: data["records_requests"][0]["messages"] = [{"id":"msg-1", "author":"Fixture", "author_role":"staff",
+    if change == "future-schema":
+        data["schema_version"] = 2
+    elif change == "unknown-field":
+        data["records_requests"][0]["new_domain_field"] = "Do not drop me"
+    elif change == "bad-audit":
+        data["audit_entries"][0]["summary"] = "Altered evidence"
+    elif change == "duplicate-id":
+        data["records_requests"].append(copy.deepcopy(data["records_requests"][0]))
+    else:
+        data["records_requests"][0]["messages"] = [{"id":"msg-1", "author":"Fixture", "author_role":"staff",
             "body":"Private", "visibility":"unknown", "created_at_unix_seconds":1000}]
     path = source(tmp_path, data)
     before = path.read_bytes()
-    with pytest.raises(ValueError): preflight(tmp_path)
+    with pytest.raises(ValueError):
+        preflight(tmp_path)
     assert path.read_bytes() == before
 
 
@@ -80,7 +86,8 @@ def test_preflight_verifies_document_bytes_and_retains_them_on_failure(tmp_path)
     assert result.records[0].documents[0].id == "doc-1"
     before = path.read_bytes()
     file.write_bytes(b"Changed evidence")
-    with pytest.raises(ValueError): preflight(tmp_path)
+    with pytest.raises(ValueError):
+        preflight(tmp_path)
     assert file.read_bytes() == b"Changed evidence"
     assert path.read_bytes() == before
 

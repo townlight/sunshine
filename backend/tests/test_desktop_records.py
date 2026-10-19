@@ -17,7 +17,7 @@ from app.models.request import RecordsRequest
 from app.models.request_workflow import RequestTimeline
 from app.models.user import User, UserRole
 from tests.conftest import override_get_session, test_session_maker as session_factory
-from tests.test_desktop_session import native_profile  # noqa: F401 — shared synthetic fixture
+from tests.test_desktop_session import native_profile as native_profile # noqa: F401 — shared synthetic fixture
 
 
 INTAKE = {"requester": "Synthetic Resident", "summary": "Trail maintenance records",

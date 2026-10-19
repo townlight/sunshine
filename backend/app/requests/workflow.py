@@ -10,7 +10,6 @@ from decimal import Decimal
 import hashlib
 
 from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.audit.logger import write_audit_log
 from app.models.fees import FeeLineItem, FeeWaiver
