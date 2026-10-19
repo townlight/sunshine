@@ -1,5 +1,6 @@
 import logging
 import uuid
+from datetime import datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -79,3 +80,18 @@ async def queue_notification(
     )
 
     return log_entry
+
+
+async def queue_local_notification(
+    session: AsyncSession, *, request_id: uuid.UUID | None, module_id: str,
+    audience: str, subject: str, body: str, created_at: datetime,
+) -> NotificationLog:
+    """Existing native manual outbox; not SMTP and not automatically queued."""
+    entry = NotificationLog(
+        request_id=request_id, module_id=module_id, audience=audience,
+        recipient_email="", channel="local notification outbox",
+        subject=subject, body=body, status="ready to send", created_at=created_at,
+    )
+    session.add(entry)
+    await session.flush()
+    return entry

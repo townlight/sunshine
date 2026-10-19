@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from sqlalchemy import DateTime, String, Text, Boolean, ForeignKey, func
+from sqlalchemy import DateTime, String, Text, Boolean, ForeignKey, Integer, func
 from sqlalchemy.orm import Mapped, mapped_column
 from app.models.user import Base
 
@@ -26,6 +26,26 @@ class RequestTimeline(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    legacy_id: Mapped[str | None] = mapped_column(Text)
+    actor_label: Mapped[str | None] = mapped_column(Text)
+    position: Mapped[int | None] = mapped_column(Integer)
+
+
+class RequestPublicStatus(Base):
+    __tablename__ = "request_public_status"
+
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
+    request_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("records_requests.id", ondelete="CASCADE"), index=True
+    )
+    legacy_id: Mapped[str | None] = mapped_column(Text)
+    label: Mapped[str] = mapped_column(Text)
+    summary: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    position: Mapped[int | None] = mapped_column(Integer)
 
 
 class RequestMessage(Base):
@@ -44,6 +64,9 @@ class RequestMessage(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    legacy_id: Mapped[str | None] = mapped_column(Text)
+    sender_label: Mapped[str | None] = mapped_column(Text)
+    position: Mapped[int | None] = mapped_column(Integer)
 
 
 class ResponseLetter(Base):

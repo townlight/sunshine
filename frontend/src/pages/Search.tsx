@@ -308,7 +308,7 @@ export default function Search({ token }: { token: string }) {
             );
 
             return (
-              <Card key={r.chunk_id} className="shadow-none hover:shadow-sm transition-shadow">
+              <Card key={r.chunk_id} className="shadow-none hover:shadow-xs transition-shadow">
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-2">

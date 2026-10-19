@@ -7,16 +7,24 @@ from civiccore.audit import (
     compute_persisted_audit_hash,
     verify_persisted_audit_chain,
 )
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.audit import AuditLog
 
 
+# One database-local transaction lock for every writer of this shared chain.
+# Locking its previous row is insufficient: it misses the empty chain, and a
+# waiter can resume with an obsolete head after that row's owner appended.
+_AUDIT_CHAIN_LOCK = 0x544C4155444954
+
+
 async def get_last_hash(session: AsyncSession, *, lock: bool = False) -> str:
-    stmt = select(AuditLog.entry_hash).order_by(AuditLog.id.desc()).limit(1)
     if lock:
-        stmt = stmt.with_for_update()
+        await session.execute(select(func.pg_advisory_xact_lock(_AUDIT_CHAIN_LOCK)))
+    # A separate statement after acquiring the lock sees the committed head
+    # under PostgreSQL READ COMMITTED, including a prior waiting writer.
+    stmt = select(AuditLog.entry_hash).order_by(AuditLog.id.desc()).limit(1)
     result = await session.execute(stmt)
     last = result.scalar_one_or_none()
     return last if last else ZERO_HASH
@@ -30,7 +38,14 @@ async def write_audit_log(
     user_id: uuid.UUID | None = None,
     details: dict | None = None,
     ai_generated: bool = False,
+    *,
+    commit: bool = True,
 ) -> AuditLog:
+    """Append atomically; existing HTTP callers keep the default commit.
+
+    Domain operations/imports pass commit=False and own the enclosing
+    transaction. The chain lock then lasts until their commit or rollback.
+    """
     prev_hash = await get_last_hash(session, lock=True)
     now = datetime.now(timezone.utc)
     entry_hash = compute_persisted_audit_hash(
@@ -53,8 +68,11 @@ async def write_audit_log(
         ai_generated=ai_generated,
     )
     session.add(entry)
-    await session.commit()
-    await session.refresh(entry)
+    if commit:
+        await session.commit()
+        await session.refresh(entry)
+    else:
+        await session.flush()
     return entry
 
 

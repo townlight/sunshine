@@ -23,6 +23,8 @@ from app.models.request import (
 )
 from app.models.request_workflow import RequestTimeline, RequestMessage, ResponseLetter
 from app.models.user import User, UserRole
+from app.requests.service import RequestIntake, create_records_request
+from app.requests.workflow import replace_response_text, stamp_response_approval
 from app.schemas.request import (
     FeeLineItemCreate, FeeLineItemRead,
     MessageCreate, MessageRead,
@@ -89,45 +91,11 @@ async def create_request(
     if user.role != UserRole.ADMIN:
         dept_id = user.department_id  # Staff always uses their own department
 
-    req = RecordsRequest(
-        requester_name=data.requester_name,
-        requester_email=data.requester_email,
-        requester_phone=data.requester_phone,
-        requester_type=data.requester_type,
-        description=data.description,
-        statutory_deadline=data.statutory_deadline,
-        scope_assessment=data.scope_assessment,
-        priority=data.priority,
-        created_by=user.id,
-        assigned_to=user.id,
-        department_id=dept_id,
+    req = await create_records_request(
+        session, RequestIntake(**data.model_dump()), actor=user,
+        assigned_to=user.id, department_id=dept_id,
     )
-    session.add(req)
     await session.commit()
-    await session.refresh(req)
-
-    # Dispatch request_received notification if requester provided an email.
-    # Mirrors the pattern in update_request (PATCH dispatch).
-    if req.requester_email:
-        city_name = await _get_city_name(session)
-        await queue_notification(
-            session=session,
-            event_type="request_received",
-            recipient_email=req.requester_email,
-            request_id=req.id,
-            context_data={
-                "requester_name": req.requester_name,
-                "request_id": str(req.id),
-                "status": req.status.value,
-                "city_name": city_name,
-            },
-        )
-
-    await write_audit_log(
-        session=session, action="create_request", resource_type="request",
-        resource_id=str(req.id), user_id=user.id,
-        details={"requester": data.requester_name, "description": data.description[:100]},
-    )
     return req
 
 
@@ -232,7 +200,7 @@ async def update_request(
     session: AsyncSession = Depends(get_async_session),
     user: User = Depends(require_role(UserRole.STAFF)),
 ):
-    req = await session.get(RecordsRequest, request_id)
+    req = await session.get(RecordsRequest, request_id, with_for_update=True)
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
@@ -270,7 +238,7 @@ async def update_request(
     if data.assigned_to is not None:
         req.assigned_to = data.assigned_to
     if data.response_draft is not None:
-        req.response_draft = data.response_draft
+        replace_response_text(req, data.response_draft)
     if data.statutory_deadline is not None:
         req.statutory_deadline = data.statutory_deadline
     if data.scope_assessment is not None:
@@ -493,7 +461,7 @@ async def approve_request(
     session: AsyncSession = Depends(get_async_session),
     user: User = Depends(require_role(UserRole.REVIEWER)),
 ):
-    req = await session.get(RecordsRequest, request_id)
+    req = await session.get(RecordsRequest, request_id, with_for_update=True)
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
@@ -501,7 +469,7 @@ async def approve_request(
     if req.status not in (RequestStatus.DRAFTED, RequestStatus.READY_FOR_RELEASE):
         raise HTTPException(status_code=400, detail=f"Can only approve from 'drafted' or 'ready_for_release' status, current: {req.status.value}")
 
-    req.status = RequestStatus.APPROVED
+    stamp_response_approval(req, datetime.now(timezone.utc))
     await log_timeline(session, request_id, "response_approved",
                       "Request approved", user.id, user.role)
     # Dispatch notification if template exists for this event

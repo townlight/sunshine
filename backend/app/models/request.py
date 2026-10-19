@@ -32,7 +32,7 @@ class RecordsRequest(Base):
     __tablename__ = "records_requests"
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    requester_name: Mapped[str] = mapped_column(String(255))
+    requester_name: Mapped[str] = mapped_column(Text)
     requester_email: Mapped[str | None] = mapped_column(String(320), nullable=True)
     date_received: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     statutory_deadline: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -42,7 +42,7 @@ class RecordsRequest(Base):
         default=RequestStatus.RECEIVED,
     )
     assigned_to: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
-    created_by: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
+    created_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     response_draft: Mapped[str | None] = mapped_column(Text, nullable=True)
     review_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -52,12 +52,29 @@ class RecordsRequest(Base):
     requester_type: Mapped[str | None] = mapped_column(String(20), nullable=True)
     scope_assessment: Mapped[str | None] = mapped_column(String(20), nullable=True)
     department_id: Mapped[uuid.UUID | None] = mapped_column(nullable=True)
-    estimated_fee: Mapped[float | None] = mapped_column(Numeric(10, 2), nullable=True)
+    estimated_fee: Mapped[float | None] = mapped_column(Numeric(21, 2), nullable=True)
     fee_status: Mapped[str | None] = mapped_column(String(20), nullable=True)
     fee_waiver_requested: Mapped[bool] = mapped_column(Boolean, server_default="false")
     priority: Mapped[str] = mapped_column(String(20), server_default="normal")
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     closure_reason: Mapped[str | None] = mapped_column(String(500), nullable=True)
+
+    # Accepted native information that has no lossless web-field equivalent.
+    # Domain content remains in the shared Records row, not a JSON state blob.
+    desktop_id: Mapped[str | None] = mapped_column(Text, unique=True, nullable=True)
+    public_tracking_number: Mapped[str | None] = mapped_column(Text, unique=True, nullable=True)
+    requester_contact: Mapped[str] = mapped_column(Text, server_default="")
+    submitted_via: Mapped[str] = mapped_column(Text, server_default="")
+    deadline_label: Mapped[str] = mapped_column(Text, server_default="")
+    deadline_basis: Mapped[str] = mapped_column(Text, server_default="")
+    deadline_reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    display_status: Mapped[str | None] = mapped_column(Text)
+    assigned_label: Mapped[str] = mapped_column(Text, server_default="")
+    fee_estimate_text: Mapped[str] = mapped_column(Text, server_default="")
+    fee_waiver_reason: Mapped[str] = mapped_column(Text, server_default="")
+    approved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    approved_response_sha256: Mapped[str | None] = mapped_column(String(64))
+    fulfilled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class RequestDocument(Base):

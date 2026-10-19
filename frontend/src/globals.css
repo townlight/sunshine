@@ -1,8 +1,117 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-light: var(--success-light);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-light: var(--warning-light);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+  --font-serif: Source Serif 4, Georgia, serif;
+  --font-mono: JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-page-title: 2.25rem;
+  --text-page-title--line-height: 1.2;
+  --text-page-title--font-weight: 700;
+  --text-section-head: 1.75rem;
+  --text-section-head--line-height: 1.3;
+  --text-section-head--font-weight: 600;
+  --text-subsection: 1.375rem;
+  --text-subsection--line-height: 1.35;
+  --text-subsection--font-weight: 600;
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+  --text-label--font-weight: 500;
+  --text-label--letter-spacing: 0.05em;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility badge-success {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+@utility badge-warning {
+  background-color: var(--warning-light);
+  color: var(--warning);
+}
+
+@utility badge-danger {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+@utility badge-info {
+  background-color: var(--info-light);
+  color: var(--info);
+}
+
+@utility badge-neutral {
+  @apply bg-gray-100 text-gray-600;
+}
+
+@utility spinner {
+  @apply animate-spin rounded-full border-2 border-current border-t-transparent;
+}
 
 @layer base {
   :root {
@@ -116,31 +225,5 @@
       scroll-behavior: auto !important;
       transition-duration: 0.01ms !important;
     }
-  }
-}
-
-@layer components {
-  .badge-success {
-    background-color: var(--success-light);
-    color: var(--success);
-  }
-  .badge-warning {
-    background-color: var(--warning-light);
-    color: var(--warning);
-  }
-  .badge-danger {
-    background-color: var(--danger-light);
-    color: var(--danger);
-  }
-  .badge-info {
-    background-color: var(--info-light);
-    color: var(--info);
-  }
-  .badge-neutral {
-    @apply bg-gray-100 text-gray-600;
-  }
-
-  .spinner {
-    @apply animate-spin rounded-full border-2 border-current border-t-transparent;
   }
 }

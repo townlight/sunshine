@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "contract_id": "townlight-records-desktop-lifecycle",
+    "contract_version": "2.0.0",
+    "purpose": "temporary-migration-proof",
+    "expires_when": "python-postgres-records-authoritative",
+    "base_contract_sha256": "601ca9449f3e55f49b9b3443e6222514ce3bd5cf9923722a7e3da83d392fd995",
+    "fixture_sha256": "a9c242a3f2618a69d7effb1d0d17d2df06f6744c8c351bba4065d315c94575b4",
+    "watermark": "SYNTHETIC DEMONSTRATION DATA - NOT A REAL MUNICIPAL RECORD",
+    "behavior_source": "Published rc.3 acceptance and workflows.rs accepted regression tests; not a new product policy"
+  },
+  "lifecycle": [
+    {
+      "action": "create-records-request",
+      "payload": {
+        "requester": "Alex Rivera",
+        "summary": "Fictional emails about park contract",
+        "deadline": "2026-07-10"
+      },
+      "expected": {
+        "status": "received",
+        "assigned_to": "",
+        "deadline_basis": "Staff-entered deadline at intake.",
+        "current_approval": false
+      }
+    },
+    {
+      "action": "request-records-clarification",
+      "payload": {
+        "clarificationNote": "Asked requester to narrow the date range."
+      },
+      "expected": {
+        "clarification_notes": 1
+      }
+    },
+    {
+      "action": "add-records-message",
+      "payload": {
+        "requestMessageBody": "We received the narrowed date range and are searching responsive records."
+      },
+      "expected": {
+        "requester_visible_messages": 1
+      }
+    },
+    {
+      "action": "assign-records-request",
+      "payload": {
+        "assignedTo": "Records Officer"
+      },
+      "expected": {
+        "assigned_to": "Records Officer"
+      }
+    },
+    {
+      "action": "record-records-search",
+      "payload": {
+        "sourceNote": "Searched parks shared drive and clerk email journal.",
+        "citation": "PRA-2026-001"
+      },
+      "expected": {
+        "search_notes": 1,
+        "audit_action": "record-records-search"
+      }
+    },
+    {
+      "action": "record-records-search-session",
+      "payload": {
+        "searchQuery": "park contract emails June 2026",
+        "searchLocations": "Parks shared drive; clerk email journal",
+        "searchResultTitle": "Park contract approval email",
+        "searchResultCitation": "PRA-2026-004",
+        "searchResultSummary": "Responsive approval email located in clerk journal.",
+        "searchResultStatus": "responsive",
+        "searchReviewer": "Records Officer"
+      },
+      "expected": {
+        "search_sessions": 1,
+        "result_citation": "PRA-2026-004"
+      }
+    },
+    {
+      "action": "add-records-document",
+      "payload": {
+        "documentTitle": "Park contract email attachment",
+        "documentSourcePath": "TEST_SOURCE_DOCUMENT",
+        "documentCitation": "PRA-2026-003"
+      },
+      "expected": {
+        "documents": 1,
+        "original_hash_required": true
+      }
+    },
+    {
+      "action": "add-records-exemption-review",
+      "payload": {
+        "exemptionNote": "Human review of the fictional privileged paragraph."
+      },
+      "expected": {
+        "exemption_reviews": 1
+      }
+    },
+    {
+      "action": "add-records-exemption-decision",
+      "payload": {
+        "exemptionSource": "Email attachment page 2",
+        "exemptionKind": "Attorney-client",
+        "exemptionFinding": "One paragraph contains privileged legal advice.",
+        "exemptionDecision": "redact",
+        "exemptionBasis": "Synthetic reviewed exemption basis",
+        "exemptionReviewer": "Records Officer"
+      },
+      "expected": {
+        "exemption_decisions": 1,
+        "decision": "redact"
+      }
+    },
+    {
+      "action": "add-records-fee-line",
+      "payload": {
+        "feeLineDescription": "Search time and copies",
+        "feeScheduleBasis": "Synthetic adopted records fee schedule",
+        "feeLineAmount": "12.50"
+      },
+      "expected": {
+        "fee_line_items": 1,
+        "amount_cents": 1250
+      }
+    },
+    {
+      "action": "waive-records-fee",
+      "payload": {
+        "feeWaiverReason": "Public interest waiver approved by clerk."
+      },
+      "expected": {
+        "fee_waiver_reason": "Public interest waiver approved by clerk."
+      }
+    },
+    {
+      "action": "draft-records-response",
+      "payload": {
+        "responseDraft": "Responsive records are attached for review.",
+        "citation": "PRA-2026-002"
+      },
+      "expected": {
+        "current_approval": false
+      }
+    },
+    {
+      "action": "export-records-response",
+      "payload": {},
+      "expected": {
+        "accepted": false,
+        "reason": "human-approval-required",
+        "request_unchanged": true
+      }
+    },
+    {
+      "action": "approve-records-response",
+      "payload": {
+        "approvalNote": "Reviewed and approved by clerk."
+      },
+      "expected": {
+        "current_approval": true,
+        "approval_notes": 1
+      }
+    },
+    {
+      "action": "build-records-release-package",
+      "payload": {},
+      "expected": {
+        "accepted": false,
+        "reason": "release-ready-copy-required",
+        "request_unchanged": true
+      }
+    },
+    {
+      "action": "add-records-release-copy",
+      "payload": {
+        "releaseCopyPath": "TEST_REDACTED_DOCUMENT",
+        "releaseCopyStatus": "redacted copy",
+        "releaseCopyNote": "Privileged paragraph removed under synthetic reviewed exemption.",
+        "releaseCopyAddedBy": "Records Officer"
+      },
+      "expected": {
+        "original_retained": true,
+        "release_hash_required": true
+      }
+    },
+    {
+      "action": "build-records-release-package",
+      "payload": {},
+      "expected": {
+        "release_packages": 1,
+        "release_artifact_count": 1
+      }
+    },
+    {
+      "action": "export-records-response",
+      "payload": {},
+      "expected": {
+        "exports": 1,
+        "content_hash_required": true
+      }
+    },
+    {
+      "action": "fulfill-records-request",
+      "payload": {},
+      "expected": {
+        "status": "fulfilled"
+      }
+    },
+    {
+      "action": "close-records-request",
+      "payload": {},
+      "expected": {
+        "status": "closed",
+        "terminal": true
+      }
+    }
+  ],
+  "approval_preservation": {
+    "original_text": "Human-reviewed response A",
+    "original_note": "Review of response A",
+    "preserve_on": [
+      {
+        "action": "assign-records-request",
+        "payload": {
+          "assignedTo": "Synthetic new officer"
+        }
+      },
+      {
+        "action": "set-records-deadline",
+        "payload": {
+          "deadline": "2026-10-20",
+          "deadlineBasis": "Synthetic revised deadline"
+        }
+      },
+      {
+        "action": "estimate-records-fee",
+        "payload": {
+          "feeEstimate": "$20 synthetic estimate"
+        }
+      },
+      {
+        "action": "draft-records-response",
+        "payload": {
+          "responseDraft": "Human-reviewed response A"
+        }
+      }
+    ],
+    "clear_only_for_changed_text": [
+      {
+        "action": "draft-records-response",
+        "replacement": "Replacement manual response B"
+      },
+      {
+        "action": "suggest-records-response",
+        "replacement": "Replacement AI response C"
+      }
+    ],
+    "failed_generation_preserves_text_and_approval": true,
+    "historical_approval_notes_retained": true,
+    "existing_exports_retained": true,
+    "export_and_fulfillment_require_renewed_approval": true
+  },
+  "public_boundary": {
+    "matching_contact_reveals_permitted_status": true,
+    "wrong_contact_rejected": true,
+    "excluded_fields": [
+      "requester_contact",
+      "assigned_to",
+      "clarification_notes",
+      "approval_notes",
+      "exemption_reviews",
+      "exemption_decisions",
+      "search_notes",
+      "search_sessions",
+      "fee_estimate",
+      "fee_line_items",
+      "fee_waiver_reason",
+      "response_draft",
+      "documents",
+      "release_packages",
+      "timeline"
+    ],
+    "requester_thread_visible_for_unreleased_matching_contact": true,
+    "released_lookup_uses_existing_status_only_projection": true,
+    "legacy_export_path_strings_retained_no_file_distribution": true,
+    "internal_messages_excluded": true
+  },
+  "shared_capabilities": {
+    "access_preflight_missing_alt_text": "missing-alt-text",
+    "access_remediation_removes_resolved_finding": true,
+    "access_ai_is_advisory": true,
+    "notice_channel": "local notification outbox",
+    "notice_initial_status": "ready to send",
+    "no_automatic_smtp_or_publication": true
+  },
+  "persistence_and_authority": {
+    "authenticated_actor_not_payload_actor": true,
+    "unauthorized_call_no_partial_write": true,
+    "restart_readback_unchanged": true,
+    "offline_work_preserved": true,
+    "backup_restore_preserves_actual_database_and_files": true,
+    "legacy_json_never_mutated_after_activation": true,
+    "service_outage_never_falls_back_to_json": true
+  },
+  "normalization": {
+    "allowed": [
+      "generated object IDs (reference-preserving bijection)",
+      "volatile timestamps",
+      "isolated profile path prefixes"
+    ],
+    "not_allowed": [
+      "content",
+      "money",
+      "permissions",
+      "approval state",
+      "references",
+      "artifact hashes",
+      "business audit attribution"
+    ]
+  },
+  "test_document_content": "Responsive fictional park contract email attachment with a privileged paragraph.",
+  "test_redacted_document_content": "Responsive fictional park contract email attachment with the privileged paragraph redacted."
+}

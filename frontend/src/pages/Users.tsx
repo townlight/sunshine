@@ -36,7 +36,7 @@ interface Department {
 const ROLE_COLORS: Record<string, string> = {
   admin: "bg-purple-100 text-purple-800",
   staff: "bg-green-100 text-green-800",
-  reviewer: "bg-[var(--navy-soft)] text-primary",
+  reviewer: "bg-(--navy-soft) text-primary",
   read_only: "bg-gray-100 text-gray-600",
   liaison: "bg-amber-100 text-amber-800",
   public: "bg-slate-100 text-slate-600",

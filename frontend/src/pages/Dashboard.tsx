@@ -367,7 +367,7 @@ export default function Dashboard({ token }: { token: string }) {
               <div className="space-y-4">
                 {auditLog.map((entry: AuditLogEntry) => (
                   <div key={entry.id} className="flex items-start gap-4 relative">
-                    <div className="w-6 h-6 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0 z-10">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0 z-10">
                       <FileText className="h-3 w-3 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0 pt-0.5">

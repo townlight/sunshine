@@ -58,6 +58,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Check out pinned desktop integration runtime
+        uses: actions/checkout@v6
+        with:
+          repository: townlight/townlight
+          ref: 1623e3d15ea8f9b16d3217cbadfbfb1ed8ed8eef
+          path: .ci-siblings/townlight
+
+      - name: Check out pinned Core
+        uses: actions/checkout@v6
+        with:
+          repository: townlight/core
+          ref: b4d0156bdc6883c1c3ef167abe0379f9ca32b258
+          path: .ci-siblings/core
+
+      - name: Check out pinned Notice
+        uses: actions/checkout@v6
+        with:
+          repository: townlight/notice
+          ref: 79b8d07199ee77cd425b31c0e0a44f3a0832b810
+          path: .ci-siblings/notice
+
+      - name: Check out pinned Access
+        uses: actions/checkout@v6
+        with:
+          repository: townlight/access
+          ref: b9100edc80ca496d6061f1cdb3eb39a60ff5f31a
+          path: .ci-siblings/access
+
       - name: Generate hermetic .env for the compose stack
         # docker-compose.yml reads env_file: .env. We synthesize a minimal,
         # per-run .env with a real JWT_SECRET (config.py rejects insecure
@@ -105,6 +133,14 @@ jobs:
       - name: Build api image
         run: docker compose build api
 
+      - name: Install paired packages for existing desktop integration tests
+        run: |
+          docker compose run --rm --no-deps -v "$PWD:/repo" api \
+            python -m pip install --no-deps --target /repo/.ci-python \
+            /repo/.ci-siblings/core /repo/.ci-siblings/notice \
+            /repo/.ci-siblings/access \
+            /repo/.ci-siblings/townlight/desktop/runtime/python-services
+
       - name: Verify docs/openapi.json not stale (T3D)
         # Regenerate the OpenAPI schema inside the already-built api container
         # (no live DB needed — FastAPI introspects at import time) and compare
@@ -137,6 +173,8 @@ jobs:
           set -o pipefail
           docker compose run --rm --no-deps \
             -e CIVICRECORDS_REPO_ROOT=/repo \
+            -e TOWNLIGHT_TEST_RUNTIME_ROOT=/repo/.ci-python \
+            -e PYTHONPATH=/repo/.ci-python:/app \
             -v "$PWD:/repo:ro" \
             api \
             python -m pytest tests --collect-only -q \
@@ -156,6 +194,8 @@ jobs:
           set -o pipefail
           docker compose run --rm --no-deps \
             -e CIVICRECORDS_REPO_ROOT=/repo \
+            -e TOWNLIGHT_TEST_RUNTIME_ROOT=/repo/.ci-python \
+            -e PYTHONPATH=/repo/.ci-python:/app \
             -v "$PWD:/repo:ro" \
             api \
             python -m pytest tests -q \

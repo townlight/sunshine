@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, Request, Response
@@ -112,7 +113,11 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-def create_app() -> FastAPI:
+def create_app(
+    *, desktop_profile_root: Path | None = None,
+    desktop_enabled_modules: frozenset[str] = frozenset(),
+    desktop_domain_enabled: bool = False,
+) -> FastAPI:
     app = FastAPI(
         title="CivicSunshine",
         description="AI-powered open records support for American cities",
@@ -246,6 +251,16 @@ def create_app() -> FastAPI:
 
     from app.departments.router import router as departments_router
     app.include_router(departments_router)
+
+    # Native routes are mounted only by the supervised desktop host, never
+    # implicitly on the ordinary web application. Modules come from its
+    # verified profile, not a request body or an all-modules default.
+    if desktop_profile_root is not None:
+        from app.desktop_bridge.router import router as native_router
+        app.state.desktop_profile_root = desktop_profile_root
+        app.state.desktop_enabled_modules = desktop_enabled_modules
+        app.state.desktop_domain_enabled = desktop_domain_enabled
+        app.include_router(native_router)
 
     @app.get("/health")
     async def health():

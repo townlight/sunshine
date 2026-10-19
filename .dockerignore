@@ -19,6 +19,8 @@
 .gitignore
 .gitattributes
 .github
+.ci-siblings
+.ci-python
 
 # --- Node / frontend ---
 **/node_modules

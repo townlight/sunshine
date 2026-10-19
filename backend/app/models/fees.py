@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, date
-from sqlalchemy import DateTime, String, Numeric, Integer, Date, ForeignKey, func
+from sqlalchemy import DateTime, String, Numeric, Integer, Date, ForeignKey, Text, func
 from sqlalchemy.orm import Mapped, mapped_column
 from app.models.user import Base
 
@@ -30,7 +30,7 @@ class FeeWaiver(Base):
         ForeignKey("records_requests.id", ondelete="CASCADE")
     )
     waiver_type: Mapped[str] = mapped_column(String(50))  # indigency/public_interest/media/government/other
-    reason: Mapped[str] = mapped_column(String(2000))
+    reason: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(20), default="pending")  # pending/approved/denied
     requested_by: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL")
@@ -57,11 +57,14 @@ class FeeLineItem(Base):
     fee_schedule_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("fee_schedules.id", ondelete="SET NULL")
     )
-    description: Mapped[str] = mapped_column(String(500))
+    description: Mapped[str] = mapped_column(Text)
     quantity: Mapped[int] = mapped_column(Integer, default=1)
-    unit_price: Mapped[float] = mapped_column(Numeric(10, 2))
-    total: Mapped[float] = mapped_column(Numeric(10, 2))
+    unit_price: Mapped[float] = mapped_column(Numeric(21, 2))
+    total: Mapped[float] = mapped_column(Numeric(21, 2))
     status: Mapped[str] = mapped_column(String(20), default="estimated")  # estimated/invoiced/paid/waived
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+    legacy_id: Mapped[str | None] = mapped_column(Text)
+    position: Mapped[int | None] = mapped_column(Integer)
+    schedule_basis: Mapped[str] = mapped_column(Text, server_default="")
