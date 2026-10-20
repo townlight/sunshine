@@ -220,7 +220,8 @@ def isolated_runtime_app():
 
 
 @pytest.mark.asyncio
-async def test_real_loopback_runtime_write_survives_process_restart(client, native_profile, tmp_path):
+@pytest.mark.parametrize("product_profile", ["records-beta", "city-core"])
+async def test_real_loopback_runtime_write_survives_process_restart(client, native_profile, tmp_path, product_profile):
     """P2 process proof, distinct from ASGI reconstruction and installed proof."""
     import asyncio
     import os
@@ -266,8 +267,19 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
         native_transport = os.environ.get("TOWNLIGHT_TEST_NATIVE_TRANSPORT") == "1"
         reservation.bind(("127.0.0.1", 15480 if native_transport else 0))
         port = reservation.getsockname()[1]
+    if product_profile == "city-core":
+        import civicclerk
+        import civiccode
+        from civicsuite_runtime.migrate import _run_alembic
+
+        for package in (civicclerk, civiccode):
+            migrations = Path(package.__file__).parent / "migrations"
+            _run_alembic(
+                package.__name__, migrations / "alembic.ini", migrations,
+                TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"),
+            )
     env = {**os.environ, "TESTING": "1", "DATABASE_URL": TEST_DATABASE_URL,
-           "CIVICSUITE_DATA_DIR": str(root / "data"), "TOWNLIGHT_PRODUCT_PROFILE": "records-beta",
+           "CIVICSUITE_DATA_DIR": str(root / "data"), "TOWNLIGHT_PRODUCT_PROFILE": product_profile,
            "PYTHONPATH": str(runtime_root) + os.pathsep + os.environ.get("PYTHONPATH", "")}
     command = [sys.executable, "-m", "uvicorn", "tests.test_desktop_records:isolated_runtime_app",
                "--factory", "--host", "127.0.0.1", "--port", str(port),
