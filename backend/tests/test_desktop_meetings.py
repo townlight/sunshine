@@ -19,8 +19,9 @@ from tests.conftest import TEST_DATABASE_URL
 from tests.test_desktop_records import native_api as native_api, native_profile as native_profile  # noqa: F401
 
 
+@pytest.mark.parametrize("product_profile", ["meetings-beta", "city-core"])
 @pytest.mark.asyncio
-async def test_meetings_native_postgres_actor_permissions_and_process_restart(native_api, monkeypatch, tmp_path):
+async def test_meetings_native_postgres_actor_permissions_and_process_restart(native_api, monkeypatch, tmp_path, product_profile):
     from civicclerk.meeting_lifecycle import MeetingStore
     from civicclerk.agenda_lifecycle import AgendaItemRepository
     from civicclerk.minutes import MinutesDraftRepository
@@ -80,7 +81,7 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
         f"uvicorn.run(create_runtime_app(domain_enabled=True),host='127.0.0.1',port={port},access_log=False,log_level='warning')"
     )
     environment = {**os.environ, "DATABASE_URL": TEST_DATABASE_URL,
-                   "TOWNLIGHT_PRODUCT_PROFILE": "meetings-beta", "TOWNLIGHT_PROFILE_ROOT": str(root),
+                   "TOWNLIGHT_PRODUCT_PROFILE": product_profile, "TOWNLIGHT_PROFILE_ROOT": str(root),
                    "TESTING": "1", "JWT_SECRET": "a" * 64}
     saved = []
     with (tmp_path / "meetings-runtime.log").open("w") as log:

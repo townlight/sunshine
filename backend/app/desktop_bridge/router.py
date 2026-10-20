@@ -43,6 +43,29 @@ class MeetingsSourceSelection(BaseModel):
     expected_sha256: str = Field(pattern="^[0-9a-f]{64}$")
 
 
+class CodeSearch(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(min_length=1, max_length=500)
+    as_of: date | None = None
+
+
+class CodeSourceSelection(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    source_id: str = Field(min_length=1, max_length=200)
+    expected_sha256: str = Field(pattern="^[0-9a-f]{64}$")
+    as_of: date | None = None
+
+
+async def code_sources(request, **kwargs):
+    provider = getattr(request.app.state, "desktop_code_sources", None)
+    if provider is None or "civiccode" not in request.app.state.desktop_enabled_modules:
+        raise HTTPException(503, "Code sources are unavailable in this profile.")
+    try:
+        return await run_in_threadpool(provider, **kwargs)
+    except Exception:
+        raise HTTPException(503, "Code sources unavailable; no stale fallback used.") from None
+
+
 async def meeting_sources(request, **kwargs):
     provider = getattr(request.app.state, "desktop_meetings_sources", None)
     if provider is None or "civicclerk" not in request.app.state.desktop_enabled_modules:
@@ -166,6 +189,40 @@ async def attach_meetings_source(request_id: uuid.UUID, data: MeetingsSourceSele
         message = await attach_snapshot(session, req, workflow.RecordsActor(actor, request.state.native_role),
                                         sources[0], request.app.state.desktop_profile_root)
         result = RecordsOperationRead(action="attach-meetings-source", message=message,
+                                      request=await request_view(session, req))
+        await session.commit()
+        return result
+    except (ValueError, OSError):
+        await session.rollback()
+        raise HTTPException(422, "Source attachment not confirmed; existing evidence retained.") from None
+
+
+@router.post("/code-sources/search")
+async def search_code_sources(data: CodeSearch, request: Request,
+                              actor: User = Depends(native_records_user)):
+    sources = await code_sources(request, query=data.query, as_of=data.as_of)
+    return {"results": [{**{k:v for k,v in source.items() if k != "text"},
+                         "excerpt": source["excerpt"]} for source in sources[:50]],
+            "truncated": len(sources) > 50}
+
+
+@router.post("/requests/{request_id}/code-sources", response_model=RecordsOperationRead)
+async def attach_code_source(request_id: uuid.UUID, data: CodeSourceSelection,
+        request: Request, session: AsyncSession = Depends(get_async_session),
+        actor: User = Depends(native_records_user)):
+    from app.requests.meeting_sources import attach_snapshot
+    req = await session.get(RecordsRequest, request_id, with_for_update=True)
+    if req is None:
+        raise HTTPException(404, "Records request not found.")
+    sources = await code_sources(request, source_id=data.source_id, as_of=data.as_of)
+    if len(sources) != 1:
+        raise HTTPException(404, "Permitted Code source not found.")
+    if sources[0]["sha256"] != data.expected_sha256:
+        raise HTTPException(409, "Code source changed; search again before attaching.")
+    try:
+        message = await attach_snapshot(session, req, workflow.RecordsActor(actor, request.state.native_role),
+                                        sources[0], request.app.state.desktop_profile_root, origin="code")
+        result = RecordsOperationRead(action="attach-code-source", message=message,
                                       request=await request_view(session, req))
         await session.commit()
         return result

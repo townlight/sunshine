@@ -52,7 +52,7 @@ jobs:
   backend:
     name: Backend (pytest via docker compose)
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
 
     steps:
       - name: Checkout
@@ -62,15 +62,22 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: townlight/townlight
-          ref: b767dcd7dc5c5756bd06ab27a8339bb3e7989a1b
+          ref: cebc62d478239f5ad3b8357e7bca7b1453f2846e
           path: .ci-siblings/townlight
 
       - name: Check out pinned Meetings integration source
         uses: actions/checkout@v6
         with:
           repository: townlight/meetings
-          ref: 1bf7b7b129f23fd79778516d0d39f699c1c9c686
+          ref: 3dd73d0619943beb8ce2965abe7a41dfe596e9be
           path: .ci-siblings/meetings
+
+      - name: Check out pinned Ordinances integration source
+        uses: actions/checkout@v6
+        with:
+          repository: townlight/ordinances
+          ref: 868891bd990588a8337832915e4d91af39ea22cd
+          path: .ci-siblings/ordinances
 
       - name: Check out pinned Core
         uses: actions/checkout@v6
@@ -147,7 +154,8 @@ jobs:
             /repo/.ci-siblings/core /repo/.ci-siblings/notice \
             /repo/.ci-siblings/access \
             /repo/.ci-siblings/townlight/desktop/runtime/python-services \
-            /repo/.ci-siblings/meetings
+            /repo/.ci-siblings/meetings \
+            /repo/.ci-siblings/ordinances
 
       - name: Verify docs/openapi.json not stale (T3D)
         # Regenerate the OpenAPI schema inside the already-built api container
