@@ -26,7 +26,31 @@ from app.desktop_bridge.schemas import PublicIntake, PublicLookup, PublicMessage
 from app.desktop_bridge.schemas import GeneratedDraft
 from app.requests import workflow
 
+from pydantic import BaseModel, ConfigDict, Field
+from starlette.concurrency import run_in_threadpool
+
 router = APIRouter(prefix="/desktop/v1", tags=["native-desktop"])
+
+
+class MeetingsSearch(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    query: str = Field(min_length=1, max_length=500)
+
+
+class MeetingsSourceSelection(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    source_id: str = Field(min_length=1, max_length=200)
+    expected_sha256: str = Field(pattern="^[0-9a-f]{64}$")
+
+
+async def meeting_sources(request, **kwargs):
+    provider = getattr(request.app.state, "desktop_meetings_sources", None)
+    if provider is None or "civicclerk" not in request.app.state.desktop_enabled_modules:
+        raise HTTPException(503, "Meetings sources are unavailable in this profile.")
+    try:
+        return await run_in_threadpool(provider, **kwargs)
+    except Exception:
+        raise HTTPException(503, "Meetings sources unavailable; no stale fallback used.") from None
 
 
 def native_public_shell(request: Request, proof: str | None = Header(default=None, alias="X-Townlight-Public")):
@@ -114,6 +138,40 @@ async def get_native_records_state(
 ):
     # Same native capability boundary as individual readback; no JSON merge.
     return await records_state(session)
+
+
+@router.post("/meetings-sources/search")
+async def search_meetings_sources(data: MeetingsSearch, request: Request,
+                                 actor: User = Depends(native_records_user)):
+    sources = await meeting_sources(request, query=data.query)
+    return {"results": [{**{k:v for k,v in source.items() if k != "text"},
+                         "excerpt": source["text"][:500]} for source in sources[:50]],
+            "truncated": len(sources) > 50}
+
+
+@router.post("/requests/{request_id}/meetings-sources", response_model=RecordsOperationRead)
+async def attach_meetings_source(request_id: uuid.UUID, data: MeetingsSourceSelection,
+        request: Request, session: AsyncSession = Depends(get_async_session),
+        actor: User = Depends(native_records_user)):
+    from app.requests.meeting_sources import attach_snapshot
+    req = await session.get(RecordsRequest, request_id, with_for_update=True)
+    if req is None:
+        raise HTTPException(404, "Records request not found.")
+    sources = await meeting_sources(request, source_id=data.source_id)
+    if len(sources) != 1:
+        raise HTTPException(404, "Permitted Meetings source not found.")
+    if sources[0]["sha256"] != data.expected_sha256:
+        raise HTTPException(409, "Meetings source changed; search again before attaching.")
+    try:
+        message = await attach_snapshot(session, req, workflow.RecordsActor(actor, request.state.native_role),
+                                        sources[0], request.app.state.desktop_profile_root)
+        result = RecordsOperationRead(action="attach-meetings-source", message=message,
+                                      request=await request_view(session, req))
+        await session.commit()
+        return result
+    except (ValueError, OSError):
+        await session.rollback()
+        raise HTTPException(422, "Source attachment not confirmed; existing evidence retained.") from None
 
 
 @router.post("/notifications/{notification_id}/sent", response_model=RecordsStateRead)

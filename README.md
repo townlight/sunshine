@@ -1,5 +1,21 @@
 # CivicSunshine
 
+## Local Townlight Meetings connection — October 19, 2026
+
+Unreleased M3 integration: the explicit native `meetings-beta` profile can search
+public Meetings archive text snapshots and attach a selected agenda, packet text
+or minutes document to a Records request. Restricted archive records, raw
+transcripts and staff-only attachments are excluded; the source is rechecked
+when selected. Records keeps the exact bytes/hash, stable archive/source ID,
+citation, structured provenance and authenticated actor in its existing evidence
+and audit stores. Retry does not duplicate an attachment. Staff can use the
+source in a response draft without automatic approval or publication.
+
+Actual native search/attachment/draft and restart readback passed on synthetic
+data. This is not installed acceptance; no release version was changed. The
+Records-only profile does not mount a Meetings provider and its existing screen
+does not show the new search controls. M4 packaging/recovery remains pending.
+
 > Formerly published as "CivicRecords AI"; renamed 2026-07. Package and service identifiers are unchanged.
 
 **Open-source, locally-hosted AI that helps American cities respond to open records requests.**
