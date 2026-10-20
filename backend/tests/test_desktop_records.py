@@ -221,7 +221,7 @@ def isolated_runtime_app():
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize("product_profile", ["records-beta", "city-core"])
-async def test_real_loopback_runtime_write_survives_process_restart(client, native_profile, tmp_path, product_profile):
+async def test_real_loopback_runtime_write_survives_process_restart(client, native_profile, tmp_path, product_profile, monkeypatch):
     """P2 process proof, distinct from ASGI reconstruction and installed proof."""
     import asyncio
     import os
@@ -233,9 +233,24 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
     import httpx
     from tests.conftest import TEST_DATABASE_URL, DESKTOP_RUNTIME_ROOT
     from app.audit.logger import verify_chain
+    import logging
+    for logger in logging.Logger.manager.loggerDict.values():
+        if isinstance(logger, logging.Logger):
+            monkeypatch.setattr(logger, "disabled", logger.disabled)
 
     runtime_root = DESKTOP_RUNTIME_ROOT
     assert runtime_root is not None, "Install the pinned paired Townlight runtime for desktop tests"
+    if product_profile == "city-core":
+        import civicclerk
+        import civiccode
+        from civicsuite_runtime.migrate import _run_alembic
+
+        for package in (civicclerk, civiccode):
+            migrations = Path(package.__file__).parent / "migrations"
+            _run_alembic(
+                package.__name__, migrations / "alembic.ini", migrations,
+                TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"),
+            )
     from civicaccess.access_review import AccessibilityReviewRepository
     sys.path.insert(0, str(runtime_root))
     from civicsuite_runtime.access_bridge import ensure_native_schema
@@ -246,6 +261,9 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
         from civicsuite_runtime.native_accounts import metadata
         ensure_schema(repository.engine)
         metadata.create_all(repository.engine)
+        if product_profile == "city-core":
+            from civicsuite_runtime.code_meetings import ensure_schema as ensure_connections
+            ensure_connections(repository.engine)
     finally:
         repository.engine.dispose()
     root, _ = native_profile
@@ -267,17 +285,6 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
         native_transport = os.environ.get("TOWNLIGHT_TEST_NATIVE_TRANSPORT") == "1"
         reservation.bind(("127.0.0.1", 15480 if native_transport else 0))
         port = reservation.getsockname()[1]
-    if product_profile == "city-core":
-        import civicclerk
-        import civiccode
-        from civicsuite_runtime.migrate import _run_alembic
-
-        for package in (civicclerk, civiccode):
-            migrations = Path(package.__file__).parent / "migrations"
-            _run_alembic(
-                package.__name__, migrations / "alembic.ini", migrations,
-                TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"),
-            )
     env = {**os.environ, "TESTING": "1", "DATABASE_URL": TEST_DATABASE_URL,
            "CIVICSUITE_DATA_DIR": str(root / "data"), "TOWNLIGHT_PRODUCT_PROFILE": product_profile,
            "PYTHONPATH": str(runtime_root) + os.pathsep + os.environ.get("PYTHONPATH", "")}

@@ -43,7 +43,8 @@ async def check_code_source_boundary(runtime, headers, endpoint, source):
 
 
 async def code_records_journey(runtime, headers, profile_root):
-    import hashlib, json
+    import hashlib
+    import json
     from pathlib import Path
 
     search = '/desktop/v1/code-sources/search'
@@ -147,7 +148,11 @@ async def code_records_journey(runtime, headers, profile_root):
 
 
 @pytest.mark.asyncio
-async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):
+async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  # noqa: F811
+    import logging
+    for logger in logging.Logger.manager.loggerDict.values():
+        if isinstance(logger, logging.Logger):
+            monkeypatch.setattr(logger, "disabled", logger.disabled)
     api, proof, actor_id, app = native_api
 
     from civicsuite_runtime.code_bridge import router
@@ -201,7 +206,19 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):
         json.dump(session, f)
     headers = {"X-Townlight-Session": token}
 
-    payload = json.loads((root.parent / "tests/fixtures/milestone_12/csv_bundle.json").read_text())
+    import os
+    code_source = (
+        Path(os.environ["CIVICRECORDS_REPO_ROOT"]) / ".ci-siblings" / "ordinances"
+        if os.environ.get("CIVICRECORDS_REPO_ROOT")
+        else next(
+            parent / "ordinances"
+            for parent in Path(__file__).resolve().parents
+            if (parent / "ordinances").is_dir()
+        )
+    )
+    payload = json.loads(
+        (code_source / "tests/fixtures/milestone_12/csv_bundle.json").read_text()
+    )
     old = {
         **payload["versions"][0],
         "version_id": "version_6_12_040_historic",
@@ -268,7 +285,13 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):
     assert resp.status_code == 200
     assert resp.json()["status"] == "refused"
 
-    import os, socket, subprocess, sys, asyncio, httpx, time
+    import os
+    import socket
+    import subprocess
+    import sys
+    import asyncio
+    import httpx
+    import time
 
     _s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     bind_port = 15480 if os.environ.get("TOWNLIGHT_TEST_NATIVE_CODE_TRANSPORT") == "1" else 0
