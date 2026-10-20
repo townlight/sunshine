@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Phase 0 preflight infrastructure audit.
 
 Runs the Check 1-7 sequence from pipelines/roles/preflight-auditor.md

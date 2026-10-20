@@ -114,7 +114,7 @@ If you catch yourself doing any of these — stop. Run the commands. Open the fi
 ## Project
 
 Open-source, locally-hosted AI system for municipal open records request processing.
-Apache 2.0 licensed. Python/FastAPI backend, React/shadcn/ui frontend, PostgreSQL+pgvector, Ollama.
+AGPL-3.0 licensed. Python/FastAPI backend, React/shadcn/ui frontend, PostgreSQL+pgvector, Ollama.
 
 ## Testing Requirements
 

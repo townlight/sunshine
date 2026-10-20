@@ -51,7 +51,7 @@ All data processed by CivicSunshine remains within {{CITY_NAME}}'s physical and 
 
 ## 4. Software Transparency
 
-CivicSunshine is open-source software licensed under the Apache License 2.0. The source code is publicly available for inspection, audit, and independent review. {{CITY_NAME}} welcomes public scrutiny of the tools used in records management.
+CivicSunshine is open-source software licensed under the AGPL-3.0. The source code is publicly available for inspection, audit, and independent review. {{CITY_NAME}} welcomes public scrutiny of the tools used in records management.
 
 ## 5. Contact Information
 
@@ -69,4 +69,4 @@ Any requester may ask that their records request be processed without AI assista
 
 > **Disclaimer:** Consult your city attorney before adoption. This disclosure template is a starting point and should be adapted to your jurisdiction's specific legal requirements, policies, and operational context.
 
-Template provided by CivicSunshine (Apache 2.0).
+Template provided by CivicSunshine (AGPL-3.0).

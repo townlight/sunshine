@@ -130,4 +130,4 @@ I certify that this impact assessment accurately describes {{CITY_NAME}}'s deplo
 
 > **Disclaimer:** Consult your city attorney before adoption. This impact assessment template is a starting point. While CivicSunshine is designed to fall outside the Colorado AI Act's high-risk classification, your jurisdiction should independently evaluate its obligations under applicable law.
 
-Template provided by CivicSunshine (Apache 2.0).
+Template provided by CivicSunshine (AGPL-3.0).

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 # Scope lock - copy to .agent-runs/<run-id>/scope-lock.yaml and fill in
 # before product work starts. This file proves the run is working on the
 # rung the canonical release plan says is next.

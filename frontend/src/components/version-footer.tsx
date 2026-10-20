@@ -21,5 +21,5 @@ export function VersionFooter() {
     };
   }, []);
 
-  return <span className="truncate">CivicSunshine v{version} &middot; Apache 2.0</span>;
+  return <span className="truncate">CivicSunshine v{version} &middot; AGPL-3.0</span>;
 }

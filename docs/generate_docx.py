@@ -215,7 +215,7 @@ def add_header_footer(section, header_text, include_page_num=True):
         fp = footer.add_paragraph()
     fp.clear()
     fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    fp.add_run("Apache License 2.0  —  github.com/townlight/sunshine").font.size = Pt(8)
+    fp.add_run("AGPL-3.0  —  github.com/townlight/sunshine").font.size = Pt(8)
     if include_page_num:
         fp.add_run("     Page ").font.size = Pt(8)
         add_page_number(fp)
@@ -493,7 +493,7 @@ def build_readme_docx(out_path):
 
     meta_para = doc.add_paragraph()
     meta_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    meta_run = meta_para.add_run(f"v1.4.8  ·  {date.today().strftime('%B %Y')}  ·  Apache 2.0")
+    meta_run = meta_para.add_run(f"v1.4.8  ·  {date.today().strftime('%B %Y')}  ·  AGPL-3.0")
     meta_run.font.name   = "Calibri"
     meta_run.font.size   = Pt(11)
     meta_run.font.italic = True
@@ -696,7 +696,7 @@ def build_readme_docx(out_path):
     h = doc.add_heading("License", level=1)
     apply_h1_style(h)
     body_para(doc,
-        "Apache License 2.0 — see LICENSE. All dependencies use permissive (MIT, Apache 2.0, BSD) "
+        "AGPL-3.0-only — see LICENSE. All dependencies use permissive (MIT, Apache 2.0, BSD) "
         "or weak-copyleft (LGPL, MPL) licenses. No AGPL, SSPL, or BSL dependencies."
     )
     doc.add_paragraph()

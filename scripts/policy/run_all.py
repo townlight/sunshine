@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Run every policy check and produce a combined PROMOTE/BLOCK report.
 
 Wired into ``.pipelines/feature.yaml`` and ``.pipelines/bugfix.yaml`` as

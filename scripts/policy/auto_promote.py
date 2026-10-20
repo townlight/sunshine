@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Machine-checkable promote decision for the agentic pipeline (v0.5).
 
 Reads the artifacts produced by the verifier, critic, drift-detector,

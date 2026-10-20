@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Policy: changed files and commit subjects must belong to the locked rung."""
 
 from __future__ import annotations

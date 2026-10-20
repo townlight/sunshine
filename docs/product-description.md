@@ -298,7 +298,7 @@ The system ships as a Docker Compose stack with an automated install script:
 
 ### Project License
 
-The CivicSunshine application code is released under the **Apache License 2.0**, providing:
+The CivicSunshine application code is released under the **AGPL-3.0-only**, providing:
 
 - Freedom for any city to use, modify, and deploy without restriction.
 - Patent protection for contributors and users.

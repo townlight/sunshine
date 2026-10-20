@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Evaluate plan.md against directive-declared plan acceptance assertions."""
 
 from __future__ import annotations

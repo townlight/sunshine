@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Policy: ADR files under ``docs/adr/`` are append-only.
 
 ADRs are immutable once Accepted. An autonomous run may ADD a new ADR
