@@ -1,18 +1,32 @@
-# CivicSunshine
+# Townlight Records
 
-> Formerly published as "CivicRecords AI"; renamed 2026-07. Package and service identifiers are unchanged.
+## Published connected desktop: 1.4.0-beta.1
+
+This module participates in the signed Townlight Records + Meetings + Code +
+Zoning desktop beta published October 21, 2026. Select zoning-beta for all four
+products; Records-only remains default and city-core excludes Zoning.
+[Download and release limits](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-v1.4.0-beta.1) ·
+[Current operator manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) ·
+[Signed acceptance](https://github.com/townlight/townlight/blob/main/docs/installer/townlight-zoning-beta1-signed-acceptance.md).
+
+This is a connected desktop release, not a new standalone package version.
+Package/import/API names remain compatibility identifiers. Historical development
+checkpoints below retain their original scope; they are superseded for current
+desktop publication status. No signed installer or historical evidence is changed.
+
+> Formerly published as "Townlight Records"; renamed 2026-07. Package and service identifiers are unchanged.
 
 **Open-source, locally-hosted AI that helps American cities respond to open records requests.**
 
-> **Release train notice (2026-05-24).** CivicSunshine v1.7.3 adds wheel and sdist release assets for direct-pip consumers. No functional behavior changes; the city-core installer continues to vendor source, and the runtime remains pinned to the published CivicCore v1.2.0 shared-ingestion release wheel. The older `v1.4.10` tag remains available as historical source only and must not be promoted as an attested baseline.
+> **Release train notice (2026-05-24).** Townlight Records v1.7.3 adds wheel and sdist release assets for direct-pip consumers. No functional behavior changes; the city-core installer continues to vendor source, and the runtime remains pinned to the published Townlight Core v1.2.0 shared-ingestion release wheel. The older `v1.4.10` tag remains available as historical source only and must not be promoted as an attested baseline.
 
-CivicSunshine runs entirely on a single machine inside your city's network — no cloud subscriptions, no vendor lock-in, no resident data leaving the building. It ingests your city's documents, makes them searchable with AI-powered natural language queries, detects potential exemptions, and manages the full request lifecycle from intake to response.
+Townlight Records runs entirely on a single machine inside your city's network — no cloud subscriptions, no vendor lock-in, no resident data leaving the building. It ingests your city's documents, makes them searchable with AI-powered natural language queries, detects potential exemptions, and manages the full request lifecycle from intake to response.
 
 ## Why This Exists
 
 Every city in America processes open records requests (FOIA, CORA, and state equivalents). Staff manually search file shares, email archives, and databases — then review every document for exemptions before release. It's slow, error-prone, and a growing burden as request volumes increase.
 
-No open-source tool exists for the **responder side** of open records at the municipal level. CivicSunshine fills that gap.
+No open-source tool exists for the **responder side** of open records at the municipal level. Townlight Records fills that gap.
 
 ## Key Features
 
@@ -29,15 +43,15 @@ No open-source tool exists for the **responder side** of open records at the mun
 - **Notification Service** — Template-based notification system with SMTP email delivery via Celery beat (60s interval). Configure SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD in .env to enable. Notification dispatch into status transitions pending
 - **Compliance by Design** — Hash-chained audit logs, human-in-the-loop enforcement, AI content labeling, data sovereignty verification. Designed for Colorado CAIA and 50-state regulatory compliance. CJIS compliance gate for public safety connectors
 - **Civic Design System** — Professional UI built with shadcn/ui and civic blue design tokens. Responsive shell: fixed 240px sidebar at ≥768px, hamburger-driven slide-in drawer below that (with focus trap, ESC close, overlay dim, auto-close on route change). WCAG 2.2 AA targeted (44px touch targets, skip-to-content link, icon+color status badges, programmatic label→input associations on admin forms, `role="alert"` validation errors with actionable copy — full third-party accessibility audit still pending)
-- **Federation-Ready** — REST API with service accounts enables future cross-jurisdiction record discovery between CivicSunshine instances
+- **Federation-Ready** — REST API with service accounts enables future cross-jurisdiction record discovery between Townlight Records instances
 
 ## Quick Start
 
 ### Requirements
 
-CivicSuite is a **server product** — one server per city. Clerks reach the server through any modern browser; there is no clerk-side installation.
+Townlight is a **server product** — one server per city. Clerks reach the server through any modern browser; there is no clerk-side installation.
 
-#### CivicSuite Server (one per city)
+#### Townlight Server (one per city)
 
 Runs the full Docker Compose stack: postgres, redis, ollama, api, celery worker, celery beat, and frontend.
 
@@ -67,12 +81,12 @@ Any computer with a modern web browser. Clerks open the server's URL — **`http
 >
 > **Two shortcuts, two flows.** The Windows installer creates **separate** Start Menu entries for the two operations — don't confuse them:
 >
-> - **Start CivicSunshine** → daily start. Runs `docker compose up -d` and opens `http://localhost:8080/`. Does **not** run the prereq check, does **not** invoke `install.ps1`, does **not** pull any model, does **not** re-seed data. The Desktop shortcut (if you opted in) mirrors this daily-start behavior.
-> - **Install or Repair CivicSunshine** → full bootstrap/repair. Runs the prereq check, then `install.ps1` (which may show the picker and pull models). Use this for first-run setup (the installer fires it automatically for you the first time), when you want to switch LLMs, or to repair a broken stack.
+> - **Start Townlight Records** → daily start. Runs `docker compose up -d` and opens `http://localhost:8080/`. Does **not** run the prereq check, does **not** invoke `install.ps1`, does **not** pull any model, does **not** re-seed data. The Desktop shortcut (if you opted in) mirrors this daily-start behavior.
+> - **Install or Repair Townlight Records** → full bootstrap/repair. Runs the prereq check, then `install.ps1` (which may show the picker and pull models). Use this for first-run setup (the installer fires it automatically for you the first time), when you want to switch LLMs, or to repair a broken stack.
 >
 > **Docker Desktop and WSL 2** must be installed and running before either path; the installer detects their absence and prints concrete remediation, but does not install them for you.
 
-For the CivicSuite starter-set package, run `python scripts/check_starter_set_integration.py --umbrella-root ..\civicsuite --require-archives` from this repo to verify that CivicCore installs first, CivicSunshine and CivicClerk are selectable, package workflow proof is required, and Linux/Windows starter-set archives exist.
+For the Townlight starter-set package, run `python scripts/check_starter_set_integration.py --umbrella-root ..\civicsuite --require-archives` from this repo to verify that Townlight Core installs first, Townlight Records and Townlight Meetings are selectable, package workflow proof is required, and Linux/Windows starter-set archives exist.
 
 **Windows:**
 ```powershell
@@ -98,13 +112,13 @@ bash install.sh
 
 ### Phase 1 migration layer
 
-CivicSunshine backend installs `civiccore` (the shared CivicSuite schema + migration runtime) as a dependency. The current release line is pinned to the published CivicCore v1.2.0 wheel so Records-AI consumes the shared document-ingestion pipeline from a release artifact. Records-specific Celery tasks, scheduler wiring, connector sync, and datasource routes remain local; parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes come from `civiccore.ingest`. Earlier interim branches used a commit archive while CivicCore v1.2.0 was unreleased; v1.7.2 returned to the versioned release-asset dependency pattern, and v1.7.3 adds direct-pip wheel and sdist assets without changing runtime behavior.
+Townlight Records backend installs `civiccore` (the shared Townlight schema + migration runtime) as a dependency. The current release line is pinned to the published Townlight Core v1.2.0 wheel so Records-AI consumes the shared document-ingestion pipeline from a release artifact. Records-specific Celery tasks, scheduler wiring, connector sync, and datasource routes remain local; parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes come from `civiccore.ingest`. Earlier interim branches used a commit archive while Townlight Core v1.2.0 was unreleased; v1.7.2 returned to the versioned release-asset dependency pattern, and v1.7.3 adds direct-pip wheel and sdist assets without changing runtime behavior.
 
 Migrations run in two layers: `civiccore` first (creates/updates the 16 shared tables), then this repo's Alembic chain on top. See [ADR-0003](https://github.com/townlight/townlight/blob/main/docs/architecture/ADR-0003-civiccore-alembic-baseline-strategy.md) for the full gate contract.
 
 ### Release provenance
 
-CivicSunshine now wires release preflight to CivicCore's canonical
+Townlight Records now wires release preflight to Townlight Core's canonical
 `civiccore.release_provenance` helper. This matters because GitHub release pages
 can show the target commit as "Verified" even when the release tag is
 lightweight or unsigned. Treat that badge as a commit signal only; the actual
@@ -205,7 +219,7 @@ All platforms use identical Docker containers — the application runs in Linux 
 
 ## Data Sovereignty
 
-CivicSunshine is designed for environments where resident data must never leave the network:
+Townlight Records is designed for environments where resident data must never leave the network:
 
 - Runs entirely on local hardware — no cloud dependencies
 - No telemetry, analytics, or crash reporting
@@ -266,31 +280,31 @@ Service accounts with hashed API keys enable instance-to-instance federation acc
 
 **v1.7.3 (May 24, 2026)** — Release-asset convention bring-up. Adds wheel and sdist as published assets so direct-pip consumers can install from release URLs. No functional change. City-core installer continues to vendor source as before.
 
-**v1.7.2 (May 23, 2026)** — CivicCore v1.2.0 shared-ingestion release-asset alignment. Records-AI now consumes the published CivicCore v1.2.0 wheel for parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes instead of the temporary commit archive used before the CivicCore release artifact existed.
+**v1.7.2 (May 23, 2026)** — Townlight Core v1.2.0 shared-ingestion release-asset alignment. Records-AI now consumes the published Townlight Core v1.2.0 wheel for parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes instead of the temporary commit archive used before the Townlight Core release artifact existed.
 
-**v1.5.0 (May 10, 2026)** — CivicCore recovery alignment release. Records-AI now consumes civiccore v1.0.1, matching the active CivicSuite platform baseline and closing ENG-002. The imported CivicCore symbols remained compatible, so this release changes the dependency baseline and release evidence without changing API URL paths, roles, permissions, or records-side database migrations.
+**v1.5.0 (May 10, 2026)** — Townlight Core recovery alignment release. Records-AI now consumes civiccore v1.0.1, matching the active Townlight platform baseline and closing ENG-002. The imported Townlight Core symbols remained compatible, so this release changes the dependency baseline and release evidence without changing API URL paths, roles, permissions, or records-side database migrations.
 
 **v1.6.0 (May 11, 2026)** — Docker secret-file extraction release. `JWT_SECRET` and `FIRST_ADMIN_PASSWORD` move out of container env vars and into Docker-mounted secret files. Existing v1.5.x installs must re-run `install.sh` or `install.ps1` so `./data/secrets/*` is created and `.env` keeps only non-secret operator settings; `_FILE` pointer env names are intentionally absent from the container env.
 
-**v1.4.10 (May 3, 2026)** — Documentation-only release alignment patch. The v1.4.9 CivicCore source-status projection code is unchanged; this tag publishes the audit-corrected 631-backend-test evidence in the release source snapshot and installer/download docs.
+**v1.4.10 (May 3, 2026)** — Documentation-only release alignment patch. The v1.4.9 Townlight Core source-status projection code is unchanged; this tag publishes the audit-corrected 631-backend-test evidence in the release source snapshot and installer/download docs.
 
-**v1.4.9 (May 3, 2026)** — CivicCore source-status projection consumer patch. Records-AI now consumes civiccore v0.22.0 for datasource list health, active-failure count, pause, and next-run projection, preserving the existing `/datasources/` response shape while moving reusable operator-state semantics into CivicCore. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.8.
+**v1.4.9 (May 3, 2026)** — Townlight Core source-status projection consumer patch. Records-AI now consumes civiccore v0.22.0 for datasource list health, active-failure count, pause, and next-run projection, preserving the existing `/datasources/` response shape while moving reusable operator-state semantics into Townlight Core. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.8.
 
-**v1.4.8 (May 2, 2026)** — CivicCore schedule validation consumer patch. Records-AI now consumes civiccore v0.21.0 for cron schedule validation and next-run computation, preserving the local `app.ingestion.cron_utils` import surface as a compatibility wrapper. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.7.
+**v1.4.8 (May 2, 2026)** — Townlight Core schedule validation consumer patch. Records-AI now consumes civiccore v0.21.0 for cron schedule validation and next-run computation, preserving the local `app.ingestion.cron_utils` import surface as a compatibility wrapper. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.7.
 
-**v1.4.7 (May 2, 2026)** — CivicCore startup config validation consumer patch. Records-AI now consumes civiccore v0.20.0 for JWT secret, Fernet encryption key, first-admin password, and CSV allowlist parsing validation, on top of the v1.4.6 vendor-delta/mock-city extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.6.
+**v1.4.7 (May 2, 2026)** — Townlight Core startup config validation consumer patch. Records-AI now consumes civiccore v0.20.0 for JWT secret, Fernet encryption key, first-admin password, and CSV allowlist parsing validation, on top of the v1.4.6 vendor-delta/mock-city extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.6.
 
-**v1.4.6 (May 2, 2026)** — CivicCore mock-city/delta consumer patch. Records-AI consumes civiccore v0.19.0 for vendor-delta request planning and reusable mock-city contract suites, on top of the v1.4.5 live connector retry and circuit-breaker extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.5.
+**v1.4.6 (May 2, 2026)** — Townlight Core mock-city/delta consumer patch. Records-AI consumes civiccore v0.19.0 for vendor-delta request planning and reusable mock-city contract suites, on top of the v1.4.5 live connector retry and circuit-breaker extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.5.
 
-**v1.4.5 (May 2, 2026)** — CivicCore sync-consumer patch. Records-AI consumes civiccore v0.18.1 for live connector retry and circuit-breaker primitives, preserving the existing Records retry semantics and database-backed sync failure workflow while removing reusable local sync-state logic. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.4.
+**v1.4.5 (May 2, 2026)** — Townlight Core sync-consumer patch. Records-AI consumes civiccore v0.18.1 for live connector retry and circuit-breaker primitives, preserving the existing Records retry semantics and database-backed sync failure workflow while removing reusable local sync-state logic. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.4.
 
-**v1.4.4 (May 1, 2026)** — CivicCore audit-consumer patch. Records-AI now consumes civiccore v0.17.0 for persisted audit-log hashing and verification, in addition to shared search, onboarding, connector-security, and ingest contracts. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.3.
+**v1.4.4 (May 1, 2026)** — Townlight Core audit-consumer patch. Records-AI now consumes civiccore v0.17.0 for persisted audit-log hashing and verification, in addition to shared search, onboarding, connector-security, and ingest contracts. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.3.
 
 **v1.4.3 (April 29, 2026)** — Shared connector-security extraction patch. Records-AI now consumes civiccore v0.13.0 for connector host validation and encrypted-config primitives instead of carrying private copies of those helpers. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.1.
 
 **v1.4.0 (April 25, 2026)** — Phase 2 LLM integration. civiccore advanced from v0.1.0 to v0.2.0; LLM provider abstraction, prompt-template engine + 3-step override resolver, and model registry now sourced from `civiccore.llm`. Migration `020_phase2_consumer_app_backfill` runs after upgrade. Records-AI now consumes civiccore v0.2.0 as a versioned dependency.
 
-**v1.3.0** — 2026-04-25 release. Phase 1 CivicCore extraction landed: `civiccore` v0.1.0 is now consumed as a release-wheel dependency. Two-layer migration order — civiccore migrations run first via subprocess, then records-side. No API or UI changes (infrastructure only). See [CHANGELOG](CHANGELOG.md) and the v1.3.0 release notes for operator upgrade guidance.
+**v1.3.0** — 2026-04-25 release. Phase 1 Townlight Core extraction landed: `civiccore` v0.1.0 is now consumed as a release-wheel dependency. Two-layer migration order — civiccore migrations run first via subprocess, then records-side. No API or UI changes (infrastructure only). See [CHANGELOG](CHANGELOG.md) and the v1.3.0 release notes for operator upgrade guidance.
 
 **v1.2.0** — 2026-04-23 release. Tier 5 (installer + onboarding + seeding + model picker + portal mode) and Tier 6 (at-rest encryption, ENG-001 closed) ship together. CI green on `d556904` (run 24853147133). Backend 617/617 pytest, frontend 36/36 vitest, unsigned Windows installer produced on tag push.
 
@@ -322,7 +336,7 @@ Service accounts with hashed API keys enable instance-to-instance federation acc
 - **T5A — Onboarding persistence, 2026-04-22 (`1782573`):** The single-phase LLM-powered adaptive interview now actually persists each answer onto the `CityProfile` singleton (creating the row on the first answer), normalizes yes/no → bool for `has_dedicated_it`, and transitions `onboarding_status` (not_started → in_progress → complete). Skip advances the walk truthfully (previously it dropped answers silently). Coverage: 4 new persistence tests + 2 skip-truth regression tests; migration `018_city_profile_state_nullable.py` relaxes a constraint the persistence path needed.
 - **T5B — First-boot baseline seeding, 2026-04-22 (`61449c5`):** `app/main.lifespan` now auto-seeds three baseline datasets on first boot: **175 state-scoped exemption rules across 51 jurisdictions** (from `STATE_RULES_REGISTRY`), **5 compliance templates**, and **12 notification templates**. Idempotent via skip-if-exists — admin customizations survive re-seed. Every run emits a start line, per-dataset `created` / `skipped` counts, and a completion summary. Universal PII regex rules are present in the seed source (5 additional rules, 180 total) but are **not** seeded by first-boot because they lack a two-letter `state_code`; those remain deferred pending schema relaxation. See `backend/app/seed/first_boot.py` and `§8.7` of the spec.
 - **T5D — Install-time portal switch (private vs. public), 2026-04-23 (`a57a897`):** New `PORTAL_MODE` environment variable (`private` | `public`, default `private`) locked at install time, changeable post-install by editing `.env` and restarting the stack. The installer (`install.ps1` / `install.sh`) prompts for the choice interactively; non-interactive installs can pre-set `CIVICRECORDS_PORTAL_MODE`. Case and whitespace are normalized by a `field_validator` on the config model. **Private mode (default)** is staff-only — the login screen is the only externally reachable page, `/auth/register` returns 404, and `UserRole.PUBLIC` is not assignable. **Public mode** exposes exactly three surfaces and nothing more: (1) a public landing page, (2) a resident-registration path, and (3) an authenticated records-request submission form for `UserRole.PUBLIC` users. Submission requires authentication — anonymous walk-up submission is intentionally out of scope. Staff roles (ADMIN, STAFF, REVIEWER, READ_ONLY, LIAISON) continue to use `/requests/` and receive 403 on the public submit endpoint. An unauthenticated `GET /config/portal-mode` endpoint (typed `PortalModeResponse { mode: Literal["public","private"] }`) is always mounted so the frontend can discover the active mode on boot and branch its routing. Fixed a pre-existing bug in `UserCreate` that forced self-registered users to `UserRole.STAFF`; self-registration now correctly forces `UserRole.PUBLIC` (and is still only reachable in public mode). Coverage: 15 pytest cases in `backend/tests/test_portal_mode.py` plus 12 vitest cases across `PublicLanding.test.tsx`, `PublicRegister.test.tsx`, and `PublicSubmit.test.tsx`. Explicitly **not** shipped in this slice and not implied by any copy: published-records search, a full resident dashboard, a track-my-request suite, or any other public-portal feature.
-- **T5E — Windows unsigned double-click installer, 2026-04-22 (`1d5429d`; test-harness flake fix `e898319`):** Real Windows `.exe` installer built with Inno Setup 6.x, produced on every `v*` tag by `.github/workflows/release.yml` on `windows-latest` via `choco install innosetup -y` + `installer/windows/build-installer.sh`. **Unsigned by design per Scott-locked B3=α posture** — operators must expect SmartScreen "Windows protected your PC — Unknown publisher" on first run; install path documented in [installer/windows/README.md](installer/windows/README.md). Flow is split into two Start Menu shortcuts: **Start CivicRecords AI** (daily `docker compose up -d`) and **Install or Repair CivicRecords AI** (full bootstrap + picker + model pull). Version is tag-derived (no hardcoded version drift) via `/DMyAppVersion=` from `$CIVICRECORDS_VERSION`. Desktop shortcut mirrors daily-start. macOS and Linux remain on the script path (`install.sh`) — native installer parity on those platforms is explicit follow-on work, not scheduled.
+- **T5E — Windows unsigned double-click installer, 2026-04-22 (`1d5429d`; test-harness flake fix `e898319`):** Real Windows `.exe` installer built with Inno Setup 6.x, produced on every `v*` tag by `.github/workflows/release.yml` on `windows-latest` via `choco install innosetup -y` + `installer/windows/build-installer.sh`. **Unsigned by design per Scott-locked B3=α posture** — operators must expect SmartScreen "Windows protected your PC — Unknown publisher" on first run; install path documented in [installer/windows/README.md](installer/windows/README.md). Flow is split into two Start Menu shortcuts: **Start Townlight Records** (daily `docker compose up -d`) and **Install or Repair Townlight Records** (full bootstrap + picker + model pull). Version is tag-derived (no hardcoded version drift) via `/DMyAppVersion=` from `$CIVICRECORDS_VERSION`. Desktop shortcut mirrors daily-start. macOS and Linux remain on the script path (`install.sh`) — native installer parity on those platforms is explicit follow-on work, not scheduled.
 - **T3D regen** (`bf3c9c3`) — Regenerated `docs/openapi.json` and `frontend/src/generated/api.ts` after the T5A schema change; CI's stale-check gate enforces this on every subsequent backend schema or route change.
 - **CI hygiene** (`5dbeed7`) — Bumped `actions/checkout@v4` and `actions/setup-node@v4` for Node 24 runtime support ahead of the 2026-06-02 GitHub runner default flip.
 
@@ -346,4 +360,4 @@ Service accounts with hashed API keys enable instance-to-instance federation acc
 | **Phase 3** | Public portal | Public homepage, search, guided request wizard, request tracker, help pages | Partial — T5D minimal surface shipped (landing + resident-registration + authenticated submission); published-records search, resident dashboard, and track-my-request remain Planned |
 | **Phase 4** | Transparency layer | Open records library, reporting dashboards, public archive, federation | Planned (v2.0) |
 
-*Note: Version numbers (semver) track release history. Phase numbers track design completeness per the canonical spec. They are separate systems. Current build (v1.7.3) includes backend work from Phases 0-2, partial Phase 3, the CivicCore v1.2.0 shared-ingestion dependency update, and additive release assets for direct-pip consumers, but has not completed the full scope of any phase. See [canonical spec](docs/UNIFIED-SPEC.md) for complete requirements and [reconciliation](docs/RECONCILIATION-2026-04-13.md) for current gap analysis.*
+*Note: Version numbers (semver) track release history. Phase numbers track design completeness per the canonical spec. They are separate systems. Current build (v1.7.3) includes backend work from Phases 0-2, partial Phase 3, the Townlight Core v1.2.0 shared-ingestion dependency update, and additive release assets for direct-pip consumers, but has not completed the full scope of any phase. See [canonical spec](docs/UNIFIED-SPEC.md) for complete requirements and [reconciliation](docs/RECONCILIATION-2026-04-13.md) for current gap analysis.*

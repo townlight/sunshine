@@ -5,15 +5,17 @@
 
 ---
 
-## Attestation of Local Data Residency for CivicSunshine
+<a id="attestation-of-local-data-residency-for-civicsunshine"></a>
 
-I, {{CONTACT_NAME}}, {{CONTACT_TITLE}} of {{CITY_NAME}}, {{STATE}}, hereby attest to the following facts regarding the deployment and operation of CivicSunshine within {{CITY_NAME}}'s infrastructure.
+## Attestation of Local Data Residency for Townlight Records
+
+I, {{CONTACT_NAME}}, {{CONTACT_TITLE}} of {{CITY_NAME}}, {{STATE}}, hereby attest to the following facts regarding the deployment and operation of Townlight Records within {{CITY_NAME}}'s infrastructure.
 
 ## 1. Attestation Statements
 
 ### 1.1 Local Deployment
 
-CivicSunshine is installed and operates exclusively on server hardware owned by {{CITY_NAME}} and physically located at:
+Townlight Records is installed and operates exclusively on server hardware owned by {{CITY_NAME}} and physically located at:
 
 **{{FACILITY_ADDRESS}}**
 
@@ -21,7 +23,7 @@ The system is administered by {{CITY_NAME}} IT staff. No third party has physica
 
 ### 1.2 No Cloud Services
 
-CivicSunshine does not use, connect to, or depend on any cloud computing services, including but not limited to:
+Townlight Records does not use, connect to, or depend on any cloud computing services, including but not limited to:
 
 - Cloud-hosted databases or storage (e.g., AWS S3, Azure Blob, Google Cloud Storage)
 - Cloud-hosted AI/ML inference APIs (e.g., OpenAI API, Azure AI, Google Vertex AI, AWS Bedrock)
@@ -32,17 +34,17 @@ All application components — the web server, database, AI models, document sto
 
 ### 1.3 No Telemetry or External Data Transmission
 
-CivicSunshine does not transmit any data to external servers, services, or endpoints. Specifically:
+Townlight Records does not transmit any data to external servers, services, or endpoints. Specifically:
 
 - No usage analytics or telemetry data is collected or transmitted.
 - No crash reports or error logs are sent to external services.
 - No document content, metadata, or user information is transmitted outside {{CITY_NAME}}'s network.
 - No DNS, NTP, or other protocol-level communications are made to vendor-operated servers beyond standard OS-level services controlled by {{CITY_NAME}} IT.
-- The application does not phone home, check for updates externally, or communicate with any CivicSunshine project infrastructure.
+- The application does not phone home, check for updates externally, or communicate with any Townlight Records project infrastructure.
 
 ### 1.4 Local AI Models
 
-All artificial intelligence and machine learning models used by CivicSunshine operate locally:
+All artificial intelligence and machine learning models used by Townlight Records operate locally:
 
 - Model weights are stored on {{CITY_NAME}}'s servers.
 - All inference (AI processing) occurs on {{CITY_NAME}}'s hardware.
@@ -54,8 +56,8 @@ All artificial intelligence and machine learning models used by CivicSunshine op
 
 {{CITY_NAME}} has verified the above attestation statements through the following methods:
 
-- **Network audit:** Reviewed firewall logs and network traffic to confirm no external data transmission from the CivicSunshine server. Date of last audit: {{LAST_AUDIT_DATE}}
-- **Source code review:** Confirmed that the deployed version of CivicSunshine contains no external API calls, telemetry code, or cloud service integrations.
+- **Network audit:** Reviewed firewall logs and network traffic to confirm no external data transmission from the Townlight Records server. Date of last audit: {{LAST_AUDIT_DATE}}
+- **Source code review:** Confirmed that the deployed version of Townlight Records contains no external API calls, telemetry code, or cloud service integrations.
 - **Configuration review:** Verified that application configuration files contain no external URLs, API keys, or cloud service credentials.
 - **Physical inspection:** Confirmed server hardware is located at the attested facility address and is physically secured.
 
@@ -73,7 +75,7 @@ All artificial intelligence and machine learning models used by CivicSunshine op
 
 ## 3. Hardware Specifications
 
-The following hardware is used to host CivicSunshine:
+The following hardware is used to host Townlight Records:
 
 | Component | Specification |
 |---|---|
@@ -128,4 +130,4 @@ Signature: ___________________________
 
 > **Disclaimer:** Consult your city attorney before adoption. This attestation template is a starting point. Your jurisdiction may have additional data residency, security, or compliance requirements that should be incorporated.
 
-Template provided by CivicSunshine (AGPL-3.0).
+Template provided by Townlight Records (AGPL-3.0).

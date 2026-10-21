@@ -1,6 +1,8 @@
-# Contributing to CivicSunshine
+<a id="contributing-to-civicsunshine"></a>
 
-Thank you for your interest in contributing to CivicSunshine. This project helps American cities respond to open records requests using AI-powered document search — contributions that improve accuracy, coverage, or usability directly benefit municipal transparency.
+# Contributing to Townlight Records
+
+Thank you for your interest in contributing to Townlight Records. This project helps American cities respond to open records requests using AI-powered document search — contributions that improve accuracy, coverage, or usability directly benefit municipal transparency.
 
 ## Development Setup
 

@@ -1,4 +1,6 @@
-# GitHub Discussions — Seed Content for CivicSunshine
+<a id="github-discussions--seed-content-for-civicsunshine"></a>
+
+# GitHub Discussions — Seed Content for Townlight Records
 # v1.4.0 · April 25, 2026
 #
 # NOTE (2026-04-25): The live Discussions threads on github.com have been updated
@@ -23,17 +25,19 @@
 ## Category: Announcements
 ## Action: PIN THIS POST after creating it
 
-### Title: CivicSunshine v1.4.0 — Phase 2 LLM integration is here
+<a id="title-civicsunshine-v140--phase-2-llm-integration-is-here"></a>
+
+### Title: Townlight Records v1.4.0 — Phase 2 LLM integration is here
 
 ---
 
-Hello, and welcome to the CivicSunshine community.
+Hello, and welcome to the Townlight Records community.
 
-CivicSunshine is an open-source, locally-hosted AI system built for American cities responding to public records requests — FOIA, CORA, and their state equivalents. Everything runs on a single machine inside your network. No cloud. No vendor lock-in. Resident data never leaves the building.
+Townlight Records is an open-source, locally-hosted AI system built for American cities responding to public records requests — FOIA, CORA, and their state equivalents. Everything runs on a single machine inside your network. No cloud. No vendor lock-in. Resident data never leaves the building.
 
 **New in v1.4.0 (released 2026-04-25) — Phase 2 LLM integration:**
 
-- **civiccore v0.2.0 dependency** — CivicSunshine now depends on `civiccore>=0.2.0,<0.3.0`. The shared sovereignty kernel graduates from Phase 1 (config/audit/identity primitives) to Phase 2, contributing the full LLM stack so every CivicSuite consumer app uses the same provider abstraction, prompt registry, and model catalog.
+- **civiccore v0.2.0 dependency** — Townlight Records now depends on `civiccore>=0.2.0,<0.3.0`. The shared sovereignty kernel graduates from Phase 1 (config/audit/identity primitives) to Phase 2, contributing the full LLM stack so every Townlight consumer app uses the same provider abstraction, prompt registry, and model catalog.
 - **LLM provider abstraction** — All LLM calls now route through `civiccore.llm.providers`. Ollama remains the default; the abstraction makes it possible to plug in other on-prem or self-hosted providers without touching application code. Provider selection is config-driven (`LLM_PROVIDER` env var) and validated at startup.
 - **Prompt template engine + 3-step override resolver** — Prompts live in `civiccore.llm.prompts` as versioned templates. The override resolver checks three locations in order: (1) per-city override in the database (`prompt_overrides` table), (2) project-local override in `backend/prompts/`, (3) civiccore default. Cities can edit any prompt without forking the codebase, and edits survive upgrades.
 - **Model registry now sourced from civiccore.llm** — The Admin → Model Registry page now reads from `civiccore.llm.registry` instead of a local hardcoded list. Adding a new model in civiccore propagates to every consumer app on the next dependency bump. `gemma4:e4b` remains the default.
@@ -79,7 +83,9 @@ If you're a city clerk, records officer, IT administrator, or civic technologist
 ## ── Q&A ──────────────────────────────────────────────────────────────────────
 ## Category: Q&A
 
-### Title: How do I install CivicSunshine on our city's server?
+<a id="title-how-do-i-install-civicsunshine-on-our-citys-server"></a>
+
+### Title: How do I install Townlight Records on our city's server?
 
 **Q:** What hardware and software do we need? What does the install process look like?
 
@@ -114,7 +120,9 @@ Full configuration options (SMTP, GPU, custom ports, `LLM_PROVIDER`, `ENCRYPTION
 
 ---
 
-### Title: Does CivicSunshine work without an internet connection?
+<a id="title-does-civicsunshine-work-without-an-internet-connection"></a>
+
+### Title: Does Townlight Records work without an internet connection?
 
 **Q:** Our network policy blocks outbound connections from internal servers. Can this run air-gapped after installation?
 
@@ -162,7 +170,7 @@ If you need more help diagnosing, the sync run log shows exactly what happened o
 
 **A:**
 
-CivicSunshine is model-agnostic — as of v1.4.0, the model registry is sourced from `civiccore.llm.registry`, so adding a model in civiccore propagates to every CivicSuite consumer app on the next dependency bump. A few options depending on your hardware:
+Townlight Records is model-agnostic — as of v1.4.0, the model registry is sourced from `civiccore.llm.registry`, so adding a model in civiccore propagates to every Townlight consumer app on the next dependency bump. A few options depending on your hardware:
 
 | Model | Use case | RAM (advisory) |
 |---|---|---|
@@ -213,7 +221,7 @@ Unassigned sources and requests are visible to admins only. If you have sources 
 
 **A:**
 
-In v1.4.0, prompts live in `civiccore.llm.prompts` as versioned templates. When CivicSunshine needs a prompt (for AI-drafted response letters, exemption summaries, the onboarding interview, etc.), the resolver checks three locations in order and uses the first match:
+In v1.4.0, prompts live in `civiccore.llm.prompts` as versioned templates. When Townlight Records needs a prompt (for AI-drafted response letters, exemption summaries, the onboarding interview, etc.), the resolver checks three locations in order and uses the first match:
 
 1. **Per-city override in the database** (`prompt_overrides` table) — edit through Admin → Prompt Overrides in the UI. Survives upgrades. This is the recommended path for city-specific tweaks.
 2. **Project-local override in `backend/prompts/`** — drop a file with the matching prompt name to override at the deployment level. Useful for fork-style customization that you want under version control alongside your `.env`.
@@ -255,7 +263,7 @@ Before the next expansion slice, I'd like to understand what cities actually nee
 - Any concerns about exposing a public endpoint given the air-gapped design goal? (Reminder: the public surface still runs on the same single-machine Docker stack — no new cloud dependency.)
 - Rate-limiting / CAPTCHA: which approach does your city's network policy allow? (Some cities can't use cloud-hosted CAPTCHA.)
 
-If you're currently running CivicSunshine or evaluating it, your input here would directly shape what gets built next.
+If you're currently running Townlight Records or evaluating it, your input here would directly shape what gets built next.
 
 ---
 
@@ -296,7 +304,7 @@ Cloud providers (Anthropic, OpenAI, etc.) are intentionally not on the roadmap �
 
 ### Title: Our first production deployment — Police Department records request workflow
 
-We stood up CivicSunshine for a mid-sized city's police department records office. Here's what the workflow looks like in practice after two weeks of use.
+We stood up Townlight Records for a mid-sized city's police department records office. Here's what the workflow looks like in practice after two weeks of use.
 
 **Setup:**
 - Dell PowerEdge R550 (16 cores, 64 GB RAM, 2 TB NVMe) — existing hardware
@@ -328,7 +336,7 @@ Happy to answer questions about the deployment or what it looks like day-to-day.
 
 ### Title: Welcome — tell us who you are and what you're working on
 
-If you found CivicSunshine, we'd love to hear about you and your situation. No pressure — just trying to understand who the community is and what they need.
+If you found Townlight Records, we'd love to hear about you and your situation. No pressure — just trying to understand who the community is and what they need.
 
 A few questions to start:
 
@@ -340,7 +348,7 @@ A few questions to start:
 
 4. **What's your biggest pain point in the current process?** Volume of requests? Finding responsive documents across multiple systems? Exemption review? Deadline management? Getting through review and approval?
 
-5. **What would make CivicSunshine useful for your city?** Or what's blocking you from trying it?
+5. **What would make Townlight Records useful for your city?** Or what's blocking you from trying it?
 
 Every response helps us understand where to focus and what to build next. This is a small open-source project trying to solve a real problem for real cities — your perspective matters more than any feature vote.
 

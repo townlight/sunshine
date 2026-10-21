@@ -1,4 +1,6 @@
-# CivicSunshine — Windows Installer (T5E)
+<a id="civicsunshine--windows-installer-t5e"></a>
+
+# Townlight Records — Windows Installer (T5E)
 
 **This installer is UNSIGNED by design.** Scott locked T5E signing
 posture = α (unsigned) on 2026-04-22. This file exists specifically so
@@ -54,7 +56,7 @@ not run it** — download again from the release page directly.
 
 ## What the installer does on first run
 
-1. Copies the CivicSunshine source tree (backend, frontend, docs,
+1. Copies the Townlight Records source tree (backend, frontend, docs,
    scripts, `install.ps1`, `docker-compose.yml`, etc.) to
    `C:\Program Files\CivicSunshine\`.
 2. Creates Start Menu shortcuts and (optionally) a Desktop shortcut.
@@ -85,10 +87,10 @@ purposes. They do different things and run different scripts:
 
 | Shortcut | Script | What it does |
 |---|---|---|
-| **Start CivicSunshine** | `launch-start.ps1` | Daily start. Runs `docker compose up -d` (idempotent — no-ops if the stack is already running) and opens `http://localhost:8080/`. Does **not** run the prereq check. Does **not** invoke `install.ps1`. Does **not** pull any model. Does **not** re-seed data. |
-| **Install or Repair CivicSunshine** | `launch-install.ps1` | Full install/repair flow. Runs the prereq check, then `install.ps1` (which may show the Gemma 4 picker and may pull models). Use this after a fresh install (the installer fires it automatically for you the first time), after choosing a different LLM, or to repair a broken stack. |
+| **Start Townlight Records** | `launch-start.ps1` | Daily start. Runs `docker compose up -d` (idempotent — no-ops if the stack is already running) and opens `http://localhost:8080/`. Does **not** run the prereq check. Does **not** invoke `install.ps1`. Does **not** pull any model. Does **not** re-seed data. |
+| **Install or Repair Townlight Records** | `launch-install.ps1` | Full install/repair flow. Runs the prereq check, then `install.ps1` (which may show the Gemma 4 picker and may pull models). Use this after a fresh install (the installer fires it automatically for you the first time), after choosing a different LLM, or to repair a broken stack. |
 
-The Desktop shortcut, if you opted into it, mirrors **Start CivicSunshine
+The Desktop shortcut, if you opted into it, mirrors **Start Townlight Records
 AI** — not the install/repair flow. Clicking it daily will not re-run
 the installer or re-pull models.
 
@@ -105,14 +107,14 @@ the installer or re-pull models.
   and the Start Menu entries it creates.
 - **Does not pull any model on daily starts.** Model pulls only happen
   inside `install.ps1`, which is only reached via the "Install or
-  Repair CivicSunshine" shortcut (or the post-install step of the
-  installer wizard itself). The "Start CivicSunshine" shortcut never
+  Repair Townlight Records" shortcut (or the post-install step of the
+  installer wizard itself). The "Start Townlight Records" shortcut never
   runs `ollama pull`.
 
 ## Uninstall — what it removes, what it preserves
 
-Use **Settings → Apps → Installed apps → CivicSunshine → Uninstall**
-or the shortcut **Uninstall CivicSunshine** in the Start Menu.
+Use **Settings → Apps → Installed apps → Townlight Records → Uninstall**
+or the shortcut **Uninstall Townlight Records** in the Start Menu.
 
 The uninstaller asks two questions in sequence. Read them carefully —
 the wording in the dialogs is the authoritative contract, and it tracks
@@ -144,7 +146,7 @@ docker compose down -v
 The `-v` flag deletes the named volumes. Only then start the
 uninstaller. Once the app files are gone, you can still remove the
 Docker volumes manually with `docker volume ls` + `docker volume rm`,
-but the CivicSunshine volume names are no longer conveniently discoverable.
+but the Townlight Records volume names are no longer conveniently discoverable.
 
 ## Verify the release before installing (optional)
 
@@ -162,5 +164,5 @@ any tagged commit.
 - Release pipeline: `.github/workflows/release.yml`
 - Upstream baseline: the Inno Setup skeleton + release pattern are
   adapted from the PatentForgeLocal installer (same toolchain, same
-  pipeline shape, same unsigned posture). CivicSunshine-specific
+  pipeline shape, same unsigned posture). Townlight Records-specific
   adaptations are documented inline in the `.iss` file.

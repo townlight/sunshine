@@ -7,9 +7,11 @@
 
 ## 1. System Description
 
-{{CITY_NAME}} utilizes CivicSunshine, an open-source records management assistance tool, to support staff in processing public records requests submitted under applicable open records laws. CivicSunshine runs entirely on locally owned and operated hardware within {{CITY_NAME}}'s facilities. No data leaves {{CITY_NAME}}'s network.
+{{CITY_NAME}} utilizes Townlight Records, an open-source records management assistance tool, to support staff in processing public records requests submitted under applicable open records laws. Townlight Records runs entirely on locally owned and operated hardware within {{CITY_NAME}}'s facilities. No data leaves {{CITY_NAME}}'s network.
 
-### What CivicSunshine Does
+<a id="what-civicsunshine-does"></a>
+
+### What Townlight Records Does
 
 - **Document search and retrieval:** Assists staff in locating responsive documents across municipal repositories by analyzing request language and matching it against indexed records.
 - **Exemption identification:** Flags portions of responsive documents that may contain information subject to statutory exemptions (e.g., personally identifiable information, attorney-client privilege, law enforcement sensitive data).
@@ -17,12 +19,14 @@
 - **Response drafting:** Generates draft response letters that cite applicable statutes, summarize responsive documents, and include required disclosures. All drafts are reviewed and edited by staff before release.
 - **Cost estimation:** Calculates estimated fees based on page counts, labor time, and applicable fee schedules.
 
-### What CivicSunshine Does NOT Do
+<a id="what-civicsunshine-does-not-do"></a>
 
-- **CivicSunshine does not make final decisions.** Every action suggested by the AI — including exemption determinations, redactions, response language, and fee calculations — requires explicit human review and approval before taking effect.
-- **CivicSunshine does not deny or grant requests.** All decisions to fulfill, partially fulfill, or deny a records request are made by authorized {{CITY_NAME}} staff.
-- **CivicSunshine does not communicate directly with requesters.** All correspondence is reviewed, edited as necessary, and sent by {{CITY_NAME}} personnel.
-- **CivicSunshine does not learn from or retain personal data.** The system does not use requester information or request content to update its models.
+### What Townlight Records Does NOT Do
+
+- **Townlight Records does not make final decisions.** Every action suggested by the AI — including exemption determinations, redactions, response language, and fee calculations — requires explicit human review and approval before taking effect.
+- **Townlight Records does not deny or grant requests.** All decisions to fulfill, partially fulfill, or deny a records request are made by authorized {{CITY_NAME}} staff.
+- **Townlight Records does not communicate directly with requesters.** All correspondence is reviewed, edited as necessary, and sent by {{CITY_NAME}} personnel.
+- **Townlight Records does not learn from or retain personal data.** The system does not use requester information or request content to update its models.
 
 ## 2. Human Oversight Guarantees
 
@@ -41,7 +45,7 @@ No records request response is sent without a qualified staff member reviewing t
 
 ## 3. Data Sovereignty
 
-All data processed by CivicSunshine remains within {{CITY_NAME}}'s physical and logical control at all times:
+All data processed by Townlight Records remains within {{CITY_NAME}}'s physical and logical control at all times:
 
 - The system runs on hardware owned and maintained by {{CITY_NAME}}.
 - No data is transmitted to cloud services, third-party servers, or external APIs.
@@ -51,7 +55,7 @@ All data processed by CivicSunshine remains within {{CITY_NAME}}'s physical and 
 
 ## 4. Software Transparency
 
-CivicSunshine is open-source software licensed under the AGPL-3.0. The source code is publicly available for inspection, audit, and independent review. {{CITY_NAME}} welcomes public scrutiny of the tools used in records management.
+Townlight Records is open-source software licensed under the AGPL-3.0. The source code is publicly available for inspection, audit, and independent review. {{CITY_NAME}} welcomes public scrutiny of the tools used in records management.
 
 ## 5. Contact Information
 
@@ -69,4 +73,4 @@ Any requester may ask that their records request be processed without AI assista
 
 > **Disclaimer:** Consult your city attorney before adoption. This disclosure template is a starting point and should be adapted to your jurisdiction's specific legal requirements, policies, and operational context.
 
-Template provided by CivicSunshine (AGPL-3.0).
+Template provided by Townlight Records (AGPL-3.0).

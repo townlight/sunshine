@@ -1,9 +1,11 @@
-# CivicRecords AI Tier 1 Retrofit Ledger
+<a id="civicrecords-ai-tier-1-retrofit-ledger"></a>
+
+# Townlight Records Tier 1 Retrofit Ledger
 
 Status: CO-4 ledger, live-release scan current as of 2026-05-05.
 
-This ledger records the CO-4 decision for the CivicRecords AI release named in
-the CivicSuite finish directive. It does not rewrite history and does not alter
+This ledger records the CO-4 decision for the Townlight Records release named in
+the Townlight finish directive. It does not rewrite history and does not alter
 public release notes, tags, or assets. The correction action taken here is a
 repo-controlled ledger plus documentation truth update.
 
@@ -16,8 +18,8 @@ Structured source of truth:
 - `v1.4.10` has no Sigstore `release-attestation.json` or
   `release-attestation.json.bundle` public release assets.
 - `v1.4.10` must not be promoted as an attested provenance baseline.
-- The active CivicCore platform dependency now points to the first attested
-  CivicCore baseline, `v0.22.1`.
+- The active Townlight Core platform dependency now points to the first attested
+  Townlight Core baseline, `v0.22.1`.
 
 ## Entry
 

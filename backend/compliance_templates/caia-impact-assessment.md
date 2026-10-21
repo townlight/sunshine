@@ -1,11 +1,13 @@
 # Colorado AI Act (SB 24-205) Impact Assessment
 
-## CivicSunshine — Deployer Assessment
+<a id="civicsunshine--deployer-assessment"></a>
+
+## Townlight Records — Deployer Assessment
 
 **Deploying Entity:** {{CITY_NAME}}, {{STATE}}
 **Assessment Date:** {{EFFECTIVE_DATE}}
 **Prepared By:** {{CONTACT_NAME}}
-**System Name:** CivicSunshine
+**System Name:** Townlight Records
 **System Version:** {{SYSTEM_VERSION}}
 
 ---
@@ -20,9 +22,9 @@ Under the Colorado AI Act (SB 24-205), a "high-risk artificial intelligence syst
 
 ### 1.2 Rationale for Non-High-Risk Classification
 
-CivicSunshine is classified as **not high-risk** for the following reasons:
+Townlight Records is classified as **not high-risk** for the following reasons:
 
-1. **No autonomous decision-making:** CivicSunshine does not make, and is not a substantial factor in making, any consequential decision. The system provides suggestions and draft content that must be reviewed and approved by authorized human staff before any action is taken.
+1. **No autonomous decision-making:** Townlight Records does not make, and is not a substantial factor in making, any consequential decision. The system provides suggestions and draft content that must be reviewed and approved by authorized human staff before any action is taken.
 
 2. **Advisory role only:** The system functions as a staff productivity tool that assists with document search, exemption identification, redaction suggestions, and response drafting. It does not determine whether a records request is granted, denied, or partially fulfilled.
 
@@ -38,7 +40,7 @@ Despite the non-high-risk classification, {{CITY_NAME}} voluntarily adopts the f
 
 ## 2. Human-in-the-Loop Enforcement
 
-The following table documents every decision point where CivicSunshine produces output that could influence records request processing, and the corresponding human oversight requirement:
+The following table documents every decision point where Townlight Records produces output that could influence records request processing, and the corresponding human oversight requirement:
 
 | Decision Point | AI Role | Human Role | Override Available? |
 |---|---|---|---|
@@ -50,7 +52,7 @@ The following table documents every decision point where CivicSunshine produces 
 | Request denial | Not involved | Authorized staff or city attorney makes all denial decisions | N/A — AI is excluded |
 | Appeal processing | May retrieve prior correspondence for reference | Staff and/or city attorney handle all appeal determinations | N/A — AI provides reference only |
 
-**Enforcement mechanism:** The CivicSunshine application enforces human review through its workflow architecture. AI suggestions are presented in a review queue; no suggestion can be applied, sent, or finalized without an explicit staff approval action in the interface.
+**Enforcement mechanism:** The Townlight Records application enforces human review through its workflow architecture. AI suggestions are presented in a review queue; no suggestion can be applied, sent, or finalized without an explicit staff approval action in the interface.
 
 ## 3. Data Governance
 
@@ -100,7 +102,7 @@ The following table documents every decision point where CivicSunshine produces 
 
 ### 5.2 Staff Training
 
-- All staff using CivicSunshine must complete initial training on the system's capabilities and limitations.
+- All staff using Townlight Records must complete initial training on the system's capabilities and limitations.
 - Annual refresher training on AI oversight responsibilities.
 - Training records maintained by {{CONTACT_NAME}}.
 
@@ -112,13 +114,13 @@ The following table documents every decision point where CivicSunshine produces 
 
 ### 5.4 Audit Trail
 
-- CivicSunshine maintains a complete audit log of all AI suggestions, staff actions (accept/reject/modify), and final outcomes.
+- Townlight Records maintains a complete audit log of all AI suggestions, staff actions (accept/reject/modify), and final outcomes.
 - Audit logs are retained per {{CITY_NAME}}'s records retention schedule.
 - Logs are available for internal audit, legal review, or public records requests as applicable.
 
 ## 6. Certification
 
-I certify that this impact assessment accurately describes {{CITY_NAME}}'s deployment and use of CivicSunshine as of the assessment date.
+I certify that this impact assessment accurately describes {{CITY_NAME}}'s deployment and use of Townlight Records as of the assessment date.
 
 **Name:** {{CONTACT_NAME}}
 **Title:** {{CONTACT_TITLE}}
@@ -128,6 +130,6 @@ I certify that this impact assessment accurately describes {{CITY_NAME}}'s deplo
 
 ---
 
-> **Disclaimer:** Consult your city attorney before adoption. This impact assessment template is a starting point. While CivicSunshine is designed to fall outside the Colorado AI Act's high-risk classification, your jurisdiction should independently evaluate its obligations under applicable law.
+> **Disclaimer:** Consult your city attorney before adoption. This impact assessment template is a starting point. While Townlight Records is designed to fall outside the Colorado AI Act's high-risk classification, your jurisdiction should independently evaluate its obligations under applicable law.
 
-Template provided by CivicSunshine (AGPL-3.0).
+Template provided by Townlight Records (AGPL-3.0).

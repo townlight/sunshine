@@ -1,4 +1,6 @@
-# Design Critique: CivicRecords AI v0.1.0
+<a id="design-critique-civicrecords-ai-v010"></a>
+
+# Design Critique: Townlight Records v0.1.0
 
 **Date:** April 12, 2026
 **Stage:** Post-MVP, pre-redesign

@@ -1,6 +1,6 @@
 # Support
 
-CivicSunshine is an open-source, locally-hosted FOIA / public-records management system. Support is community-driven via GitHub.
+Townlight Records is an open-source, locally-hosted FOIA / public-records management system. Support is community-driven via GitHub.
 
 ## Where to ask
 

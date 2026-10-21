@@ -1,6 +1,6 @@
 # Release Signing and Provenance
 
-CivicSunshine consumes the canonical CivicSuite release-provenance gate from
+Townlight Records consumes the canonical Townlight release-provenance gate from
 `civiccore.release_provenance`. The local `scripts/verify-release-provenance.py`
 wrapper exists only so repo workflows have a stable command.
 
@@ -10,7 +10,7 @@ commit signal only. Under the strengthened model, the Git tag is a release
 pointer and the trust artifact is the Sigstore-signed `release-attestation.json`
 plus `release-attestation.json.bundle`.
 
-The active release workflow now runs CivicCore's adversarial provenance fixtures
+The active release workflow now runs Townlight Core's adversarial provenance fixtures
 before any build, builds the unsigned Windows installer, writes a checksum,
 generates a schema-version-1 release attestation, signs it with GitHub Actions
 OIDC via cosign, and verifies the attestation before the GitHub Release is
