@@ -226,7 +226,7 @@ def make_page_callback(doc_title, show_header=True):
         canvas.line(margin, 0.55 * inch, w - margin, 0.55 * inch)
         canvas.setFont("Helvetica", 8)
         canvas.setFillColor(colors.HexColor("#6b7280"))
-        canvas.drawString(margin, 0.38 * inch, "Apache License 2.0 — github.com/townlight/sunshine")
+        canvas.drawString(margin, 0.38 * inch, "AGPL-3.0 — github.com/townlight/sunshine")
         canvas.drawRightString(w - margin, 0.38 * inch, "© 2026 CivicSunshine")
 
         canvas.restoreState()
@@ -731,7 +731,7 @@ def build_readme_full(out_path):
     story.append(sp(4))
     story.append(P(f"Generated {date.today().strftime('%B %d, %Y')}", styles["tagline"]))
     story.append(sp(4))
-    story.append(P("Apache License 2.0", styles["tagline"]))
+    story.append(P("AGPL-3.0", styles["tagline"]))
     story.append(sp(12))
     story.append(HR())
     story.append(sp(8))
@@ -1149,7 +1149,7 @@ def build_readme_full(out_path):
     # --- 13. License ---
     story += section_header("13. License", styles, 1)
     story.append(P(
-        "CivicSunshine is released under the <b>Apache License 2.0</b>.",
+        "CivicSunshine is released under the <b>AGPL-3.0-only</b>.",
         styles["body"]
     ))
     story.append(P(
@@ -1197,7 +1197,7 @@ def build_readme_short(out_path):
     story.append(sp(8))
     story.append(P("Open-Source Municipal Records Request AI", styles["subtitle"]))
     story.append(sp(4))
-    story.append(P(f"v1.4.8 · {date.today().strftime('%B %Y')} · Apache 2.0", styles["tagline"]))
+    story.append(P(f"v1.4.8 · {date.today().strftime('%B %Y')} · AGPL-3.0", styles["tagline"]))
     story.append(sp(12))
     story.append(HR())
     story.append(sp(8))
@@ -1321,7 +1321,7 @@ def build_readme_short(out_path):
         ("User Manual",         "USER-MANUAL.md / USER-MANUAL.pdf"),
         ("Canonical Spec",      "docs/UNIFIED-SPEC.md"),
         ("Issue Tracker",       "github.com/townlight/sunshine/issues"),
-        ("License",             "Apache License 2.0 — see LICENSE"),
+        ("License",             "AGPL-3.0-only — see LICENSE"),
         ("Installation",        "install.ps1 (Windows) / install.sh (macOS/Linux)"),
     ]
     link_data = [["Resource", "Location"]] + [[k, v] for k, v in links]
@@ -1329,7 +1329,7 @@ def build_readme_short(out_path):
     story.append(sp(16))
     story.append(HR())
     story.append(P(
-        "CivicSunshine is open-source software released under Apache 2.0.",
+        "CivicSunshine is open-source software released under AGPL-3.0-only.",
         styles["center_body"]
     ))
 

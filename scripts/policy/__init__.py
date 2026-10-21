@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Agentic pipeline policy checks (generic).
 
 These scripts encode the non-negotiable constraints an autonomous agent

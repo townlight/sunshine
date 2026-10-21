@@ -63,4 +63,4 @@ Sincerely,
 
 > **Disclaimer:** Consult your city attorney before adoption. This template is a starting point and should be reviewed for compliance with your jurisdiction's open records laws and disclosure requirements.
 
-Template provided by CivicSunshine (Apache 2.0).
+Template provided by CivicSunshine (AGPL-3.0).

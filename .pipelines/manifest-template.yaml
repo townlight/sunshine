@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 # Pipeline run manifest - copy to .agent-runs/<run-id>/manifest.yaml
 # and fill in every field. Empty strings and empty lists are NOT defaults;
 # they cause the run to refuse to start.

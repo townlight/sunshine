@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Block policy/verify when execute has not proven full DoD readiness.
 
 This check closes the failure mode where an executor finishes a useful slice

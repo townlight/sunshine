@@ -214,7 +214,7 @@ CivicSunshine is designed for environments where resident data must never leave 
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md).
 
 All dependencies use permissive (MIT, Apache 2.0, BSD) or weak-copyleft (LGPL, MPL) licenses. No AGPL, SSPL, or BSL dependencies.
 

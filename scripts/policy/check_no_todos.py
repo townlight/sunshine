@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Policy: source files in the project must not contain TODO/FIXME/HACK markers.
 
 Treats unfinished work-in-progress markers as a Blocker for release tagging

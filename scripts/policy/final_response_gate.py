@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: AGPL-3.0-only
 """Fail closed when an authorized Agent Pipeline run must continue.
 
 This is the executable pre-final gate. Unlike

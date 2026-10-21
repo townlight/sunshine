@@ -3,7 +3,7 @@ name = "civicrecords-ai"
 version = "1.7.3"
 description = "Open-source AI-powered open records support for American cities"
 requires-python = ">=3.12"
-license = "Apache-2.0"
+license = "AGPL-3.0-only"
 dependencies = [
     "fastapi>=0.135.0",
     "uvicorn[standard]>=0.44.0",

@@ -128,4 +128,4 @@ Signature: ___________________________
 
 > **Disclaimer:** Consult your city attorney before adoption. This attestation template is a starting point. Your jurisdiction may have additional data residency, security, or compliance requirements that should be incorporated.
 
-Template provided by CivicSunshine (Apache 2.0).
+Template provided by CivicSunshine (AGPL-3.0).

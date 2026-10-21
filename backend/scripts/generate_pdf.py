@@ -378,7 +378,7 @@ def build_title_page(s, W):
     story.append(Spacer(1, 0.25 * inch))
 
     # Project badge row
-    badge_data = [["Open Source", "Apache 2.0", "v1.0.0", "Python 3.12"]]
+    badge_data = [["Open Source", "AGPL-3.0", "v1.0.0", "Python 3.12"]]
     badge_style = TableStyle([
         ("BACKGROUND",    (0, 0), (-1, -1), BLUE),
         ("TEXTCOLOR",     (0, 0), (-1, -1), WHITE),
@@ -1081,7 +1081,7 @@ def build_deployment(s):
     story.append(Spacer(1, 12))
     story.append(HRFlowable(width="100%", thickness=1, color=BLUE, spaceAfter=8))
     story.append(Paragraph(
-        "CivicSunshine v1.0.0  ·  Apache License 2.0  ·  "
+        "CivicSunshine v1.0.0  ·  AGPL-3.0-only  ·  "
         "https://github.com/townlight/sunshine",
         ParagraphStyle("FootNote", parent=s["Body"], fontSize=9,
                        textColor=GRAY, alignment=TA_CENTER)))

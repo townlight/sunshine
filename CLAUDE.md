@@ -121,7 +121,7 @@ For any task with 2+ non-overlapping scopes of work, dispatch parallel subagents
 ## Project
 
 Open-source, locally-hosted AI system for municipal open records request processing.
-Apache 2.0 licensed. Python/FastAPI backend, React/shadcn/ui frontend, PostgreSQL+pgvector, Ollama.
+AGPL-3.0 licensed. Python/FastAPI backend, React/shadcn/ui frontend, PostgreSQL+pgvector, Ollama.
 
 ## Testing Requirements
 
