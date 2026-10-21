@@ -30,6 +30,10 @@ def _sibling(name: str) -> Path:
 
 @pytest.mark.asyncio
 async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: F811
+    import logging
+    for logger in list(logging.Logger.manager.loggerDict.values()):
+        if isinstance(logger, logging.Logger):
+            monkeypatch.setattr(logger, "disabled", logger.disabled)
     api, original_proof, actor_id, app = native_api
 
     from civicsuite_runtime.code_bridge import router as code_router
@@ -37,6 +41,23 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
     from civicsuite_runtime.migrate import _run_alembic
     import civiccode.main as code
     import civiczone
+
+    for cache_name in (
+        "_source_registry_repository",
+        "_section_lifecycle_repository",
+        "_staff_workbench_repository",
+        "_plain_language_repository",
+        "_ordinance_handoff_repository",
+        "_popular_question_repository",
+        "_import_store",
+        "_codifier_sync_store",
+    ):
+        cache = getattr(code, cache_name)
+        if cache is not None:
+            engine = getattr(cache, "engine", None)
+            if engine is not None:
+                engine.dispose()
+        monkeypatch.setattr(code, cache_name, None)
 
     app.include_router(code_router)
     app.include_router(zoning_router)
