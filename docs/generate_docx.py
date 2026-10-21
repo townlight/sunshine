@@ -1,5 +1,5 @@
 """
-CivicSunshine — DOCX Generator
+Townlight Records — DOCX Generator
 Produces README.docx and USER-MANUAL.docx at the repository root.
 Run: python docs/generate_docx.py
 """
@@ -472,7 +472,7 @@ def build_readme_docx(out_path):
 
     add_header_footer(
         doc.sections[0],
-        "CivicSunshine  |  v1.4.8  |  Open-Source Municipal Records AI"
+        "Townlight Records  |  v1.4.8  |  Open-Source Municipal Records AI"
     )
 
     # Title block
@@ -509,13 +509,13 @@ def build_readme_docx(out_path):
         "Staff manually search file shares, email archives, and databases — then review every document "
         "for exemptions before release. It is slow, error-prone, and a growing burden as request "
         "volumes increase. No open-source tool existed for the responder side of open records at the "
-        "municipal level. CivicSunshine fills that gap."
+        "municipal level. Townlight Records fills that gap."
     )
 
     # --- Key Features ---
     h = doc.add_heading("Key Features", level=1)
     apply_h1_style(h)
-    body_para(doc, f"CivicSunshine ships with {len(FEATURES)} documented features:")
+    body_para(doc, f"Townlight Records ships with {len(FEATURES)} documented features:")
     doc.add_paragraph()
 
     feat_rows = [[f["name"], f["desc"]] for f in [{"name": n, "desc": d} for n, d in FEATURES]]
@@ -573,7 +573,7 @@ def build_readme_docx(out_path):
     h = doc.add_heading("Architecture", level=1)
     apply_h1_style(h)
     body_para(doc,
-        "CivicSunshine deploys as a 7-service Docker Compose stack. All services run in "
+        "Townlight Records deploys as a 7-service Docker Compose stack. All services run in "
         "Linux containers regardless of host operating system."
     )
     doc.add_paragraph()
@@ -665,15 +665,15 @@ def build_readme_docx(out_path):
     h = doc.add_heading("Status", level=1)
     apply_h1_style(h)
     body_para(doc,
-        "v1.4.8 — Patch release aligning CivicSunshine with civiccore 0.21.0 while "
-        "preserving the records-ai runtime surface and moving reusable schedule validation into CivicCore."
+        "v1.4.8 — Patch release aligning Townlight Records with civiccore 0.21.0 while "
+        "preserving the records-ai runtime surface and moving reusable schedule validation into Townlight Core."
     )
     body_para(doc,
-        "v1.4.0 — Phase 2 CivicCore LLM extraction landed. civiccore 0.2.0 became the "
+        "v1.4.0 — Phase 2 Townlight Core LLM extraction landed. civiccore 0.2.0 became the "
         "shared LLM provider/template/registry layer consumed by records-ai."
     )
     body_para(doc,
-        "v1.3.0 — Phase 1 CivicCore extraction landed. civiccore 0.1.0 is now a "
+        "v1.3.0 — Phase 1 Townlight Core extraction landed. civiccore 0.1.0 is now a "
         "release-wheel dependency; two-layer migration order (civiccore first via "
         "subprocess, then records). Infrastructure-only release — no API or UI changes."
     )
@@ -788,7 +788,7 @@ def build_user_manual_docx(out_path):
 
     add_header_footer(
         doc.sections[0],
-        "CivicSunshine User Manual  |  v1.4.8"
+        "Townlight Records User Manual  |  v1.4.8"
     )
 
     lines = USER_MANUAL.read_text(encoding="utf-8").splitlines()
@@ -1037,7 +1037,7 @@ def build_user_manual_docx(out_path):
 # Main
 # ---------------------------------------------------------------------------
 def main():
-    print("CivicSunshine DOCX Generator")
+    print("Townlight Records DOCX Generator")
     print("=" * 40)
 
     readme_docx     = REPO_ROOT / "README.docx"

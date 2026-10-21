@@ -1,4 +1,6 @@
-# CivicSunshine — Change Control Register
+<a id="civicsunshine--change-control-register"></a>
+
+# Townlight Records — Change Control Register
 
 **Canonical Spec:** `docs/UNIFIED-SPEC.md` (Unified Design Specification v2.0, April 12, 2026)
 

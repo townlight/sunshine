@@ -1,4 +1,4 @@
-"""Compatibility wrapper around CivicCore schedule validation helpers."""
+"""Compatibility wrapper around Townlight Core schedule validation helpers."""
 
 from civiccore.scheduling import (
     UTC,

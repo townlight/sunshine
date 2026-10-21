@@ -6,7 +6,7 @@ $ErrorActionPreference = "Continue"
 $HardwareEnvFile = ".env.hardware"
 
 Write-Host ""
-Write-Host "=== CivicSunshine Hardware Detection ===" -ForegroundColor Cyan
+Write-Host "=== Townlight Records Hardware Detection ===" -ForegroundColor Cyan
 Write-Host ""
 
 $envLines = @(
@@ -62,7 +62,7 @@ $ramGB = [math]::Round($ramKB / 1GB)
 Write-Host "RAM: $ramGB GB"
 
 if ($ramGB -lt 32) {
-    Write-Host "ERROR: CivicSunshine requires a minimum of 32 GB RAM. Found: $ramGB GB" -ForegroundColor Red
+    Write-Host "ERROR: Townlight Records requires a minimum of 32 GB RAM. Found: $ramGB GB" -ForegroundColor Red
     exit 1
 }
 
@@ -136,7 +136,7 @@ if ($amdGpu) {
                 Write-Host "Ollama service started" -ForegroundColor Green
             } catch {
                 Write-Host "WARNING: Could not start Ollama service. GPU inference may not work." -ForegroundColor Yellow
-                Write-Host "Run 'ollama serve' manually before starting CivicSunshine." -ForegroundColor Yellow
+                Write-Host "Run 'ollama serve' manually before starting Townlight Records." -ForegroundColor Yellow
                 $gpuEnabled = $false
             }
         }

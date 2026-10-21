@@ -1,4 +1,6 @@
-# CivicRecords AI -- Canonical Spec Gap List
+<a id="civicrecords-ai----canonical-spec-gap-list"></a>
+
+# Townlight Records -- Canonical Spec Gap List
 
 **Generated:** 2026-04-13
 **Source:** `docs/UNIFIED-SPEC.md` v2.0 (April 12, 2026)

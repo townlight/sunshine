@@ -33,7 +33,7 @@ class Check:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Check CivicSunshine's CivicSuite starter-set installer contract."
+        description="Check Townlight Records's Townlight starter-set installer contract."
     )
     parser.add_argument(
         "--umbrella-root",
@@ -225,7 +225,7 @@ def _payload(checks: list[Check], umbrella_root: Path) -> dict[str, object]:
 
 def _print_report(checks: list[Check], umbrella_root: Path) -> None:
     payload = _payload(checks, umbrella_root)
-    print("CivicSunshine starter-set integration")
+    print("Townlight Records starter-set integration")
     print(f"Version: {EXPECTED_RECORDS_VERSION}")
     print(f"Umbrella root: {umbrella_root}")
     print(f"starter_set_ready={str(payload['starter_set_ready']).lower()}")
@@ -242,11 +242,11 @@ def _print_report(checks: list[Check], umbrella_root: Path) -> None:
 
 
 def _print_plan() -> None:
-    print("CivicSunshine starter-set integration")
+    print("Townlight Records starter-set integration")
     print("Release evidence checks:")
-    print("  1. Umbrella clerk-core profile installs CivicCore, CivicSunshine, then CivicMeetings.")
-    print(f"  2. CivicSunshine is selectable and records its CivicCore {EXPECTED_CIVICCORE_RUNTIME} runtime dependency.")
-    print("  3. CivicMeetings is paired at v1.0.4.")
+    print("  1. Umbrella clerk-core profile installs Townlight Core, Townlight Records, then Townlight Meetings.")
+    print(f"  2. Townlight Records is selectable and records its Townlight Core {EXPECTED_CIVICCORE_RUNTIME} runtime dependency.")
+    print("  3. Townlight Meetings is paired at v1.0.4.")
     print("  4. Umbrella release contract requires package workflow proof.")
     print("  5. Linux and Windows starter-set archives exist when --require-archives is used.")
     print("STARTER-SET-INTEGRATION: PLAN")

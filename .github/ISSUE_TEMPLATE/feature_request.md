@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an enhancement to CivicSunshine
+about: Suggest an enhancement to Townlight Records
 title: "[feat] "
 labels: ["enhancement"]
 ---

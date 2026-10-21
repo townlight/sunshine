@@ -1,4 +1,6 @@
-# CivicSunshine — Development Standards
+<a id="civicsunshine--development-standards"></a>
+
+# Townlight Records — Development Standards
 
 ## Current Governance Override - Agent Pipeline For Codex
 
@@ -9,7 +11,7 @@ gates when a run is active.
 
 Before any push, release, or tag, run the relevant repository gates directly
 and record the evidence in the active pipeline run when one exists. For
-CivicSunshine, that normally includes recovery gates, release gates,
+Townlight Records, that normally includes recovery gates, release gates,
 secret-scan/provenance checks, backend tests, frontend tests, Docker/runtime
 proofs for install surfaces, and docs truth checks that match the changed
 surface.

@@ -119,8 +119,8 @@ def create_app(
     desktop_domain_enabled: bool = False,
 ) -> FastAPI:
     app = FastAPI(
-        title="CivicSunshine",
-        description="AI-powered open records support for American cities",
+        title='Townlight Records',
+        description='AI-powered open records support for American cities',
         version=APP_VERSION,
         lifespan=lifespan,
     )

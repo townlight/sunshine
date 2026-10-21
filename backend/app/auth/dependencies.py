@@ -56,7 +56,7 @@ async def _suite_session_user_from_request(request: Request, session: AsyncSessi
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail={
                 "message": str(exc),
-                "fix": "Return to the CivicSuite launcher and sign in again.",
+                "fix": "Return to the Townlight launcher and sign in again.",
             },
         ) from exc
     except (InvalidTokenError, ValueError):
@@ -91,7 +91,7 @@ async def _suite_session_user_from_request(request: Request, session: AsyncSessi
                     "Open your account settings and change the initial "
                     "administrator password before using staff features."
                     if status_code == status.HTTP_403_FORBIDDEN
-                    else "Return to the CivicSuite launcher and sign in again."
+                    else "Return to the Townlight launcher and sign in again."
                 ),
             },
         ) from exc

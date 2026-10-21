@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a defect in CivicSunshine
+about: Report a defect in Townlight Records
 title: "[bug] "
 labels: ["bug"]
 ---
@@ -20,7 +20,7 @@ labels: ["bug"]
 <!-- What actually happened. Include error messages, stack traces, console output. -->
 
 **Environment**
-- CivicSunshine version (`docker compose run --rm api python -c "import app; print(app.__version__)"` or check the admin UI footer):
+- Townlight Records version (`docker compose run --rm api python -c "import app; print(app.__version__)"` or check the admin UI footer):
 - Deployment: Docker Compose / installer / dev clone
 - OS: Windows / macOS / Linux (specify version)
 - Browser (if frontend issue):

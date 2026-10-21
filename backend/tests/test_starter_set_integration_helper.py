@@ -103,7 +103,7 @@ def test_starter_set_integration_print_only_documents_contract() -> None:
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "Umbrella clerk-core profile installs CivicCore" in result.stdout
+    assert "Umbrella clerk-core profile installs Townlight Core" in result.stdout
     assert "package workflow proof" in result.stdout
     assert "STARTER-SET-INTEGRATION: PLAN" in result.stdout
 
