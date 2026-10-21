@@ -1,7 +1,7 @@
 """
 render_diagrams.py
 Generates 6 professional SVG (and PNG where available) architecture diagrams
-for the CivicSunshine project using reportlab.
+for the Townlight Records project using reportlab.
 
 Output directory: same directory as this script.
 """
@@ -153,7 +153,7 @@ def make_component():
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
 
     # Title
-    d.add(label("CivicSunshine — System Components (v1.2)", W/2, H - 24,
+    d.add(label("Townlight Records — System Components (v1.2)", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     layers = [
@@ -307,7 +307,7 @@ def make_class():
     W, H = 920, 720
     d = Drawing(W, H)
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
-    d.add(label("CivicSunshine — Domain Class Diagram", W/2, H - 24,
+    d.add(label("Townlight Records — Domain Class Diagram", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     HDR = 22
@@ -492,7 +492,7 @@ def make_sequence_ingestion():
     W, H = 920, 680
     d = Drawing(W, H)
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
-    d.add(label("CivicSunshine — Ingestion Pipeline Sequence", W/2, H - 24,
+    d.add(label("Townlight Records — Ingestion Pipeline Sequence", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     participants = [
@@ -613,7 +613,7 @@ def make_deployment():
     W, H = 920, 640
     d = Drawing(W, H)
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
-    d.add(label("CivicSunshine — Docker Deployment Topology", W/2, H - 24,
+    d.add(label("Townlight Records — Docker Deployment Topology", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     # Browser node (external)
@@ -719,7 +719,7 @@ def make_sequence_request():
     W, H = 920, 700
     d = Drawing(W, H)
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
-    d.add(label("CivicSunshine — Records Request Lifecycle", W/2, H - 24,
+    d.add(label("Townlight Records — Records Request Lifecycle", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     participants = [
@@ -819,7 +819,7 @@ def make_sync_failure():
     W, H = 920, 600
     d = Drawing(W, H)
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
-    d.add(label("CivicSunshine — Sync Failure State Machine", W/2, H - 24,
+    d.add(label("Townlight Records — Sync Failure State Machine", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     STATE_W = 140

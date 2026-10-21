@@ -1,4 +1,4 @@
-"""Compatibility wrapper around CivicCore live-sync retry primitives."""
+"""Compatibility wrapper around Townlight Core live-sync retry primitives."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ RetryExhausted = SyncRetryExhausted
 
 
 def _compute_delay(attempt: int, retry_after: float | None = None) -> float | None:
-    """Return the shared CivicCore delay for this retry attempt."""
+    """Return the shared Townlight Core delay for this retry attempt."""
 
     return compute_retry_delay(
         attempt,

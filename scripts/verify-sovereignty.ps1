@@ -1,7 +1,7 @@
 # CivicSunshine - Data Sovereignty Check (Windows)
 
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "  CivicSunshine - Data Sovereignty Check"
+Write-Host "  Townlight Records - Data Sovereignty Check"
 Write-Host "============================================"
 Write-Host ""
 

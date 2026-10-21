@@ -228,7 +228,7 @@ async def ingest_file_from_bytes(
     source_path: str | None = None,
     metadata: dict | None = None,
 ) -> object | None:
-    """Ingest a document from raw bytes through the CivicCore pipeline."""
+    """Ingest a document from raw bytes through the Townlight Core pipeline."""
     import logging
 
     logger = logging.getLogger(__name__)
