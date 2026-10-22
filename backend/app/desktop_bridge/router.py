@@ -76,6 +76,15 @@ async def meeting_sources(request, **kwargs):
         raise HTTPException(503, "Meetings sources unavailable; no stale fallback used.") from None
 
 
+async def planning_sources(request, **kwargs):
+    provider = getattr(request.app.state, "desktop_planning_sources", None)
+    if provider is None or "civicplan" not in request.app.state.desktop_enabled_modules:
+        raise HTTPException(503, "Planning sources unavailable; no cached fallback used.")
+    try:
+        return await run_in_threadpool(provider, **kwargs)
+    except Exception:
+        raise HTTPException(503, "Planning sources unavailable; no cached fallback used.") from None
+
 async def zoning_sources(request, **kwargs):
     provider = getattr(request.app.state, "desktop_zoning_sources", None)
     if provider is None or "civiczone" not in request.app.state.desktop_enabled_modules:
@@ -163,7 +172,44 @@ async def native_records_user(
     proof: str | None = Header(default=None, alias="X-Townlight-Session"),
 ) -> User:
     from app.auth.native_identity import mapped_native_actor
+    session.info["planning_source_provider"] = getattr(request.app.state, "desktop_planning_sources", None)
     return await mapped_native_actor(request, session, proof, "civicrecords-ai")
+
+
+@router.post("/planning-sources/search")
+async def search_planning_sources(data: MeetingsSearch, request: Request,
+                                actor: User = Depends(native_records_user)):
+    sources = await planning_sources(request, query=data.query)
+    return {"results": [{**{k: v for k, v in source.items() if k != "text"},
+                         "excerpt": source["text"][:500]} for source in sources[:50]],
+            "truncated": len(sources) > 50}
+
+
+@router.post("/requests/{request_id}/planning-sources", response_model=RecordsOperationRead)
+async def attach_planning_source(request_id: uuid.UUID, data: MeetingsSourceSelection,
+        request: Request, session: AsyncSession = Depends(get_async_session),
+        actor: User = Depends(native_records_user)):
+    from app.requests.meeting_sources import attach_snapshot
+    req = await session.get(RecordsRequest, request_id, with_for_update=True)
+    if req is None:
+        raise HTTPException(404, "Records request not found.")
+    sources = await planning_sources(request, source_id=data.source_id)
+    if len(sources) != 1:
+        raise HTTPException(404, "Permitted Planning source not found.")
+    if sources[0]["sha256"] != data.expected_sha256:
+        raise HTTPException(409, "Planning source changed; search again before attaching.")
+    try:
+        message = await attach_snapshot(session, req,
+                                        workflow.RecordsActor(actor, request.state.native_role),
+                                        sources[0], request.app.state.desktop_profile_root,
+                                        origin="planning")
+        result = RecordsOperationRead(action="attach-planning-source", message=message,
+                                      request=await request_view(session, req))
+        await session.commit()
+        return result
+    except (ValueError, OSError):
+        await session.rollback()
+        raise HTTPException(422, "Source attachment not confirmed; existing evidence retained.") from None
 
 
 @router.post("/zoning-sources/search")
@@ -388,6 +434,8 @@ async def get_native_request(
     req = await session.get(RecordsRequest, request_id)
     if req is None:
         raise HTTPException(404, "Records request not found.")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
     return req
 
 

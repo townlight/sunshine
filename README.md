@@ -2,6 +2,10 @@
 
 # Townlight Records
 
+Planning P3/P4 development integration adds permission-checked snapshot selection
+to the existing Records review and export workflow. Existing installer profiles
+and signed 1.4 artifacts are unchanged. See [the source adapter contract](docs/PLANNING-SNAPSHOT-SOURCES.md).
+
 ## Published connected desktop: 1.4.0-beta.1
 
 This module participates in the signed Townlight Records + Meetings + Code +
