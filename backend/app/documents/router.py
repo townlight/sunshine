@@ -37,7 +37,11 @@ async def list_documents(source_id: uuid.UUID | None = None, status: IngestionSt
         stmt = stmt.where(Document.ingestion_status == status)
     stmt = stmt.offset(offset).limit(limit)
     result = await session.execute(stmt)
-    return result.scalars().all()
+    documents = result.scalars().all()
+    from app.requests.planning_sources import validate_document
+    for document in documents:
+        await validate_document(session, document)
+    return documents
 
 @router.get("/{document_id}", response_model=DocumentRead)
 async def get_document(document_id: uuid.UUID, session: AsyncSession = Depends(get_async_session), user: User = Depends(require_role(UserRole.STAFF))):
@@ -45,6 +49,8 @@ async def get_document(document_id: uuid.UUID, session: AsyncSession = Depends(g
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
     require_department_or_404(user, doc.department_id, "Document not found")
+    from app.requests.planning_sources import validate_document
+    await validate_document(session, doc)
     return doc
 
 @router.get("/{document_id}/chunks", response_model=list[DocumentChunkRead])
@@ -55,5 +61,7 @@ async def list_chunks(document_id: uuid.UUID, limit: int = Query(default=50, le=
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
     require_department_or_404(user, doc.department_id, "Document not found")
+    from app.requests.planning_sources import validate_document
+    await validate_document(session, doc)
     result = await session.execute(select(DocumentChunk).where(DocumentChunk.document_id == document_id).order_by(DocumentChunk.chunk_index).offset(offset).limit(limit))
     return result.scalars().all()

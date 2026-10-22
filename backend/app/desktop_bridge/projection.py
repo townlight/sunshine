@@ -85,6 +85,8 @@ async def request_view(session, req):
     for evidence in await ordered_rows(session, RequestFileEvidence, req.id):
         link = await session.get(RequestDocument, evidence.id)
         document = await session.get(Document, link.document_id)
+        from app.requests.planning_sources import validate_document
+        await validate_document(session, document)
         copy = await session.scalar(select(RequestReleaseCopy).where(
             RequestReleaseCopy.attachment_id == evidence.id
         ).order_by(RequestReleaseCopy.position.desc()).limit(1))

@@ -124,7 +124,11 @@ async def list_requests(
         stmt = stmt.where(RecordsRequest.assigned_to == assigned_to)
     stmt = stmt.offset(offset).limit(limit)
     result = await session.execute(stmt)
-    return result.scalars().all()
+    rows = result.scalars().all()
+    from app.requests.planning_sources import validate_request
+    for row in rows:
+        await validate_request(session, row.id)
+    return rows
 
 
 @router.get("/stats", response_model=RequestStats)
@@ -190,6 +194,8 @@ async def get_request(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
     return req
 
 
@@ -204,6 +210,8 @@ async def update_request(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     if data.status is not None and data.status != req.status:
         valid = VALID_TRANSITIONS.get(req.status, set())
@@ -290,6 +298,8 @@ async def attach_document(
     session.add(req_doc)
 
     # Cache document for legal defensibility
+    from app.requests.planning_sources import validate_document
+    await validate_document(session, doc)
     if doc.source_path:
         import asyncio
         import shutil
@@ -331,6 +341,8 @@ async def list_attached_documents(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     result = await session.execute(
         select(RequestDocument).where(RequestDocument.request_id == request_id)
@@ -423,6 +435,8 @@ async def mark_ready_for_release(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     if req.status != RequestStatus.IN_REVIEW:
         raise HTTPException(status_code=400, detail=f"Can only mark ready for release from 'in_review' status, current: {req.status.value}")
@@ -465,6 +479,8 @@ async def approve_request(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     if req.status not in (RequestStatus.DRAFTED, RequestStatus.READY_FOR_RELEASE):
         raise HTTPException(status_code=400, detail=f"Can only approve from 'drafted' or 'ready_for_release' status, current: {req.status.value}")
@@ -1126,6 +1142,8 @@ async def generate_response_letter(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     # Fetch attached documents with their exemption flags
     result = await session.execute(
@@ -1184,6 +1202,8 @@ async def get_response_letter(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     result = await session.execute(
         select(ResponseLetter)
@@ -1220,6 +1240,8 @@ async def update_response_letter(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
 
     letter = await session.get(ResponseLetter, letter_id)
     if not letter or letter.request_id != request_id:

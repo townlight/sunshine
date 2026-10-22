@@ -430,6 +430,8 @@ async def _check_z3(api, headers, actor_id, app, syncurl, qid):
     await _z3_visibility(api, headers, app, syncurl, qid, snapshot)
     endpoint = await _z3_records(api, headers, app, qid, snapshot)
     await _z3_permissions(api, headers, app, syncurl, qid, snapshot, archive_id, endpoint)
+    from tests.planning_connected_acceptance import check_planning
+    await check_planning(api, headers, actor_id, app, syncurl, snapshot, archive_id)
     return snapshot, archive_id
 
 

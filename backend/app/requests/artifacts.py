@@ -115,6 +115,8 @@ def verify_export(profile_root, artifact, path_text):
 
 
 async def complete_artifact(session, req, actor, artifact_id, path_text, profile_root):
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
     artifact = await session.get(RequestArtifact, artifact_id, with_for_update=True)
     if artifact is None or artifact.request_id != req.id or artifact.actor_id != actor.user.id:
         raise ValueError("This prepared Records artifact does not belong to this request and actor.")
@@ -144,6 +146,8 @@ async def complete_artifact(session, req, actor, artifact_id, path_text, profile
 
 
 async def fulfill(session, req, actor):
+    from app.requests.planning_sources import validate_request
+    await validate_request(session, req.id)
     workflow.ensure_active(req)
     require_current_approval(req)
     completed = (await session.execute(select(RequestArtifact).where(

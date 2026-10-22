@@ -9,7 +9,7 @@ from app.requests import files, workflow
 
 
 async def attach_snapshot(session, req, actor, source, profile_root, *, origin="meetings"):
-    if origin not in ("meetings", "code", "zoning"):
+    if origin not in ("meetings", "code", "zoning", "planning"):
         raise ValueError("Invalid source origin.")
     workflow.ensure_active(req)
     content = source["text"].encode("utf-8")
