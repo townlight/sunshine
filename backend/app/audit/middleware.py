@@ -1,3 +1,4 @@
+import hashlib
 import uuid
 
 import jwt
@@ -65,14 +66,22 @@ class AuditMiddleware(BaseHTTPMiddleware):
             return response
 
         user_id = _extract_user_id(request)
+        path = request.url.path
+        action = f"{request.method} {path}"
+        # Route instances with multiple UUIDs can exceed action's String(100).
+        # Keep complete request evidence in the hashed details, without changing
+        # historical rows or silently losing the ancillary HTTP audit entry.
+        if len(action) > 100:
+            action = f"{request.method} http_request"
+        resource_id = path if len(path) <= 255 else "sha256:" + hashlib.sha256(path.encode()).hexdigest()
 
         try:
             async with async_session_maker() as session:
                 await write_audit_log(
                     session=session,
-                    action=f"{request.method} {request.url.path}",
+                    action=action,
                     resource_type="http_request",
-                    resource_id=request.url.path,
+                    resource_id=resource_id,
                     user_id=user_id,
                     details={
                         "method": request.method,
