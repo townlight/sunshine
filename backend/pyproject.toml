@@ -1,6 +1,6 @@
 [project]
 name = "civicrecords-ai"
-version = "1.7.3"
+version = "1.7.4"
 description = "Open-source AI-powered open records support for American cities"
 requires-python = ">=3.12"
 license = "AGPL-3.0-only"

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Townlight Planning staff beta preparation — package 1.7.4
+
+- Assign a new bundled Records package identity for the Planning source/snapshot
+  integration and bounded long-route audit repair accepted in P5/P6. Package
+  metadata and the service version agree; no additional runtime or interface
+  behavior changes. This is preparation, not publication of v1.7.4.
+- Historical v1.7.3 artifacts and the signed Townlight 1.4 installer remain
+  unchanged. Existing data, API/package identifiers and audit evidence are kept.
+
 ### Changed
 - Repaired the cross-platform frontend test entry point so both `npm test` and
   the repository's historical `npm test -- --run` audit command execute the
