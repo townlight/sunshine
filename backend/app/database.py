@@ -19,4 +19,5 @@ async_session_maker = async_sessionmaker(engine, class_=AsyncSession, expire_on_
 async def get_async_session(request: Request) -> AsyncGenerator[AsyncSession, None]:
     async with async_session_maker() as session:
         session.info["planning_source_provider"] = getattr(request.app.state, "desktop_planning_sources", None)
+        session.info["permitting_source_provider"] = getattr(request.app.state, "desktop_permitting_sources", None)
         yield session
