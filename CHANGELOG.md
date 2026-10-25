@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Connected Permitting candidate
+
+- Accept an explicitly selected, reviewed Permitting Records copy through the authenticated native bridge. Retain its exact bytes and provenance; existing Records review and release approval still apply.
+- Recheck source permission and byte hashes during later Records operations. A revoked or changed source blocks cached release. Native routes remain absent from the standalone web API.
+
 ### Townlight Planning staff beta preparation — package 1.7.4
 
 - Assign a new bundled Records package identity for the Planning source/snapshot

@@ -1,4 +1,4 @@
-"""Recheck selected Planning evidence; attachment never grants source access."""
+"""Recheck selected Planning/Permitting evidence; attachment never grants access."""
 import hashlib
 
 from fastapi import HTTPException
@@ -10,10 +10,15 @@ from app.models.request import RequestDocument
 
 
 async def validate_document(session, document):
-    provenance = (document.metadata_ or {}).get("planning_source")
+    for origin in ("planning", "permitting"):
+        await _validate_origin(session, document, origin)
+
+
+async def _validate_origin(session, document, origin):
+    provenance = (document.metadata_ or {}).get(f"{origin}_source")
     if provenance is None:
         return
-    provider = session.info.get("planning_source_provider")
+    provider = session.info.get(f"{origin}_source_provider")
     try:
         if not callable(provider):
             raise ValueError("Provider unavailable")
@@ -27,7 +32,7 @@ async def validate_document(session, document):
                 or document.file_hash != digest):
             raise ValueError("Source changed or restricted")
     except Exception:
-        raise HTTPException(503, "Planning evidence unavailable or restricted; no cached release permitted.") from None
+        raise HTTPException(503, f"{origin.capitalize()} evidence unavailable or restricted; no cached release permitted.") from None
 
 
 async def validate_request(session, request_id):
