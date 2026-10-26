@@ -867,3 +867,8 @@ Tier 5 installer/onboarding/seeding/model-picker/portal-mode slices and Tier 6 a
 - No telemetry, analytics, or outbound data transmission
 - JWT secrets from environment configuration (not hardcoded)
 - API keys hashed before storage (SHA-256)
+
+
+## Connected Inspections source handoff (unreleased)
+
+An enabled native Inspections provider exposes only explicitly reviewed Records-copy snapshots. The shared database session now receives this provider too; unavailable, changed, restricted or revoked sources fail closed. Attachment remains separate from Records approval and release.

@@ -20,4 +20,5 @@ async def get_async_session(request: Request) -> AsyncGenerator[AsyncSession, No
     async with async_session_maker() as session:
         session.info["planning_source_provider"] = getattr(request.app.state, "desktop_planning_sources", None)
         session.info["permitting_source_provider"] = getattr(request.app.state, "desktop_permitting_sources", None)
+        session.info["inspections_source_provider"] = getattr(request.app.state, "desktop_inspections_sources", None)
         yield session

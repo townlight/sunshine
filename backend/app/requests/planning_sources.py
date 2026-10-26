@@ -10,7 +10,7 @@ from app.models.request import RequestDocument
 
 
 async def validate_document(session, document):
-    for origin in ("planning", "permitting"):
+    for origin in ("planning", "permitting", "inspections"):
         await _validate_origin(session, document, origin)
 
 
