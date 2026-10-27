@@ -1,3 +1,28 @@
+# Townlight Records
+
+**A request, its sources and a human decision.**
+
+Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request.
+
+## Use this product
+
+- [Current user manual](USER-MANUAL.md): installed workflow, roles, sources, review, export, recovery and limits.
+- [Product landing page](https://townlight.github.io/products/records/).
+- [Overall eight-product manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) and [feature/integration assessment](https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md).
+- [Signed composition and acceptance](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1): Records 1.7.4 in the accepted 1.7 desktop composition.
+
+Records receives explicitly selected evidence from the six other business products and uses Core for shared contracts. This is not unrestricted federation across every system.
+
+## Release scope
+
+The installed acceptance covers the documented staff journeys and explicit source boundaries. Full resident-portal, accessibility, redaction-ledger and federation requirements require their own deployment/feature evidence; this guide does not certify all of them. The source contains request, exemption, fees, messages, SMTP and public endpoints, which must not be described as absent merely because an older plan calls them future work.
+
+Documentation reviewed 2026-10-26. Installed acceptance, source/API implementation and future requirements are different evidence. Code is AGPL-3.0-only with the repository’s public institution exception where applicable; documentation is CC BY 4.0. See the repository license files.
+
+## Historical repository reference
+
+The earlier README below is retained for package history and contributor commands. Older maturity/version statements describe that historical reference and are superseded by the current operating guide and linked release evidence.
+
 <a id="civicsunshine"></a>
 
 # Townlight Records
