@@ -9,6 +9,9 @@ on:
   push:
     branches: [master]
     paths:
+      - "README*"
+      - "USER-MANUAL*"
+      - "docs/**"
       - ".github/workflows/ci.yml"
       - "Dockerfile.*"
       - "docker-compose.yml"
@@ -19,6 +22,9 @@ on:
   pull_request:
     branches: [master]
     paths:
+      - "README*"
+      - "USER-MANUAL*"
+      - "docs/**"
       - ".github/workflows/ci.yml"
       - "Dockerfile.*"
       - "docker-compose.yml"

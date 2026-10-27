@@ -1,3 +1,106 @@
+# Townlight Records — User manual
+
+Current operating guide · reviewed 2026-10-26 · Records 1.7.4 in the accepted 1.7 desktop composition.
+
+[Product page](https://townlight.github.io/products/records/) · [Overall manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) · [Requirements assessment](https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md)
+
+## Purpose and audience
+
+Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request.
+
+Primary operators: **Records officers, clerks and authorized reviewers**. [Release and acceptance notes](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1).
+
+## Before starting
+
+Use the explicit product composition in the installed Townlight desktop. Sign in with the required local staff account, confirm System Health readiness and take a backup before maintenance. If a workspace is absent, inspect the profile and release identity before importing data. Optional AI is not needed for the accepted deterministic workflow. The procedures below use real saved sources; sample/demo web pages are not substitutes.
+
+## Complete the workflow
+
+### 1. Receive a request
+
+Open Records as authorized staff. Create or open a request with the requester and request description. Retain the request identifier. Use clarification, assignment and timeline controls to record the work rather than changing status only in a private note.
+
+### 2. Find responsive material
+
+Create a search session and search permitted sources. Inspect source title, date, citation and visibility. Attach responsive evidence explicitly. Search results from Meetings, Code, Zoning, Planning, Permitting and Inspections are constrained by the installed profile and source permissions.
+
+### 3. Review documents
+
+Inspect each original and attachment. Record exemption decisions, evidence notes and release review in the request. An AI suggestion or a source summary is not a legal exemption determination; the reviewer owns the decision and its citation.
+
+### 4. Handle connected copies
+
+Select the reviewed source copy or attach from the source workspace to an existing request. Compare the source identifier and hash. Private staff notes are excluded by each public-copy contract, not by renaming a private packet. If a source becomes restricted, changed or unavailable, resolve the source issue before release; do not substitute stale text.
+
+### 5. Draft and communicate
+
+Edit the response text, log messages and review fee line items or waivers where applicable. The local notification/outbox is distinct from external email delivery. SMTP exists in source but requires deployment configuration; an outbox entry alone does not prove delivery.
+
+### 6. Approve the exact response
+
+Review the response and attachments, then use the authorized approval control. Approval is tied to the response text hash. Editing that text invalidates the previous approval; review and approve the new text before release.
+
+### 7. Release and close
+
+Use the final export/release operation only after approval and source checks succeed. Keep the release artifact and audit trail. Fulfillment and closure are deliberate later actions. Attaching an evidence copy, viewing a preview or drafting a response does not fulfill a request.
+
+### 8. Recover a stale view
+
+If services were stopped, wait for readiness and use Retry Records when displayed. Navigate back to Records to reload canonical state. Do not create a duplicate request or attach the same source again just because a previous screen is stale.
+
+## How this product connects
+
+Records receives explicitly selected evidence from the six other business products and uses Core for shared contracts. This is not unrestricted federation across every system.
+
+## Boundaries and known gaps
+
+The installed acceptance covers the documented staff journeys and explicit source boundaries. Full resident-portal, accessibility, redaction-ledger and federation requirements require their own deployment/feature evidence; this guide does not certify all of them. The source contains request, exemption, fees, messages, SMTP and public endpoints, which must not be described as absent merely because an older plan calls them future work.
+
+## Shared operating rules
+
+Use the installed native desktop for the accepted workflow. Standalone package web pages, sample endpoints and developer API examples are different surfaces. A local Resident/Public view is not an internet deployment. Confirm the selected composition before looking for a workspace.
+
+1. Keep named staff accounts and least privilege. Administrators manage setup; ordinary staff use their authorized workspace. Do not put credentials, unredacted evidence or resident data into public issues.
+2. Preserve originals and their hashes. Import preview and confirmation are distinct actions. Treat fictional fixtures as fictional; they are not municipal authority.
+3. Save before navigating away, closing or signing out. Unsaved drafts are not a durable record. On a conflict, reopen and reconcile; on an unknown result, inspect the saved record before repeating a write.
+4. Review the exact revision and audience. A private packet and a public copy are different artifacts. Public text is explicitly edited/reviewed; changing a filename does not sanitize private content.
+5. Keep source permission, version and hash checks. If a provider is stopped or a source becomes restricted, retain the draft, restore authorized access and deliberately reselect evidence. Never bypass the check or substitute a sample.
+6. Approval, attachment, export and publication are separate actions. No cross-product attachment is an automatic records response, official permit, legal determination or enforcement decision.
+
+## Installation, maintenance and recovery
+
+Choose a release from the overall manual; do not infer a supported upgrade from a higher version number. Verify its published checksum, publisher signature and acceptance notes before installing. The default download remains the signed 1.4 beta, and Records-only remains its default selection. Planning 1.5.1 has a fresh-install boundary; Permitting and Inspections use separately identified products.
+
+Complete Setup and normal runtime activation for the selected composition. Optional local AI can be deferred. Use System Health to distinguish stopped, starting, ready and failed dependencies. Wait for readiness before opening a dependent workspace. Use documented Retry controls after recovery; do not repeat business writes to refresh a stale screen.
+
+Back up through the canonical desktop controls before migration or maintenance. Keep the coherent data, document and profile backup and its receipt in protected storage. A source export is not a full backup. Stop dependent services before PostgreSQL maintenance. Restore through the supported controls rather than editing SQL or restoring historical JSON into the active runtime. Uninstall can retain data; backup before uninstalling and inspect the chosen removal options. Never assume uninstall means data deletion.
+
+For an error, retain the message, time, selected profile, installed version and operation; inspect System Health and relevant logs. Use a redacted support bundle. Do not delete the profile, run an arbitrary downgrade or repair prerequisites as a first response. If an installer requests a restart, save work and obtain the operator’s explicit restart decision before proceeding.
+
+## Evidence and scope
+
+This manual reuses the accepted installed, required-CI and signed-delivery evidence. It does not turn source inspection into a new installed test. Recovery evidence is reused only within its recorded candidate/profile boundaries; no universal upgrade, hardware, accessibility or production deployment certification is implied. The [overall manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) gives release identities and shared operations. The [feature and integration assessment](https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md) separates implementation, explicit deferral, missing capability and unverified acceptance.
+
+
+## Maintainer and API reference
+
+The following source contracts support these instructions. The historical reference below retains older API/setup details for their original version; it does not override this operating guide or the release acceptance.
+
+- [backend/app/desktop_bridge](https://github.com/townlight/sunshine/tree/master/backend/app/desktop_bridge)
+- [backend/app/requests/workflow.py](https://github.com/townlight/sunshine/tree/master/backend/app/requests/workflow.py)
+- [backend/app/requests/meeting_sources.py](https://github.com/townlight/sunshine/tree/master/backend/app/requests/meeting_sources.py)
+- [backend/app/notifications/smtp_delivery.py](https://github.com/townlight/sunshine/tree/master/backend/app/notifications/smtp_delivery.py)
+- [docs/UNIFIED-SPEC.md](https://github.com/townlight/sunshine/tree/master/docs/UNIFIED-SPEC.md)
+
+
+---
+
+## Historical package/API reference
+
+The material below is retained from the previous manual for historical and developer reference. Version, unreleased, sample, planned and installation claims below describe that earlier document, not current desktop release status. Use the current guide above for operation. Existing detailed API reference remains useful only for the matching package/version.
+
+<a id="civicsunshine--user-manual"></a>
+
 # Townlight Records — User Manual
 
 ## Published connected desktop: 1.4.0-beta.1
@@ -32,6 +135,8 @@ desktop publication status. No signed installer or historical evidence is change
 *Written for staff who receive, process, and fulfill open records requests. You do not need to understand the technology to use this manual.*
 
 ---
+
+<a id="a1-what-is-civicsunshine"></a>
 
 ## A.1 What Is Townlight Records?
 
@@ -366,6 +471,12 @@ docker exec <records-api-container> env | grep -E "JWT_SECRET|FIRST_ADMIN_PASSWO
 ```
 
 The command should return no lines.
+
+The first administrator password is for first login only. After a fresh
+install, Townlight Records allows the administrator to open the account endpoint
+needed to change the password, but staff/admin screens remain locked until the
+password has been rotated. The screen message tells the operator to open account
+settings and change the initial administrator password before continuing.
 
 **Upgrade from v1.5.x:** if your `.env` still contains `JWT_SECRET=` or
 `FIRST_ADMIN_PASSWORD=`, re-run `install.sh` or `install.ps1`. The runtime no

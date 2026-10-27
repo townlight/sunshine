@@ -1,420 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Townlight Records — Open-source, locally-hosted AI for municipal open records request processing. No cloud. No vendor lock-in. Your data stays yours.">
-  <meta name="keywords" content="FOIA, open records, municipal software, AI, local government, open source">
-  <meta property="og:title" content="Townlight Records">
-  <meta property="og:description" content="Open-source AI for municipal open records. Runs locally. No cloud. No vendor lock-in.">
-  <meta property="og:type" content="website">
-  <title>Townlight Records — Open-Source AI for Municipal Open Records</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --blue-dark:   #1a3a5c;
-      --blue-mid:    #2563eb;
-      --blue-light:  #3b82f6;
-      --blue-pale:   #eff6ff;
-      --gray-900:    #111827;
-      --gray-700:    #374151;
-      --gray-500:    #6b7280;
-      --gray-300:    #d1d5db;
-      --gray-100:    #f3f4f6;
-      --white:       #ffffff;
-      --green:       #16a34a;
-      --font-sans:   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-mono:   "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-sans);
-      color: var(--gray-700);
-      background: var(--white);
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    /* ── NAV ─────────────────────────────────────────── */
-    nav {
-      background: var(--blue-dark);
-      padding: 0 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 1px 4px rgba(0,0,0,.25);
-    }
-    .nav-brand {
-      color: var(--white);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -.01em;
-      text-decoration: none;
-    }
-    .nav-brand span { color: #93c5fd; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: .875rem;
-      transition: color .15s;
-    }
-    .nav-links a:hover { color: var(--white); }
-    @media (max-width: 600px) { .nav-links { display: none; } }
-
-    /* ── HERO ────────────────────────────────────────── */
-    .hero {
-      background: linear-gradient(160deg, var(--blue-dark) 0%, #1e4d8c 60%, #2563eb 100%);
-      color: var(--white);
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.25);
-      border-radius: 20px;
-      padding: .25rem .85rem;
-      font-size: .8rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      color: #bfdbfe;
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      line-height: 1.1;
-      margin-bottom: .6rem;
-    }
-    .hero h1 span { color: #93c5fd; }
-    .hero-tagline {
-      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-      color: #bfdbfe;
-      margin-bottom: 2rem;
-      font-weight: 400;
-    }
-    .hero-value {
-      max-width: 680px;
-      margin: 0 auto 2.5rem;
-      font-size: 1.05rem;
-      color: #dbeafe;
-      line-height: 1.75;
-    }
-    .hero-value strong { color: var(--white); }
-
-    /* ── QUICK START ─────────────────────────────────── */
-    .quickstart {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-      text-align: left;
-    }
-    .qs-step {
-      flex: 1;
-      background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 10px;
-      padding: 1rem;
-    }
-    .qs-num {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #93c5fd;
-      margin-bottom: .3rem;
-    }
-    .qs-step p { font-size: .85rem; color: #dbeafe; line-height: 1.5; }
-    .qs-step code {
-      display: block;
-      margin-top: .4rem;
-      font-family: var(--font-mono);
-      font-size: .78rem;
-      color: #f0f9ff;
-      background: rgba(0,0,0,.25);
-      padding: .3rem .5rem;
-      border-radius: 5px;
-    }
-    @media (max-width: 600px) {
-      .quickstart { flex-direction: column; }
-      .qs-step { width: 100%; }
-    }
-
-    .btn {
-      display: inline-block;
-      padding: .75rem 1.75rem;
-      border-radius: 8px;
-      font-size: .95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all .15s;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--white);
-      color: var(--blue-dark);
-    }
-    .btn-primary:hover { background: #e0f2fe; }
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255,255,255,.45);
-      margin-left: .75rem;
-    }
-    .btn-outline:hover { background: rgba(255,255,255,.1); }
-
-    /* ── ARCHITECTURE ────────────────────────────────── */
-    .arch {
-      background: var(--gray-900);
-      padding: 3rem 1.5rem;
-      text-align: center;
-    }
-    .arch h2 {
-      color: #93c5fd;
-      font-size: 1rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .arch pre {
-      font-family: var(--font-mono);
-      font-size: clamp(.65rem, 1.8vw, .85rem);
-      color: #e2e8f0;
-      line-height: 1.6;
-      text-align: left;
-      display: inline-block;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 10px;
-      padding: 1.5rem 2rem;
-      overflow-x: auto;
-      max-width: 100%;
-    }
-
-    /* ── STATS BAR ───────────────────────────────────── */
-    .stats-bar {
-      background: var(--blue-pale);
-      border-top: 1px solid #bfdbfe;
-      border-bottom: 1px solid #bfdbfe;
-      padding: 1.75rem 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--blue-mid);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: .8rem;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-top: .25rem;
-    }
-
-    /* ── SECTIONS ────────────────────────────────────── */
-    section { padding: 4rem 1.5rem; }
-    .container { max-width: 1060px; margin: 0 auto; }
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--gray-900);
-      letter-spacing: -.02em;
-      margin-bottom: .5rem;
-    }
-    .section-sub {
-      color: var(--gray-500);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-
-    /* ── FEATURES GRID ───────────────────────────────── */
-    .features { background: var(--white); }
-    .grid-6 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1.25rem;
-    }
-    .card {
-      border: 1px solid var(--gray-300);
-      border-radius: 12px;
-      padding: 1.5rem;
-      transition: box-shadow .2s, border-color .2s;
-    }
-    .card:hover {
-      box-shadow: 0 4px 18px rgba(37,99,235,.1);
-      border-color: #93c5fd;
-    }
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 9px;
-      background: var(--blue-pale);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: .4rem;
-    }
-    .card p { font-size: .875rem; color: var(--gray-500); line-height: 1.6; }
-
-    /* ── TECH SPECS ──────────────────────────────────── */
-    .tech { background: var(--gray-100); }
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .tech-card {
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: 10px;
-      padding: 1.1rem 1.25rem;
-    }
-    .tech-card .label {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--blue-mid);
-      margin-bottom: .3rem;
-    }
-    .tech-card .value {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--gray-900);
-    }
-    .tech-card .detail {
-      font-size: .78rem;
-      color: var(--gray-500);
-      margin-top: .15rem;
-    }
-
-    /* ── PLATFORMS ───────────────────────────────────── */
-    .platforms { background: var(--white); }
-    .platform-list {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .platform-chip {
-      background: var(--blue-pale);
-      border: 1px solid #bfdbfe;
-      border-radius: 8px;
-      padding: .6rem 1.1rem;
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--blue-dark);
-    }
-    .platform-note {
-      margin-top: 1rem;
-      font-size: .875rem;
-      color: var(--gray-500);
-    }
-
-    /* ── LINKS ───────────────────────────────────────── */
-    .links { background: var(--gray-100); }
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: .75rem;
-    }
-    .link-card {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: 9px;
-      padding: .85rem 1rem;
-      text-decoration: none;
-      color: var(--gray-700);
-      font-size: .9rem;
-      font-weight: 500;
-      transition: all .15s;
-    }
-    .link-card:hover {
-      border-color: var(--blue-light);
-      color: var(--blue-mid);
-      box-shadow: 0 2px 8px rgba(37,99,235,.1);
-    }
-    .link-card .arrow { margin-left: auto; color: var(--gray-300); font-size: .8rem; }
-
-    /* ── LICENSE ─────────────────────────────────────── */
-    .license-block {
-      background: var(--white);
-      border: 1px solid var(--gray-300);
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      max-width: 540px;
-    }
-    .license-badge {
-      background: var(--green);
-      color: var(--white);
-      font-size: .75rem;
-      font-weight: 700;
-      padding: .3rem .7rem;
-      border-radius: 6px;
-      white-space: nowrap;
-    }
-    .license-block p { font-size: .875rem; color: var(--gray-500); }
-    .license-block strong { color: var(--gray-700); }
-
-    /* ── FOOTER ──────────────────────────────────────── */
-    footer {
-      background: var(--blue-dark);
-      color: #94a3b8;
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-    }
-    footer .tagline {
-      font-size: 1rem;
-      color: var(--white);
-      font-weight: 600;
-      margin-bottom: .5rem;
-    }
-    footer .sub {
-      font-size: .825rem;
-      margin-bottom: 1.25rem;
-    }
-    footer a { color: #93c5fd; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    footer .copy { font-size: .775rem; color: #475569; margin-top: 1rem; }
-
-    /* ── DIVIDER ─────────────────────────────────────── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--gray-300);
-      margin: 0;
-    }
-  </style>
-</head>
-<body>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Townlight Records — A request, its sources and a human decision.</title><meta name="description" content="Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request."><meta name="theme-color" content="#faf8f3"><link rel="canonical" href="https://townlight.github.io/products/records/"><style>
+:root{--paper:#faf8f3;--card:#fff;--ink:#1a2330;--muted:#4e5a68;--navy:#1a3a52;--gold:#80601b;--rule:#d8cfbb;--soft:#eee9dc;--serif:Georgia,"Iowan Old Style",serif;--sans:system-ui,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 var(--sans)}a{color:var(--navy);text-underline-offset:.22em}a:hover{color:var(--gold)}:focus-visible{outline:3px solid var(--gold);outline-offset:4px}.skip{position:absolute;left:16px;top:-100px;background:var(--navy);color:white;padding:12px;z-index:9}.skip:focus{top:12px}.shell{width:min(1160px,calc(100% - 40px));margin:auto}header{border-bottom:1px solid var(--rule);background:var(--paper)}nav{display:flex;align-items:center;flex-wrap:wrap;gap:16px 28px;padding:20px 0}.brand{font-size:21px;font-weight:750;letter-spacing:-.03em;text-decoration:none}.mark{display:inline-block;width:13px;height:24px;background:var(--navy);border-right:4px solid var(--gold);margin-right:10px;vertical-align:middle}nav .links{display:flex;flex-wrap:wrap;gap:12px 24px;margin-left:auto;font-size:15px}nav a{min-height:30px;display:inline-flex;align-items:center}.hero{padding:80px 0 58px;display:grid;grid-template-columns:1.3fr .7fr;gap:52px;align-items:center}h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.12;letter-spacing:-.025em}h1{font-size:clamp(40px,5.5vw,68px);margin:12px 0 24px}h2{font-size:clamp(30px,3.3vw,43px);margin:0 0 22px}h3{font-size:27px;margin:8px 0 14px}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700}.lede{font-size:21px;color:var(--muted);max-width:720px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 18px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 20px;text-decoration:none;background:var(--navy);color:white;border:1px solid var(--navy);border-radius:3px;font-weight:650}.button:hover{background:#122a3d;color:white}.secondary{background:transparent;color:var(--navy);border-color:var(--rule)}.secondary:hover{background:var(--soft);color:var(--navy)}.note{font-size:14px;color:var(--muted)}.panel{border:1px solid var(--rule);background:var(--card);padding:28px;box-shadow:0 18px 44px #1a23300b}.panel ul{padding-left:22px}.strip{background:var(--navy);color:white;padding:24px 0}.strip p{margin:0;max-width:1000px}.section{padding:60px 0;border-bottom:1px solid var(--rule)}.intro{max-width:760px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:30px}.product{background:var(--card);border:1px solid var(--rule);padding:27px;display:flex;flex-direction:column;min-width:0}.product p{color:var(--muted);margin:0 0 20px}.product .more{margin-top:auto;font-weight:650}.number{font-size:12px;letter-spacing:.1em;color:var(--gold);font-weight:700}.steps{counter-reset:item;list-style:none;padding:0;display:grid;gap:18px}.steps li{counter-increment:item;position:relative;padding:24px 26px 24px 76px;background:var(--card);border:1px solid var(--rule)}.steps li:before{content:counter(item,decimal-leading-zero);position:absolute;left:24px;top:24px;color:var(--gold);font-size:16px;font-weight:700}.steps strong{display:block;font-size:19px}.steps p{margin:8px 0 0;color:var(--muted)}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:36px}.boundary{background:var(--soft);padding:28px;border-left:4px solid var(--gold)}.resources{padding-left:22px}.resources li{margin:10px 0}footer{padding:34px 0 50px;color:var(--muted);font-size:14px}p,li,a,code{overflow-wrap:anywhere}code{font-size:.9em}main{min-width:0}.breadcrumb{font-size:14px;margin-top:28px}.pill{display:inline-block;border:1px solid var(--rule);padding:3px 9px;font-size:13px;color:var(--muted);margin:5px 5px 0 0}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:48px 0;gap:28px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.twocol{grid-template-columns:1fr}nav .links{margin-left:0}.lede{font-size:19px}}
+@media(max-width:520px){.shell{width:calc(100% - 28px)}.grid{grid-template-columns:1fr}.section{padding:40px 0}h1{font-size:40px}.steps li{padding:22px 20px 22px 58px}.steps li:before{left:17px;top:22px}.panel{padding:22px}.button{width:100%}.hero{padding-top:32px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body><a class="skip" href="#main">Skip to content</a><header><nav class="shell" aria-label="Main"><a class="brand" href="https://townlight.github.io/"><span class="mark" aria-hidden="true"></span>Townlight</a><div class="links"><a href="https://townlight.github.io/#products">Eight products</a><a href="https://github.com/townlight/townlight/blob/main/USER-MANUAL.md">Overall manual</a><a href="https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md">Scope &amp; evidence</a><a href="https://github.com/townlight">Source</a></div></nav></header>
+<main id="main" class="shell"><p class="breadcrumb"><a href="https://townlight.github.io/#products">All eight products</a> / Records</p>
+<section class="hero"><div><p class="eyebrow">Townlight Records</p><h1>A request, its sources and a human decision.</h1><p class="lede">Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request.</p><div class="actions"><a class="button" href="https://github.com/townlight/sunshine/blob/master/USER-MANUAL.md">Read the full user manual</a><a class="button secondary" href="https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1">Choose this release</a></div><p class="note">Records 1.7.4 in the accepted 1.7 desktop composition. Release-specific acceptance and profile selection apply.</p></div><aside class="panel" aria-label="Product at a glance"><p class="eyebrow">Built for Records officers, clerks and authorized reviewers</p><h2>The work, connected.</h2><ul><li>Request intake and tracked staff work</li><li>Permission-checked sources and response review</li><li>Explicit approval and release</li></ul><p class="note">Staff own the decisions. Evidence keeps its source, version and permissions.</p></aside></section>
+<section class="section"><p class="eyebrow">How it works</p><h2>A clear path through the work.</h2><ol class="steps"><li><strong>Receive a request</strong><p>Open Records as authorized staff. Create or open a request with the requester and request description. Retain the request identifier. Use clarification, assignment and timeline controls to record the work rather than changing status only in a private note.</p></li><li><strong>Find responsive material</strong><p>Create a search session and search permitted sources. Inspect source title, date, citation and visibility. Attach responsive evidence explicitly. Search results from Meetings, Code, Zoning, Planning, Permitting and Inspections are constrained by the installed profile and source permissions.</p></li><li><strong>Review documents</strong><p>Inspect each original and attachment. Record exemption decisions, evidence notes and release review in the request. An AI suggestion or a source summary is not a legal exemption determination; the reviewer owns the decision and its citation.</p></li><li><strong>Handle connected copies</strong><p>Select the reviewed source copy or attach from the source workspace to an existing request. Compare the source identifier and hash. Private staff notes are excluded by each public-copy contract, not by renaming a private packet. If a source becomes restricted, changed or unavailable, resolve the source issue before release; do not substitute stale text.</p></li><li><strong>Draft and communicate</strong><p>Edit the response text, log messages and review fee line items or waivers where applicable. The local notification/outbox is distinct from external email delivery. SMTP exists in source but requires deployment configuration; an outbox entry alone does not prove delivery.</p></li><li><strong>Approve the exact response</strong><p>Review the response and attachments, then use the authorized approval control. Approval is tied to the response text hash. Editing that text invalidates the previous approval; review and approve the new text before release.</p></li><li><strong>Release and close</strong><p>Use the final export/release operation only after approval and source checks succeed. Keep the release artifact and audit trail. Fulfillment and closure are deliberate later actions. Attaching an evidence copy, viewing a preview or drafting a response does not fulfill a request.</p></li><li><strong>Recover a stale view</strong><p>If services were stopped, wait for readiness and use Retry Records when displayed. Navigate back to Records to reload canonical state. Do not create a duplicate request or attach the same source again just because a previous screen is stale.</p></li></ol></section>
+<section class="section twocol"><div><p class="eyebrow">Part of the whole</p><h2>Connect the evidence.</h2><p>Records receives explicitly selected evidence from the six other business products and uses Core for shared contracts. This is not unrestricted federation across every system.</p><a href="https://github.com/townlight/townlight/blob/main/USER-MANUAL.md">See how all eight products work together →</a></div><aside class="boundary"><p class="eyebrow">Scope and limits</p><h3>Know what this release does.</h3><p>The installed acceptance covers the documented staff journeys and explicit source boundaries. Full resident-portal, accessibility, redaction-ledger and federation requirements require their own deployment/feature evidence; this guide does not certify all of them. The source contains request, exemption, fees, messages, SMTP and public endpoints, which must not be described as absent merely because an older plan calls them future work.</p><a href="https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md">Read the feature-by-feature findings</a></aside></section>
+<section class="section"><h2>Start with the right guide.</h2><ul class="resources"><li><a href="https://github.com/townlight/sunshine/blob/master/USER-MANUAL.md">Full Records user manual</a> — setup, roles, sources, review, export, recovery and troubleshooting.</li><li><a href="https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1">Exact signed release and acceptance</a> — versions, checksums and scope.</li><li><a href="https://github.com/townlight/sunshine">Repository and README</a> — source contracts and maintainer reference.</li><li><a href="https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-v1.4.0-beta.1">Existing default 1.4 Windows download</a> — unchanged; newer compositions require explicit selection.</li></ul><p class="note">Core is bundled infrastructure, not a separate standalone installer. Local public views do not deploy an internet portal. No automatic legal, permit or enforcement decision is created.</p></section><section class="section" id="package-reference"><details><summary>Package/API reference and release history</summary><p>Historical package release recovery: v1.7.3 was the release-asset convention bring-up. v1.4.10 remains a provisional pre-gate, do-not-promote artifact and must not be promoted as an attested baseline. These are package-history labels, not the current signed desktop version.</p><p>The material below is retained from this package’s earlier landing page. Historical release labels, sample interfaces and implementation milestones describe that package context. They do not override the current signed desktop guide above. Use the current manual for native operation and the assessment for broader scope.</p>
 <aside aria-label="Published connected desktop" style="max-width:1080px;margin:24px auto;padding:20px;box-sizing:border-box;background:#fff;border:2px solid #315b46;border-radius:8px">
   <strong>Published connected desktop: Townlight Records + Meetings + Code + Zoning 1.4.0-beta.1</strong>
   <p>The signed Windows public beta was published October 21, 2026. Records-only is the default; select <code>zoning-beta</code> for all four products. The <code>city-core</code> profile excludes Zoning. This bounded evaluation release does not change this module's standalone package version or certify production readiness.</p>
@@ -423,62 +21,10 @@
 
 
 <!-- NAV -->
-<nav>
-  <a class="nav-brand" href="#">Civic<span>Records AI</span></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#tech">Tech Stack</a></li>
-    <li><a href="#links">Docs</a></li>
-    <li><a href="https://github.com/townlight/sunshine">GitHub</a></li>
-  </ul>
-</nav>
+
 
 <!-- HERO -->
-<header class="hero">
-  <div class="hero-badge">v1.7.3 release-asset convention bring-up &nbsp;·&nbsp; AGPL-3.0 &nbsp;·&nbsp; Open Source &nbsp;·&nbsp; Recovery Gate Active</div>
-  <p style="max-width: 860px; margin: 1rem auto 0; color: #bfdbfe;">Release recovery note: <code>v1.7.3</code> adds wheel and sdist release assets for direct-pip consumers with no functional change; the city-core installer continues to vendor source as before. The older <code>v1.7.2</code> shared-ingestion release, <code>v1.6.1</code> Celery ingestion worker event-loop recovery patch, and <code>v1.6.0</code> Docker secret-file extraction release remain historical recovery context. The older <code>v1.4.10</code> artifact is historical pre-gate, provisional source only, and must not be promoted as an attested baseline.</p>
-  <h1>Civic<span>Records AI</span></h1>
-  <p class="hero-tagline">Open-source AI for municipal open records</p>
 
-  <p class="hero-value">
-    Every city in America processes public records requests — and most staff still search file shares
-    manually, review hundreds of pages by hand, and track deadlines in spreadsheets.
-    <strong>Townlight Records changes that.</strong> It runs entirely inside your city's network,
-    ingesting your documents and making them searchable with natural language AI queries, flagging
-    potential exemptions, and managing the full request lifecycle from intake to response.
-    No cloud subscription. No vendor lock-in. <strong>Your data never leaves the building.</strong>
-  </p>
-
-  <div class="quickstart">
-    <div class="qs-step">
-      <div class="qs-num">Step 1</div>
-      <p>Install Docker Desktop (required — not included in setup scripts)</p>
-      <code>docker.com/get-started</code>
-    </div>
-    <div class="qs-step">
-      <div class="qs-num">Step 2</div>
-      <p>Clone &amp; run the setup script</p>
-      <code>bash install.sh</code>
-    </div>
-    <div class="qs-step">
-      <div class="qs-num">Step 3</div>
-      <p>Open your browser</p>
-      <code>http://localhost:8080</code>
-    </div>
-  </div>
-  <p style="font-size:.8rem;color:#93c5fd;margin-bottom:1.5rem;opacity:.85;">
-    &#9432;&nbsp; A Windows double-click installer (<strong style="color:#bfdbfe;">unsigned</strong>, ships with every tagged release) handles the Docker-stack setup end-to-end.
-    macOS and Linux continue to use the setup scripts below &mdash; Docker Desktop (macOS) or Docker Engine (Linux) must be installed first.
-  </p>
-
-  <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;">
-    <a href="https://github.com/townlight/sunshine" class="btn btn-primary">&#128008; GitHub Repository</a>
-    <a href="https://raw.githubusercontent.com/townlight/sunshine/v1.7.3/install.sh" class="btn btn-primary" download>&#11015; Download Installer (Linux / macOS)</a>
-    <a href="https://github.com/townlight/sunshine/releases/download/v1.7.3/CivicSunshine-1.7.3-Setup.exe" class="btn btn-primary" download>&#11015; Download Installer (Windows)</a>
-    <a href="https://github.com/townlight/sunshine/blob/master/USER-MANUAL.md" class="btn btn-outline">&#128462; User Manual</a>
-    <a href="https://github.com/townlight/sunshine/blob/master/README.md" class="btn btn-outline">&#128196; README</a>
-  </div>
-</header>
 
 <!-- ARCHITECTURE -->
 <div class="arch">
@@ -502,10 +48,10 @@
   <div style="max-width: 860px; margin: 0 auto;">
     <svg viewBox="0 0 860 620" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
       <defs>
-        <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#93c5fd"/></marker>
-        <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563eb" stop-opacity=".15"/><stop offset="100%" stop-color="#2563eb" stop-opacity=".05"/></linearGradient>
-        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#16a34a" stop-opacity=".12"/><stop offset="100%" stop-color="#16a34a" stop-opacity=".04"/></linearGradient>
-        <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity=".12"/><stop offset="100%" stop-color="#7c3aed" stop-opacity=".04"/></linearGradient>
+        <marker id="history-ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#93c5fd"/></marker>
+        <linearGradient id="history-g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563eb" stop-opacity=".15"/><stop offset="100%" stop-color="#2563eb" stop-opacity=".05"/></linearGradient>
+        <linearGradient id="history-g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#16a34a" stop-opacity=".12"/><stop offset="100%" stop-color="#16a34a" stop-opacity=".04"/></linearGradient>
+        <linearGradient id="history-g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity=".12"/><stop offset="100%" stop-color="#7c3aed" stop-opacity=".04"/></linearGradient>
       </defs>
 
       <!-- Tier backgrounds -->
@@ -667,7 +213,7 @@
 </div>
 
 <!-- FEATURES -->
-<section class="features" id="features">
+<section class="features" id="history-features">
   <div class="container">
     <h2 class="section-title">What it does</h2>
     <p class="section-sub">Eighteen integrated capabilities — all running locally, all under your control.</p>
@@ -788,7 +334,7 @@
 <hr class="divider">
 
 <!-- TECH SPECS -->
-<section class="tech" id="tech">
+<section class="tech" id="history-tech">
   <div class="container">
     <h2 class="section-title">Tech stack</h2>
     <p class="section-sub">Standard, well-supported open-source components. No proprietary runtimes. No licensing surprises.</p>
@@ -855,7 +401,7 @@
 <hr class="divider">
 
 <!-- LINKS -->
-<section class="links" id="links">
+<section class="links" id="history-links">
   <div class="container">
     <h2 class="section-title">Get started</h2>
     <p class="section-sub">Download, read the documentation, and evaluate Townlight Records for your city.</p>
@@ -937,13 +483,6 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <p class="tagline">Built for American cities. Open source. Locally hosted. Your data stays yours.</p>
-  <p class="sub">
-    <a href="https://github.com/townlight/sunshine">github.com/townlight/sunshine</a>
-  </p>
-  <p class="copy">Copyright &copy; 2026 CivicSunshine Contributors &nbsp;&middot;&nbsp; AGPL-3.0</p>
-</footer>
 
-</body>
-</html>
+
+</details></section></main><footer class="shell">Volunteer-maintained, open-source municipal software. Code: AGPL-3.0 with the applicable public institution exception. Documentation: CC BY 4.0.<br>Reviewed October 26, 2026 · <a href="https://github.com/townlight/townlight/issues">Support and issues</a> · Keep credentials and resident data out of public reports.</footer></body></html>

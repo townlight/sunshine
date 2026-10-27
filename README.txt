@@ -1,5 +1,36 @@
 # Townlight Records
 
+**A request, its sources and a human decision.**
+
+Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request.
+
+## Use this product
+
+- [Current user manual](USER-MANUAL.md): installed workflow, roles, sources, review, export, recovery and limits.
+- [Product landing page](https://townlight.github.io/products/records/).
+- [Overall eight-product manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) and [feature/integration assessment](https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md).
+- [Signed composition and acceptance](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1): Records 1.7.4 in the accepted 1.7 desktop composition.
+
+Records receives explicitly selected evidence from the six other business products and uses Core for shared contracts. This is not unrestricted federation across every system.
+
+## Release scope
+
+The installed acceptance covers the documented staff journeys and explicit source boundaries. Full resident-portal, accessibility, redaction-ledger and federation requirements require their own deployment/feature evidence; this guide does not certify all of them. The source contains request, exemption, fees, messages, SMTP and public endpoints, which must not be described as absent merely because an older plan calls them future work.
+
+Documentation reviewed 2026-10-26. Installed acceptance, source/API implementation and future requirements are different evidence. Code is AGPL-3.0-only with the repository’s public institution exception where applicable; documentation is CC BY 4.0. See the repository license files.
+
+## Historical repository reference
+
+The earlier README below is retained for package history and contributor commands. Older maturity/version statements describe that historical reference and are superseded by the current operating guide and linked release evidence.
+
+<a id="civicsunshine"></a>
+
+# Townlight Records
+
+Planning P3/P4 development integration adds permission-checked snapshot selection
+to the existing Records review and export workflow. Existing installer profiles
+and signed 1.4 artifacts are unchanged. See [the source adapter contract](docs/PLANNING-SNAPSHOT-SOURCES.md).
+
 ## Published connected desktop: 1.4.0-beta.1
 
 This module participates in the signed Townlight Records + Meetings + Code +
@@ -13,6 +44,22 @@ This is a connected desktop release, not a new standalone package version.
 Package/import/API names remain compatibility identifiers. Historical development
 checkpoints below retain their original scope; they are superseded for current
 desktop publication status. No signed installer or historical evidence is changed.
+
+## Historical integration checkpoint — Local Townlight Meetings connection — October 19, 2026
+
+Unreleased M3 integration: the explicit native `meetings-beta` profile can search
+public Meetings archive text snapshots and attach a selected agenda, packet text
+or minutes document to a Records request. Restricted archive records, raw
+transcripts and staff-only attachments are excluded; the source is rechecked
+when selected. Records keeps the exact bytes/hash, stable archive/source ID,
+citation, structured provenance and authenticated actor in its existing evidence
+and audit stores. Retry does not duplicate an attachment. Staff can use the
+source in a response draft without automatic approval or publication.
+
+Actual native search/attachment/draft and restart readback passed on synthetic
+data. This is not installed acceptance; no release version was changed. The
+Records-only profile does not mount a Meetings provider and its existing screen
+does not show the new search controls. M4 packaging/recovery remains pending.
 
 > Formerly published as "Townlight Records"; renamed 2026-07. Package and service identifiers are unchanged.
 
@@ -50,6 +97,8 @@ No open-source tool exists for the **responder side** of open records at the mun
 ### Requirements
 
 Townlight is a **server product** — one server per city. Clerks reach the server through any modern browser; there is no clerk-side installation.
+
+<a id="civicsuite-server-one-per-city"></a>
 
 #### Townlight Server (one per city)
 
@@ -208,6 +257,13 @@ returns zero lines.
 only non-secret operator settings such as `CIVICRECORDS_SECRET_DIR`. Do not set
 `JWT_SECRET*`, `FIRST_ADMIN_PASSWORD*`, or matching `_FILE` pointer env vars in
 Docker deployments; those names are recoverable with `docker exec env`.
+
+The initial administrator password is bootstrap-only. On a fresh install the
+startup-created admin account is marked `must_change_password`; staff and admin
+surfaces stay locked with a plain-language remediation message until that
+operator changes the password from the account screen. The `/users/me` response
+includes `must_change_password` so the frontend can route the operator directly
+to password rotation without exposing the generated password again.
 
 ## Supported Platforms
 
