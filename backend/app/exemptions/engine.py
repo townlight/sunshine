@@ -1,98 +1,34 @@
-import re
 import uuid
-from dataclasses import dataclass
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.exemptions.patterns import scan_text as _scan_text_pii
+from civiccore.exemptions import (
+    Rule, evaluate, FlagResult,
+    scan_chunk_builtin as scan_chunk_builtin,
+    scan_text_with_regex as scan_text_with_regex,
+    scan_text_with_keywords as scan_text_with_keywords,
+)
 from app.models.document import DocumentChunk
 from app.models.exemption import ExemptionFlag, ExemptionRule, FlagStatus, RuleType
 
 
-@dataclass
-class FlagResult:
-    category: str
-    matched_text: str
-    confidence: float
-    rule_id: uuid.UUID | None = None
-    rule_type: str = "regex"
-
-
-def scan_text_with_regex(text: str, pattern: str) -> list[str]:
-    """Find all matches of a regex pattern in text."""
-    try:
-        return re.findall(pattern, text, re.IGNORECASE)
-    except re.error:
-        return []
-
-
-def scan_text_with_keywords(text: str, keywords: str) -> list[str]:
-    """Find keyword matches. Keywords are comma-separated."""
-    matches = []
-    text_lower = text.lower()
-    for kw in keywords.split(","):
-        kw = kw.strip().lower()
-        if kw and kw in text_lower:
-            # Extract surrounding context
-            idx = text_lower.index(kw)
-            start = max(0, idx - 30)
-            end = min(len(text), idx + len(kw) + 30)
-            matches.append(text[start:end].strip())
-    return matches
-
-
-def scan_chunk_builtin(text: str, state_code: str | None = None) -> list[FlagResult]:
-    """Scan text with built-in PII rules via patterns.py (single source of truth)."""
-    pii_matches = _scan_text_pii(text, state_code=state_code)
-    flags = []
-    for m in pii_matches:
-        flags.append(FlagResult(
-            category=m.category,
-            matched_text=m.matched_text if len(m.matched_text) < 200 else m.matched_text[:200],
-            confidence=m.confidence,
-            rule_id=None,
-            rule_type="regex",
-        ))
-    return flags
-
-
 async def scan_chunk_with_rules(
-    session: AsyncSession,
-    text: str,
-    state_code: str | None = None,
+    session: AsyncSession, text: str, state_code: str | None = None,
 ) -> list[FlagResult]:
-    """Scan text with database-configured rules for a state."""
-    flags = scan_chunk_builtin(text, state_code=state_code)
-
+    """Use shared Core evaluation; database ownership remains with Records."""
+    rules = []
     if state_code:
         result = await session.execute(
             select(ExemptionRule).where(
                 ExemptionRule.enabled.is_(True),
-                ExemptionRule.state_code == state_code,
+                ExemptionRule.state_code == state_code.upper(),
                 ExemptionRule.rule_type.in_([RuleType.REGEX, RuleType.KEYWORD]),
             )
         )
-        rules = result.scalars().all()
-
-        for rule in rules:
-            if rule.rule_type == RuleType.REGEX:
-                matches = scan_text_with_regex(text, rule.rule_definition)
-            elif rule.rule_type == RuleType.KEYWORD:
-                matches = scan_text_with_keywords(text, rule.rule_definition)
-            else:
-                continue
-
-            for match in matches:
-                flags.append(FlagResult(
-                    category=rule.category,
-                    matched_text=match if len(match) < 200 else match[:200],
-                    confidence=0.8,
-                    rule_id=rule.id,
-                    rule_type=rule.rule_type.value,
-                ))
-
-    return flags
+        rules = [Rule(r.id, r.state_code, r.category, r.rule_type.value,
+                      r.rule_definition, r.version) for r in result.scalars()]
+    return evaluate(text, state_code, rules=rules)
 
 
 async def scan_request_documents(

@@ -11,6 +11,7 @@ from app.audit.logger import write_audit_log
 from app.auth.dependencies import require_role, require_department_or_404, has_department_access
 from app.database import get_async_session
 from app.exemptions.engine import scan_request_documents
+from civiccore.exemptions import RuleEvaluationError
 from app.models.city_profile import CityProfile
 from app.models.exemption import (
     DisclosureTemplate, ExemptionFlag, ExemptionRule, FlagStatus, RuleType,
@@ -237,7 +238,11 @@ async def scan_for_exemptions(
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
 
-    flags = await scan_request_documents(session, request_id, state_code)
+    try:
+        flags = await scan_request_documents(session, request_id, state_code)
+    except RuleEvaluationError as exc:
+        await session.rollback()
+        raise HTTPException(status_code=422, detail=f"Scan incomplete: {exc}") from exc
 
     # Optional LLM secondary pass
     llm_flags = []

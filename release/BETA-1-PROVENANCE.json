@@ -1,0 +1,1020 @@
+{
+  "edition": "Townlight Beta 1",
+  "base_commit": "5aed3b52e89ec4a61ea100fac13f309868cbdb45",
+  "installer_sha256": "98bcdef11ebdf5c767f620c904ff49f85115fde3b5c23f62703b111e645aaf86",
+  "owned_source_sha256": "84a23e1297e42d17b16cfc9e51b2dd78bc46414c0de8ad7ebd2466c1a409d06b",
+  "documentation_sha256": "a928bb1c40fec7ef6f223c7b77bc9fe7837e4cfffcebf35bb3309cc5549284e6",
+  "release": "https://github.com/townlight/townlight/releases/tag/townlight-beta-1",
+  "archive_files": [
+    {
+      "archive": "installed-owned-source/app/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/__init__.py",
+      "sha256": "faef907da0d1b1e4b467dc711514a24f6112ff32809ee7e7e6065c684ab7f2b9",
+      "status": "same",
+      "publication_sha256": "faef907da0d1b1e4b467dc711514a24f6112ff32809ee7e7e6065c684ab7f2b9"
+    },
+    {
+      "archive": "installed-owned-source/app/admin/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/admin/__init__.py",
+      "sha256": "5724a9ba19246885896a1603eecc360d7cb5b5cc6c745f635553158f7c46431d",
+      "status": "same",
+      "publication_sha256": "5724a9ba19246885896a1603eecc360d7cb5b5cc6c745f635553158f7c46431d"
+    },
+    {
+      "archive": "installed-owned-source/app/admin/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/admin/router.py",
+      "sha256": "daea85a6114138f50a2a3da4bff8736c1140174599440b07cac35aee27694b7d",
+      "status": "same",
+      "publication_sha256": "daea85a6114138f50a2a3da4bff8736c1140174599440b07cac35aee27694b7d"
+    },
+    {
+      "archive": "installed-owned-source/app/analytics/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/analytics/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/analytics/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/analytics/router.py",
+      "sha256": "a82bc140c0e152301bc9583a8a291974876f068eb3a4fac1b342056ecb217316",
+      "status": "same",
+      "publication_sha256": "a82bc140c0e152301bc9583a8a291974876f068eb3a4fac1b342056ecb217316"
+    },
+    {
+      "archive": "installed-owned-source/app/audit/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/audit/__init__.py",
+      "sha256": "35d25b33770f3cd458121ab4d8a6cdb87c32e7b8282bb674c8bf93bca6a5d82d",
+      "status": "same",
+      "publication_sha256": "35d25b33770f3cd458121ab4d8a6cdb87c32e7b8282bb674c8bf93bca6a5d82d"
+    },
+    {
+      "archive": "installed-owned-source/app/audit/logger.py",
+      "repo": "sunshine",
+      "path": "backend/app/audit/logger.py",
+      "sha256": "1ad570f68753023d56827f8fa672822e50e234d32259b218682b815ee02cd0e8",
+      "status": "same",
+      "publication_sha256": "1ad570f68753023d56827f8fa672822e50e234d32259b218682b815ee02cd0e8"
+    },
+    {
+      "archive": "installed-owned-source/app/audit/middleware.py",
+      "repo": "sunshine",
+      "path": "backend/app/audit/middleware.py",
+      "sha256": "c9283a66fbe43933edf30895e9b242380a99769127bd6536937dd56652e01a96",
+      "status": "same",
+      "publication_sha256": "c9283a66fbe43933edf30895e9b242380a99769127bd6536937dd56652e01a96"
+    },
+    {
+      "archive": "installed-owned-source/app/audit/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/audit/router.py",
+      "sha256": "fc933066a2355e924c0f7c359d9249591c0f8024eadc455246b4b0b536f7d67f",
+      "status": "same",
+      "publication_sha256": "fc933066a2355e924c0f7c359d9249591c0f8024eadc455246b4b0b536f7d67f"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/__init__.py",
+      "sha256": "40ae31146583108d88187effd6cdc081314021177425b6bdb1cb7b72530d5c4b",
+      "status": "same",
+      "publication_sha256": "40ae31146583108d88187effd6cdc081314021177425b6bdb1cb7b72530d5c4b"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/backend.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/backend.py",
+      "sha256": "5a91017634252d0e8c959fa1ec1ae2163b118a4901ecc0bb1233448e8ca498bb",
+      "status": "same",
+      "publication_sha256": "5a91017634252d0e8c959fa1ec1ae2163b118a4901ecc0bb1233448e8ca498bb"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/department_authority.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/department_authority.py",
+      "sha256": "f234cf04a5755dc3c0bd76230ef5145d4e7d26876c21b6776924ed95ea3e80eb",
+      "status": "new",
+      "publication_sha256": "f234cf04a5755dc3c0bd76230ef5145d4e7d26876c21b6776924ed95ea3e80eb"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/dependencies.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/dependencies.py",
+      "sha256": "28390a14cf9b4550ed09772d0f8c922e4e27cfb75639dd7d853dbeea1e28433d",
+      "status": "same",
+      "publication_sha256": "28390a14cf9b4550ed09772d0f8c922e4e27cfb75639dd7d853dbeea1e28433d"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/desktop_session.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/desktop_session.py",
+      "sha256": "ce8ff9e910ca8b7f36d8c8616a65d593d48fba3588538edfa6731ea6ada8a36b",
+      "status": "same",
+      "publication_sha256": "ce8ff9e910ca8b7f36d8c8616a65d593d48fba3588538edfa6731ea6ada8a36b"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/manager.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/manager.py",
+      "sha256": "337f7d5b6d89973c352259c21512da56e6308a6e3e6967f035a31916b52c2bbb",
+      "status": "same",
+      "publication_sha256": "337f7d5b6d89973c352259c21512da56e6308a6e3e6967f035a31916b52c2bbb"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/native_identity.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/native_identity.py",
+      "sha256": "3d2536b13f38c52d93c4ab54887bf232a3b9181fe1b485165e1fd6a81fe687d0",
+      "status": "same",
+      "publication_sha256": "3d2536b13f38c52d93c4ab54887bf232a3b9181fe1b485165e1fd6a81fe687d0"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/router.py",
+      "sha256": "9574ed42379df9ef05d9c13409c01f715538e00bb9e3c884b884cd2c1c8495fc",
+      "status": "same",
+      "publication_sha256": "9574ed42379df9ef05d9c13409c01f715538e00bb9e3c884b884cd2c1c8495fc"
+    },
+    {
+      "archive": "installed-owned-source/app/auth/suite_session.py",
+      "repo": "sunshine",
+      "path": "backend/app/auth/suite_session.py",
+      "sha256": "126a453ff01029cfe7abbbb5a3ecbf6c3ba562957ce929eb7854ff682576d071",
+      "status": "same",
+      "publication_sha256": "126a453ff01029cfe7abbbb5a3ecbf6c3ba562957ce929eb7854ff682576d071"
+    },
+    {
+      "archive": "installed-owned-source/app/catalog/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/catalog/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/catalog/loader.py",
+      "repo": "sunshine",
+      "path": "backend/app/catalog/loader.py",
+      "sha256": "8ec0239d327824d28d18425904c64ef2bbfc2d04c65a4c5deb64904d5354912d",
+      "status": "changed",
+      "publication_sha256": "390d961f971b146678847519afb7d566d086a5920fbfe2f8eb5356210e63cc80"
+    },
+    {
+      "archive": "installed-owned-source/app/catalog/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/catalog/router.py",
+      "sha256": "8720ef17e4106e738c2ed3672af4051dfe36b617a9da8eae8fa54a9c23de13d8",
+      "status": "changed",
+      "publication_sha256": "f63175a7ab75e3d0aa44a4fc653cdb37868fea62984fa40f7095765b3a874c4f"
+    },
+    {
+      "archive": "installed-owned-source/app/city_profile/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/city_profile/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/city_profile/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/city_profile/router.py",
+      "sha256": "e0b9d83c16dcb8e6ad6b2ca3bd2c4300ff0aa9ff89609a7f5bd7cc5dde835682",
+      "status": "same",
+      "publication_sha256": "e0b9d83c16dcb8e6ad6b2ca3bd2c4300ff0aa9ff89609a7f5bd7cc5dde835682"
+    },
+    {
+      "archive": "installed-owned-source/app/config.py",
+      "repo": "sunshine",
+      "path": "backend/app/config.py",
+      "sha256": "52725fbeb02c75717ae638e8d0cdf2d527656fb8bac5b5b5572d48d6e794a1c5",
+      "status": "changed",
+      "publication_sha256": "52725fbeb02c75717ae638e8d0cdf2d527656fb8bac5b5b5572d48d6e794a1c5"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/__init__.py",
+      "sha256": "858f35a785e1714492e27337991099f9891ab9e0b6325427213d0458b7e7508f",
+      "status": "same",
+      "publication_sha256": "858f35a785e1714492e27337991099f9891ab9e0b6325427213d0458b7e7508f"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/base.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/base.py",
+      "sha256": "61772e641cda2c08df5c95ce7cbefe725b550b1fd67f54cb550ea847c9927688",
+      "status": "same",
+      "publication_sha256": "61772e641cda2c08df5c95ce7cbefe725b550b1fd67f54cb550ea847c9927688"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/file_system.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/file_system.py",
+      "sha256": "d61c6ed4b906cb10697949ed9810ce14853301af1706cc02ba6605fec1d385a6",
+      "status": "same",
+      "publication_sha256": "d61c6ed4b906cb10697949ed9810ce14853301af1706cc02ba6605fec1d385a6"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/imap_email.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/imap_email.py",
+      "sha256": "a6353f14d4f083e999e089bd8c536438a9355ac0bab5c94b03ab30f4f0ef084d",
+      "status": "same",
+      "publication_sha256": "a6353f14d4f083e999e089bd8c536438a9355ac0bab5c94b03ab30f4f0ef084d"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/manual_drop.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/manual_drop.py",
+      "sha256": "4130a495cb691d56d6c9cc493bf85edb520f86c89846a241ed216ca652b4d2ac",
+      "status": "same",
+      "publication_sha256": "4130a495cb691d56d6c9cc493bf85edb520f86c89846a241ed216ca652b4d2ac"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/odbc.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/odbc.py",
+      "sha256": "636c23aa66537775c674efe095a1c9e27dc670a6370a742e325c1ea5039243db",
+      "status": "same",
+      "publication_sha256": "636c23aa66537775c674efe095a1c9e27dc670a6370a742e325c1ea5039243db"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/rest_api.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/rest_api.py",
+      "sha256": "52e26ea1923a25ed7704f090e37745be39a0fb80e38a4b5cdb315a08d16373f2",
+      "status": "same",
+      "publication_sha256": "52e26ea1923a25ed7704f090e37745be39a0fb80e38a4b5cdb315a08d16373f2"
+    },
+    {
+      "archive": "installed-owned-source/app/connectors/retry.py",
+      "repo": "sunshine",
+      "path": "backend/app/connectors/retry.py",
+      "sha256": "bba511cd51d7727835e24540b5c8c4660dbab43776d34cbaf2a618b207c36726",
+      "status": "same",
+      "publication_sha256": "bba511cd51d7727835e24540b5c8c4660dbab43776d34cbaf2a618b207c36726"
+    },
+    {
+      "archive": "installed-owned-source/app/database.py",
+      "repo": "sunshine",
+      "path": "backend/app/database.py",
+      "sha256": "cbf900a24999134b812e06749cd897a8f36e1885a05fb6b837363788ae2e990f",
+      "status": "same",
+      "publication_sha256": "cbf900a24999134b812e06749cd897a8f36e1885a05fb6b837363788ae2e990f"
+    },
+    {
+      "archive": "installed-owned-source/app/datasources/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/datasources/__init__.py",
+      "sha256": "f8a2f02b77cc7a4a879305cceee97e5ee272213e93c635792e42a1c3e5afaa75",
+      "status": "same",
+      "publication_sha256": "f8a2f02b77cc7a4a879305cceee97e5ee272213e93c635792e42a1c3e5afaa75"
+    },
+    {
+      "archive": "installed-owned-source/app/datasources/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/datasources/router.py",
+      "sha256": "67dc17fea9f4259bcf8c4f376c447bdcd775ae59fd6e805a981873fe87bf36c4",
+      "status": "same",
+      "publication_sha256": "67dc17fea9f4259bcf8c4f376c447bdcd775ae59fd6e805a981873fe87bf36c4"
+    },
+    {
+      "archive": "installed-owned-source/app/datasources/sync_failures_router.py",
+      "repo": "sunshine",
+      "path": "backend/app/datasources/sync_failures_router.py",
+      "sha256": "6d942272770c5968245a2c2455883971eef01afd28c3fb6620efcf435ae0daa5",
+      "status": "same",
+      "publication_sha256": "6d942272770c5968245a2c2455883971eef01afd28c3fb6620efcf435ae0daa5"
+    },
+    {
+      "archive": "installed-owned-source/app/departments/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/departments/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/departments/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/departments/router.py",
+      "sha256": "1c5f50b50572ecd7003903f2d3e9433027c86ebffe5a44d821b2e5ed05f0a39d",
+      "status": "same",
+      "publication_sha256": "1c5f50b50572ecd7003903f2d3e9433027c86ebffe5a44d821b2e5ed05f0a39d"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/__init__.py",
+      "sha256": "707138dfa41f7f4e91957a523e3c3394ce52803778c5b278b3cc77d4a5b1c30f",
+      "status": "same",
+      "publication_sha256": "707138dfa41f7f4e91957a523e3c3394ce52803778c5b278b3cc77d4a5b1c30f"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/projection.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/projection.py",
+      "sha256": "5267b17ae6be18258ea0e225ffb0d53c56aeaf674d9426856b8db804f801008c",
+      "status": "same",
+      "publication_sha256": "5267b17ae6be18258ea0e225ffb0d53c56aeaf674d9426856b8db804f801008c"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/records.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/records.py",
+      "sha256": "407b2ca9974caa761c00daee3b585ca915c2fe649a69a0dd58f42342b39821d1",
+      "status": "same",
+      "publication_sha256": "407b2ca9974caa761c00daee3b585ca915c2fe649a69a0dd58f42342b39821d1"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/router.py",
+      "sha256": "7c02e0a222c36aecb84b105a918309a811f40249c3f55756d87cfa2646c4ef1b",
+      "status": "changed",
+      "publication_sha256": "05392cde7218819ca71360d8602ba9562f1f4f0b367d9a50a29332b098b80212"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/schemas.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/schemas.py",
+      "sha256": "753dd5474d532912bc50118fe9add74613cbc3b17a062dd93681309ac590926d",
+      "status": "same",
+      "publication_sha256": "753dd5474d532912bc50118fe9add74613cbc3b17a062dd93681309ac590926d"
+    },
+    {
+      "archive": "installed-owned-source/app/desktop_bridge/station.py",
+      "repo": "sunshine",
+      "path": "backend/app/desktop_bridge/station.py",
+      "sha256": "2f53398b6a897f804419ea5025895bb7dc468d8891dc553b20bb14cb5d0a8084",
+      "status": "new",
+      "publication_sha256": "e00e9e86ef5e6d60f8475eaf7334c99b1b8d2c93e2582abdb230a90e165c1637"
+    },
+    {
+      "archive": "installed-owned-source/app/documents/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/documents/__init__.py",
+      "sha256": "2795a0001b651166674cb0b501f64e0030e84816d5b4335f3189529510e2b10b",
+      "status": "same",
+      "publication_sha256": "2795a0001b651166674cb0b501f64e0030e84816d5b4335f3189529510e2b10b"
+    },
+    {
+      "archive": "installed-owned-source/app/documents/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/documents/router.py",
+      "sha256": "12c9facd2481a2294883f665516bd5e0bf3a487ee76c7eb747eb4b95aa80fefe",
+      "status": "same",
+      "publication_sha256": "12c9facd2481a2294883f665516bd5e0bf3a487ee76c7eb747eb4b95aa80fefe"
+    },
+    {
+      "archive": "installed-owned-source/app/exemptions/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/exemptions/__init__.py",
+      "sha256": "2fd238ebecb0a427697f59094dad0d088962ebe3029a8a540d14957160714341",
+      "status": "same",
+      "publication_sha256": "2fd238ebecb0a427697f59094dad0d088962ebe3029a8a540d14957160714341"
+    },
+    {
+      "archive": "installed-owned-source/app/exemptions/engine.py",
+      "repo": "sunshine",
+      "path": "backend/app/exemptions/engine.py",
+      "sha256": "56001a7259c4ca1a206ee528ceced69bd2764534133db61b9fcf5d01a26a8253",
+      "status": "changed",
+      "publication_sha256": "002c670dd469825713c9c80774176f4df508c4c728ad2b818c666cb578af2529"
+    },
+    {
+      "archive": "installed-owned-source/app/exemptions/llm_reviewer.py",
+      "repo": "sunshine",
+      "path": "backend/app/exemptions/llm_reviewer.py",
+      "sha256": "ab13ae2f8dde8c66debff2f9276787887524f7bf785833fcddc569816b1be8b4",
+      "status": "same",
+      "publication_sha256": "ab13ae2f8dde8c66debff2f9276787887524f7bf785833fcddc569816b1be8b4"
+    },
+    {
+      "archive": "installed-owned-source/app/exemptions/patterns.py",
+      "repo": "sunshine",
+      "path": "backend/app/exemptions/patterns.py",
+      "sha256": "364df5cffdccda747ecbf9d69775f0cce92610c6b253b5b78b91a0ac409ef9eb",
+      "status": "changed",
+      "publication_sha256": "09ceb4c043794145ee7c45d8917ef851eb4522394f93751dcf1e2bb540bff38c"
+    },
+    {
+      "archive": "installed-owned-source/app/exemptions/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/exemptions/router.py",
+      "sha256": "4c35393f13a282194f4225b02e7b6d233b6e9b979371d6e318c7e5ed1df97dca",
+      "status": "changed",
+      "publication_sha256": "d59bd6e9229f6c55029477811fdb623bd04335224ae0665c92642736c63b5a61"
+    },
+    {
+      "archive": "installed-owned-source/app/ingestion/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/ingestion/__init__.py",
+      "sha256": "b9960370edcad325db1bbc1a812416b99100a86c1db220b67a69e46f503ec5ad",
+      "status": "same",
+      "publication_sha256": "b9960370edcad325db1bbc1a812416b99100a86c1db220b67a69e46f503ec5ad"
+    },
+    {
+      "archive": "installed-owned-source/app/ingestion/cron_utils.py",
+      "repo": "sunshine",
+      "path": "backend/app/ingestion/cron_utils.py",
+      "sha256": "63ca640af21a0a25da5e49ff745ffecb800dd18f4dd9e4ba886b123855334876",
+      "status": "same",
+      "publication_sha256": "63ca640af21a0a25da5e49ff745ffecb800dd18f4dd9e4ba886b123855334876"
+    },
+    {
+      "archive": "installed-owned-source/app/ingestion/scheduler.py",
+      "repo": "sunshine",
+      "path": "backend/app/ingestion/scheduler.py",
+      "sha256": "cf90a00bb1eafc4e3327499461afbab3bc2202a726b5871551fc8a5c1638e734",
+      "status": "same",
+      "publication_sha256": "cf90a00bb1eafc4e3327499461afbab3bc2202a726b5871551fc8a5c1638e734"
+    },
+    {
+      "archive": "installed-owned-source/app/ingestion/sync_runner.py",
+      "repo": "sunshine",
+      "path": "backend/app/ingestion/sync_runner.py",
+      "sha256": "0cab2a9f8b4caf7f199796d9c748fc165a04ec95f6181960ef84f74956fb9488",
+      "status": "same",
+      "publication_sha256": "0cab2a9f8b4caf7f199796d9c748fc165a04ec95f6181960ef84f74956fb9488"
+    },
+    {
+      "archive": "installed-owned-source/app/ingestion/tasks.py",
+      "repo": "sunshine",
+      "path": "backend/app/ingestion/tasks.py",
+      "sha256": "fb9dabc97a0ea8d8ddbceec5a2a98ef5cdbafb92eee41ecb702b4cb7860bddd9",
+      "status": "same",
+      "publication_sha256": "fb9dabc97a0ea8d8ddbceec5a2a98ef5cdbafb92eee41ecb702b4cb7860bddd9"
+    },
+    {
+      "archive": "installed-owned-source/app/llm/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/llm/__init__.py",
+      "sha256": "0411eee4d07aefa5002fbec9e0d426ee45fd2f9e589b56803b1668f6493d51e5",
+      "status": "same",
+      "publication_sha256": "0411eee4d07aefa5002fbec9e0d426ee45fd2f9e589b56803b1668f6493d51e5"
+    },
+    {
+      "archive": "installed-owned-source/app/llm/client.py",
+      "repo": "sunshine",
+      "path": "backend/app/llm/client.py",
+      "sha256": "8504ba9c8ee46c902b4a6d9004dccce92f66f20b388c8a55484bb8324169ded1",
+      "status": "same",
+      "publication_sha256": "8504ba9c8ee46c902b4a6d9004dccce92f66f20b388c8a55484bb8324169ded1"
+    },
+    {
+      "archive": "installed-owned-source/app/llm/context_manager.py",
+      "repo": "sunshine",
+      "path": "backend/app/llm/context_manager.py",
+      "sha256": "aec2aac65a8e04a4a754ff44a6c4b37afdbf46a24156d5092c98f57aea436cc0",
+      "status": "same",
+      "publication_sha256": "aec2aac65a8e04a4a754ff44a6c4b37afdbf46a24156d5092c98f57aea436cc0"
+    },
+    {
+      "archive": "installed-owned-source/app/main.py",
+      "repo": "sunshine",
+      "path": "backend/app/main.py",
+      "sha256": "abb959c23054e8fdd12fb4918ea6c1149ef3cc7b1fee268697baf36f07af9fc2",
+      "status": "same",
+      "publication_sha256": "abb959c23054e8fdd12fb4918ea6c1149ef3cc7b1fee268697baf36f07af9fc2"
+    },
+    {
+      "archive": "installed-owned-source/app/models/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/__init__.py",
+      "sha256": "85380f990a3bf800137f3e67775ba042f57a8a6b54d304845f43e1cb2a0b80c5",
+      "status": "same",
+      "publication_sha256": "85380f990a3bf800137f3e67775ba042f57a8a6b54d304845f43e1cb2a0b80c5"
+    },
+    {
+      "archive": "installed-owned-source/app/models/audit.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/audit.py",
+      "sha256": "df56686024ce0b50fc6ffe0fe20d4775314cd3bd60302ae85d8b9f860ca053bb",
+      "status": "same",
+      "publication_sha256": "df56686024ce0b50fc6ffe0fe20d4775314cd3bd60302ae85d8b9f860ca053bb"
+    },
+    {
+      "archive": "installed-owned-source/app/models/city_profile.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/city_profile.py",
+      "sha256": "cc91186429d3a0afe01cd36ec8dd97bda3aa99e6297d25aeeae81fafcc31fe04",
+      "status": "same",
+      "publication_sha256": "cc91186429d3a0afe01cd36ec8dd97bda3aa99e6297d25aeeae81fafcc31fe04"
+    },
+    {
+      "archive": "installed-owned-source/app/models/connectors.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/connectors.py",
+      "sha256": "bd21d54690bdd9298d218ac973f29a2f14e2a4e59898784208d8f714ed33b032",
+      "status": "same",
+      "publication_sha256": "bd21d54690bdd9298d218ac973f29a2f14e2a4e59898784208d8f714ed33b032"
+    },
+    {
+      "archive": "installed-owned-source/app/models/departments.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/departments.py",
+      "sha256": "95df980295f111a89ec3197370eb7ebe5a67881871a9016ce9bee7a2741ed173",
+      "status": "same",
+      "publication_sha256": "95df980295f111a89ec3197370eb7ebe5a67881871a9016ce9bee7a2741ed173"
+    },
+    {
+      "archive": "installed-owned-source/app/models/document.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/document.py",
+      "sha256": "bcde5a7d50bc74ef2bb6d078e210366ca78b2c2ae9cc072ff72c6f727d9c78a7",
+      "status": "same",
+      "publication_sha256": "bcde5a7d50bc74ef2bb6d078e210366ca78b2c2ae9cc072ff72c6f727d9c78a7"
+    },
+    {
+      "archive": "installed-owned-source/app/models/exemption.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/exemption.py",
+      "sha256": "19c6c9f126eb03fd77139619f1e2a6c6af89d67af7e90d2139644dc909e9f7e3",
+      "status": "same",
+      "publication_sha256": "19c6c9f126eb03fd77139619f1e2a6c6af89d67af7e90d2139644dc909e9f7e3"
+    },
+    {
+      "archive": "installed-owned-source/app/models/fees.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/fees.py",
+      "sha256": "8b6cc691265769ccd53ba6376b96c584c0a9d2bb6e55fe79a276ea1265ed2a7d",
+      "status": "same",
+      "publication_sha256": "8b6cc691265769ccd53ba6376b96c584c0a9d2bb6e55fe79a276ea1265ed2a7d"
+    },
+    {
+      "archive": "installed-owned-source/app/models/notifications.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/notifications.py",
+      "sha256": "f42e1facfadb8d4538b89f85a213142efc18e17be2bde95ac665b94d5704ad8c",
+      "status": "same",
+      "publication_sha256": "f42e1facfadb8d4538b89f85a213142efc18e17be2bde95ac665b94d5704ad8c"
+    },
+    {
+      "archive": "installed-owned-source/app/models/records_artifacts.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/records_artifacts.py",
+      "sha256": "bb3c7d9b5e796686c3731db8577009d00378a14feec56f8d46360bd8660d3130",
+      "status": "same",
+      "publication_sha256": "bb3c7d9b5e796686c3731db8577009d00378a14feec56f8d46360bd8660d3130"
+    },
+    {
+      "archive": "installed-owned-source/app/models/records_evidence.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/records_evidence.py",
+      "sha256": "acadc29d3b93a2432c2c752b05f9c61e649c7d94fe29948b8dab4c46ffd421dd",
+      "status": "same",
+      "publication_sha256": "acadc29d3b93a2432c2c752b05f9c61e649c7d94fe29948b8dab4c46ffd421dd"
+    },
+    {
+      "archive": "installed-owned-source/app/models/records_files.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/records_files.py",
+      "sha256": "8bceb23febbb492b13035ea12a9219d32741d397668d920a52b31f0e323b15f7",
+      "status": "same",
+      "publication_sha256": "8bceb23febbb492b13035ea12a9219d32741d397668d920a52b31f0e323b15f7"
+    },
+    {
+      "archive": "installed-owned-source/app/models/request.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/request.py",
+      "sha256": "f88185889b139ac38de9a0d77449db246b22fef58f1743d25c7d2116c718ae76",
+      "status": "same",
+      "publication_sha256": "f88185889b139ac38de9a0d77449db246b22fef58f1743d25c7d2116c718ae76"
+    },
+    {
+      "archive": "installed-owned-source/app/models/request_workflow.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/request_workflow.py",
+      "sha256": "cc297a448c7f2de9ef1e31d7d94d24494efeeac7165f1d466e94aecfb7807b64",
+      "status": "same",
+      "publication_sha256": "cc297a448c7f2de9ef1e31d7d94d24494efeeac7165f1d466e94aecfb7807b64"
+    },
+    {
+      "archive": "installed-owned-source/app/models/search.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/search.py",
+      "sha256": "e1f7499d2042fcae621e817878b1cf12bd53e5b55ebbaae33d8c24e29de275c9",
+      "status": "same",
+      "publication_sha256": "e1f7499d2042fcae621e817878b1cf12bd53e5b55ebbaae33d8c24e29de275c9"
+    },
+    {
+      "archive": "installed-owned-source/app/models/service_account.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/service_account.py",
+      "sha256": "594cbd1dfeea0bf026341f1a427f4e96a362f75c11a7cc0df7fb7e3a8363a311",
+      "status": "same",
+      "publication_sha256": "594cbd1dfeea0bf026341f1a427f4e96a362f75c11a7cc0df7fb7e3a8363a311"
+    },
+    {
+      "archive": "installed-owned-source/app/models/sync_failure.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/sync_failure.py",
+      "sha256": "d31b87435c855f632b9b6d746eeec477d4f3811a95017401d0b1c3db4d506eb0",
+      "status": "same",
+      "publication_sha256": "d31b87435c855f632b9b6d746eeec477d4f3811a95017401d0b1c3db4d506eb0"
+    },
+    {
+      "archive": "installed-owned-source/app/models/user.py",
+      "repo": "sunshine",
+      "path": "backend/app/models/user.py",
+      "sha256": "39603bc8063007391d478b52165d2ae8d4bf0c5f1a1d7f716b78ff94754b2c82",
+      "status": "same",
+      "publication_sha256": "39603bc8063007391d478b52165d2ae8d4bf0c5f1a1d7f716b78ff94754b2c82"
+    },
+    {
+      "archive": "installed-owned-source/app/notifications/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/notifications/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/notifications/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/notifications/router.py",
+      "sha256": "ac77bd461ee941a84117eb93935464dc2c908ba96c3e2c613d80bd28088d5009",
+      "status": "same",
+      "publication_sha256": "ac77bd461ee941a84117eb93935464dc2c908ba96c3e2c613d80bd28088d5009"
+    },
+    {
+      "archive": "installed-owned-source/app/notifications/service.py",
+      "repo": "sunshine",
+      "path": "backend/app/notifications/service.py",
+      "sha256": "0672a6a7a60bc09c4b1bfe29d7046f93fef36ea48b09a2ff3b898bdf66ad0965",
+      "status": "same",
+      "publication_sha256": "0672a6a7a60bc09c4b1bfe29d7046f93fef36ea48b09a2ff3b898bdf66ad0965"
+    },
+    {
+      "archive": "installed-owned-source/app/notifications/smtp_delivery.py",
+      "repo": "sunshine",
+      "path": "backend/app/notifications/smtp_delivery.py",
+      "sha256": "4dc26331949c01537173b6bb5c91d5f4d23419e73e46d1600fe289053904e544",
+      "status": "same",
+      "publication_sha256": "4dc26331949c01537173b6bb5c91d5f4d23419e73e46d1600fe289053904e544"
+    },
+    {
+      "archive": "installed-owned-source/app/notifications/sync_notifications.py",
+      "repo": "sunshine",
+      "path": "backend/app/notifications/sync_notifications.py",
+      "sha256": "8dee67dcfacd3182afbba6a1ed874e7029a0f2a7aef5a619fcec353dc569b778",
+      "status": "same",
+      "publication_sha256": "8dee67dcfacd3182afbba6a1ed874e7029a0f2a7aef5a619fcec353dc569b778"
+    },
+    {
+      "archive": "installed-owned-source/app/onboarding/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/onboarding/__init__.py",
+      "sha256": "410f27365a45a5cad7e8a8b23a63e6312fcc6ba18b9f3cfb8ecf782940f7fc49",
+      "status": "same",
+      "publication_sha256": "410f27365a45a5cad7e8a8b23a63e6312fcc6ba18b9f3cfb8ecf782940f7fc49"
+    },
+    {
+      "archive": "installed-owned-source/app/onboarding/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/onboarding/router.py",
+      "sha256": "fd107d538b24379eb31a08e39927eec2486df5d383c20b6f23af9adbb3299ff4",
+      "status": "same",
+      "publication_sha256": "fd107d538b24379eb31a08e39927eec2486df5d383c20b6f23af9adbb3299ff4"
+    },
+    {
+      "archive": "installed-owned-source/app/public/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/public/__init__.py",
+      "sha256": "9b2399a19ebba72002567e091d5d5bc56a158640e121328fa89365823d0607f9",
+      "status": "same",
+      "publication_sha256": "9b2399a19ebba72002567e091d5d5bc56a158640e121328fa89365823d0607f9"
+    },
+    {
+      "archive": "installed-owned-source/app/public/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/public/router.py",
+      "sha256": "1b688edd6b2ed2334bd6c113c4c30e47748ce98bc12c6c70e716f81b8acc23ea",
+      "status": "same",
+      "publication_sha256": "1b688edd6b2ed2334bd6c113c4c30e47748ce98bc12c6c70e716f81b8acc23ea"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/__init__.py",
+      "sha256": "10f4a38349943e0adc86d6b60e935616b29948f77c0a1c4ea7c3ccf94b70f2e3",
+      "status": "same",
+      "publication_sha256": "10f4a38349943e0adc86d6b60e935616b29948f77c0a1c4ea7c3ccf94b70f2e3"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/artifacts.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/artifacts.py",
+      "sha256": "e557ecc8cfd265bfcb76b4b06de38fcaf6eb75ed3dbba6d21fe65f481bbbf8a1",
+      "status": "same",
+      "publication_sha256": "e557ecc8cfd265bfcb76b4b06de38fcaf6eb75ed3dbba6d21fe65f481bbbf8a1"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/deadline_check.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/deadline_check.py",
+      "sha256": "d5d734204bf8ef783d8d619b07df8884ab3cf2987bffcf57daa6d55a3431eb5a",
+      "status": "same",
+      "publication_sha256": "d5d734204bf8ef783d8d619b07df8884ab3cf2987bffcf57daa6d55a3431eb5a"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/files.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/files.py",
+      "sha256": "f5c2703a70c076b963f1116a0779d354479c65cb734bc921a4197c72694c8eec",
+      "status": "same",
+      "publication_sha256": "f5c2703a70c076b963f1116a0779d354479c65cb734bc921a4197c72694c8eec"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/meeting_sources.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/meeting_sources.py",
+      "sha256": "5694a2e0b345cf684261ef54cc205e5ec1aaeb0125c2c77c0c4a1cf2899feb79",
+      "status": "same",
+      "publication_sha256": "5694a2e0b345cf684261ef54cc205e5ec1aaeb0125c2c77c0c4a1cf2899feb79"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/native_public.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/native_public.py",
+      "sha256": "0f9995ccc14fd61e49f51474fc2fcbcc52696b9102c1bd65b227fe135ea5e6cc",
+      "status": "same",
+      "publication_sha256": "0f9995ccc14fd61e49f51474fc2fcbcc52696b9102c1bd65b227fe135ea5e6cc"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/planning_sources.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/planning_sources.py",
+      "sha256": "b62831d83e129a974bec04ee10fd71cfd15c8940f5c5c4dd11794b8f51cbd8d8",
+      "status": "same",
+      "publication_sha256": "b62831d83e129a974bec04ee10fd71cfd15c8940f5c5c4dd11794b8f51cbd8d8"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/router.py",
+      "sha256": "f29526862e9e3adae5cb288a59644fa9d10f0e62fdb0e41602286d715c529199",
+      "status": "changed",
+      "publication_sha256": "f29526862e9e3adae5cb288a59644fa9d10f0e62fdb0e41602286d715c529199"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/service.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/service.py",
+      "sha256": "117aa98e60d09824799b2696dfce65d9ade7d60b58a35df3e8664add3cccca66",
+      "status": "same",
+      "publication_sha256": "117aa98e60d09824799b2696dfce65d9ade7d60b58a35df3e8664add3cccca66"
+    },
+    {
+      "archive": "installed-owned-source/app/requests/workflow.py",
+      "repo": "sunshine",
+      "path": "backend/app/requests/workflow.py",
+      "sha256": "3d0ec7c9e4dd987beab5c1ca89f7b4c8e45f0a24075b64ce7694be50a901a72b",
+      "status": "same",
+      "publication_sha256": "3d0ec7c9e4dd987beab5c1ca89f7b4c8e45f0a24075b64ce7694be50a901a72b"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/__init__.py",
+      "sha256": "7cd5688441a82abcca61eda136c29d767a8043bb0a3f7d9f0696a6443f675372",
+      "status": "same",
+      "publication_sha256": "7cd5688441a82abcca61eda136c29d767a8043bb0a3f7d9f0696a6443f675372"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/analytics.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/analytics.py",
+      "sha256": "1b2f2d7507f1057d010c203ec7c7fa6037d7adfd1e5be4b7323402dca5693a69",
+      "status": "same",
+      "publication_sha256": "1b2f2d7507f1057d010c203ec7c7fa6037d7adfd1e5be4b7323402dca5693a69"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/audit.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/audit.py",
+      "sha256": "95b0e336b85ffdb37079359ab68aa04b9ed974e964dc9a943cbef132f99e327d",
+      "status": "same",
+      "publication_sha256": "95b0e336b85ffdb37079359ab68aa04b9ed974e964dc9a943cbef132f99e327d"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/city_profile.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/city_profile.py",
+      "sha256": "b3187fb30ee67b36d4eb2794c2e36b31a49f01b9ad53b0db1a0d9bf87b2c2b2d",
+      "status": "same",
+      "publication_sha256": "b3187fb30ee67b36d4eb2794c2e36b31a49f01b9ad53b0db1a0d9bf87b2c2b2d"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/connectors/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/connectors/__init__.py",
+      "sha256": "bc0d25288808206c0bad0ff842e9e68f6aa298f194cec977e540cc20438d79ec",
+      "status": "same",
+      "publication_sha256": "bc0d25288808206c0bad0ff842e9e68f6aa298f194cec977e540cc20438d79ec"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/connectors/odbc.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/connectors/odbc.py",
+      "sha256": "d21cc39b1dc8567b6615bf14c3ff1a44c43cbedd851ce27acfe52e92015ede65",
+      "status": "same",
+      "publication_sha256": "d21cc39b1dc8567b6615bf14c3ff1a44c43cbedd851ce27acfe52e92015ede65"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/connectors/rest_api.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/connectors/rest_api.py",
+      "sha256": "a14767ee188a3ff4ca34b54f73f5c6059a146628d559de016402e3b3cf04793b",
+      "status": "same",
+      "publication_sha256": "a14767ee188a3ff4ca34b54f73f5c6059a146628d559de016402e3b3cf04793b"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/department.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/department.py",
+      "sha256": "5e45ab7a46abbb6a40e6c7d22b928aa65bdc0fabab5a424ee988fd31ec672c30",
+      "status": "same",
+      "publication_sha256": "5e45ab7a46abbb6a40e6c7d22b928aa65bdc0fabab5a424ee988fd31ec672c30"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/document.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/document.py",
+      "sha256": "139e5160eac328e5d5499c935a2ee4bbc8a7eee5a24cfe1fc7e08b1aca0fbc8a",
+      "status": "same",
+      "publication_sha256": "139e5160eac328e5d5499c935a2ee4bbc8a7eee5a24cfe1fc7e08b1aca0fbc8a"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/exemption.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/exemption.py",
+      "sha256": "7cd5c0e1d1c2eaca8dace50b570ac06832765cbb3c3df148b84d3a12188f4664",
+      "status": "same",
+      "publication_sha256": "7cd5c0e1d1c2eaca8dace50b570ac06832765cbb3c3df148b84d3a12188f4664"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/fee_schedule.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/fee_schedule.py",
+      "sha256": "132fca7b2f2484f924464e8c01bec43674d8a6fc579202849cf73e43630adf70",
+      "status": "same",
+      "publication_sha256": "132fca7b2f2484f924464e8c01bec43674d8a6fc579202849cf73e43630adf70"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/notifications.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/notifications.py",
+      "sha256": "61d74c4b0977679c0739a374997ae5d49792d47f0f469baf6c422b77fd993fa3",
+      "status": "same",
+      "publication_sha256": "61d74c4b0977679c0739a374997ae5d49792d47f0f469baf6c422b77fd993fa3"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/request.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/request.py",
+      "sha256": "7c632f8eaaa7198a74edf0860e25fcf2ef3fa8c8a5eb15fd55f633089787b8cd",
+      "status": "same",
+      "publication_sha256": "7c632f8eaaa7198a74edf0860e25fcf2ef3fa8c8a5eb15fd55f633089787b8cd"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/search.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/search.py",
+      "sha256": "13a5c1913290f2d1b4c9447c3b3d4d1046038e146c2b11a97a03e1bb895b3015",
+      "status": "same",
+      "publication_sha256": "13a5c1913290f2d1b4c9447c3b3d4d1046038e146c2b11a97a03e1bb895b3015"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/service_account.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/service_account.py",
+      "sha256": "998b5de7ba31a8800d2feb6379c5eaa00747bccd23c05ce99863a42b0951a37f",
+      "status": "same",
+      "publication_sha256": "998b5de7ba31a8800d2feb6379c5eaa00747bccd23c05ce99863a42b0951a37f"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/sync_failure.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/sync_failure.py",
+      "sha256": "7d0f1052aba113868dc3439ef78b85b8d9941cf243eb7224ca12e1d9019f9971",
+      "status": "same",
+      "publication_sha256": "7d0f1052aba113868dc3439ef78b85b8d9941cf243eb7224ca12e1d9019f9971"
+    },
+    {
+      "archive": "installed-owned-source/app/schemas/user.py",
+      "repo": "sunshine",
+      "path": "backend/app/schemas/user.py",
+      "sha256": "95cee0fce572e5c68f21453c6d2ae145f4a44a7aa9e3b7a3e1d6393eebf5bf06",
+      "status": "same",
+      "publication_sha256": "95cee0fce572e5c68f21453c6d2ae145f4a44a7aa9e3b7a3e1d6393eebf5bf06"
+    },
+    {
+      "archive": "installed-owned-source/app/search/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/search/__init__.py",
+      "sha256": "6d5a53e92963972bce100511001cfc78b65a347390a47b4273c0c62f7a88ccc9",
+      "status": "same",
+      "publication_sha256": "6d5a53e92963972bce100511001cfc78b65a347390a47b4273c0c62f7a88ccc9"
+    },
+    {
+      "archive": "installed-owned-source/app/search/engine.py",
+      "repo": "sunshine",
+      "path": "backend/app/search/engine.py",
+      "sha256": "ff3c9ca2fba3293400ed1d5f4056e5a47a8673f443061b703abdace1e309d454",
+      "status": "same",
+      "publication_sha256": "ff3c9ca2fba3293400ed1d5f4056e5a47a8673f443061b703abdace1e309d454"
+    },
+    {
+      "archive": "installed-owned-source/app/search/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/search/router.py",
+      "sha256": "904441f2323a86199c42d647e5935c4f78bbb973c5c20a9b35e1bcc929691891",
+      "status": "same",
+      "publication_sha256": "904441f2323a86199c42d647e5935c4f78bbb973c5c20a9b35e1bcc929691891"
+    },
+    {
+      "archive": "installed-owned-source/app/search/synthesizer.py",
+      "repo": "sunshine",
+      "path": "backend/app/search/synthesizer.py",
+      "sha256": "427e73f0cf9752fb347f7769751e7e14a522fcc6bebeb1b785440ad0f5b7e254",
+      "status": "same",
+      "publication_sha256": "427e73f0cf9752fb347f7769751e7e14a522fcc6bebeb1b785440ad0f5b7e254"
+    },
+    {
+      "archive": "installed-owned-source/app/security/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/security/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "same",
+      "publication_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "installed-owned-source/app/security/at_rest.py",
+      "repo": "sunshine",
+      "path": "backend/app/security/at_rest.py",
+      "sha256": "ae75ffc5d633a6d99180bb61e0d01f2084af917565f67cfc5a5ab1d0a055b554",
+      "status": "same",
+      "publication_sha256": "ae75ffc5d633a6d99180bb61e0d01f2084af917565f67cfc5a5ab1d0a055b554"
+    },
+    {
+      "archive": "installed-owned-source/app/security/host_validator.py",
+      "repo": "sunshine",
+      "path": "backend/app/security/host_validator.py",
+      "sha256": "2890b06c3440118166ca36640d0d7d06b81224eb3e540e021721712fe3c967a8",
+      "status": "same",
+      "publication_sha256": "2890b06c3440118166ca36640d0d7d06b81224eb3e540e021721712fe3c967a8"
+    },
+    {
+      "archive": "installed-owned-source/app/seed/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/seed/__init__.py",
+      "sha256": "94373caf66af4bff649d9b77dee25b4a9f03f57ba8cc507c02f889baa1d48575",
+      "status": "same",
+      "publication_sha256": "94373caf66af4bff649d9b77dee25b4a9f03f57ba8cc507c02f889baa1d48575"
+    },
+    {
+      "archive": "installed-owned-source/app/seed/first_boot.py",
+      "repo": "sunshine",
+      "path": "backend/app/seed/first_boot.py",
+      "sha256": "88b0f011853f6f60f7d488bfebe0dde96209a8d3243a08b731e4a6f682bab40b",
+      "status": "same",
+      "publication_sha256": "88b0f011853f6f60f7d488bfebe0dde96209a8d3243a08b731e4a6f682bab40b"
+    },
+    {
+      "archive": "installed-owned-source/app/service_accounts/__init__.py",
+      "repo": "sunshine",
+      "path": "backend/app/service_accounts/__init__.py",
+      "sha256": "724c131242497b5d06cb96ed27573bdd2de4f098babe79129e6f1e20d9a5b76b",
+      "status": "same",
+      "publication_sha256": "724c131242497b5d06cb96ed27573bdd2de4f098babe79129e6f1e20d9a5b76b"
+    },
+    {
+      "archive": "installed-owned-source/app/service_accounts/router.py",
+      "repo": "sunshine",
+      "path": "backend/app/service_accounts/router.py",
+      "sha256": "c6632fc265846154c9a537070390de2c47c3d2d92c78e6fb8fb352f32ad3bf30",
+      "status": "same",
+      "publication_sha256": "c6632fc265846154c9a537070390de2c47c3d2d92c78e6fb8fb352f32ad3bf30"
+    },
+    {
+      "archive": "installed-owned-source/app/worker.py",
+      "repo": "sunshine",
+      "path": "backend/app/worker.py",
+      "sha256": "6b33f496ba32184cc049e6cc5c6398c2e42f1b30c51bea52ae67e768da880829",
+      "status": "same",
+      "publication_sha256": "6b33f496ba32184cc049e6cc5c6398c2e42f1b30c51bea52ae67e768da880829"
+    }
+  ],
+  "identity_note": "Publication commit integrates the already-built candidate; it is not claimed to be the original signing/build commit. Archive paths retain original byte hashes. Documentation entrypoints have a distribution addendum.",
+  "publication_note": "Original accepted bytes remain in the immutable source companion. Canonical sources normalize line endings. Release integration fixes remove a shadowed duplicate class, position imports for lint, format regression/acceptance tools and resolve the paired Core source dependency. Current audited manuals supersede build-time README copies. Each mapped file records both original and publication byte hashes."
+}

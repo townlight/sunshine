@@ -1394,10 +1394,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * List Domains
-         * @description List all functional domains in the systems catalog.
-         */
+        /** List Domains */
         get: operations["list_domains_catalog_domains_get"];
         put?: never;
         post?: never;
@@ -1414,11 +1411,25 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * List Systems
-         * @description List systems in the catalog, optionally filtered by domain.
-         */
+        /** List Systems */
         get: operations["list_systems_catalog_systems_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/catalog/connectors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Connectors */
+        get: operations["list_connectors_catalog_connectors_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1436,10 +1447,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /**
-         * Trigger Catalog Load
-         * @description Load or refresh the systems catalog from the bundled JSON.
-         */
+        /** Trigger Catalog Load */
         post: operations["trigger_catalog_load_catalog_load_post"];
         delete?: never;
         options?: never;
@@ -6474,6 +6482,37 @@ export interface operations {
         parameters: {
             query?: {
                 domain?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_connectors_catalog_connectors_get: {
+        parameters: {
+            query: {
+                domain: string;
             };
             header?: never;
             path?: never;

@@ -3,6 +3,8 @@
 from datetime import date, datetime, time, timezone
 import uuid
 
+from app.desktop_bridge.station import router as station_router
+
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -30,6 +32,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from starlette.concurrency import run_in_threadpool
 
 router = APIRouter(prefix="/desktop/v1", tags=["native-desktop"])
+
+router.include_router(station_router)
 
 
 class MeetingsSearch(BaseModel):

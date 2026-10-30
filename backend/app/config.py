@@ -13,7 +13,7 @@ from civiccore.security import (
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode
 
-APP_VERSION = "1.7.4"
+APP_VERSION = "1.8.0.dev1"
 
 _INSECURE_SECRETS = DEFAULT_INSECURE_SECRET_VALUES
 _INSECURE_ENCRYPTION_KEYS = DEFAULT_INSECURE_FERNET_KEY_VALUES
@@ -61,6 +61,12 @@ class Settings(BaseSettings):
 
     testing: bool = False
 
+    # Deployment/tenant scope for CivicCore department authority (see
+    # civiccore.auth.department_scope). Configured server-side by the operator;
+    # Records never derives it from a request. Empty = deny all staff reads that
+    # require department authority (fail closed, no permissive fallback).
+    authority_scope_id: str = ""
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
     @staticmethod
@@ -107,6 +113,14 @@ class Settings(BaseSettings):
     def _parse_allowlist_csv(cls, v):
         # Accept CSV strings from env in addition to native lists.
         return parse_csv_setting(v) if isinstance(v, (str, list, tuple, set)) or v is None else v
+
+    @field_validator("authority_scope_id", mode="before")
+    @classmethod
+    def _normalize_authority_scope(cls, v):
+        """Normalize the configured scope id; malformed values are refused later."""
+        if isinstance(v, str):
+            return v.strip().lower()
+        return v
 
     @field_validator("portal_mode", mode="before")
     @classmethod

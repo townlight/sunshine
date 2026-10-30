@@ -1,419 +1,216 @@
-# Townlight Records
-
-**A request, its sources and a human decision.**
-
-Records owns records requests and the final response workflow. Receiving a reviewed document from another Townlight product adds evidence to a request; it does not approve or release that request.
-
-## Use this product
-
-- [Current user manual](USER-MANUAL.md): installed workflow, roles, sources, review, export, recovery and limits.
-- [Product landing page](https://townlight.github.io/products/records/).
-- [Overall eight-product manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) and [feature/integration assessment](https://github.com/townlight/townlight/blob/main/docs/assessment/feature-and-integration-review.md).
-- [Signed composition and acceptance](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-planning-permitting-inspections-v1.7.0-beta.1): Records 1.7.4 in the accepted 1.7 desktop composition.
-
-Records receives explicitly selected evidence from the six other business products and uses Core for shared contracts. This is not unrestricted federation across every system.
-
-## Release scope
-
-The installed acceptance covers the documented staff journeys and explicit source boundaries. Full resident-portal, accessibility, redaction-ledger and federation requirements require their own deployment/feature evidence; this guide does not certify all of them. The source contains request, exemption, fees, messages, SMTP and public endpoints, which must not be described as absent merely because an older plan calls them future work.
-
-Documentation reviewed 2026-10-26. Installed acceptance, source/API implementation and future requirements are different evidence. Code is AGPL-3.0-only with the repository’s public institution exception where applicable; documentation is CC BY 4.0. See the repository license files.
-
-## Historical repository reference
-
-The earlier README below is retained for package history and contributor commands. Older maturity/version statements describe that historical reference and are superseded by the current operating guide and linked release evidence.
-
-<a id="civicsunshine"></a>
+> **Townlight Beta 1 release:** [signed Windows installer, exact owned source, documentation and acceptance](https://github.com/townlight/townlight/releases/tag/townlight-beta-1). [Online manual](https://townlight.github.io/manuals/records.html). This retained manual edition describes the accepted candidate before publication; distribution has changed, component versions and signed bytes have not.
 
 # Townlight Records
 
-Planning P3/P4 development integration adds permission-checked snapshot selection
-to the existing Records review and export workflow. Existing installer profiles
-and signed 1.4 artifacts are unchanged. See [the source adapter contract](docs/PLANNING-SNAPSHOT-SOURCES.md).
+**Townlight Beta 1** · Existing component versions retained · AGPL-3.0-only
 
-## Published connected desktop: 1.4.0-beta.1
+Records manages request intake, responsive evidence, review and the final response. Material received from another Townlight product is evidence for a request. Records separately controls release decisions, response approval, exports and fulfillment.
 
-This module participates in the signed Townlight Records + Meetings + Code +
-Zoning desktop beta published October 21, 2026. Select zoning-beta for all four
-products; Records-only remains default and city-core excludes Zoning.
-[Download and release limits](https://github.com/townlight/townlight/releases/tag/townlight-records-meetings-code-zoning-v1.4.0-beta.1) ·
-[Current operator manual](https://github.com/townlight/townlight/blob/main/USER-MANUAL.md) ·
-[Signed acceptance](https://github.com/townlight/townlight/blob/main/docs/installer/townlight-zoning-beta1-signed-acceptance.md).
+## Start here
 
-This is a connected desktop release, not a new standalone package version.
-Package/import/API names remain compatibility identifiers. Historical development
-checkpoints below retain their original scope; they are superseded for current
-desktop publication status. No signed installer or historical evidence is changed.
+Staff should use the operating manual. Administrators should read first-run, configuration and recovery before changing a deployment. Developers should read the exact API/schema reference and matching source companion. This edition accompanies Townlight Beta 1; use the release link above for the signed candidate and exact source/documentation archives.
 
-## Historical integration checkpoint — Local Townlight Meetings connection — October 19, 2026
+- [Operating manual](docs/beta-1/manuals/records.html) · [Printable PDF](docs/beta-1/pdf/Townlight-Records-Manual-Beta-1.pdf) · [Editable Word manual](docs/beta-1/docx/Townlight-Records-Manual-Beta-1.docx)
+- [API and data dictionary](docs/beta-1/api/records.html) · [OpenAPI JSON](docs/beta-1/api/records-openapi.json)
+- [Product and suite directory](docs/beta-1/index.html) · [Terms and full license](docs/beta-1/terms.html)
 
-Unreleased M3 integration: the explicit native `meetings-beta` profile can search
-public Meetings archive text snapshots and attach a selected agenda, packet text
-or minutes document to a Records request. Restricted archive records, raw
-transcripts and staff-only attachments are excluded; the source is rechecked
-when selected. Records keeps the exact bytes/hash, stable archive/source ID,
-citation, structured provenance and authenticated actor in its existing evidence
-and audit stores. Retry does not duplicate an attachment. Staff can use the
-source in a response draft without automatic approval or publication.
+## Exact version and candidate
 
-Actual native search/attachment/draft and restart readback passed on synthetic
-data. This is not installed acceptance; no release version was changed. The
-Records-only profile does not mount a Meetings provider and its existing screen
-does not show the new search controls. M4 packaging/recovery remains pending.
+| Identity | Value |
+| --- | --- |
+| Public documentation identity | Townlight Beta 1 |
+| Installer version | 1.6.0.1 |
+| Product component | civicrecords-ai 1.8.0.dev1 |
+| Native desktop source version | 1.6.0-1 |
+| Candidate MSI SHA256 | `98bcdef11ebdf5c767f620c904ff49f85115fde3b5c23f62703b111e645aaf86` |
+| Corresponding-source SHA256 | `84a23e1297e42d17b16cfc9e51b2dd78bc46414c0de8ad7ebd2466c1a409d06b` |
+| Current owned software license | AGPL-3.0-only |
+| Supported acceptance profile | Windows x64 fresh install; inspections-preview; separate Station configuration |
 
-> Formerly published as "Townlight Records"; renamed 2026-07. Package and service identifiers are unchanged.
 
-**Open-source, locally-hosted AI that helps American cities respond to open records requests.**
+“Townlight Beta 1” identifies this coordinated beta delivery. It does not renumber the installer, native binary, Python packages or historical receipts. Component versions may differ. This documentation is a later companion to unchanged signed bytes, not a rebuilt installer. Historical release pages and manuals describe their own versions and are not the download instructions for this private candidate.
 
-> **Release train notice (2026-05-24).** Townlight Records v1.7.3 adds wheel and sdist release assets for direct-pip consumers. No functional behavior changes; the city-core installer continues to vendor source, and the runtime remains pinned to the published Townlight Core v1.2.0 shared-ingestion release wheel. The older `v1.4.10` tag remains available as historical source only and must not be promoted as an attested baseline.
+## What staff can do
 
-Townlight Records runs entirely on a single machine inside your city's network — no cloud subscriptions, no vendor lock-in, no resident data leaving the building. It ingests your city's documents, makes them searchable with AI-powered natural language queries, detects potential exemptions, and manages the full request lifecycle from intake to response.
+- **Receive and identify the request:** Create the request with its requester, description and recorded deadline basis. Save it and retain the request identifier. Record assignment, clarification and work in the request history.
+- **Find responsive evidence:** Search only the permitted sources. Inspect the source title, date, citation, visibility and version before attaching responsive material. Open the saved attachment to confirm that it is the intended evidence.
+- **Preserve the original:** Keep original bytes and their hash. Add a separately reviewed release-ready or redacted copy when needed. Renaming a private file does not remove private content.
+- **Record each release decision:** Explicitly record release, redact or exempt for the relevant document, with the applicable reason and source. Do not treat an AI suggestion or another product’s review as the Records legal decision.
+- **Draft and approve:** Draft the response and review the selected attachments. Record approval of the exact response text. Editing that text changes its hash and requires a new approval.
+- **Export both artifacts:** Export the approved response and the release package. If release is refused, inspect the missing decision, approval or source-permission message. Resolve that condition before trying again.
+- **Fulfill and retain:** Use the explicit fulfillment action only after checking the outgoing artifacts. Retain the response, package and history. A preview, attachment or export by itself does not fulfill the request.
 
-## Why This Exists
+## Operating procedures and examples
 
-Every city in America processes open records requests (FOIA, CORA, and state equivalents). Staff manually search file shares, email archives, and databases — then review every document for exemptions before release. It's slow, error-prone, and a growing burden as request volumes increase.
+The operating manual now includes these existing procedures, with synthetic inputs, readback and limits. Follow the actual app boundary identified there; a standalone source capability is not automatically a desktop screen.
 
-No open-source tool exists for the **responder side** of open records at the municipal level. Townlight Records fills that gap.
+- [Fees messages notifications and local intake](docs/beta-1/manuals/records.html#fees-messages-notifications-and-local-intake).
+- [Record a fee line or waiver](docs/beta-1/manuals/records.html#record-a-fee-line-or-waiver).
+- [Save staff and requester messages](docs/beta-1/manuals/records.html#save-staff-and-requester-messages).
+- [Configure templates and inspect the outbox](docs/beta-1/manuals/records.html#configure-templates-and-inspect-the-outbox).
+- [Exercise existing local public intake and tracking](docs/beta-1/manuals/records.html#exercise-existing-local-public-intake-and-tracking).
 
-## Key Features
+## Architecture and data
 
-- **AI-Powered Search** — Natural language hybrid search (semantic + keyword) across all ingested city documents with source attribution, normalized relevance scores, and optional AI-generated summaries
-- **Document Ingestion** — Automatic parsing of PDF, DOCX, XLSX, CSV, email, HTML, and text files. Scanned documents processed via multimodal AI (Gemma 4) with Tesseract OCR fallback
-- **Exemption Detection** — Tier 1 PII detection (SSN, credit card with Luhn validation, phone, email, bank accounts, state-specific driver's licenses) plus per-state statutory keyword matching. Optional LLM secondary review. All flags require human confirmation
-- **Request Management** — Full lifecycle tracking with 10 statuses: received, clarification needed, assigned, searching, in review, ready for release, drafted, approved, fulfilled, closed. Timeline, messaging, fee tracking, and response letter generation
-- **Guided Onboarding** — Two modes operators can switch between: a 3-phase form wizard (City Profile → Systems → Gap Map), and a single-phase LLM-powered adaptive interview that persists each answer (including `has_dedicated_it`) to the CityProfile singleton and drives the `onboarding_status` lifecycle (not_started → in_progress → complete). Skip advances the walk truthfully. Both modes surface coverage gaps across 12 municipal domains.
-- **Municipal Systems Catalog** — Curated knowledge base of 25+ municipal software vendors across 12 functional domains (finance, public safety, permitting, HR, etc.) with discovery hints and connector templates
-- **Universal Connector Framework** — Standardized protocol (authenticate/discover/fetch/health_check) for connecting to city data sources. Ships with four implemented connector types: `file_system` (local/mounted directories), `manual_drop` (watched drop folders), `rest_api` (generic REST API — API key / Bearer / OAuth2 client-credentials / Basic auth; JSON/XML/CSV; page/offset/cursor pagination), and `odbc` (SQL databases via pyodbc, row-as-document with SQL-injection guards). IMAP email, SMB/NFS, and SharePoint connectors on roadmap
-- **Scheduled Sync & Idempotent Ingestion** — Per-source cron scheduling (5-field expressions via croniter, evaluated in UTC with local-time disclosure, rolling 7-day min-interval validation, 5-minute floor) with `schedule_enabled` pause toggle. Idempotent pipeline: binary sources dedup by content hash, structured REST/ODBC sources dedup by stable source-path with canonical JSON serialization. Concurrent-update races prevented via `SELECT FOR UPDATE` + partial UNIQUE indexes; content updates atomically replace chunks and embeddings in the same transaction
-- **Sync Failure Tracking & Circuit Breaker** — Per-record failure tracking with two-layer retry (task-level exponential backoff + record-level per-tick retry with N=100/T=90s cap). Automatic circuit breaker after 5 consecutive full-run failures (`sync_paused`) with admin-feedback unpause grace period. `health_status` (healthy/degraded/circuit_open) computed live from failure counts. Admin UI: colored health badge, failed records panel with bulk retry/dismiss, Sync Now button with real-time polling progress
-- **Operational Analytics** — Real-time metrics: average response time, deadline compliance rate, overdue requests, status breakdown
-- **Notification Service** — Template-based notification system with SMTP email delivery via Celery beat (60s interval). Configure SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD in .env to enable. Notification dispatch into status transitions pending
-- **Compliance by Design** — Hash-chained audit logs, human-in-the-loop enforcement, AI content labeling, data sovereignty verification. Designed for Colorado CAIA and 50-state regulatory compliance. CJIS compliance gate for public safety connectors
-- **Civic Design System** — Professional UI built with shadcn/ui and civic blue design tokens. Responsive shell: fixed 240px sidebar at ≥768px, hamburger-driven slide-in drawer below that (with focus trap, ESC close, overlay dim, auto-close on route change). WCAG 2.2 AA targeted (44px touch targets, skip-to-content link, icon+color status badges, programmatic label→input associations on admin forms, `role="alert"` validation errors with actionable copy — full third-party accessibility audit still pending)
-- **Federation-Ready** — REST API with service accounts enables future cross-jurisdiction record discovery between Townlight Records instances
+### Runtime and storage
 
-## Quick Start
+The accepted package targets **Windows x64 fresh installation**. Its native shell uses **Rust 2021, Tauri 2 and Microsoft WebView2**; browser assets are JavaScript built with **Vite 8.1.6**. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled **CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic**, with **PostgreSQL 17 / PostGIS** and managed original files. The installed runtime tested here contains FastAPI 0.162.0. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
 
-### Requirements
+The native transport is fixed to loopback `127.0.0.1:15480`; PostgreSQL uses the configured local runtime port (default `15432`). Optional local model service defaults to `127.0.0.1:15434`. Those are deployment defaults, not internet endpoints. The runtime has health, module and readiness endpoints; readiness is stronger than process existence. The task queue is the existing local Core task infrastructure, not an assertion that a separate Redis service is required for this desktop composition.
 
-Townlight is a **server product** — one server per city. Clerks reach the server through any modern browser; there is no clerk-side installation.
+The default native profile is `%LOCALAPPDATA%\CivicSuite`; the historical directory name remains part of compatibility. Do not rename it to Townlight. A configured `TOWNLIGHT_PROFILE_ROOT` must be absolute. Local configuration and secrets live under that profile; protected managed files and database state must be backed up coherently. Source/runtime identity is distinct from a product’s display label.
 
-<a id="civicsuite-server-one-per-city"></a>
+### Data and consistency
 
-#### Townlight Server (one per city)
+Requests; assignments and deadlines; search sessions; evidence attachments and original hashes; release copies; exemption decisions; messages; fee line items; response approvals; export artifacts and audit events.
 
-Runs the full Docker Compose stack: postgres, redis, ollama, api, celery worker, celery beat, and frontend.
+Versioned saves use expected prior revision identifiers where defined. Reopen and reconcile on conflict. Exact exports and handoffs use source IDs, current visibility, revision and SHA256. Review belongs to the saved revision and does not transfer silently to edited text. Database changes use the owning product’s migrations; a request or readiness check is not an authorization to mutate schema.
 
-- **CPU:** 8+ cores recommended.
-- **RAM:** the installer gates on `MIN_RAM_GB` from `scripts/detect_hardware.sh` (32 GB at the time of writing). That value is flagged "needs measurement — arbitrary value pending peak-RAM profile" in its provenance comment; see the comment block at the top of `scripts/detect_hardware.sh` for the rationale and the intended revision path.
-- **Disk:** 50 GB free.
-- **Host OS:** Linux (Ubuntu/Debian) via `install.sh`, Windows 10/11 via `install.ps1`, or macOS via `install.sh` (script path; not lifecycle-certified). Docker Desktop / Docker Engine must already be installed and running.
-- **Network:** No outbound internet connection required after initial setup.
-- **Hardware cost (secondary market):** Refurbished Dell OptiPlex small-form-factor units with 16–32 GB RAM are commonly available and are a plausible hardware-cost target for a city-scale deployment. Confirm against `MIN_RAM_GB` (currently 32 GB) before purchasing on the low end of that range.
+### Capacity and platform statements
 
-#### Clerk Workstation (one per clerk)
+This beta has synthetic single-profile workflow evidence. It does not have a published benchmark for concurrent staff capacity, minimum RAM/CPU, large-source limits or a field SLA. Do not turn a developer machine’s specification into a supported minimum. Installer size is 2,092,122,112 bytes before installation; allow additional disk for extracted runtime, database, originals, exports, media and backups. Select equipment/storage after sizing those actual workloads.
 
-Any computer with a modern web browser. Clerks open the server's URL — **`http://<server>:8080`** — sign in, and use the application. **Zero client-side install** is required: no Docker, no helper script, no Python runtime, no model weights downloaded to the clerk machine. The server hosts everything.
+The exact [runtime payload lock](docs/beta-1/reference/runtime-payload-lock.json) records pinned files, sizes and hashes. The [component metadata](docs/beta-1/reference/component-metadata.json) records shipped dependency declarations. These references are more precise than a manually copied dependency list. Third-party and historical license notices must accompany their matching payloads.
 
-- **Browser:** Chromium-based (Chrome, Edge), Firefox, or Safari — current version.
-- **OS:** any (Windows, macOS, Linux, ChromeOS — anything that runs a modern browser).
-- **Network:** LAN access to the server on ports 8080 (web UI) and 8000 (API).
-- **Install:** none.
 
-### Install
+| Data contract | Description |
+| --- | --- |
+| Input | A request description and requester, authorized source documents, explicit cross-product evidence selections and a reviewer’s decisions. |
+| Retained records | Requests; assignments and deadlines; search sessions; evidence attachments and original hashes; release copies; exemption decisions; messages; fee line items; response approvals; export artifacts and audit events. |
+| Output | A retained request history, reviewed attachments, approved response text and a release package after the applicable release checks. |
+| Connections | Receives selected evidence from Meetings, Code, Zoning, Planning, Permitting, Inspections and Station. Station originals are locked private evidence. A product’s public copy remains subject to the Records response workflow. |
 
-> **Install paths.** Two options ship today:
->
-> 1. **Windows double-click installer (T5E, UNSIGNED).** A signed build is a future release — this one is not. The unsigned installer is published on every release tag at `releases/download/<tag>/CivicSunshine-<version>-Setup.exe` along with a SHA-256 checksum for independent verification. On first run Windows SmartScreen shows **"Windows protected your PC — Unknown publisher."** This is expected. Click **More info → Run anyway** to proceed. See [installer/windows/README.md](installer/windows/README.md) for the full SmartScreen walkthrough and checksum-verify steps. The installer bundles the repo snapshot, runs a prereq check (Docker Desktop, WSL 2 + Virtual Machine Platform, 32 GB RAM floor, optional host Ollama), then runs `install.ps1` (via `installer\windows\launch-install.ps1`). `install.ps1` **auto-pulls `nomic-embed-text` and auto-pulls the Gemma 4 tag you select in the picker** (default `gemma4:e4b`) — expect several minutes on first run — and seeds the T5B baseline datasets.
->
-> 2. **Script-based install (Linux / macOS — not lifecycle-certified — and Windows if you prefer CLI).** Windows-only currently; macOS support pending lifecycle certification. The scripts below configure and start the Docker Compose stack on macOS and Linux as a non-certified path, and on Windows as a CLI alternative. They do **not** install Docker, WSL, or any other system prerequisites — those must already be present. `install.ps1` / `install.sh` both ship the 4-model Gemma 4 picker, auto-pull the selected LLM plus `nomic-embed-text`, and auto-seed the baseline datasets on first boot.
->
-> **Two shortcuts, two flows.** The Windows installer creates **separate** Start Menu entries for the two operations — don't confuse them:
->
-> - **Start Townlight Records** → daily start. Runs `docker compose up -d` and opens `http://localhost:8080/`. Does **not** run the prereq check, does **not** invoke `install.ps1`, does **not** pull any model, does **not** re-seed data. The Desktop shortcut (if you opted in) mirrors this daily-start behavior.
-> - **Install or Repair Townlight Records** → full bootstrap/repair. Runs the prereq check, then `install.ps1` (which may show the picker and pull models). Use this for first-run setup (the installer fires it automatically for you the first time), when you want to switch LLMs, or to repair a broken stack.
->
-> **Docker Desktop and WSL 2** must be installed and running before either path; the installer detects their absence and prints concrete remediation, but does not install them for you.
 
-For the Townlight starter-set package, run `python scripts/check_starter_set_integration.py --umbrella-root ..\civicsuite --require-archives` from this repo to verify that Townlight Core installs first, Townlight Records and Townlight Meetings are selectable, package workflow proof is required, and Linux/Windows starter-set archives exist.
+## Setup and operation
 
-**Windows:**
-```powershell
-git clone https://github.com/townlight/sunshine.git
-cd civicrecords-ai
-.\install.ps1
-```
-
-**macOS / Linux** (script path; not lifecycle-certified — see "Supported Platforms" below)**:**
-```bash
-git clone https://github.com/townlight/sunshine.git
-cd civicrecords-ai
-bash install.sh
-```
-
-### First Use
-
-1. Open **http://localhost:8080** in your browser
-2. Sign in with the admin credentials you configured in `.env`
-3. Go to **Sources** → **Add Source** → enter a directory path to your documents
-4. Click **Ingest Now** — documents are parsed, chunked, and indexed automatically
-5. Go to **Search** — type a natural language query and get cited results
-
-### Phase 1 migration layer
-
-Townlight Records backend installs `civiccore` (the shared Townlight schema + migration runtime) as a dependency. The current release line is pinned to the published Townlight Core v1.2.0 wheel so Records-AI consumes the shared document-ingestion pipeline from a release artifact. Records-specific Celery tasks, scheduler wiring, connector sync, and datasource routes remain local; parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes come from `civiccore.ingest`. Earlier interim branches used a commit archive while Townlight Core v1.2.0 was unreleased; v1.7.2 returned to the versioned release-asset dependency pattern, and v1.7.3 adds direct-pip wheel and sdist assets without changing runtime behavior.
-
-Migrations run in two layers: `civiccore` first (creates/updates the 16 shared tables), then this repo's Alembic chain on top. See [ADR-0003](https://github.com/townlight/townlight/blob/main/docs/architecture/ADR-0003-civiccore-alembic-baseline-strategy.md) for the full gate contract.
-
-### Release provenance
-
-Townlight Records now wires release preflight to Townlight Core's canonical
-`civiccore.release_provenance` helper. This matters because GitHub release pages
-can show the target commit as "Verified" even when the release tag is
-lightweight or unsigned. Treat that badge as a commit signal only; the actual
-trust artifact for post-baseline releases is the Sigstore-signed
-`release-attestation.json` plus bundle documented in
-[docs/ops/release-signing.md](docs/ops/release-signing.md).
-
-The older public `v1.4.10` release is a historical pre-gate, provisional artifact because
-its tag predates the attestation model and its public release assets do not
-include `release-attestation.json` or `release-attestation.json.bundle`. CO-4
-records the decision in
-[docs/ops/tier1-retrofit-ledger.md](docs/ops/tier1-retrofit-ledger.md): do not
-republish, mirror, or promote `v1.4.10` as an attested provenance baseline.
-
-## Architecture
-
-### Deployment stack
-
-![Deployment stack — entire system runs inside Docker Compose on the city's network. No cloud, no outbound by default.](docs/diagrams/deployment-stack.svg)
-
-### LLM call flow
-
-![LLM call flow: records-ai application code routes through civiccore.llm (context assembly, template resolution, model registry, provider factory) to a local Ollama provider, with optional cloud providers.](docs/diagrams/llm-flow.svg)
-
-### Sovereignty / data boundary
-
-![Sovereignty boundary: all runtime components (FastAPI, Celery, Postgres+pgvector, Ollama, local volumes) live inside the city's on-prem network. No outbound by default; cloud is opt-in only.](docs/diagrams/sovereignty.svg)
-
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Browser    │────▶│   nginx     │────▶│   FastAPI    │
-│  (React UI) │     │  (frontend) │     │   (API)      │
-└─────────────┘     └─────────────┘     └──────┬───────┘
-                                               │
-                    ┌──────────────────────────┤
-                    │              │            │
-              ┌─────▼─────┐ ┌────▼────┐ ┌─────▼─────┐
-              │ PostgreSQL │ │  Redis  │ │  Ollama   │
-              │ + pgvector │ │ (queue) │ │  (LLM)    │
-              └───────────┘ └─────────┘ └───────────┘
-                                  │
-                            ┌─────▼─────┐
-                            │  Celery   │
-                            │ (worker)  │
-                            └───────────┘
-```
-
-**7 Docker services:** PostgreSQL 17 + pgvector, Redis 7.2, Ollama, FastAPI, Celery worker, Celery beat, nginx frontend.
-
-**Tech stack:** Python 3.12, FastAPI, SQLAlchemy 2.0, React 18, shadcn/ui, Tailwind CSS, Alembic, Celery, pgvector, nomic-embed-text, Gemma 4 (recommended).
+1. Obtain the identified signed private candidate and its corresponding-source companion from the beta coordinator. The landing pages in this documentation are not an installer download service.
+2. On the intended fresh Windows test installation, verify the MSI hash and publisher signature before installing. Preserve unrelated profiles and recovery material. This candidate has fresh-install acceptance; historical in-place upgrades are unverified.
+3. Launch Townlight under the intended named Windows account. Choose the storage folders. Select **Townlight Inspections candidate** (`inspections-preview`) for all eight desktop products. A narrower default selection will not expose all workspaces.
+4. Enter the city profile, time zone and contacts. Create the first named local administrator, sign in and choose protected backup storage. **Continue without local AI** is valid for the deterministic workflows.
+5. Run Health Check and wait for readiness. Open Townlight. In System Health select **Finish Records Migration** to activate the canonical Python/PostgreSQL runtime. Do not fabricate migration receipts or seed accounts.
+6. Create named staff through Settings. Import authorized sources using each product’s source library. All examples in this package are synthetic; they are not municipal authority.
+7. Provision Station separately if it is part of the beta exercise. Selecting the desktop composition does not start or configure Station. Configure vision explicitly only if automatic photo drafting is selected.
 
 ## Configuration
+### Native deployment configuration
 
-Most configuration is via environment variables in `.env`. Secret material for
-JWT signing and the initial admin password is file-backed in v1.6.0 and is not
-placed in the container environment:
+Use Setup, Settings and System Health for supported staff operation. Administrators provision folders, backup storage, named accounts and the city profile. Select `inspections-preview` for the full eight-workspace desktop. Station remains a separate service boundary. Do not use a standalone product’s demo server as a substitute for the installed workspace.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | `postgresql+asyncpg://civicrecords:civicrecords@postgres:5432/civicrecords` |
-| `FIRST_ADMIN_EMAIL` | Initial admin account email | `admin@example.gov` |
-| `CIVICRECORDS_SECRET_DIR` | Host directory containing file-backed secrets for Docker Compose | `./data/secrets` |
-| `OLLAMA_BASE_URL` | Ollama API endpoint | `http://ollama:11434` |
-| `REDIS_URL` | Redis connection string | `redis://redis:6379/0` |
-| `AUDIT_RETENTION_DAYS` | Audit log retention period | `1095` (3 years) |
-| `CONNECTOR_HOST_ALLOWLIST` | Comma-separated hostnames/IPs exempt from SSRF block (on-prem use) | (empty — RFC1918, loopback, and cloud IMDS ranges blocked by default) |
+Technical deployments use `TOWNLIGHT_PRODUCT_PROFILE`, `TOWNLIGHT_PROFILE_ROOT`, `DATABASE_URL`, `CIVICSUITE_RUNTIME_PORT`, `PORTAL_MODE` and the runtime-managed secret files. Treat database URLs and native session proofs as secrets. The installed native domain runtime explicitly refuses non-loopback binding. `PORTAL_MODE=private` is the accepted posture; changing it does not by itself commission an internet portal, authentication provider or reverse proxy.
 
-### Operations / Secrets
+The isolated documentation exporter sets a fictional profile and unusable synthetic database origin only to read schemas; those values are not deployment configuration. Keep deployment values in the intended process/account scope. An already-running process does not automatically inherit later environment edits.
 
-As of v1.6.0, `JWT_SECRET` and `FIRST_ADMIN_PASSWORD` are no longer runtime
-container environment variables. The install scripts generate the same strong
-random values as earlier releases, write them to `./data/secrets/jwt_secret`
-and `./data/secrets/first_admin_password`, and configure Docker Compose to mount
-those files at `/run/secrets/...`. The container environment intentionally does
-not include `JWT_SECRET`, `FIRST_ADMIN_PASSWORD`, or matching `_FILE` pointer
-names. A release rehearsal must prove:
+### Communications and review configuration
 
-```bash
-docker exec <records-api-container> env | grep -E "JWT_SECRET|FIRST_ADMIN_PASSWORD"
+SMTP settings include host, port, username/password, sender address and TLS choice. Configure and verify actual delivery only for a deployment that selects external mail. Connector host allowlists and encrypted data-source configuration are separate controls. Records fee schedules concern the records workflow; they do not authorize Permitting to calculate an official permit fee. Keep resident portal posture and self-registration separate from named local staff setup.
+
+## API usage
+### Native command example
+
+The following JavaScript belongs in the existing trusted Townlight frontend/development environment with `invoke` imported from `@tauri-apps/api/core`. It is not a command for an arbitrary web page or an instruction for nontechnical staff. IDs must come from records created in an isolated synthetic exercise.
+
+```javascript
+import { invoke } from '@tauri-apps/api/core';
+const result = await invoke('records_domain_request', {request: {operation: 'view', request_id: requestId}});
+console.log(result);
 ```
 
-returns zero lines.
+### Trusted local HTTP example
 
-**Upgrade note from v1.5.x:** existing installs that still have
-`JWT_SECRET=...` or `FIRST_ADMIN_PASSWORD=...` in `.env` must re-run
-`install.sh` or `install.ps1` so the secret files are created and `.env` keeps
-only non-secret operator settings such as `CIVICRECORDS_SECRET_DIR`. Do not set
-`JWT_SECRET*`, `FIRST_ADMIN_PASSWORD*`, or matching `_FILE` pointer env vars in
-Docker deployments; those names are recoverable with `docker exec env`.
+An administrator/developer can inspect an already-configured isolated runtime from a trusted local process. This PowerShell example reads the signed-in synthetic profile’s existing proof into memory; it does not create a user, seed a session, reveal the proof in output or bypass a permission check. Do not use real city data in development examples. A read response does not prove approval or publication.
 
-The initial administrator password is bootstrap-only. On a fresh install the
-startup-created admin account is marked `must_change_password`; staff and admin
-surfaces stay locked with a plain-language remediation message until that
-operator changes the password from the account screen. The `/users/me` response
-includes `must_change_password` so the frontend can route the operator directly
-to password rotation without exposing the generated password again.
-
-## Supported Platforms
-
-- Windows 10/11 (Docker Desktop)
-- macOS 13+ (Docker Desktop) — Windows-only currently; macOS support pending lifecycle certification (script-path install only)
-- Ubuntu 22.04+ / Debian 12+ (Docker Engine)
-
-All platforms use identical Docker containers — the application runs in Linux containers regardless of host OS.
-
-## Data Sovereignty
-
-Townlight Records is designed for environments where resident data must never leave the network:
-
-- Runs entirely on local hardware — no cloud dependencies
-- No telemetry, analytics, or crash reporting
-- All LLM inference runs locally via Ollama
-- Live verification script confirms the running Compose stack is local-only: start the stack with `docker compose up -d`, then run `bash scripts/verify-sovereignty.sh`
-
-## License
-
-Code: AGPL-3.0-only, with the TownLight Public Institution Exception for qualifying deployments. See [LICENSE](LICENSE) and [LICENSE-EXCEPTION.md](LICENSE-EXCEPTION.md).
-
-All dependencies use permissive (MIT, Apache 2.0, BSD) or weak-copyleft (LGPL, MPL) licenses. No AGPL, SSPL, or BSL dependencies.
-
-## Documentation
-
-**Complete System Manual** (unified staff + IT admin guide with architecture diagrams):
-- [Download PDF](docs/civicrecords-ai-manual.pdf) | [Download Word](docs/civicrecords-ai-manual.docx) | [View Online](docs/civicrecords-ai-manual.html)
-
-**Individual References:**
-- [Staff User Manual](docs/user-manual-staff.html) — For city clerks and records officers (non-technical)
-- [IT Administrator Manual](docs/admin-manual-it.html) — Installation, configuration, security, backup, monitoring
-- [Canonical Spec](docs/UNIFIED-SPEC.md) — Unified Design Specification (single source of truth)
-- [System Architecture Diagram](docs/architecture/system-architecture.html) — Interactive component and data flow diagrams
-- [Phase Decomposition](docs/architecture/decomposition.html) — Project phases and build sequence
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, coding standards, and how to submit changes.
-
-### Testing Prerequisites
-
-Integration tests require Docker Compose with PostgreSQL running, and the `civicrecords` Postgres user needs DROP/CREATE DATABASE privileges (the default docker compose config does this automatically). Each test drops and recreates `civicrecords_test` to guarantee a clean schema.
-
-```bash
-docker compose up -d postgres redis
-docker compose run --rm api python -m pytest tests -q
+```powershell
+$profilePath = Join-Path $env:LOCALAPPDATA 'CivicSuite'
+$sessionPath = Join-Path $profilePath 'config\local-session.json'
+$session = Get-Content -LiteralPath $sessionPath -Raw | ConvertFrom-Json
+$headers = @{ 'X-Townlight-Session' = $session.session_hash }
+Invoke-RestMethod -Uri 'http://127.0.0.1:15480/desktop/v1/records-state' -Headers $headers
+Remove-Variable session, headers
 ```
 
-If a prior test run died mid-fixture, `civicrecords_test` may already exist and the suite will fail with `DuplicateDatabaseError`. Drop it manually and re-run:
+### A synthetic write with subsequent readback
 
-```bash
-docker compose exec postgres dropdb -U civicrecords civicrecords_test
+This example demonstrates the existing Meetings HTTP contract in an isolated exercise. It is intentionally fictional. It does not start a service. Its authentication setup is included so it can be run independently under the signed-in synthetic account. If a write times out, inspect current records before repeating it.
+
+```powershell
+$profilePath = Join-Path $env:LOCALAPPDATA 'CivicSuite'
+$sessionPath = Join-Path $profilePath 'config/local-session.json'
+$session = Get-Content -LiteralPath $sessionPath -Raw | ConvertFrom-Json
+$headers = @{ 'X-Townlight-Session' = $session.session_hash }
+$body = @{
+  title = 'Synthetic documentation exercise'
+  scheduled_start = '2026-11-05T18:00:00-07:00'
+  location = 'Synthetic room'
+  meeting_type = 'regular'
+} | ConvertTo-Json
+$meeting = Invoke-RestMethod -Method Post `
+  -Uri 'http://127.0.0.1:15480/desktop/v1/meetings/meetings' `
+  -Headers $headers -ContentType 'application/json' -Body $body
+Invoke-RestMethod `
+  -Uri ('http://127.0.0.1:15480/desktop/v1/meetings/meetings/' + $meeting.id) `
+  -Headers $headers
+Remove-Variable session, headers
 ```
 
-## User Roles
+This write requires Meetings to be enabled and the signed-in staff role to permit it. It is a cross-suite integration example; for this product’s request models, use the complete technical reference below.
 
-| Role | Permissions | Phase |
-|------|-------------|-------|
-| **Admin** | Full access: user management, system config, rule management, audit logs, onboarding | Built |
-| **Staff** | Search, create requests, attach documents, scan for exemptions, review flags, manage fees | Built |
-| **Reviewer** | Everything Staff can do + approve/reject responses and exemption flags | Built |
-| **Read-Only** | View search results and request status only | Built |
-| **Liaison** | Department-scoped read access to requests and search; Users/Audit Log/Onboarding nav hidden | Built |
-| **Public** | Submit requests (T5D, authenticated only); track own requests [planned]; search published records [planned] | T5D `a57a897` (v1.2.0) |
+## MCP status
 
-Service accounts with hashed API keys enable instance-to-instance federation access.
+No direct product MCP server is exposed by the accepted Townlight desktop or Station boundary. Do not configure an invented `townlight mcp` command or assume an AI client has staff permissions. The integration surfaces for this beta are native IPC, the documented HTTP APIs, source bundle imports, exact exports and the existing Station CLI.
 
-## Status
+The bundled transcription code includes a **TextFlowKit MCP adapter** as a separate source capability. It offers job-based `transcribe_media`, `get_transcript`, `list_jobs`, `get_job_status` and `export_transcript`, and additional tools declared in that adapter. It uses stdio first and optional Streamable HTTP, with the MCP SDK as an optional extra. It is not automatically launched, authenticated as Townlight staff or accepted as a Townlight product MCP deployment. This documentation does not add such a service.
 
-**v1.7.3 (May 24, 2026)** — Release-asset convention bring-up. Adds wheel and sdist as published assets so direct-pip consumers can install from release URLs. No functional change. City-core installer continues to vendor source as before.
+For a transcription client already provisioned separately, an illustrative tool call is:
 
-**v1.7.2 (May 23, 2026)** — Townlight Core v1.2.0 shared-ingestion release-asset alignment. Records-AI now consumes the published Townlight Core v1.2.0 wheel for parsing, chunking, local Ollama embeddings, and pgvector document/chunk writes instead of the temporary commit archive used before the Townlight Core release artifact existed.
+```json
+{"name":"get_job_status","arguments":{"job_id":"synthetic-existing-job-id"}}
+```
 
-**v1.5.0 (May 10, 2026)** — Townlight Core recovery alignment release. Records-AI now consumes civiccore v1.0.1, matching the active Townlight platform baseline and closing ENG-002. The imported Townlight Core symbols remained compatible, so this release changes the dependency baseline and release evidence without changing API URL paths, roles, permissions, or records-side database migrations.
+Use a job ID returned by that transcription service. This example does not create a Townlight record or bypass its review/Records handoff. The exact optional adapter tool signatures are supplied in the [MCP source reference](docs/beta-1/reference/mcp.html). Station meeting capture does not become live speech recognition because this optional donor adapter exists.
 
-**v1.6.0 (May 11, 2026)** — Docker secret-file extraction release. `JWT_SECRET` and `FIRST_ADMIN_PASSWORD` move out of container env vars and into Docker-mounted secret files. Existing v1.5.x installs must re-run `install.sh` or `install.ps1` so `./data/secrets/*` is created and `.env` keeps only non-secret operator settings; `_FILE` pointer env names are intentionally absent from the container env.
+## Verification and known limits
 
-**v1.4.10 (May 3, 2026)** — Documentation-only release alignment patch. The v1.4.9 Townlight Core source-status projection code is unchanged; this tag publishes the audit-corrected 631-backend-test evidence in the release source snapshot and installer/download docs.
+| Product | Recorded result | Precisely exercised |
+| --- | --- | --- |
+| Records | PASS | Intake, note, original attachment/readback, separate release copy, explicit release decision, draft/approval, approved response and release package exports, fulfillment/readback and native workspace. |
 
-**v1.4.9 (May 3, 2026)** — Townlight Core source-status projection consumer patch. Records-AI now consumes civiccore v0.22.0 for datasource list health, active-failure count, pause, and next-run projection, preserving the existing `/datasources/` response shape while moving reusable operator-state semantics into Townlight Core. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.8.
 
-**v1.4.8 (May 2, 2026)** — Townlight Core schedule validation consumer patch. Records-AI now consumes civiccore v0.21.0 for cron schedule validation and next-run computation, preserving the local `app.ingestion.cron_utils` import surface as a compatibility wrapper. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.7.
+These results come from the identified signed candidate’s fresh normal-profile Sandbox exercise: real native IPC/HTTP/PostgreSQL and selected headless controls. All accounts, source bundles and media were synthetic. The guest install/uninstall and recovery passed, and the owned Sandbox stopped. No host installed application or standalone CivicCast was changed. This documentation task reuses those receipts; it does not claim a new software acceptance run.
 
-**v1.4.7 (May 2, 2026)** — Townlight Core startup config validation consumer patch. Records-AI now consumes civiccore v0.20.0 for JWT secret, Fernet encryption key, first-admin password, and CSV allowlist parsing validation, on top of the v1.4.6 vendor-delta/mock-city extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.6.
+The [workflow matrix](docs/beta-1/reference/workflow-matrix.json) identifies raw receipt filenames. The [evidence index](docs/beta-1/reference/sandbox-evidence-index.json) retains their original hashes; raw receipts remain in the private beta handoff rather than being silently republished with the documentation site.
 
-**v1.4.6 (May 2, 2026)** — Townlight Core mock-city/delta consumer patch. Records-AI consumes civiccore v0.19.0 for vendor-delta request planning and reusable mock-city contract suites, on top of the v1.4.5 live connector retry and circuit-breaker extraction. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.5.
+The limits remain: actual city field acceptance and equipment/network commissioning; Station automatic provisioning/SCM commissioning; every UI/role combination; field recognition accuracy; and historical in-place upgrades are not certified. They are not five invented feature requirements. Fresh-install controlled beta handoff remains the accepted scope. This package makes no city-deployment, publication or general-availability claim.
 
-**v1.4.5 (May 2, 2026)** — Townlight Core sync-consumer patch. Records-AI consumes civiccore v0.18.1 for live connector retry and circuit-breaker primitives, preserving the existing Records retry semantics and database-backed sync failure workflow while removing reusable local sync-state logic. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.4.
+The selected staff workflow is accepted. A resident internet deployment, every jurisdiction’s requirements, complete federation and exhaustive redaction/accessibility behavior are not certified by that acceptance. SMTP code exists; logging a message or outbox entry does not establish email delivery.
 
-**v1.4.4 (May 1, 2026)** — Townlight Core audit-consumer patch. Records-AI now consumes civiccore v0.17.0 for persisted audit-log hashing and verification, in addition to shared search, onboarding, connector-security, and ingest contracts. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.3.
+## Development and repository map
 
-**v1.4.3 (April 29, 2026)** — Shared connector-security extraction patch. Records-AI now consumes civiccore v0.13.0 for connector host validation and encrypted-config primitives instead of carrying private copies of those helpers. API URL paths, roles, permissions, and records-side database migrations are unchanged from v1.4.1.
+Use the corresponding source for the candidate rather than assuming the public default branch matches it. The source companion contains `installed-owned-source`, product build inputs, desktop Rust/browser sources, locks and `BUILD.md`. It excludes credentials and third-party binary/model payloads. Use the recorded runtime lock when reproducing packaging.
 
-**v1.4.0 (April 25, 2026)** — Phase 2 LLM integration. civiccore advanced from v0.1.0 to v0.2.0; LLM provider abstraction, prompt-template engine + 3-step override resolver, and model registry now sourced from `civiccore.llm`. Migration `020_phase2_consumer_app_backfill` runs after upgrade. Records-AI now consumes civiccore v0.2.0 as a versioned dependency.
+Relevant source contracts:
 
-**v1.3.0** — 2026-04-25 release. Phase 1 Townlight Core extraction landed: `civiccore` v0.1.0 is now consumed as a release-wheel dependency. Two-layer migration order — civiccore migrations run first via subprocess, then records-side. No API or UI changes (infrastructure only). See [CHANGELOG](CHANGELOG.md) and the v1.3.0 release notes for operator upgrade guidance.
+- `app/desktop_bridge/router.py`
+- `app/desktop_bridge/station.py`
+- `app/requests`
+- `app/auth/native_identity.py`
+- `app/notifications`
 
-**v1.2.0** — 2026-04-23 release. Tier 5 (installer + onboarding + seeding + model picker + portal mode) and Tier 6 (at-rest encryption, ENG-001 closed) ship together. CI green on `d556904` (run 24853147133). Backend 617/617 pytest, frontend 36/36 vitest, unsigned Windows installer produced on tag push.
+The desktop package defines `npm run build`, `npm test`, `npm run test:browser` and its Tauri command. Python products retain their own `pyproject.toml`, tests and migrations; use the matching checkout’s declared dependencies and test configuration. Do not run a sample server against a production profile. This documentation build validates documentation only and reuses the separately identified installed acceptance; it does not claim a new complete application CI run.
 
-**v1.1.0** — Phase 2 release with department access controls, 50-state exemption rules, and compliance templates.
+## Recovery and support
 
-**New in v1.1.0:**
-- Department-level access controls — staff scoped to own department, admins see all
-- Department CRUD API with audit logging
-- 50-state + DC exemption rule coverage (175 jurisdiction-scoped rules across 51 jurisdictions, plus 5 universal PII rules available in the seed source — 180 total)
-- 5 compliance template documents (AI Use Disclosure, Response Letter Disclosure, CAIA Impact Assessment, AI Governance Policy, Data Residency Attestation)
-- Template render endpoint with city profile variable substitution
-- Exemption auditability dashboard with acceptance/rejection rates and CSV/JSON export (time-period filtering not yet implemented)
-- Model registry CRUD endpoints (spec 6.7 compliance metadata)
+Save work and use Core’s canonical **Backup Now** before maintenance. That operation stops writers. Preserve the coherent profile/database/document backup and its receipt, then use **Start** to resume. A source export is not a full backup.
 
-**Carried from v1.0.x:**
-- 13 staff workbench pages + Login with shadcn/ui design system
-- 29 database tables, ~30 API endpoints
-- 631 backend + 36 frontend automated tests passing (CI-verified on PR #61, run 25272823105)
-- Guided onboarding, systems catalog, connector framework
-- Request timeline, messaging, fee tracking, response letter generation
-- Operational analytics and notification service
-- AMD GPU/NPU hardware auto-detection (ROCm on Linux, DirectML on Windows)
-- Login rate limiting, audit log archival, admin-only user creation
-- Tested on Windows 11 (Docker Desktop) and Ubuntu 22.04 (Docker Engine)
+Use **Restore Latest Backup** through the supported controls. If the result says **Restore needs service start**, use **Start**, then **Check**, and reopen a known record. Do not repeat restore merely because services need to start. The fresh-profile acceptance verified that a fulfilled request survived restore and a post-backup marker did not.
 
-**In v1.2.0 — Tier 5 (all five slices shipped 2026-04-22 → 2026-04-23, tagged in this release):**
+Keep Station’s dedicated database and media evidence together in its own backup. Core’s native-profile backup must not be assumed to include an external Station data directory. Stop writers during a coordinated backup. Preserve failed media attempts and logs.
 
-- **T5C — 4-model Gemma 4 installer picker, 2026-04-22 (`7721cf0`):** Picker now shows exactly four supported Gemma 4 tags: `gemma4:e2b`, `gemma4:e4b` (default), `gemma4:26b`, `gemma4:31b` — with per-model disk footprint, min/recommended RAM advisories, and a `supportable_against_target` boolean against the locked Windows 11 / 32 GB baseline. The fake tags `gemma4:12b` and `gemma4:27b` that contaminated `install.sh`, `install.ps1`, `scripts/detect_hardware.*`, and `backend/app/config.py` have been purged repo-wide. Host RAM is re-verified empirically at install time regardless of picker selection.
-- **T5A — Onboarding persistence, 2026-04-22 (`1782573`):** The single-phase LLM-powered adaptive interview now actually persists each answer onto the `CityProfile` singleton (creating the row on the first answer), normalizes yes/no → bool for `has_dedicated_it`, and transitions `onboarding_status` (not_started → in_progress → complete). Skip advances the walk truthfully (previously it dropped answers silently). Coverage: 4 new persistence tests + 2 skip-truth regression tests; migration `018_city_profile_state_nullable.py` relaxes a constraint the persistence path needed.
-- **T5B — First-boot baseline seeding, 2026-04-22 (`61449c5`):** `app/main.lifespan` now auto-seeds three baseline datasets on first boot: **175 state-scoped exemption rules across 51 jurisdictions** (from `STATE_RULES_REGISTRY`), **5 compliance templates**, and **12 notification templates**. Idempotent via skip-if-exists — admin customizations survive re-seed. Every run emits a start line, per-dataset `created` / `skipped` counts, and a completion summary. Universal PII regex rules are present in the seed source (5 additional rules, 180 total) but are **not** seeded by first-boot because they lack a two-letter `state_code`; those remain deferred pending schema relaxation. See `backend/app/seed/first_boot.py` and `§8.7` of the spec.
-- **T5D — Install-time portal switch (private vs. public), 2026-04-23 (`a57a897`):** New `PORTAL_MODE` environment variable (`private` | `public`, default `private`) locked at install time, changeable post-install by editing `.env` and restarting the stack. The installer (`install.ps1` / `install.sh`) prompts for the choice interactively; non-interactive installs can pre-set `CIVICRECORDS_PORTAL_MODE`. Case and whitespace are normalized by a `field_validator` on the config model. **Private mode (default)** is staff-only — the login screen is the only externally reachable page, `/auth/register` returns 404, and `UserRole.PUBLIC` is not assignable. **Public mode** exposes exactly three surfaces and nothing more: (1) a public landing page, (2) a resident-registration path, and (3) an authenticated records-request submission form for `UserRole.PUBLIC` users. Submission requires authentication — anonymous walk-up submission is intentionally out of scope. Staff roles (ADMIN, STAFF, REVIEWER, READ_ONLY, LIAISON) continue to use `/requests/` and receive 403 on the public submit endpoint. An unauthenticated `GET /config/portal-mode` endpoint (typed `PortalModeResponse { mode: Literal["public","private"] }`) is always mounted so the frontend can discover the active mode on boot and branch its routing. Fixed a pre-existing bug in `UserCreate` that forced self-registered users to `UserRole.STAFF`; self-registration now correctly forces `UserRole.PUBLIC` (and is still only reachable in public mode). Coverage: 15 pytest cases in `backend/tests/test_portal_mode.py` plus 12 vitest cases across `PublicLanding.test.tsx`, `PublicRegister.test.tsx`, and `PublicSubmit.test.tsx`. Explicitly **not** shipped in this slice and not implied by any copy: published-records search, a full resident dashboard, a track-my-request suite, or any other public-portal feature.
-- **T5E — Windows unsigned double-click installer, 2026-04-22 (`1d5429d`; test-harness flake fix `e898319`):** Real Windows `.exe` installer built with Inno Setup 6.x, produced on every `v*` tag by `.github/workflows/release.yml` on `windows-latest` via `choco install innosetup -y` + `installer/windows/build-installer.sh`. **Unsigned by design per Scott-locked B3=α posture** — operators must expect SmartScreen "Windows protected your PC — Unknown publisher" on first run; install path documented in [installer/windows/README.md](installer/windows/README.md). Flow is split into two Start Menu shortcuts: **Start Townlight Records** (daily `docker compose up -d`) and **Install or Repair Townlight Records** (full bootstrap + picker + model pull). Version is tag-derived (no hardcoded version drift) via `/DMyAppVersion=` from `$CIVICRECORDS_VERSION`. Desktop shortcut mirrors daily-start. macOS and Linux remain on the script path (`install.sh`) — native installer parity on those platforms is explicit follow-on work, not scheduled.
-- **T3D regen** (`bf3c9c3`) — Regenerated `docs/openapi.json` and `frontend/src/generated/api.ts` after the T5A schema change; CI's stale-check gate enforces this on every subsequent backend schema or route change.
-- **CI hygiene** (`5dbeed7`) — Bumped `actions/checkout@v4` and `actions/setup-node@v4` for Node 24 runtime support ahead of the 2026-06-02 GitHub runner default flip.
+On failure, record the time, selected composition, component/installer versions and exact message. Check System Health for stopped, starting, ready or failed dependencies. Use the existing Retry control after readiness; do not create duplicate business records to refresh a stale view. Share only a redacted diagnostic bundle. Preserve secrets, original evidence, recovery material and unrelated installations.
 
-**In v1.2.0 — security hardening carried from earlier sprints (all tagged in this release):**
-- **T2A** — Role self-escalation via `PATCH /users/me` closed (`UserSelfUpdate` schema); all 24 department-scoped handlers enforce `require_department_scope`; 404/403 status-code info-leak unified via `require_department_or_404`; Pattern D list-endpoint fail-open fixed on 4 routes; parameterized enforcement test covers 25 routes
-- **T2B** — `connection_config` redacted from `GET /datasources/` for all non-admin users (`DataSourceAdminRead` returned only on admin write endpoints). **ENG-001 runtime exposure: closed.**
-- **Tier 6 / ENG-001 — At-rest encryption for `data_sources.connection_config`, 2026-04-23:** Connector credentials are now encrypted at rest using Fernet (AES-128-CBC + HMAC-SHA256) via a transparent SQLAlchemy `EncryptedJSONB` TypeDecorator; envelope shape is `{"v": 1, "ct": "<fernet-token>"}`. A new required `ENCRYPTION_KEY` env var (installer auto-generates on fresh installs) drives the encryption; a reversible Alembic migration (`019_encrypt_connection_config`) encrypts existing plaintext rows and decrypts on downgrade. Operator verification: `docker compose run --rm --no-deps api python scripts/verify_at_rest.py`. **ENG-001 now fully closed.** Key rotation is not supported in this release and is tracked as a future slice; the versioned envelope (`"v": 1`) leaves the door open.
-- **T2C** — `FIRST_ADMIN_PASSWORD` startup validator (rejects `.env.example` placeholder, empty, <12 chars, and common defaults); SSRF host validator blocks loopback, IMDS, and RFC1918 ranges on REST and ODBC connector URLs at schema-validation time
-- **T3A** — Create-user form now POSTs to `/api/admin/users` (was `/api/auth/register`, which silently downgraded submitted roles to STAFF)
-- **CI** — 631 backend + 36 frontend tests (CI-verified on PR #61, run 25272823105); bootstrap-failure smoke test confirms stack rejects placeholder admin password; `docs/openapi.json` and `frontend/src/generated/api.ts` stale-check enforced on every build (T3D)
+## License and responsible use
 
-> **ENG-001 standing caveat (historical — closed 2026-04-23):** At-rest encryption for `data_sources.connection_config` landed as Tier 6 / ENG-001. Prior to Tier 6 the JSONB column was plaintext and visible to any database superuser, `pg_dump` output, or restored backup. Post-Tier-6 the column is stored as a Fernet envelope keyed off `ENCRYPTION_KEY`; `pg_dump` output and raw backups contain ciphertext only. T2B runtime exposure closed in an earlier sprint; Tier 6 closes the at-rest gap. ENG-001 is now fully closed. See Section 8.10 of [docs/UNIFIED-SPEC.md](docs/UNIFIED-SPEC.md) and the Operator section on the encryption key in [USER-MANUAL.md](USER-MANUAL.md) for details.
+Current owned code is AGPL-3.0-only. Preserve full license, matching corresponding source, dependency notices and historical grants. Terms of use do not remove license rights. Source imports do not confer permission to publish third-party material. Review all automatic drafts and use the separate owning-product decision before official action. CivicCast remains independent.
 
-**Roadmap (per [canonical spec](docs/UNIFIED-SPEC.md)):**
+## Earlier documentation
 
-| Phase | Focus | Key Deliverables | Status |
-|-------|-------|-----------------|--------|
-| **Phase 0** | Design foundation | shadcn/ui, design tokens, sidebar shell, component library | In progress |
-| **Phase 1** | Staff workbench redesign | Redesign all staff pages with new design system, WCAG 2.2 AA | In progress |
-| **Phase 2** | New backend features | Fees, notifications (SMTP), response letters, context manager, analytics, liaison role, department scoping, audit retention | Partially built |
-| **Phase 3** | Public portal | Public homepage, search, guided request wizard, request tracker, help pages | Partial — T5D minimal surface shipped (landing + resident-registration + authenticated submission); published-records search, resident dashboard, and track-my-request remain Planned |
-| **Phase 4** | Transparency layer | Open records library, reporting dashboards, public archive, federation | Planned (v2.0) |
-
-*Note: Version numbers (semver) track release history. Phase numbers track design completeness per the canonical spec. They are separate systems. Current build (v1.7.3) includes backend work from Phases 0-2, partial Phase 3, the Townlight Core v1.2.0 shared-ingestion dependency update, and additive release assets for direct-pip consumers, but has not completed the full scope of any phase. See [canonical spec](docs/UNIFIED-SPEC.md) for complete requirements and [reconciliation](docs/RECONCILIATION-2026-04-13.md) for current gap analysis.*
+Previous editions are retained under `docs/history/pre-townlight-beta-1/`. They describe their original software and license grants. Use the current Townlight Beta 1 manual for this candidate.

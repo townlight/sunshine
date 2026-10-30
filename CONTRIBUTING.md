@@ -155,7 +155,7 @@ Open a GitHub Discussion in the Ideas category. Describe:
 
 All dependencies must use permissive (MIT, Apache 2.0, BSD) or weak-copyleft (LGPL, MPL, EPL) licenses. No AGPL, SSPL, or BSL dependencies.
 
-By contributing, you agree that your contributions will be licensed under the GNU Affero General Public License, version 3 only (AGPL-3.0-only), with the TownLight Public Institution Exception 1.0. Documentation contributions are licensed under CC BY 4.0.
+By contributing, you agree that your contributions will be licensed under the GNU Affero General Public License, version 3 only (AGPL-3.0-only). Documentation contributions are licensed under CC BY 4.0.
 
 ## State Exemption Rules
 
