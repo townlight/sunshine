@@ -84,14 +84,29 @@ def main() -> int:
             or ("v1.7.2" in lower and "civiccore v1.2.0" in lower)
             or ("v1.7.1" in lower and "civiccore v1.2.0" in lower)
         )
-        if not (has_legacy_warning and has_current_recovery_label):
+        has_beta_label = (
+            "Townlight Beta 1" in text
+            and "1.8.0.dev1" in text
+            and "AGPL-3.0-only" in text
+            and (
+                "98bcdef11ebdf5c767f620c904ff49f85115fde3b5c23f62703b111e645aaf86" in text
+                or (rel == "docs/index.html" and 'href="./versions.html"' in text)
+            )
+        )
+        if not (has_beta_label or (has_legacy_warning and has_current_recovery_label)):
             fail(
-                f"{rel}: missing current recovery label or v1.4.10 do-not-promote warning",
+                f"{rel}: missing exact Beta 1 identity or historical recovery warning/label",
                 failures,
             )
         for pattern in OVERCLAIM_PATTERNS:
             if pattern.search(text):
                 fail(f"{rel}: blocked public overclaim pattern {pattern.pattern}", failures)
+
+    # Keep the historical prohibition explicit without repeating obsolete
+    # installation instructions in every current staff manual and landing page.
+    recovery = read_text("docs/release-recovery-status.md").lower()
+    if not all(token in recovery for token in ("v1.4.10", "provisional", "do-not-promote")):
+        fail("historical v1.4.10 prohibition missing from recovery status", failures)
 
     package_json = read_text("frontend/package.json")
     if '"test:e2e"' not in package_json:

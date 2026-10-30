@@ -34,10 +34,14 @@ async def test_list_requests(client: AsyncClient, admin_token: str):
 
 
 @pytest.mark.asyncio
-async def test_get_request(client: AsyncClient, admin_token: str):
+async def test_get_request(
+    client: AsyncClient, admin_token: str, dept_a: uuid.UUID,
+    department_read_grant,
+):
+    await department_read_grant(admin_token, dept_a)
     create = await client.post(
         "/requests/",
-        json={"requester_name": "Get Test", "description": "Test"},
+        json={"requester_name": "Get Test", "description": "Test", "department_id": str(dept_a)},
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     req_id = create.json()["id"]

@@ -6,7 +6,7 @@ from datetime import datetime, timezone, timedelta
 import logging
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -15,6 +15,7 @@ from app.audit.logger import write_audit_log
 from app.notifications.service import queue_notification
 from app.config import settings
 from app.auth.dependencies import require_role, require_department_or_404, require_department_filter
+from app.auth.department_authority import enforce_request_department_authority
 from app.database import get_async_session
 from app.models.city_profile import CityProfile
 from app.models.document import Document
@@ -187,6 +188,7 @@ async def request_stats(
 @router.get("/{request_id}", response_model=RequestRead)
 async def get_request(
     request_id: uuid.UUID,
+    request: Request,
     session: AsyncSession = Depends(get_async_session),
     user: User = Depends(require_role(UserRole.LIAISON)),
 ):
@@ -194,6 +196,12 @@ async def get_request(
     if not req:
         raise HTTPException(status_code=404, detail="Request not found")
     require_department_or_404(user, req.department_id, "Request not found")
+    # Core department authority: the caller must additionally hold a persisted,
+    # server-side grant for the record's owning department in this deployment
+    # scope. Deny by default; the department never comes from the request.
+    await enforce_request_department_authority(
+        session, request, user, req.department_id, not_found_detail="Request not found"
+    )
     from app.requests.planning_sources import validate_request
     await validate_request(session, req.id)
     return req

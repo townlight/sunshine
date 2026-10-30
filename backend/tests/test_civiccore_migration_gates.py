@@ -94,12 +94,12 @@ RECORDS_TABLES: Final[frozenset[str]] = frozenset({
     "request_messages", "request_timeline", "response_letters",
 })  # 15 total — see ADR-0003 §Context records list
 
-# The standalone web dependency is Core 1.2.0; the pinned desktop runtime
-# uses 1.2.1 with the local task queue. Keep explicit expected revisions for
-# both supported packages, rather than deriving the expectation from the DB.
+# Keep the historical and Beta 1 source-paired package heads explicit rather
+# than deriving the expected revision from the database under test.
 CIVICCORE_BASELINE_REV: Final[str] = {
     "1.2.0": "civiccore_0002_llm",
     "1.2.1": "civiccore_0003_local_task_queue",
+    "1.3.0.dev1": "civiccore_0009_job_artifacts",
 }[version("civiccore")]
 
 # v1.3.0 operator's civiccore-side starting revision. v1.3.0 shipped with

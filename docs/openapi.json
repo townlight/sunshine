@@ -3,7 +3,7 @@
   "info": {
     "title": "Townlight Records",
     "description": "AI-powered open records support for American cities",
-    "version": "1.7.4"
+    "version": "1.8.0.dev1"
   },
   "paths": {
     "/auth/jwt/login": {
@@ -5070,7 +5070,6 @@
           "catalog"
         ],
         "summary": "List Domains",
-        "description": "List all functional domains in the systems catalog.",
         "operationId": "list_domains_catalog_domains_get",
         "responses": {
           "200": {
@@ -5095,7 +5094,6 @@
           "catalog"
         ],
         "summary": "List Systems",
-        "description": "List systems in the catalog, optionally filtered by domain.",
         "operationId": "list_systems_catalog_systems_get",
         "security": [
           {
@@ -5142,13 +5140,57 @@
         }
       }
     },
+    "/catalog/connectors": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "List Connectors",
+        "operationId": "list_connectors_catalog_connectors_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Domain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/catalog/load": {
       "post": {
         "tags": [
           "catalog"
         ],
         "summary": "Trigger Catalog Load",
-        "description": "Load or refresh the systems catalog from the bundled JSON.",
         "operationId": "trigger_catalog_load_catalog_load_post",
         "responses": {
           "200": {

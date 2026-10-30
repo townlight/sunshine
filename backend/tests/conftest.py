@@ -81,6 +81,34 @@ class _SessionProxy:
 test_session_maker = _SessionProxy()
 
 
+@pytest.fixture
+def department_read_grant(client, monkeypatch):
+    """Explicit synthetic persisted authority for tests that exercise request reads."""
+    from civiccore.auth.department_scope import record_department_grant
+
+    scope_id = "records-test"
+    monkeypatch.setattr(settings, "authority_scope_id", scope_id)
+
+    async def grant(token: str, department_id: uuid.UUID) -> None:
+        response = await client.get(
+            "/users/me", headers={"Authorization": f"Bearer {token}"}
+        )
+        assert response.status_code == 200
+        user = response.json()
+        async with test_session_maker() as session:
+            await record_department_grant(
+                session,
+                scope_id=scope_id,
+                subject=user["email"],
+                department_id=department_id,
+                roles=[user["role"]],
+                recorded_by="synthetic-test-administrator",
+            )
+            await session.commit()
+
+    return grant
+
+
 def get_test_session():
     """Alias for test_session_maker — usable without the conftest collection concern."""
     return _test_session_maker()
