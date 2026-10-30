@@ -56,8 +56,10 @@ async def test_admin_sees_all_departments(
 
 @pytest.mark.asyncio
 async def test_staff_gets_request_in_own_department(
-    client: AsyncClient, staff_token_dept_a: str,
+    client: AsyncClient, staff_token_dept_a: str, dept_a: uuid.UUID,
+    department_read_grant,
 ):
+    await department_read_grant(staff_token_dept_a, dept_a)
     create = await client.post(
         "/requests/",
         json={"requester_name": "Alice", "description": "My dept"},
