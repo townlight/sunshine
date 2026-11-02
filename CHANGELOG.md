@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Records fulfillment export freshness
+
+- Require completed response and release-package exports to match the current
+  approved response text before fulfillment. After editing and approving a new
+  response, export both packages again; historical exports remain intact.
+- Fulfillment receipts reference only matching response exports. This is a source
+  correction; it does not replace the published Townlight Beta 1 installer.
+
+### Frontend build dependency security
+
+- Pin Redocly's transitive minimatch dependency to patched version 11.0.4 for
+  GHSA-g3hv-75wg-m249. Keep the existing OpenAPI generator and Redocly 1.34.21;
+  a checked, idempotent postinstall adjustment adapts its matcher import and
+  verifies matching/nonmatching HTTP-header rules without network access.
+- Generated API types remain unchanged. Dependency audit enforcement remains
+  enabled; review/remove the compatibility adjustment when Redocly is upgraded.
+
 ### Connected Permitting candidate
 
 - Accept an explicitly selected, reviewed Permitting Records copy through the authenticated native bridge. Retain its exact bytes and provenance; existing Records review and release approval still apply.
