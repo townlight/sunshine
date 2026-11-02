@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Records fulfillment export freshness
+
+- Require completed response and release-package exports to match the current
+  approved response text before fulfillment. After editing and approving a new
+  response, export both packages again; historical exports remain intact.
+- Fulfillment receipts reference only matching response exports. This is a source
+  correction; it does not replace the published Townlight Beta 1 installer.
+
 ### Connected Permitting candidate
 
 - Accept an explicitly selected, reviewed Permitting Records copy through the authenticated native bridge. Retain its exact bytes and provenance; existing Records review and release approval still apply.

@@ -1,6 +1,7 @@
 """Export intent versus real bytes versus completed Records state."""
 import hashlib
 import json
+import uuid
 
 import pytest
 from sqlalchemy import func, select
@@ -100,3 +101,59 @@ async def test_incomplete_or_superseded_export_never_becomes_success(native_api)
         row = await session.scalar(select(RequestArtifact))
         assert row.completed_at is None and row.export_path is None
     assert path.exists()  # failed finalization never removes evidence
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("fresh_kind", [None, "response", "release-package"])
+async def test_fulfillment_requires_exports_for_current_approved_response(native_api, fresh_kind):
+    api, proof, actor_id, app = native_api
+    request_id = await intake(api, proof)
+    await operation(api, proof, request_id, "record-records-search-session", {
+        "searchQuery": "Synthetic trail", "searchLocations": "Synthetic files",
+        "searchResultTitle": "Public record", "searchResultCitation": "SYN-1",
+        "searchResultSummary": "Synthetic evidence",
+    })
+    await operation(api, proof, request_id, "add-records-exemption-decision", {
+        "exemptionSource": "SYN-1", "exemptionKind": "Human review",
+        "exemptionFinding": "No restriction", "exemptionDecision": "release",
+        "exemptionBasis": "Synthetic test decision",
+    })
+    await operation(api, proof, request_id, "draft-records-response", {
+        "responseDraft": "Approved response A", "citation": "SYN-1",
+    })
+    await operation(api, proof, request_id, "approve-records-response")
+
+    async def export(kind):
+        plan = await prepare(api, proof, request_id, kind)
+        path = write_test_export(app, plan)
+        await complete(api, proof, request_id, plan, path)
+        return path
+
+    historical = [await export(kind) for kind in ("response", "release-package")]
+    historical_bytes = [path.read_bytes() for path in historical]
+    await operation(api, proof, request_id, "draft-records-response", {
+        "responseDraft": "Approved response B",
+    })
+    await operation(api, proof, request_id, "approve-records-response")
+    current = {}
+    if fresh_kind:
+        current[fresh_kind] = await export(fresh_kind)
+
+    await operation(api, proof, request_id, "fulfill-records-request", expected_status=400)
+    async with session_factory() as session:
+        assert await session.scalar(select(func.count()).select_from(RequestPublication)) == 0
+    for kind in ("response", "release-package"):
+        if kind not in current:
+            current[kind] = await export(kind)
+    fulfilled = await operation(api, proof, request_id, "fulfill-records-request")
+    assert fulfilled["request"]["fulfilled_at_unix_seconds"] is not None
+    async with session_factory() as session:
+        artifacts = (await session.execute(select(RequestArtifact).where(
+            RequestArtifact.request_id == uuid.UUID(request_id)
+        ))).scalars().all()
+        assert len(artifacts) == 4 and all(row.completed_at for row in artifacts)
+        publication = await session.scalar(select(RequestPublication))
+        assert publication.actor_id == actor_id
+        assert str(current["response"]) in publication.payload
+        assert all(str(path) not in publication.payload for path in historical)
+    assert [path.read_bytes() for path in historical] == historical_bytes

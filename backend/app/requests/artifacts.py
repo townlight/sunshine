@@ -150,13 +150,16 @@ async def fulfill(session, req, actor):
     await validate_request(session, req.id)
     workflow.ensure_active(req)
     require_current_approval(req)
+    # Retain historical exports, but only the current approved response's
+    # completed artifacts can satisfy fulfillment or appear in its receipt.
     completed = (await session.execute(select(RequestArtifact).where(
-        RequestArtifact.request_id == req.id, RequestArtifact.completed_at.is_not(None)
+        RequestArtifact.request_id == req.id, RequestArtifact.completed_at.is_not(None),
+        RequestArtifact.response_sha256 == req.approved_response_sha256,
     ))).scalars().all()
     if not any(row.kind == "response" for row in completed):
-        raise ValueError("Export the approved records response package before fulfillment.")
+        raise ValueError("Export the current approved records response package before fulfillment.")
     if not any(row.kind == "release-package" for row in completed):
-        raise ValueError("Build the records release package before fulfillment.")
+        raise ValueError("Build the release package for the current approved response before fulfillment.")
     exports = "; ".join(row.export_path for row in completed if row.kind == "response")
     tracking = req.public_tracking_number or "without tracking number"
     payload = f"Records request {tracking} fulfilled for {req.requester_name}. Deadline: {req.deadline_label}. Exports: {exports}."
