@@ -10,7 +10,7 @@ import pytest
 from unittest.mock import MagicMock, AsyncMock, patch
 from sqlalchemy import text
 
-from app.models.document import DataSource, SourceType
+from townlight_records.models.document import DataSource, SourceType
 from tests.conftest import build_data_source
 
 
@@ -19,7 +19,7 @@ from tests.conftest import build_data_source
 # ---------------------------------------------------------------------------
 
 def make_discovered_record(n: int):
-    from app.connectors.base import DiscoveredRecord
+    from townlight_records.connectors.base import DiscoveredRecord
     return DiscoveredRecord(
         source_path=f"records/{n}",
         filename=f"record_{n}.json",
@@ -30,7 +30,7 @@ def make_discovered_record(n: int):
 
 
 def make_fetched_document(n: int):
-    from app.connectors.base import FetchedDocument
+    from townlight_records.connectors.base import FetchedDocument
     return FetchedDocument(
         source_path=f"records/{n}",
         filename=f"record_{n}.json",
@@ -75,8 +75,8 @@ async def test_close_called_on_success(db_session):
     mock_connector.fetch = AsyncMock(return_value=make_fetched_document(1))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector, source_id=str(source_id), session=db_session
         )
@@ -96,7 +96,7 @@ async def test_close_called_on_fetch_failure(db_session):
     mock_connector.fetch = AsyncMock(side_effect=RuntimeError("fetch failed"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
     # P7 contract: fetch failure does NOT propagate — it's absorbed into sync_failures
     result = await run_connector_sync_with_retry(
         connector=mock_connector, source_id=str(source_id), session=db_session
@@ -117,7 +117,7 @@ async def test_close_called_on_discover_failure(db_session):
     mock_connector.discover = AsyncMock(side_effect=ConnectionError("IMAP down"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
     with pytest.raises(ConnectionError):
         await run_connector_sync_with_retry(
             connector=mock_connector, source_id=str(source_id), session=db_session
@@ -142,8 +142,8 @@ async def test_cursor_written_on_full_success(db_session):
     mock_connector.fetch = AsyncMock(return_value=make_fetched_document(1))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector, source_id=str(source_id), session=db_session
         )
@@ -173,8 +173,8 @@ async def test_structured_log_on_fetch_failure(db_session, caplog):
     mock_connector.fetch = AsyncMock(side_effect=CustomError("upstream error"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with caplog.at_level(logging.ERROR, logger="app.ingestion.sync_runner"):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with caplog.at_level(logging.ERROR, logger="townlight_records.ingestion.sync_runner"):
         await run_connector_sync_with_retry(
             connector=mock_connector, source_id=str(source_id), session=db_session
         )
@@ -190,7 +190,7 @@ async def test_structured_log_on_fetch_failure(db_session, caplog):
 
 def test_task_ingest_source_has_timeouts():
     """task_ingest_source must declare soft_time_limit and time_limit."""
-    from app.ingestion.tasks import task_ingest_source
+    from townlight_records.ingestion.tasks import task_ingest_source
 
     assert getattr(task_ingest_source, "soft_time_limit", None) == 3600, (
         "soft_time_limit must be 3600"

@@ -4,7 +4,7 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 from sqlalchemy import text
 
-from app.models.document import SourceType
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 
@@ -68,15 +68,15 @@ async def test_integrity_error_skips_task_retry(db_session):
     no task-level retry. Per D13b."""
     import uuid
     from sqlalchemy.exc import IntegrityError
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     from sqlalchemy import select
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "integrity-test")
     await db_session.commit()
 
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     mock_connector = AsyncMock()
     mock_connector.connector_type = "rest_api"
@@ -94,7 +94,7 @@ async def test_integrity_error_skips_task_retry(db_session):
     mock_connector.close = MagicMock()
 
     with patch(
-        "app.ingestion.sync_runner.ingest_structured_record",
+        "townlight_records.ingestion.sync_runner.ingest_structured_record",
         new=AsyncMock(side_effect=IntegrityError("duplicate key", None, None)),
     ):
         result = await run_connector_sync_with_retry(
@@ -121,15 +121,15 @@ async def test_integrity_error_skips_task_retry(db_session):
 async def test_ioerror_triggers_task_retry(db_session):
     """ingest_structured_record raises IOError → sync_failures row has status=retrying. Per D13b."""
     import uuid
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     from sqlalchemy import select
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "ioerror-test")
     await db_session.commit()
 
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     mock_connector = AsyncMock()
     mock_connector.connector_type = "rest_api"
@@ -147,7 +147,7 @@ async def test_ioerror_triggers_task_retry(db_session):
     mock_connector.close = MagicMock()
 
     with patch(
-        "app.ingestion.sync_runner.ingest_structured_record",
+        "townlight_records.ingestion.sync_runner.ingest_structured_record",
         new=AsyncMock(side_effect=IOError("disk full")),
     ):
         result = await run_connector_sync_with_retry(

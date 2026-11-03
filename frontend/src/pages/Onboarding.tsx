@@ -73,7 +73,7 @@ const STEPS = [
 
 function loadSavedProfile(): CityProfile {
   try {
-    const saved = localStorage.getItem("civicrecords_city_profile");
+    const saved = localStorage.getItem("townlight_records_city_profile");
     if (saved) return JSON.parse(saved);
   } catch {}
   return {
@@ -241,7 +241,7 @@ export default function Onboarding({ token }: { token: string }) {
 
   const saveAndContinue = async () => {
     // Always persist draft to localStorage between steps
-    localStorage.setItem("civicrecords_city_profile", JSON.stringify(profile));
+    localStorage.setItem("townlight_records_city_profile", JSON.stringify(profile));
 
     if (step < 3) {
       setStep(step + 1);
@@ -266,7 +266,7 @@ export default function Onboarding({ token }: { token: string }) {
           gap_map: profile.systems,
         }),
       });
-      localStorage.setItem("civicrecords_onboarding_complete", "true");
+      localStorage.setItem("townlight_records_onboarding_complete", "true");
       navigate("/city-profile");
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Failed to save profile. Please try again.");
@@ -281,7 +281,7 @@ export default function Onboarding({ token }: { token: string }) {
   return (
     <div className="space-y-6 max-w-3xl">
       <PageHeader
-        title="Welcome to CivicSunshine"
+        title="Welcome to Townlight Records"
         description="Let's set up your city profile. Choose guided interview or manual form."
       />
 

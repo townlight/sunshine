@@ -1,4 +1,4 @@
-from civiccore.ingest.chunker import chunk_text, chunk_pages, estimate_tokens
+from townlight_core.ingest.chunker import chunk_text, chunk_pages, estimate_tokens
 
 def test_estimate_tokens():
     assert estimate_tokens("hello world") > 0

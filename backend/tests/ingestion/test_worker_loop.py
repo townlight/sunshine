@@ -172,12 +172,12 @@ def _patched_ingestion_runtime(monkeypatch_target_session):
 
     - ``app.ingestion.tasks.create_async_engine`` → returns ``_FakeAsyncEngine``.
     - ``app.ingestion.tasks.async_sessionmaker`` → returns ``_FakeSessionMaker``.
-    - ``app.database.async_session_maker`` → also a ``_FakeSessionMaker``
+    - ``townlight_records.database.async_session_maker`` → also a ``_FakeSessionMaker``
        so the fallback path in ``get_worker_session()`` also goes through
        the fake (covers the eager-mode case where ``worker_process_init``
        did not fire).
-    - ``civiccore.ingest.pipeline.ingest_file`` → returns a fake Document.
-    - ``app.audit.logger.write_audit_log`` → no-op.
+    - ``townlight_core.ingest.pipeline.ingest_file`` → returns a fake Document.
+    - ``townlight_records.audit.logger.write_audit_log`` → no-op.
     - ``app.ingestion.tasks._engine`` / ``_session_maker`` → reset to None
        between tests so each test starts in the prefork-pristine state.
 
@@ -186,9 +186,9 @@ def _patched_ingestion_runtime(monkeypatch_target_session):
     ``create_async_engine`` returns a fresh ``_FakeAsyncEngine``, and the
     cross-loop check fires only when an engine is shared across loops.
     """
-    from app.ingestion import tasks as tasks_mod
-    from app.audit import logger as audit_logger_mod
-    from app import database as database_mod
+    from townlight_records.ingestion import tasks as tasks_mod
+    from townlight_records.audit import logger as audit_logger_mod
+    from townlight_records import database as database_mod
 
     class _FakeDoc:
         id = uuid.uuid4()
@@ -213,8 +213,8 @@ def _patched_ingestion_runtime(monkeypatch_target_session):
 
     # Snapshot the originals so we can restore them on exit. We patch the
     # *bindings inside ``app.ingestion.tasks``* — that module did
-    # ``from civiccore.ingest.pipeline import ingest_file`` and
-    # ``from app.audit.logger import write_audit_log``, so the names
+    # ``from townlight_core.ingest.pipeline import ingest_file`` and
+    # ``from townlight_records.audit.logger import write_audit_log``, so the names
     # ``tasks_mod.ingest_file`` / ``tasks_mod.write_audit_log`` are what
     # the ``_ingest()`` closures actually resolve. Patching the source
     # modules is too late — the import already bound the originals.
@@ -280,7 +280,7 @@ def _patched_ingestion_runtime(monkeypatch_target_session):
 @pytest.fixture
 def eager_celery():
     """Run Celery tasks synchronously in the calling process."""
-    from app.worker import celery_app
+    from townlight_records.worker import celery_app
 
     prior_eager = celery_app.conf.task_always_eager
     prior_prop = celery_app.conf.task_eager_propagates
@@ -324,7 +324,7 @@ def test_task_ingest_file_runs_twice_same_process_prefork_pattern(
     code path traversed is the actual prefork bug surface, not the
     eager-mode fallback.
     """
-    from app.ingestion import tasks as tasks_mod
+    from townlight_records.ingestion import tasks as tasks_mod
     from celery.signals import worker_process_init
 
     p1, p2 = tmp_text_files
@@ -419,7 +419,7 @@ def test_run_async_does_not_reuse_engine_across_loops(eager_celery, tmp_text_fil
     fix, two fake engines are built — one per call, each bound to its
     own loop.
     """
-    from app.ingestion import tasks as tasks_mod
+    from townlight_records.ingestion import tasks as tasks_mod
     from celery.signals import worker_process_init
 
     p1, p2 = tmp_text_files

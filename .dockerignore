@@ -1,4 +1,4 @@
-# Build context exclusions for civicrecords-ai
+# Build context exclusions for townlight-records
 #
 # Why: every service in docker-compose.yml uses `build.context: .`. Without
 # this file Docker BuildKit ships everything in the repo as build context
@@ -9,7 +9,7 @@
 # for the captured failure mode and before/after context-size numbers.
 #
 # CRITICAL — DO NOT exclude `backend/tests/fixtures/`. The Gate 2 test at
-# `backend/tests/test_civiccore_migration_gates.py::test_gate2_upgrade_from_v1_2`
+# `backend/tests/test_townlight_core_migration_gates.py::test_gate2_upgrade_from_v1_2`
 # reads `schema_v1_2_0.sql` from inside the api container at test time.
 # The api Dockerfile copies `backend/tests` into the image. Excluding the
 # fixtures directory would silently break Gate 2 on the next image rebuild.

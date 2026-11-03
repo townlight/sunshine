@@ -7,8 +7,8 @@ tests ensure every dispatch path creates an actual notification record.
 
 import pytest
 
-from app.notifications.service import queue_notification
-from app.models.notifications import NotificationLog, NotificationTemplate
+from townlight_records.notifications.service import queue_notification
+from townlight_records.models.notifications import NotificationLog, NotificationTemplate
 
 
 # Every event_type that the requests router dispatches.
@@ -55,7 +55,7 @@ async def test_queue_notification_creates_log_for_each_event_type(client, admin_
     """queue_notification() must create a NotificationLog row for every dispatched event_type."""
     from tests.conftest import test_session_maker
     from scripts.seed_notification_templates import NOTIFICATION_TEMPLATES
-    from app.models.user import User
+    from townlight_records.models.user import User
     from sqlalchemy import select
 
     # admin_token fixture creates a user; fetch it for template attribution
@@ -156,7 +156,7 @@ async def test_create_request_dispatches_request_received(client, admin_token: s
     """
     from tests.conftest import test_session_maker
     from scripts.seed_notification_templates import NOTIFICATION_TEMPLATES
-    from app.models.user import User
+    from townlight_records.models.user import User
     from sqlalchemy import select
 
     # Ensure the request_received template exists in the test DB

@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from civicsuite_runtime.records_import import preflight
+from townlight_runtime.records_import import preflight
 
 
 def source(root, data):
@@ -16,7 +16,7 @@ def source(root, data):
 
 
 def sample():
-    audit = dict(id="audit-1", module_id="civicrecords-ai", action="fixture", summary="Historical evidence",
+    audit = dict(id="audit-1", module_id="townlight_records", action="fixture", summary="Historical evidence",
                  created_at_unix_seconds=1000, previous_hash="GENESIS")
     audit["entry_hash"] = hashlib.sha256("\n".join(str(audit[k]) for k in (
         "previous_hash", "id", "module_id", "action", "summary", "created_at_unix_seconds")).encode()).hexdigest()

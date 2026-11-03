@@ -38,7 +38,7 @@ def test_release_workflow_cleanroom_release_gate_contract() -> None:
 
     assert jobs["publish-release"]["needs"] == ["release-cleanroom-rehearsal"]
     assert "release-cleanroom-rehearsal" in jobs
-    assert "civicsuite-cleanroom=1" in workflow_text
+    assert "townlight-cleanroom=1" in workflow_text
     assert "system prune" not in workflow_text
     assert (
         "Cleanroom rehearsal: PASSED in workflow run ${WORKFLOW_RUN_ID}"

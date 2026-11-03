@@ -7,12 +7,12 @@ import uuid
 
 import pytest
 from sqlalchemy import select, func
-from civicaccess.access_review import AccessibilityReviewRepository
-from civicsuite_runtime.access_bridge import ensure_native_schema, state as access_state
-from civicsuite_runtime.records_import import preflight
-from civicsuite_runtime.records_import_store import ensure_schema, import_snapshot, imports, legacy_audit
-from app.desktop_bridge.projection import request_view
-from app.models.request import RecordsRequest
+from townlight_access.access_review import AccessibilityReviewRepository
+from townlight_runtime.access_bridge import ensure_native_schema, state as access_state
+from townlight_runtime.records_import import preflight
+from townlight_runtime.records_import_store import ensure_schema, import_snapshot, imports, legacy_audit
+from townlight_records.desktop_bridge.projection import request_view
+from townlight_records.models.request import RecordsRequest
 from tests.conftest import TEST_DATABASE_URL, test_session_maker as session_factory
 from tests.test_desktop_records import native_api as native_api, native_profile as native_profile, INTAKE # noqa: F401
 from tests.test_records_import_preflight import sample, source
@@ -28,9 +28,9 @@ def test_native_cli_initializes_profile_before_backend_imports(tmp_path, entrypo
     for key in ("TESTING", "JWT_SECRET", "JWT_SECRET_FILE", "FIRST_ADMIN_PASSWORD",
                 "FIRST_ADMIN_PASSWORD_FILE", "ENCRYPTION_KEY", "TOWNLIGHT_MIGRATION_PROOF"):
         env.pop(key, None)
-    env.update(TOWNLIGHT_PROFILE_ROOT=str(tmp_path), CIVICSUITE_DATA_DIR=str(tmp_path / "Data"),
+    env.update(TOWNLIGHT_PROFILE_ROOT=str(tmp_path), TOWNLIGHT_DATA_DIR=str(tmp_path / "Data"),
                DATABASE_URL="postgresql+asyncpg://unused:unused@127.0.0.1:1/unused")
-    result = subprocess.run([sys.executable, "-m", f"civicsuite_runtime.{entrypoint}"],
+    result = subprocess.run([sys.executable, "-m", f"townlight_runtime.{entrypoint}"],
                             env=env, cwd=tmp_path, capture_output=True, text=True, timeout=30)
     assert result.returncode == 1  # No native activation journal/proof: refuse, do not connect.
     assert "Traceback" not in result.stderr
@@ -43,7 +43,7 @@ def storage_schema():
     try:
         ensure_native_schema(repository.engine)
         ensure_schema(repository.engine)
-        from civicsuite_runtime.native_accounts import metadata
+        from townlight_runtime.native_accounts import metadata
         metadata.create_all(repository.engine)
     finally:
         repository.engine.dispose()
@@ -183,8 +183,8 @@ async def test_import_failure_rolls_back_rows_and_completion_receipt(native_api)
 
 @pytest.mark.asyncio
 async def test_identity_mapping_does_not_repurpose_existing_users(client, native_profile):
-    from civicsuite_runtime.native_accounts import provision_accounts, accounts
-    from app.models.user import User, UserRole
+    from townlight_runtime.native_accounts import provision_accounts, accounts
+    from townlight_records.models.user import User, UserRole
     root, _ = native_profile
     storage_schema()
     async with session_factory() as session:
@@ -215,9 +215,9 @@ async def test_identity_mapping_does_not_repurpose_existing_users(client, native
 
 @pytest.mark.asyncio
 async def test_cutover_recovers_committed_import_without_json_fallback(client, native_profile, monkeypatch):
-    from civicsuite_runtime import records_cutover
+    from townlight_runtime import records_cutover
     root, staff_proof = native_profile
-    monkeypatch.setattr("app.auth.desktop_session.time.time", lambda: 1000)
+    monkeypatch.setattr("townlight_records.auth.desktop_session.time.time", lambda: 1000)
     storage_schema()
     data = full_sample(root)
     path = source(root, data)
@@ -248,17 +248,17 @@ async def test_cutover_recovers_committed_import_without_json_fallback(client, n
     assert path.read_bytes() == backup.read_bytes()
     async with session_factory() as session:
         assert await session.scalar(select(func.count()).select_from(RecordsRequest)) == 1
-        from civicsuite_runtime.records_snapshot import snapshot as suite_snapshot
-        from civicsuite_runtime.native_accounts import accounts
+        from townlight_runtime.records_snapshot import snapshot as suite_snapshot
+        from townlight_runtime.native_accounts import accounts
         admin_id = await session.scalar(select(accounts.c.user_id).where(accounts.c.email == admin["email"]))
-        view = await suite_snapshot(session, ["civicrecords-ai", "civicaccess"], admin_id)
+        view = await suite_snapshot(session, ["townlight_records", "townlight_access"], admin_id)
         assert view["demo_fixture"] == data["demo_fixture"]
         assert view["audit_entries"][0]["entry_hash"] == data["audit_entries"][0]["entry_hash"]
 
 
 @pytest.mark.asyncio
 async def test_canonical_demo_is_idempotent_and_exports_its_watermark(native_api):
-    from civicsuite_runtime.records_demo import load_demo, FIXTURE_HASH
+    from townlight_runtime.records_demo import load_demo, FIXTURE_HASH
     from tests.test_desktop_records_lifecycle import operation
     _, proof, actor_id, app = native_api
     api = native_api[0]

@@ -51,9 +51,9 @@ async def _seed_exemption_flag_on_request(
 
     Returns the flag's id.
     """
-    from app.models.document import DataSource, Document, DocumentChunk, SourceType
-    from app.models.exemption import ExemptionFlag, FlagStatus
-    from app.models.user import User, UserRole
+    from townlight_records.models.document import DataSource, Document, DocumentChunk, SourceType
+    from townlight_records.models.exemption import ExemptionFlag, FlagStatus
+    from townlight_records.models.user import User, UserRole
     from tests.conftest import _create_test_user, test_session_maker
 
     seed_email = f"seed-flag-{uuid.uuid4().hex[:8]}@test.com"

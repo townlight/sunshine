@@ -1,6 +1,6 @@
 # Self-classification rules - pre-authorized for agents
 
-These are the rules the executor role applies to every grep hit, every test failure, every workflow alert, and every "should I halt or fix forward?" judgment call. They're pre-authorized so the agent doesn't halt-and-ask on routine cases. The civicrecords-ai sweep wasted ~25% of its time on halt-and-ask cycles that should have been mechanical decisions.
+These are the rules the executor role applies to every grep hit, every test failure, every workflow alert, and every "should I halt or fix forward?" judgment call. They're pre-authorized so the agent doesn't halt-and-ask on routine cases. The townlight_records sweep wasted ~25% of its time on halt-and-ask cycles that should have been mechanical decisions.
 
 ## Grep-hit classification (during edit phases)
 
@@ -12,7 +12,7 @@ Every line returned by a release-sweep grep gets exactly ONE classification:
 - `.github/workflows/*.yml` lines that pip-install a versioned URL
 - `README.md`, `USER-MANUAL.md`, install-instruction snippets describing current state
 - Test files asserting current pin URL or current version constant
-- Test fixture dicts like `{"civiccore": "1.0.0"}` (update value to new version)
+- Test fixture dicts like `{"townlight_core": "1.0.0"}` (update value to new version)
 - Compatibility matrix entries describing current pin
 - Source files with `EXPECTED_<DEP>_VERSION = "X.Y.Z"` constants
 
@@ -34,7 +34,7 @@ A grep hit is SHAPE-GUARD when ALL of these hold:
 - Updating X to the new version would pass trivially with no real coverage
 
 Examples:
-- `assert "civiccore==1.0.0" not in dependencies` - asserts no `==` pinning, version-independent
+- `assert "townlight_core==1.0.0" not in dependencies` - asserts no `==` pinning, version-independent
 - `assert "1.0.0.dev0" not in text` - asserts no stale dev marker, version-unrelated
 
 ### OWN-MODULE-VERSION - SKIP (do not edit during a dependency-bump sweep)
@@ -72,7 +72,7 @@ The fix-forward bound is: changes must touch only `.github/workflows/`, `scripts
 ### CONTRACT-CHANGE - HALT AND REPORT
 
 - Any source code change required
-- Any test asserting on dependency-removed behavior (e.g., civicclerk tests asserting on civiccore-removed `token_roles` field) - the auditor must approve the test update before the agent applies it
+- Any test asserting on dependency-removed behavior (e.g., townlight_meetings tests asserting on townlight_core-removed `token_roles` field) - the auditor must approve the test update before the agent applies it
 - Any cross-module dependency conflict
 - Any failure whose root cause requires a design decision
 
@@ -93,7 +93,7 @@ When fix-forward catches multiple MECHANICAL-CI-BUG issues in a single workflow 
 - Bundle them into ONE commit on a single fix-forward branch
 - Branch name format: `fix/<scope>-<class>-<date>` (e.g. `fix/release-yml-preflight-2026-05-11`)
 - One PR per fix-forward bundle, not one PR per bug
-- The civicrecords-ai sweep opened 4 PRs (#70/#71/#72/#73) for what should have been 1 bundled PR. This is the explicit anti-pattern.
+- The townlight_records sweep opened 4 PRs (#70/#71/#72/#73) for what should have been 1 bundled PR. This is the explicit anti-pattern.
 
 ## Tag-move budget
 
@@ -104,7 +104,7 @@ A `<module> v<X.Y.Z>` tag may be moved at most ONCE per release sprint, and only
 
 A second tag move is a signal that Phase 2 local rehearsal didn't catch what it should have. After the second move, halt and reassess Phase 2 instrumentation rather than continuing to chase remote bugs with more tag pushes.
 
-CivicSuite v1.5.0 moved 4 times during recovery. The new pipeline targets ZERO moves per sprint; 1 move is acceptable for genuine environmental surprise.
+Townlight v1.5.0 moved 4 times during recovery. The new pipeline targets ZERO moves per sprint; 1 move is acceptable for genuine environmental surprise.
 
 ## What this preserves vs. what changes
 

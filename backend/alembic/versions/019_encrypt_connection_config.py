@@ -9,7 +9,7 @@ restored snapshots, Postgres superuser sessions, SQL-level backups.
 This migration closes that gap. The column stays JSONB in Postgres; the
 cell contents become the versioned envelope
 ``{"v": 1, "ct": "<fernet-token>"}`` produced by
-:mod:`app.security.at_rest`. Runtime code continues to see a plain dict
+:mod:`townlight_records.security.at_rest`. Runtime code continues to see a plain dict
 thanks to the ``EncryptedJSONB`` TypeDecorator on the SQLAlchemy column.
 
 Properties:
@@ -26,7 +26,7 @@ Properties:
 
 Operator rollout note (also documented in USER-MANUAL.md): set the
 encryption key env var BEFORE restarting the app. The migration runs
-on startup (see `app.main.lifespan`); a missing key causes the fail-fast
+on startup (see `townlight_records.main.lifespan`); a missing key causes the fail-fast
 check in `Settings.check_encryption_key` to raise before any row is
 touched.
 
@@ -42,8 +42,8 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-from app.security.at_rest import decrypt_json, encrypt_json, is_encrypted
-from civiccore.migrations.guards import has_table
+from townlight_records.security.at_rest import decrypt_json, encrypt_json, is_encrypted
+from townlight_core.migrations.guards import has_table
 
 revision: str = '019_encrypt_connection_config'
 down_revision: Union[str, None] = '018_city_profile_state_nullable'
@@ -84,7 +84,7 @@ def upgrade() -> None:
     """Encrypt every plaintext row. Skip already-encrypted rows.
 
     SHARED data_sources table — gated on table presence so the data
-    migration is a clean no-op if civiccore baseline (or any future
+    migration is a clean no-op if townlight_core baseline (or any future
     migration order) has not yet created it. The per-row ``is_encrypted``
     check below is the authoritative post-migration-state guard: re-runs
     against an already-encrypted column skip every row and report

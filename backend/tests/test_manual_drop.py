@@ -5,7 +5,7 @@ import tempfile
 import uuid
 from pathlib import Path
 
-from app.connectors.manual_drop import (
+from townlight_records.connectors.manual_drop import (
     ManualDropConnector,
     MAX_FILE_BYTES,
 )
@@ -248,15 +248,15 @@ async def test_non_recursive_skips_subdirs(drop_dir):
 
 # ── Pipeline Dispatch Tests ───────────────────────────────────────────────────
 
-from app.connectors import manual_drop as _drop_mod  # noqa: E402  section-local import for "Pipeline Dispatch Tests" group below
+from townlight_records.connectors import manual_drop as _drop_mod  # noqa: E402  section-local import for "Pipeline Dispatch Tests" group below
 
 
 @pytest.mark.asyncio
 async def test_ingest_manual_drop_dispatch(drop_dir):
     """_ingest_manual_drop_source discovers, fetches, ingests, and archives."""
     from unittest.mock import AsyncMock, MagicMock, patch
-    from app.ingestion.tasks import _ingest_manual_drop_source
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.ingestion.tasks import _ingest_manual_drop_source
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
 
     source = MagicMock()
     source.id = "00000000-0000-0000-0000-000000000002"
@@ -300,8 +300,8 @@ async def test_ingest_manual_drop_dispatch(drop_dir):
     mock_session.commit = AsyncMock()
 
     with patch.object(_drop_mod, "ManualDropConnector", return_value=mock_connector), \
-         patch("app.ingestion.tasks.ingest_file_from_bytes", new_callable=AsyncMock) as mock_ingest, \
-         patch("app.ingestion.tasks.write_audit_log", new_callable=AsyncMock):
+         patch("townlight_records.ingestion.tasks.ingest_file_from_bytes", new_callable=AsyncMock) as mock_ingest, \
+         patch("townlight_records.ingestion.tasks.write_audit_log", new_callable=AsyncMock):
         mock_ingest.return_value = MagicMock()
 
         result = await _ingest_manual_drop_source(mock_session, source, user_id=None)
@@ -322,10 +322,10 @@ async def test_ingest_manual_drop_dispatch(drop_dir):
 
 
 @pytest.mark.asyncio
-async def test_ingest_file_from_bytes_forwards_provenance_to_civiccore():
+async def test_ingest_file_from_bytes_forwards_provenance_to_townlight_core():
     """Byte ingestion preserves the connector's source path and metadata."""
     from unittest.mock import AsyncMock, MagicMock, patch
-    from app.ingestion.tasks import ingest_file_from_bytes
+    from townlight_records.ingestion.tasks import ingest_file_from_bytes
 
     source_id = uuid.uuid4()
     session = MagicMock()
@@ -336,7 +336,7 @@ async def test_ingest_file_from_bytes_forwards_provenance_to_civiccore():
     }
 
     with patch(
-        "app.ingestion.tasks.ingest_bytes",
+        "townlight_records.ingestion.tasks.ingest_bytes",
         new=AsyncMock(return_value=document),
     ) as mock_ingest:
         result = await ingest_file_from_bytes(
@@ -364,7 +364,7 @@ async def test_ingest_file_from_bytes_forwards_provenance_to_civiccore():
 async def test_ingest_manual_drop_auth_failure():
     """_ingest_manual_drop_source returns error on inaccessible folder."""
     from unittest.mock import AsyncMock, MagicMock, patch
-    from app.ingestion.tasks import _ingest_manual_drop_source
+    from townlight_records.ingestion.tasks import _ingest_manual_drop_source
 
     source = MagicMock()
     source.connection_config = {"drop_path": "/nonexistent"}

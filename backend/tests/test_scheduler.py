@@ -6,8 +6,8 @@ from unittest.mock import patch
 
 import pytest
 
-from app.ingestion.cron_utils import compute_next_sync_at
-from app.models.document import SourceType
+from townlight_records.ingestion.cron_utils import compute_next_sync_at
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 
@@ -22,7 +22,7 @@ class TestCronTriggerLogic:
     """These tests validate the trigger decision in isolation (pure logic)."""
 
     def _should_trigger(self, cron_expr: str, last_sync_at: datetime | None, now: datetime) -> bool:
-        """Reference the shared CivicCore helper used by the production scheduler."""
+        """Reference the shared TownlightCore helper used by the production scheduler."""
         next_scheduled = compute_next_sync_at(cron_expr, last_sync_at)
         return next_scheduled <= now
 
@@ -66,23 +66,23 @@ class TestMinIntervalValidation:
 
     def test_min_interval_valid_hourly(self):
         """0 * * * * (hourly, 60-min gap) → passes validation (>= 5)."""
-        from app.ingestion.cron_utils import min_interval_minutes
+        from townlight_records.ingestion.cron_utils import min_interval_minutes
         assert min_interval_minutes("0 * * * *") >= 5
 
     def test_min_interval_rejected_every_minute(self):
         """* * * * * (every minute) → min_interval_minutes returns 1 → reject."""
-        from app.ingestion.cron_utils import min_interval_minutes
+        from townlight_records.ingestion.cron_utils import min_interval_minutes
         assert min_interval_minutes("* * * * *") < 5
 
     def test_min_interval_adversarial_cron(self):
         """*/1 0 * * * → fires every minute in hour 0 → rolling week detects 1-min gap."""
-        from app.ingestion.cron_utils import min_interval_minutes
+        from townlight_records.ingestion.cron_utils import min_interval_minutes
         result = min_interval_minutes("*/1 0 * * *")
         assert result < 5, f"Expected < 5 but got {result}"
 
     def test_min_interval_every_5_min_passes(self):
         """*/5 * * * * (every 5 min) → passes (exactly at floor)."""
-        from app.ingestion.cron_utils import min_interval_minutes
+        from townlight_records.ingestion.cron_utils import min_interval_minutes
         assert min_interval_minutes("*/5 * * * *") >= 5
 
 
@@ -104,7 +104,7 @@ class TestCheckScheduledSources:
     @pytest.mark.asyncio
     async def test_schedule_disabled_not_triggered(self, db_session):
         """Source with valid cron but schedule_enabled=False → not triggered."""
-        from app.ingestion.scheduler import _check_scheduled_sources_async
+        from townlight_records.ingestion.scheduler import _check_scheduled_sources_async
         await self._seed_user(db_session)
         source_id = uuid.uuid4()
         from sqlalchemy import text
@@ -123,14 +123,14 @@ class TestCheckScheduledSources:
         )
         await db_session.commit()
 
-        with patch("app.ingestion.tasks.task_ingest_source") as mock_task:
+        with patch("townlight_records.ingestion.tasks.task_ingest_source") as mock_task:
             await _check_scheduled_sources_async(db_session)
             mock_task.delay.assert_not_called()
 
     @pytest.mark.asyncio
     async def test_paused_source_not_triggered(self, db_session):
         """Source with valid cron but sync_paused=True → not triggered."""
-        from app.ingestion.scheduler import _check_scheduled_sources_async
+        from townlight_records.ingestion.scheduler import _check_scheduled_sources_async
         await self._seed_user(db_session)
         source_id = uuid.uuid4()
         from sqlalchemy import text
@@ -149,6 +149,6 @@ class TestCheckScheduledSources:
         )
         await db_session.commit()
 
-        with patch("app.ingestion.tasks.task_ingest_source") as mock_task:
+        with patch("townlight_records.ingestion.tasks.task_ingest_source") as mock_task:
             await _check_scheduled_sources_async(db_session)
             mock_task.delay.assert_not_called()

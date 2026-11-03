@@ -9,25 +9,25 @@ import json
 import pytest
 from sqlalchemy import select
 
-from app.models.audit import AuditLog
+from townlight_records.models.audit import AuditLog
 from tests.conftest import TEST_DATABASE_URL, test_session_maker as session_factory
 from tests.test_desktop_records import native_api as native_api, native_profile as native_profile # noqa: F401
 
 
 @pytest.mark.asyncio
 async def test_access_review_uses_existing_engine_and_keeps_capabilities_separate(native_api):
-    from civicaccess.access_review import AccessibilityReviewRepository, review_accessibility
-    from civicsuite_runtime.access_bridge import router, ensure_native_schema
+    from townlight_access.access_review import AccessibilityReviewRepository, review_accessibility
+    from townlight_runtime.access_bridge import router, ensure_native_schema
     api, proof, actor_id, app = native_api
     repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
     try:
         ensure_native_schema(repository.engine)
-        from civicsuite_runtime.records_import_store import ensure_schema
+        from townlight_runtime.records_import_store import ensure_schema
         ensure_schema(repository.engine)
     finally:
         repository.engine.dispose()
     app.include_router(router)
-    from civicsuite_runtime.records_snapshot import router as snapshot_router
+    from townlight_runtime.records_snapshot import router as snapshot_router
     app.include_router(snapshot_router)
     endpoint = "/desktop/v1/access/reviews"
     data = {"title": "Sample notice", "body": "Please attend.", "hasAltText": False, "language": "en"}
@@ -65,12 +65,24 @@ async def test_access_review_uses_existing_engine_and_keeps_capabilities_separat
         assert saved["status"] == expected.status
         assert [f["code"] for f in saved["findings"]] == [f.code for f in expected.findings]
         assert saved["ai_analysis"] == advice.get("ai_analysis")
+        assert saved["ai_outcome"] == outcome
+        assert saved["body"] == data["body"]
+        assert saved["created_by"] == str(actor_id)
     state = (await api.get("/desktop/v1/access/state", headers=headers)).json()
     assert len(state["reviews"]) == 3
+    assert [review["ai_outcome"] for review in state["reviews"]] == ["unavailable", "failed", "generated"]
+    assert all(review["body"] == data["body"] and review["created_by"] == str(actor_id)
+               for review in state["reviews"])
     assert {a["actor"] for a in state["audit_events"]} == {str(actor_id)}
     plan = await api.post(f"{endpoint}/{saved['review_id']}/export", headers=headers)
     assert plan.status_code == 200, plan.text
     prepared = plan.json()
+    record = json.loads(prepared["content"].split("```json\n", 1)[1].rsplit("\n```", 1)[0])
+    assert record["review"]["body"] == data["body"]
+    assert record["advice"]["ai_analysis"] == "Synthetic advisory text"
+    assert record["advice"]["ai_analysis_model"] == "synthetic-model"
+    assert {event["actor"] for event in record["audit_events"]} == {str(actor_id)}
+    assert record["exported_by"] == str(actor_id)
     output = root / "Data" / "exports" / "access" / prepared["file_name"]
     output.parent.mkdir(parents=True)
     output.write_bytes(b"wrong bytes")
@@ -106,6 +118,17 @@ async def test_access_review_uses_existing_engine_and_keeps_capabilities_separat
         result = await api.post("/desktop/v1/access/rewrite-result", json={**payload, "outcome": "unavailable"}, headers=headers)
         assert result.status_code == 200, result.text
         assert "sample" in result.json()["message"]
+        draft_id = result.json()["draft_id"]
+        reloaded = (await api.get("/desktop/v1/access/state", headers=headers)).json()
+        retained = next(row for row in reloaded["drafts"] if row["draft_id"] == draft_id)
+        assert retained["source_text"] == payload["text"]
+        assert retained["review_status"] == "qualified-human-review-required"
+        assert retained["outcome"] == "unavailable" and retained["model"] is None
+        exported = await api.post(f"/desktop/v1/access/drafts/{draft_id}/export", headers=headers)
+        assert exported.status_code == 200, exported.text
+        draft_record = json.loads(exported.json()["content"].split("```json\n", 1)[1].rsplit("\n```", 1)[0])
+        assert draft_record["draft"]["source_text"] == payload["text"]
+        assert draft_record["draft"]["result_text"] == retained["result_text"]
         failed = await api.post("/desktop/v1/access/rewrite-result", json={**payload, "outcome": "failed"}, headers=headers)
         assert failed.status_code == 422  # Failed inference cannot silently substitute sample output.
     private = await api.post("/desktop/v1/suite/search", json={"query": "Private trail"}, headers=headers)
@@ -116,13 +139,13 @@ async def test_access_review_uses_existing_engine_and_keeps_capabilities_separat
     own = await api.post("/desktop/v1/suite/search", json={"query": "Sample notice"}, headers=headers)
     assert own.status_code == 200, own.text
     assert len(own.json()["search_results"]) == 2
-    assert {r["module_id"] for r in own.json()["search_results"]} == {"civicaccess"}
+    assert {r["module_id"] for r in own.json()["search_results"]} == {"townlight_access"}
     # Records-only view must not leak Access audit summaries either.
-    from app.desktop_bridge.projection import records_state
+    from townlight_records.desktop_bridge.projection import records_state
     async with session_factory() as session:
         view = await records_state(session)
-        assert all(item.module_id == "civicrecords-ai" for item in view.audit_entries)
-    from civicsuite_runtime.access_bridge import review_advice
+        assert all(item.module_id == "townlight_records" for item in view.audit_entries)
+    from townlight_runtime.access_bridge import review_advice
     surviving = own.json()["state"]["access"]["reviews"][0]
     canonical = surviving["canonical_review_id"]
     async with session_factory() as session:

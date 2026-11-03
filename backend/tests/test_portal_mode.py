@@ -2,7 +2,7 @@
 
 Tests cover:
 
-1. :class:`app.config.Settings` portal_mode:
+1. :class:`townlight_records.config.Settings` portal_mode:
    - default is ``"private"`` when no env var is set
    - ``PORTAL_MODE=public`` loads as ``"public"``
    - values are case/whitespace normalized (``"  Public  "`` → ``"public"``)
@@ -36,8 +36,8 @@ import uuid
 import pytest
 from pydantic import ValidationError
 
-from app.config import Settings, settings
-from app.models.user import UserRole
+from townlight_records.config import Settings, settings
+from townlight_records.models.user import UserRole
 
 
 # --------------------------------------------------------------------------
@@ -202,11 +202,11 @@ async def public_user_token(client) -> str:
     mounted in the app instance ``client`` built.
     """
     from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
-    from app.auth.manager import UserManager
-    from app.models.user import User
-    from app.schemas.user import AdminUserCreate
+    from townlight_records.auth.manager import UserManager
+    from townlight_records.models.user import User
+    from townlight_records.schemas.user import AdminUserCreate
     # Import by attribute so we see whatever the client fixture set up
-    import app.database as app_database
+    import townlight_records.database as app_database
 
     email = f"public-user-{uuid.uuid4().hex[:8]}@test.com"
     password = "Tw3ntyCharacterPasswordX"

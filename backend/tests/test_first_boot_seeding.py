@@ -16,10 +16,10 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy import select
 
-from app.models.exemption import DisclosureTemplate, ExemptionRule
-from app.models.notifications import NotificationTemplate
-from app.models.user import User, UserRole
-from app.seed.first_boot import run_first_boot_seeds
+from townlight_records.models.exemption import DisclosureTemplate, ExemptionRule
+from townlight_records.models.notifications import NotificationTemplate
+from townlight_records.models.user import User, UserRole
+from townlight_records.seed.first_boot import run_first_boot_seeds
 
 
 async def _get_admin_user_id(db_session) -> uuid.UUID:

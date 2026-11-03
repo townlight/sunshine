@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy import text
 
-from app.models.document import SourceType
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 
@@ -30,7 +30,7 @@ async def _seed_source(session, source_id, name, **extra):
 @pytest.mark.asyncio
 async def test_retry_cap_by_count(db_session):
     """100 retrying rows, retry_batch_size=10 → exactly 10 retried, 90 remain."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     from sqlalchemy import select, func
 
     source_id = uuid.uuid4()
@@ -54,7 +54,7 @@ async def test_retry_cap_by_count(db_session):
     async def counting_fetch(path):
         nonlocal fetch_call_count
         fetch_call_count += 1
-        from app.connectors.base import FetchedDocument
+        from townlight_records.connectors.base import FetchedDocument
         return FetchedDocument(
             source_path=path, filename="x.json", file_type="json",
             content=b'{"id":1}', file_size=7, metadata={},
@@ -62,8 +62,8 @@ async def test_retry_cap_by_count(db_session):
 
     mock_connector.fetch = AsyncMock(side_effect=counting_fetch)
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -84,7 +84,7 @@ async def test_retry_cap_by_count(db_session):
 @pytest.mark.asyncio
 async def test_dead_letter_at_retry_threshold_during_retry_run(db_session):
     """A retrying row with retry_count=5 → promoted to permanently_failed, not fetched."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "dead-letter-cap")
@@ -108,7 +108,7 @@ async def test_dead_letter_at_retry_threshold_during_retry_run(db_session):
     mock_connector.fetch = AsyncMock(side_effect=AssertionError("should not be called"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
     await run_connector_sync_with_retry(
         connector=mock_connector,
         source_id=str(source_id),

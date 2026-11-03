@@ -10,7 +10,7 @@ import { VersionFooter } from "@/components/version-footer";
 import { FileSearch, HelpCircle, Keyboard, LogOut, Menu, PanelsTopLeft, X } from "lucide-react";
 
 const suiteLauncherUrl =
-  (import.meta.env.VITE_CIVICSUITE_LAUNCHER_URL as string | undefined)?.trim() ||
+  (import.meta.env.VITE_TOWNLIGHT_LAUNCHER_URL as string | undefined)?.trim() ||
   "http://127.0.0.1:18082/";
 
 interface AppShellProps {
@@ -47,7 +47,7 @@ function SidebarContents({
           <span className="text-sm font-bold text-primary-foreground">CS</span>
         </div>
         <div>
-          <p className="text-sm font-semibold text-foreground leading-tight">CivicSunshine</p>
+          <p className="text-sm font-semibold text-foreground leading-tight">Townlight Records</p>
           <p className="text-xs text-muted-foreground leading-tight">AI</p>
         </div>
       </div>
@@ -166,7 +166,7 @@ export function AppShell({ children, onSignOut, userEmail, userRole }: AppShellP
             <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center">
               <span className="text-xs font-bold text-primary-foreground">CS</span>
             </div>
-            <span className="text-sm font-semibold text-foreground">CivicSunshine</span>
+            <span className="text-sm font-semibold text-foreground">Townlight Records</span>
           </div>
 
           <div className="ml-auto flex items-center gap-1">

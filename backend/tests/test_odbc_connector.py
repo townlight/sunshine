@@ -10,9 +10,9 @@ import sqlite3
 import pytest
 from unittest.mock import MagicMock, patch
 
-from app.connectors.odbc import OdbcConnector, _validate_identifier
-from app.connectors.base import HealthStatus
-from app.schemas.connectors.odbc import ODBCConfig
+from townlight_records.connectors.odbc import OdbcConnector, _validate_identifier
+from townlight_records.connectors.base import HealthStatus
+from townlight_records.schemas.connectors.odbc import ODBCConfig
 
 
 def _make_pyodbc_mock(sqlite_conn):
@@ -51,7 +51,7 @@ def odbc_connector(sqlite_db):
         modified_column="modified_at",
     )
     connector = OdbcConnector(config)
-    with patch("app.connectors.odbc.pyodbc", _make_pyodbc_mock(sqlite_db)):
+    with patch("townlight_records.connectors.odbc.pyodbc", _make_pyodbc_mock(sqlite_db)):
         asyncio.run(connector.authenticate())
     return connector
 
@@ -143,7 +143,7 @@ async def test_row_size_guard_skips_large_rows(sqlite_db):
         max_row_bytes=5,  # impossibly small — every row exceeds this
     )
     connector = OdbcConnector(config)
-    with patch("app.connectors.odbc.pyodbc", _make_pyodbc_mock(sqlite_db)):
+    with patch("townlight_records.connectors.odbc.pyodbc", _make_pyodbc_mock(sqlite_db)):
         await connector.authenticate()
     records = await connector.discover()
     assert records == []
@@ -152,7 +152,7 @@ async def test_row_size_guard_skips_large_rows(sqlite_db):
 @pytest.mark.asyncio
 async def test_dsn_error_scrubbing():
     """Credential fields are redacted in error messages surfaced to callers."""
-    from app.connectors.odbc import _scrub_dsn_error
+    from townlight_records.connectors.odbc import _scrub_dsn_error
     raw = "Connection failed: DSN=mydsn;UID=admin;PWD=s3cr3t;Server=db"
     scrubbed = _scrub_dsn_error(raw)
     assert "s3cr3t" not in scrubbed

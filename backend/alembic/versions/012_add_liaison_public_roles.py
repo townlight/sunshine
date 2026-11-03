@@ -33,7 +33,7 @@ def upgrade() -> None:
     # The project targets PostgreSQL 17, so the prior COMMIT workaround (which breaks
     # asyncpg's protocol-level transaction management) is not needed.
     #
-    # The user_role enum is a SHARED (CivicCore-owned) type — civiccore baseline
+    # The user_role enum is a SHARED (TownlightCore-owned) type — townlight_core baseline
     # already declares the full role set including 'liaison' and 'public', so on
     # any DB that ran the baseline these statements no-op via ADD VALUE IF NOT
     # EXISTS. Native Postgres idempotency is sufficient here; no `has_table`

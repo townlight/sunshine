@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { apiFetch } from "@/lib/api";
 
-const DEFAULT_VERSION = "1.7.3";
+const DEFAULT_VERSION = "1.8.0.dev2";
 
 export function VersionFooter() {
   const [version, setVersion] = useState(DEFAULT_VERSION);
@@ -21,5 +21,5 @@ export function VersionFooter() {
     };
   }, []);
 
-  return <span className="truncate">CivicSunshine v{version} &middot; AGPL-3.0</span>;
+  return <span className="truncate">Townlight Records v{version} &middot; AGPL-3.0</span>;
 }

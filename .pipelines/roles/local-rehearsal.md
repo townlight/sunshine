@@ -31,7 +31,7 @@ cat > .env <<EOF
 EOF
 ```
 
-The civicrecords-ai email-validator bug only surfaced because CI's hermetic email used `.local` (reserved per RFC 6762). Local rehearsal that uses a different email value won't catch it. **Mirror exactly.**
+The townlight_records email-validator bug only surfaced because CI's hermetic email used `.local` (reserved per RFC 6762). Local rehearsal that uses a different email value won't catch it. **Mirror exactly.**
 
 ### Step 2 - Run the verification script the workflow runs
 
@@ -124,7 +124,7 @@ act push --eventpath <(echo '{"ref": "refs/tags/v0.0.0-rehearsal", "ref_type": "
 
 `act` can simulate the entire workflow tree (preflight, verify-release-linux, build-windows-installer if Windows runner available). Doesn't replicate every CI nuance but catches structural workflow bugs in seconds.
 
-If `act` isn't available, document that gap and rely on Steps 1-4. The civicrecords-ai sweep would have been ~2 hours instead of 8 if anyone had `act`-rehearsed before pushing.
+If `act` isn't available, document that gap and rely on Steps 1-4. The townlight_records sweep would have been ~2 hours instead of 8 if anyone had `act`-rehearsed before pushing.
 
 ## Local-only failures that CAN happen (not a blocker)
 
@@ -168,7 +168,7 @@ The Phase 3 stage MUST NOT execute until this report contains a PASS line for St
 
 ## Why this role exists
 
-Tag push is the single non-reversible step in the pipeline. The agent-pipeline-codex allows tag-moves (CivicSuite v1.5.0 moved 4 times) but each move costs ~30 minutes (PR, merge, tag move, CI cycle) and pollutes the audit trail. The civicrecords-ai sweep tag-moved 4 times because the release workflow was the discovery mechanism for the bugs. With local rehearsal, the workflow becomes the EXECUTION mechanism, not the discovery mechanism.
+Tag push is the single non-reversible step in the pipeline. The agent-pipeline-codex allows tag-moves (Townlight v1.5.0 moved 4 times) but each move costs ~30 minutes (PR, merge, tag move, CI cycle) and pollutes the audit trail. The townlight_records sweep tag-moved 4 times because the release workflow was the discovery mechanism for the bugs. With local rehearsal, the workflow becomes the EXECUTION mechanism, not the discovery mechanism.
 
 Local rehearsal failing is good news (free fix). Remote rehearsal failing after a tag push is bad news (~30 minutes of plumbing per failure).
 

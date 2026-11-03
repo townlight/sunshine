@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# civicrecords-ai/scripts/verify-release.sh - recovery release gate.
+# townlight_records/scripts/verify-release.sh - recovery release gate.
 
 set -euo pipefail
 
@@ -69,7 +69,7 @@ else
     if docker compose up -d --wait postgres redis ollama; then
         database_name=$(grep -E '^DATABASE_URL=' .env | head -1 | tr -d '\r' | sed -E 's#^DATABASE_URL=[^:]+://[^/]+/([^?]+).*$#\1#' || true)
         if [ -n "${database_name:-}" ] && [ "$database_name" != "DATABASE_URL" ]; then
-            docker compose exec -T postgres createdb -U civicrecords "$database_name" >/dev/null 2>&1 || true
+            docker compose exec -T postgres createdb -U townlight_records "$database_name" >/dev/null 2>&1 || true
         fi
         if ! docker compose up -d --wait api; then
             fail "compose runtime failed to become healthy"
@@ -192,16 +192,16 @@ else
 fi
 
 if [ -n "$RUFF_CMD" ]; then
-    if (cd backend && $RUFF_CMD check .) > /tmp/civicrecords-ruff.out 2>&1; then
+    if (cd backend && $RUFF_CMD check .) > /tmp/townlight_records-ruff.out 2>&1; then
         pass "ruff: 0 violations"
     else
-        fail "ruff: violations present (see /tmp/civicrecords-ruff.out)"
+        fail "ruff: violations present (see /tmp/townlight_records-ruff.out)"
     fi
 elif command -v docker >/dev/null 2>&1; then
-    if docker compose run --rm --no-deps api python -m ruff check . > /tmp/civicrecords-ruff.out 2>&1; then
+    if docker compose run --rm --no-deps api python -m ruff check . > /tmp/townlight_records-ruff.out 2>&1; then
         pass "ruff via api container: 0 violations"
     else
-        fail "container ruff: violations present or ruff unavailable (see /tmp/civicrecords-ruff.out)"
+        fail "container ruff: violations present or ruff unavailable (see /tmp/townlight_records-ruff.out)"
     fi
 fi
 
@@ -210,26 +210,26 @@ if command -v docker >/dev/null 2>&1; then
     collected=""
     passed=""
     if docker compose run --rm --no-deps \
-        -e CIVICRECORDS_REPO_ROOT=/repo \
+        -e TOWNLIGHT_RECORDS_REPO_ROOT=/repo \
         -v "$PWD:/repo:ro" \
-        api python -m pytest tests --collect-only -q > /tmp/civicrecords-pytest-collect.out 2>&1; then
-        collected=$(grep -oE '[0-9]+ tests? collected' /tmp/civicrecords-pytest-collect.out | tail -1 | grep -oE '[0-9]+' || true)
+        api python -m pytest tests --collect-only -q > /tmp/townlight_records-pytest-collect.out 2>&1; then
+        collected=$(grep -oE '[0-9]+ tests? collected' /tmp/townlight_records-pytest-collect.out | tail -1 | grep -oE '[0-9]+' || true)
         pass "pytest collect-only: ${collected:-unknown} test(s)"
     else
-        fail "pytest collect-only failed (see /tmp/civicrecords-pytest-collect.out)"
+        fail "pytest collect-only failed (see /tmp/townlight_records-pytest-collect.out)"
     fi
     if docker compose run --rm --no-deps \
-        -e CIVICRECORDS_REPO_ROOT=/repo \
+        -e TOWNLIGHT_RECORDS_REPO_ROOT=/repo \
         -v "$PWD:/repo:ro" \
-        api python -m pytest tests -q > /tmp/civicrecords-pytest-run.out 2>&1; then
-        passed=$(grep -oE '[0-9]+ passed' /tmp/civicrecords-pytest-run.out | tail -1 | grep -oE '[0-9]+' || true)
+        api python -m pytest tests -q > /tmp/townlight_records-pytest-run.out 2>&1; then
+        passed=$(grep -oE '[0-9]+ passed' /tmp/townlight_records-pytest-run.out | tail -1 | grep -oE '[0-9]+' || true)
         if [ -n "$collected" ] && [ -n "$passed" ] && [ "$collected" != "$passed" ]; then
             fail "pytest collected/pass mismatch: collected=$collected passed=$passed"
         else
             pass "pytest full suite: ${passed:-unknown} passed"
         fi
     else
-        fail "pytest full suite failed (see /tmp/civicrecords-pytest-run.out)"
+        fail "pytest full suite failed (see /tmp/townlight_records-pytest-run.out)"
     fi
 fi
 
@@ -245,7 +245,12 @@ else
 fi
 
 info "9. runtime install proof"
-if [ -n "$PYTHON_CMD" ] && $PYTHON_CMD "$REPO_ROOT/scripts/verify-runtime-install.py"; then
+CORE_WHEEL="$REPO_ROOT/.candidate-wheels/townlight_core-1.3.0.dev2-py3-none-any.whl"
+if [ ! -f "$CORE_WHEEL" ] && [ -n "$PYTHON_CMD" ]; then
+    $PYTHON_CMD -m pip install build
+    $PYTHON_CMD "$REPO_ROOT/scripts/install-core-candidate.py" --wheel-output "$REPO_ROOT/.candidate-wheels"
+fi
+if [ -n "$PYTHON_CMD" ] && $PYTHON_CMD "$REPO_ROOT/scripts/verify-runtime-install.py" --core-wheel "$CORE_WHEEL"; then
     pass "runtime install proof"
 else
     fail "runtime install proof failed"

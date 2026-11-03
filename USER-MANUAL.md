@@ -1,6 +1,6 @@
 # Townlight Records Manual
 
-**Townlight Beta 1** · Documentation edition 30 October 2026
+**Townlight Beta 1** · Naming candidate documentation edition 2 November 2026
 
 ## Contents
 
@@ -34,23 +34,22 @@ Staff should begin with First run and Daily workflow. Administrators should also
 
 | Identity | Value |
 | --- | --- |
-| Public documentation identity | Townlight Beta 1 |
-| Installer version | 1.6.0.1 |
-| Product component | civicrecords-ai 1.8.0.dev1 |
-| Native desktop source version | 1.6.0-1 |
-| Candidate MSI SHA256 | `98bcdef11ebdf5c767f620c904ff49f85115fde3b5c23f62703b111e645aaf86` |
-| Corresponding-source SHA256 | `84a23e1297e42d17b16cfc9e51b2dd78bc46414c0de8ad7ebd2466c1a409d06b` |
+| Documentation | Townlight Beta 1 naming, Access and Notice candidate |
+| Intended installer version | 1.7.0.1; build and acceptance pending |
+| Product component | townlight-records 1.8.0.dev2 |
+| Principal import package | townlight_records |
+| Native desktop source version | 1.7.0-1 |
+| Candidate hashes | Pending candidate build, signing and installed acceptance |
 | Current owned software license | AGPL-3.0-only |
-| Supported acceptance profile | Windows x64 fresh install; inspections-preview; separate Station configuration |
+| Acceptance composition | Fresh Windows x64 profile; inspections-preview; Station configured separately |
 
-
-“Townlight Beta 1” identifies this coordinated beta delivery. It does not renumber the installer, native binary, Python packages or historical receipts. Component versions may differ. This documentation is a later companion to unchanged signed bytes, not a rebuilt installer. Historical release pages and manuals describe their own versions and are not the download instructions for this private candidate.
+The naming change advances this package's version and requires a new signed installer and installed acceptance. Those steps and publication remain pending. Historical tags, receipts and archived manuals keep their original names and certify only their identified artifacts. Use an empty database and fresh profile; no in-place legacy upgrade is supported. The approved Windows profile path remains `%LOCALAPPDATA%\CivicSuite`. Preserve existing profiles, data and recovery material.
 
 ## First run
 
 1. Obtain the identified signed private candidate and its corresponding-source companion from the beta coordinator. The landing pages in this documentation are not an installer download service.
-2. On the intended fresh Windows test installation, verify the MSI hash and publisher signature before installing. Preserve unrelated profiles and recovery material. This candidate has fresh-install acceptance; historical in-place upgrades are unverified.
-3. Launch Townlight under the intended named Windows account. Choose the storage folders. Select **Townlight Inspections candidate** (`inspections-preview`) for all eight desktop products. A narrower default selection will not expose all workspaces.
+2. On the intended fresh Windows test installation, verify the MSI hash and publisher signature before installing. Preserve unrelated profiles and recovery material. Installed acceptance for this source candidate remains pending; no in-place legacy upgrade is supported.
+3. Launch Townlight under the intended named Windows account. Choose the storage folders. Select **Townlight Inspections candidate** (`inspections-preview`) for the bounded desktop composition, including Access and Notice. A narrower default selection will not expose all workspaces.
 4. Enter the city profile, time zone and contacts. Create the first named local administrator, sign in and choose protected backup storage. **Continue without local AI** is valid for the deterministic workflows.
 5. Run Health Check and wait for readiness. Open Townlight. In System Health select **Finish Records Migration** to activate the canonical Python/PostgreSQL runtime. Do not fabricate migration receipts or seed accounts.
 6. Create named staff through Settings. Import authorized sources using each product’s source library. All examples in this package are synthetic; they are not municipal authority.
@@ -193,16 +192,16 @@ Versioned saves use expected prior revision identifiers where defined. Reopen an
 
 ### Capacity and platform statements
 
-This beta has synthetic single-profile workflow evidence. It does not have a published benchmark for concurrent staff capacity, minimum RAM/CPU, large-source limits or a field SLA. Do not turn a developer machine’s specification into a supported minimum. Installer size is 2,092,122,112 bytes before installation; allow additional disk for extracted runtime, database, originals, exports, media and backups. Select equipment/storage after sizing those actual workloads.
+This beta has synthetic single-profile workflow evidence. It does not have a published benchmark for concurrent staff capacity, minimum RAM/CPU, large-source limits or a field SLA. Do not turn a developer machine’s specification into a supported minimum. The new installer size remains pending its build;  allow additional disk for extracted runtime, database, originals, exports, media and backups. Select equipment/storage after sizing those actual workloads.
 
 The exact [runtime payload lock](docs/beta-1/reference/runtime-payload-lock.json) records pinned files, sizes and hashes. The [component metadata](docs/beta-1/reference/component-metadata.json) records shipped dependency declarations. These references are more precise than a manually copied dependency list. Third-party and historical license notices must accompany their matching payloads.
 
 ## Configuration and administration
 ### Native deployment configuration
 
-Use Setup, Settings and System Health for supported staff operation. Administrators provision folders, backup storage, named accounts and the city profile. Select `inspections-preview` for the full eight-workspace desktop. Station remains a separate service boundary. Do not use a standalone product’s demo server as a substitute for the installed workspace.
+Use Setup, Settings and System Health for supported staff operation. Administrators provision folders, backup storage, named accounts and the city profile. Select `inspections-preview` for the bounded desktop composition, including Access and Notice. Station remains a separate service boundary. Do not use a standalone product’s demo server as a substitute for the installed workspace.
 
-Technical deployments use `TOWNLIGHT_PRODUCT_PROFILE`, `TOWNLIGHT_PROFILE_ROOT`, `DATABASE_URL`, `CIVICSUITE_RUNTIME_PORT`, `PORTAL_MODE` and the runtime-managed secret files. Treat database URLs and native session proofs as secrets. The installed native domain runtime explicitly refuses non-loopback binding. `PORTAL_MODE=private` is the accepted posture; changing it does not by itself commission an internet portal, authentication provider or reverse proxy.
+Technical deployments use `TOWNLIGHT_PRODUCT_PROFILE`, `TOWNLIGHT_PROFILE_ROOT`, `DATABASE_URL`, `TOWNLIGHT_RUNTIME_PORT`, `PORTAL_MODE` and the runtime-managed secret files. Treat database URLs and native session proofs as secrets. The installed native domain runtime explicitly refuses non-loopback binding. `PORTAL_MODE=private` is the accepted posture; changing it does not by itself commission an internet portal, authentication provider or reverse proxy.
 
 The isolated documentation exporter sets a fictional profile and unusable synthetic database origin only to read schemas; those values are not deployment configuration. Keep deployment values in the intended process/account scope. An already-running process does not automatically inherit later environment edits.
 

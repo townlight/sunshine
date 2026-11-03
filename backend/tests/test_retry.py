@@ -2,7 +2,7 @@ import pytest
 import httpx
 from unittest.mock import AsyncMock, patch
 
-from app.connectors.retry import RetryExhausted, _compute_delay, with_retry
+from townlight_records.connectors.retry import RetryExhausted, _compute_delay, with_retry
 
 
 @pytest.mark.asyncio
@@ -24,7 +24,7 @@ async def test_retry_on_429_then_success():
         idx += 1
         return r
 
-    with patch("app.connectors.retry.asyncio.sleep", new_callable=AsyncMock):
+    with patch("townlight_records.connectors.retry.asyncio.sleep", new_callable=AsyncMock):
         result = await with_retry(action)
     assert result.status_code == 200
 
@@ -32,7 +32,7 @@ async def test_retry_on_429_then_success():
 @pytest.mark.asyncio
 async def test_retry_exhausted_on_all_429():
     action = AsyncMock(return_value=httpx.Response(429))
-    with patch("app.connectors.retry.asyncio.sleep", new_callable=AsyncMock):
+    with patch("townlight_records.connectors.retry.asyncio.sleep", new_callable=AsyncMock):
         with pytest.raises(RetryExhausted):
             await with_retry(action)
 
@@ -51,7 +51,7 @@ async def test_retry_after_header_respected():
         idx += 1
         return r
 
-    with patch("app.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
+    with patch("townlight_records.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
         await with_retry(action)
     sleep_duration = mock_sleep.call_args[0][0]
     assert 4.0 <= sleep_duration <= 6.5  # 5s ± 20% jitter + tolerance
@@ -70,7 +70,7 @@ async def test_retry_after_honored_up_to_600s_cap():
             return httpx.Response(429, headers={"Retry-After": "35"})
         return httpx.Response(200)
 
-    with patch("app.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
+    with patch("townlight_records.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
         result = await with_retry(action)
     assert result.status_code == 200
     mock_sleep.assert_called_once_with(35.0)
@@ -84,7 +84,7 @@ async def test_retry_after_honored_up_to_600s_cap():
             return httpx.Response(429, headers={"Retry-After": "9999"})
         return httpx.Response(200)
 
-    with patch("app.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
+    with patch("townlight_records.connectors.retry.asyncio.sleep", new_callable=AsyncMock) as mock_sleep:
         result = await with_retry(action_9999)
     assert result.status_code == 200
     mock_sleep.assert_called_once_with(600.0)

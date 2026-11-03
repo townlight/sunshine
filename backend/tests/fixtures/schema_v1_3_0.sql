@@ -166,10 +166,10 @@ CREATE TABLE public.alembic_version (
 
 
 --
--- Name: alembic_version_civiccore; Type: TABLE; Schema: public; Owner: -
+-- Name: alembic_version_townlight_core; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.alembic_version_civiccore (
+CREATE TABLE public.alembic_version_townlight_core (
     version_num character varying(32) NOT NULL
 );
 
@@ -871,11 +871,11 @@ ALTER TABLE ONLY public._migration_015_report
 
 
 --
--- Name: alembic_version_civiccore alembic_version_civiccore_pkc; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: alembic_version_townlight_core alembic_version_townlight_core_pkc; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.alembic_version_civiccore
-    ADD CONSTRAINT alembic_version_civiccore_pkc PRIMARY KEY (version_num);
+ALTER TABLE ONLY public.alembic_version_townlight_core
+    ADD CONSTRAINT alembic_version_townlight_core_pkc PRIMARY KEY (version_num);
 
 
 --
@@ -1818,9 +1818,9 @@ ALTER TABLE ONLY public.sync_run_log
 -- PostgreSQL database dump complete
 --
 
--- Phase 1 / v1.3.0 alembic stamp (records side at 019, civiccore at baseline 0001)
+-- Phase 1 / v1.3.0 alembic stamp (records side at 019, townlight_core at baseline 0001)
 INSERT INTO public.alembic_version (version_num) VALUES ('019_encrypt_connection_config') ON CONFLICT DO NOTHING;
-INSERT INTO public.alembic_version_civiccore (version_num) VALUES ('civiccore_0001_baseline_v1') ON CONFLICT DO NOTHING;
+INSERT INTO public.alembic_version_townlight_core (version_num) VALUES ('townlight_core_0001') ON CONFLICT DO NOTHING;
 
 \unrestrict SGmLy84updd8xrVfVRSflm0rJM7ExcIDHw9izMSFieaDpLwUV0jB3DzYIlYRUVv
 

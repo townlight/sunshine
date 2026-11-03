@@ -51,8 +51,8 @@ def main() -> int:
         ]
     )
 
-    assets = sorted(output_dir.glob("civicrecords_ai-*-py3-none-any.whl"))
-    assets.extend(sorted(output_dir.glob("civicrecords_ai-*.tar.gz")))
+    assets = sorted(output_dir.glob("townlight_records-*-py3-none-any.whl"))
+    assets.extend(sorted(output_dir.glob("townlight_records-*.tar.gz")))
     if len(assets) != 2:
         print("expected exactly one wheel and one sdist, found:", file=sys.stderr)
         for asset in assets:

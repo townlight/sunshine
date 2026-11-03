@@ -3,9 +3,9 @@ import asyncio
 
 from sqlalchemy import select
 
-from app.database import async_session_maker
-from app.models.notifications import NotificationTemplate
-from app.models.user import User
+from townlight_records.database import async_session_maker
+from townlight_records.models.notifications import NotificationTemplate
+from townlight_records.models.user import User
 
 
 NOTIFICATION_TEMPLATES = [

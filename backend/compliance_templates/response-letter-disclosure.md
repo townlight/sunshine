@@ -44,7 +44,7 @@ Dear [Requester Name],
 
 [Fee information, if applicable]
 
-AI Disclosure: {{CITY_NAME}} used CivicSunshine, a locally hosted
+AI Disclosure: {{CITY_NAME}} used Townlight Records, a locally hosted
 open-source tool, to assist staff in searching for, reviewing, and
 preparing the responsive documents included with this response. [...]
 

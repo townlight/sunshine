@@ -9,13 +9,13 @@ from httpx import ASGITransport, AsyncClient
 import pytest
 from sqlalchemy import func, select
 
-from app.database import get_async_session
-from app.main import create_app
-from app.models.audit import AuditLog
-from app.models.notifications import NotificationLog
-from app.models.request import RecordsRequest
-from app.models.request_workflow import RequestTimeline
-from app.models.user import User, UserRole
+from townlight_records.database import get_async_session
+from townlight_records.main import create_app
+from townlight_records.models.audit import AuditLog
+from townlight_records.models.notifications import NotificationLog
+from townlight_records.models.request import RecordsRequest
+from townlight_records.models.request_workflow import RequestTimeline
+from townlight_records.models.user import User, UserRole
 from tests.conftest import override_get_session, test_session_maker as session_factory
 from tests.test_desktop_session import native_profile as native_profile # noqa: F401 — shared synthetic fixture
 
@@ -27,8 +27,8 @@ INTAKE = {"requester": "Synthetic Resident", "summary": "Trail maintenance recor
 @pytest.fixture
 async def native_api(client, native_profile, monkeypatch):
     root, proof = native_profile
-    monkeypatch.setattr("app.auth.desktop_session.time.time", lambda: 1000)
-    monkeypatch.setattr("app.audit.middleware.async_session_maker", session_factory)
+    monkeypatch.setattr("townlight_records.auth.desktop_session.time.time", lambda: 1000)
+    monkeypatch.setattr("townlight_records.audit.middleware.async_session_maker", session_factory)
     actor_id = uuid.uuid4()
     async with session_factory() as session:
         session.add(User(id=actor_id, email="records@example.invalid", hashed_password="!native-only",
@@ -38,7 +38,7 @@ async def native_api(client, native_profile, monkeypatch):
         await session.commit()
     app = create_app(desktop_profile_root=root,
                      desktop_domain_enabled=True,
-                     desktop_enabled_modules=frozenset({"civicrecords-ai", "civicaccess"}))
+                     desktop_enabled_modules=frozenset({"townlight_records", "townlight_access"}))
     app.dependency_overrides[get_async_session] = override_get_session
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as api:
         yield api, proof, actor_id, app
@@ -156,11 +156,11 @@ async def test_native_identity_mapping_fails_closed_without_promotion(native_api
 @pytest.mark.asyncio
 async def test_native_role_and_enabled_profile_are_both_required(native_api):
     api, proof, _, app = native_api
-    app.state.desktop_enabled_modules = frozenset({"civicaccess"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_access"})
     response = await api.post("/desktop/v1/requests", json=INTAKE,
                               headers={"X-Townlight-Session": proof})
     assert response.status_code == 403
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records"})
     app.state.desktop_domain_enabled = False
     inactive = await api.post("/desktop/v1/requests", json=INTAKE,
                              headers={"X-Townlight-Session": proof})
@@ -190,7 +190,7 @@ async def test_ordinary_web_app_does_not_mount_native_routes(client):
 
 @pytest.mark.asyncio
 async def test_shared_intake_failure_leaves_no_partial_request(native_api, monkeypatch):
-    from app.requests import service
+    from townlight_records.requests import service
 
     _, _, actor_id, _ = native_api
 
@@ -215,7 +215,7 @@ def isolated_runtime_app():
     import os
     if os.environ.get("TESTING") != "1":
         raise RuntimeError("The isolated runtime factory is test-only.")
-    from civicsuite_runtime.services import create_runtime_app
+    from townlight_runtime.services import create_runtime_app
     return create_runtime_app(domain_enabled=True)
 
 
@@ -232,7 +232,7 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
     import time
     import httpx
     from tests.conftest import TEST_DATABASE_URL, DESKTOP_RUNTIME_ROOT
-    from app.audit.logger import verify_chain
+    from townlight_records.audit.logger import verify_chain
     import logging
     for logger in logging.Logger.manager.loggerDict.values():
         if isinstance(logger, logging.Logger):
@@ -241,28 +241,30 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
     runtime_root = DESKTOP_RUNTIME_ROOT
     assert runtime_root is not None, "Install the pinned paired Townlight runtime for desktop tests"
     if product_profile == "city-core":
-        import civicclerk
-        import civiccode
-        from civicsuite_runtime.migrate import _run_alembic
+        import townlight_meetings
+        import townlight_code
+        from townlight_runtime.migrate import _run_alembic
 
-        for package in (civicclerk, civiccode):
+        for package in (townlight_meetings, townlight_code):
             migrations = Path(package.__file__).parent / "migrations"
             _run_alembic(
                 package.__name__, migrations / "alembic.ini", migrations,
                 TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"),
             )
-    from civicaccess.access_review import AccessibilityReviewRepository
+    from townlight_access.access_review import AccessibilityReviewRepository
     sys.path.insert(0, str(runtime_root))
-    from civicsuite_runtime.access_bridge import ensure_native_schema
+    from townlight_runtime.access_bridge import ensure_native_schema
     repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
     try:
         ensure_native_schema(repository.engine)
-        from civicsuite_runtime.records_import_store import ensure_schema
-        from civicsuite_runtime.native_accounts import metadata
+        from townlight_notice.workflow import NoticeWorkflow
+        NoticeWorkflow(repository.engine)
+        from townlight_runtime.records_import_store import ensure_schema
+        from townlight_runtime.native_accounts import metadata
         ensure_schema(repository.engine)
         metadata.create_all(repository.engine)
         if product_profile == "city-core":
-            from civicsuite_runtime.code_meetings import ensure_schema as ensure_connections
+            from townlight_runtime.code_meetings import ensure_schema as ensure_connections
             ensure_connections(repository.engine)
     finally:
         repository.engine.dispose()
@@ -286,7 +288,7 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
         reservation.bind(("127.0.0.1", 15480 if native_transport else 0))
         port = reservation.getsockname()[1]
     env = {**os.environ, "TESTING": "1", "DATABASE_URL": TEST_DATABASE_URL,
-           "CIVICSUITE_DATA_DIR": str(root / "data"), "TOWNLIGHT_PRODUCT_PROFILE": product_profile,
+           "TOWNLIGHT_DATA_DIR": str(root / "data"), "TOWNLIGHT_PRODUCT_PROFILE": product_profile,
            "PYTHONPATH": str(runtime_root) + os.pathsep + os.environ.get("PYTHONPATH", "")}
     command = [sys.executable, "-m", "uvicorn", "tests.test_desktop_records:isolated_runtime_app",
                "--factory", "--host", "127.0.0.1", "--port", str(port),
@@ -323,7 +325,7 @@ async def test_real_loopback_runtime_write_survives_process_restart(client, nati
                             source = tmp_path / "native-source.txt"
                             source.write_bytes(b"Synthetic source bytes")
                             native_env = {**env, "TOWNLIGHT_TEST_SESSION_PROOF": proof,
-                                          "CIVICSUITE_DESKTOP_STATE_DIR": str(root),
+                                          "TOWNLIGHT_DESKTOP_STATE_DIR": str(root),
                                           "TOWNLIGHT_TEST_SOURCE_FILE": str(source)}
                             desktop = runtime_root.parents[1]
                             native_command = ["cargo", "test", "--offline", "--manifest-path", "src-tauri/Cargo.toml",

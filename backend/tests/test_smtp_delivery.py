@@ -5,12 +5,12 @@ from unittest.mock import patch, MagicMock
 import pytest
 from httpx import AsyncClient
 
-from app.notifications.smtp_delivery import send_email, deliver_queued_notifications
+from townlight_records.notifications.smtp_delivery import send_email, deliver_queued_notifications
 
 
 def test_send_email_raises_without_smtp_host():
     """send_email fails if SMTP_HOST is not configured."""
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings:
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings:
         mock_settings.smtp_host = ""
         with pytest.raises(RuntimeError, match="SMTP_HOST not configured"):
             send_email("test@city.gov", "Test Subject", "Test Body")
@@ -18,8 +18,8 @@ def test_send_email_raises_without_smtp_host():
 
 def test_send_email_connects_and_sends():
     """send_email creates SMTP connection, logs in, and sends."""
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings, \
-         patch("app.notifications.smtp_delivery.smtplib.SMTP") as mock_smtp_class:
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings, \
+         patch("townlight_records.notifications.smtp_delivery.smtplib.SMTP") as mock_smtp_class:
         mock_settings.smtp_host = "smtp.city.gov"
         mock_settings.smtp_port = 587
         mock_settings.smtp_username = "user"
@@ -46,8 +46,8 @@ def test_send_email_connects_and_sends():
 
 def test_send_email_without_tls():
     """send_email works without TLS."""
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings, \
-         patch("app.notifications.smtp_delivery.smtplib.SMTP") as mock_smtp_class:
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings, \
+         patch("townlight_records.notifications.smtp_delivery.smtplib.SMTP") as mock_smtp_class:
         mock_settings.smtp_host = "smtp.city.gov"
         mock_settings.smtp_port = 25
         mock_settings.smtp_username = ""
@@ -70,7 +70,7 @@ async def test_deliver_skips_when_smtp_not_configured(client: AsyncClient):
     """deliver_queued_notifications returns early if SMTP not configured."""
     from tests.conftest import test_session_maker
 
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings:
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings:
         mock_settings.smtp_host = ""
         async with test_session_maker() as session:
             result = await deliver_queued_notifications(session)
@@ -82,7 +82,7 @@ async def test_deliver_skips_when_smtp_not_configured(client: AsyncClient):
 async def test_deliver_sends_queued_email(client: AsyncClient):
     """deliver_queued_notifications processes queued entries."""
     from tests.conftest import test_session_maker
-    from app.models.notifications import NotificationLog
+    from townlight_records.models.notifications import NotificationLog
 
     async with test_session_maker() as session:
         # Create a queued notification
@@ -97,8 +97,8 @@ async def test_deliver_sends_queued_email(client: AsyncClient):
         await session.commit()
         log_id = log.id
 
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings, \
-         patch("app.notifications.smtp_delivery.send_email") as mock_send:
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings, \
+         patch("townlight_records.notifications.smtp_delivery.send_email") as mock_send:
         mock_settings.smtp_host = "smtp.city.gov"
 
         async with test_session_maker() as session:
@@ -122,7 +122,7 @@ async def test_deliver_sends_queued_email(client: AsyncClient):
 async def test_deliver_handles_smtp_failure(client: AsyncClient):
     """deliver_queued_notifications marks entries as failed on SMTP error."""
     from tests.conftest import test_session_maker
-    from app.models.notifications import NotificationLog
+    from townlight_records.models.notifications import NotificationLog
 
     async with test_session_maker() as session:
         log = NotificationLog(
@@ -136,8 +136,8 @@ async def test_deliver_handles_smtp_failure(client: AsyncClient):
         await session.commit()
         log_id = log.id
 
-    with patch("app.notifications.smtp_delivery.settings") as mock_settings, \
-         patch("app.notifications.smtp_delivery.send_email", side_effect=Exception("Connection refused")):
+    with patch("townlight_records.notifications.smtp_delivery.settings") as mock_settings, \
+         patch("townlight_records.notifications.smtp_delivery.send_email", side_effect=Exception("Connection refused")):
         mock_settings.smtp_host = "smtp.city.gov"
 
         async with test_session_maker() as session:

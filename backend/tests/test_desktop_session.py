@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from app.auth.desktop_session import validate_native_session
+from townlight_records.auth.desktop_session import validate_native_session
 
 
 @pytest.fixture
@@ -49,9 +49,9 @@ def test_native_session_preserves_actor_and_module_capabilities(native_profile):
     assert principal.display_name == "Synthetic Records Officer"
     assert principal.role == "records-staff"
     assert principal.expires_at_unix_seconds == 2000
-    assert principal.allows_module("civicrecords-ai")
-    assert not principal.allows_module("civicaccess")
-    assert not principal.allows_module("civicclerk")
+    assert principal.allows_module("townlight_records")
+    assert not principal.allows_module("townlight_access")
+    assert not principal.allows_module("townlight_meetings")
 
 
 @pytest.mark.parametrize("proof", [None, "", "forged", "0" * 64])

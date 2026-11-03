@@ -11,9 +11,9 @@ from pathlib import Path
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from app.config import settings
-from app.models.exemption import DisclosureTemplate
-from app.models.user import User, UserRole
+from townlight_records.config import settings
+from townlight_records.models.exemption import DisclosureTemplate
+from townlight_records.models.user import User, UserRole
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "compliance_templates"
 

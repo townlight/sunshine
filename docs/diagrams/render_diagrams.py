@@ -1,13 +1,13 @@
 """
 render_diagrams.py
-Generates 6 professional SVG (and PNG where available) architecture diagrams
-for the Townlight Records project using reportlab.
+Generates six SVG and PNG architecture diagrams for Townlight Records.
+Requires ReportLab and PyMuPDF. PNGs render from the generated SVG at 144 DPI;
+any failed output raises an error instead of leaving an apparently successful run.
 
 Output directory: same directory as this script.
 """
 
 import os
-import traceback
 
 from reportlab.graphics.shapes import (
     Drawing, Rect, String, Line, Group, Polygon
@@ -126,21 +126,23 @@ def dashed_line(x1, y1, x2, y2, color=GRAY_BORDER, width=1):
 
 
 def write_diagram(drawing, name):
+    # Include labels that extend beyond the original page's left/bottom edge.
+    # Otherwise the generated bitmap silently clips the connector captions.
+    x0, y0, x1, y1 = drawing.getBounds()
+    left, bottom = max(0, 8 - x0), max(0, 8 - y0)
+    drawing.translate(left, bottom)
+    drawing.width = max(drawing.width, x1 + 8) + left
+    drawing.height = max(drawing.height, y1 + 8) + bottom
     path_svg = os.path.join(OUT_DIR, name + ".svg")
-    try:
-        renderSVG.drawToFile(drawing, path_svg)
-        print(f"Generated: {path_svg}")
-    except Exception as e:
-        print(f"ERROR writing SVG {name}: {e}")
-        traceback.print_exc()
-    # Try PNG
-    try:
-        from reportlab.graphics import renderPM
-        path_png = os.path.join(OUT_DIR, name + ".png")
-        renderPM.drawToFile(drawing, path_png, fmt="PNG", dpi=144)
-        print(f"Generated: {path_png}")
-    except Exception as e:
-        print(f"  (PNG skipped for {name}: {e})")
+    renderSVG.drawToFile(drawing, path_svg)
+    print(f"Generated: {path_svg}")
+    import pymupdf
+    path_png = os.path.join(OUT_DIR, name + ".png")
+    with pymupdf.open(path_svg) as source:
+        pdf = source.convert_to_pdf()
+    with pymupdf.open("pdf", pdf) as document:
+        document[0].get_pixmap(dpi=144).save(path_png)
+    print(f"Generated: {path_png}")
 
 
 # ===========================================================================
@@ -153,7 +155,7 @@ def make_component():
     d.add(Rect(0, 0, W, H, fillColor=WHITE, strokeColor=None))
 
     # Title
-    d.add(label("Townlight Records — System Components (v1.2)", W/2, H - 24,
+    d.add(label("Townlight Records — Standalone System Components", W/2, H - 24,
                 size=14, color=DARK, bold=True))
 
     layers = [
@@ -637,7 +639,7 @@ def make_deployment():
     DCH = CSH - 50
     d.add(box(DCX, DCY, DCW, DCH, fill=HexColor("#f0f9ff"),
               stroke=MID, strokeWidth=1.5, rx=6))
-    d.add(label("Docker Compose Network (civicrecords-net)",
+    d.add(label("Docker Compose Network (townlight_records-net)",
                 DCX + 12, DCY + DCH - 16,
                 size=9.5, color=MID, bold=True, anchor="start"))
 
@@ -725,7 +727,7 @@ def make_sequence_request():
     participants = [
         ("Requester",       HexColor("#0369a1"), HexColor("#e0f2fe")),
         ("Clerk",           GREEN,               GREEN2),
-        ("CivicSunshine", MID,                 PALE),
+        ("Townlight Records", MID,                 PALE),
         ("Local LLM",       TEAL,                TEAL2),
         ("Supervisor",      PURPLE,              PURPLE2),
         ("Audit Log",       GRAY,                GRAY2),
@@ -752,7 +754,7 @@ def make_sequence_request():
         d.add(dashed_line(xs[i], LIFE_TOP, xs[i], LIFE_BOT,
                           color=GRAY_BORDER, width=1))
 
-    # Activation on CivicSunshine
+    # Activation on Townlight Records
     d.add(Rect(xs[2] - 5, 80, 10, 540,
                fillColor=PALE, strokeColor=MID, strokeWidth=1))
 
@@ -934,12 +936,8 @@ def main():
     print("-" * 60)
 
     for name, fn in diagrams:
-        try:
-            drawing = fn()
-            write_diagram(drawing, name)
-        except Exception as e:
-            print(f"ERROR in {name}: {e}")
-            traceback.print_exc()
+        drawing = fn()
+        write_diagram(drawing, name)
 
     print("-" * 60)
     print("Done.")

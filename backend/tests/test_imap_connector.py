@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-from app.connectors.imap_email import (
+from townlight_records.connectors.imap_email import (
     ImapEmailConnector,
     is_attachment_safe,
     MAX_ATTACHMENT_BYTES,

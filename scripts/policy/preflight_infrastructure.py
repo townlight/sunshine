@@ -235,7 +235,7 @@ def check_diagnostic_instrumentation(root: Path) -> CheckResult:
             "FAIL - verify-release.sh does not dump container logs. "
             "When compose health fails, the failure cause is hidden. "
             "Add `docker compose logs --no-color --tail 100 <service>` "
-            "to the failure path. Template: civicrecords-ai PR #72."
+            "to the failure path. Template: townlight_records PR #72."
         )
         result.passed = False
     return result
@@ -258,7 +258,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--module-root", required=True, type=Path,
                         help="Path to the module repo root")
-    parser.add_argument("--repo", help="org/repo for gh run history check (e.g. CivicSuite/civicrecords-ai)")
+    parser.add_argument("--repo", help="org/repo for gh run history check (e.g. Townlight/townlight_records)")
     parser.add_argument("--run-local", action="store_true",
                         help="Actually run verify-release.sh locally (slow; requires Docker)")
     parser.add_argument("--report", type=Path,

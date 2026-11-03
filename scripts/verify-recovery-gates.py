@@ -13,9 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = [
     "docs/release-recovery-status.md",
-    "docs/audits/civicrecords-ai-audit-full-2026-05-07.md",
+    "docs/audits/townlight_records-audit-full-2026-05-07.md",
     "frontend/playwright.config.ts",
-    "frontend/e2e/civicrecords-user-flows.spec.ts",
+    "frontend/e2e/townlight_records-user-flows.spec.ts",
     "scripts/verify-secret-scan.py",
     "scripts/verify-runtime-install.py",
     "scripts/check_starter_set_integration.py",
@@ -78,11 +78,11 @@ def main() -> int:
             and has_do_not_promote_warning
         )
         has_current_recovery_label = (
-            ("v1.5.0" in lower and "civiccore v1.0.1" in lower)
+            ("v1.5.0" in lower and "townlight_core v1.0.1" in lower)
             or ("v1.6.0" in lower and "qa-002" in lower)
             or ("v1.7.3" in lower and "release-asset convention" in lower)
-            or ("v1.7.2" in lower and "civiccore v1.2.0" in lower)
-            or ("v1.7.1" in lower and "civiccore v1.2.0" in lower)
+            or ("v1.7.2" in lower and "townlight_core v1.2.0" in lower)
+            or ("v1.7.1" in lower and "townlight_core v1.2.0" in lower)
         )
         has_beta_label = (
             "Townlight Beta 1" in text

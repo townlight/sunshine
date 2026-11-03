@@ -13,7 +13,7 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-from civiccore.migrations.guards import (
+from townlight_core.migrations.guards import (
     idempotent_add_column,
     idempotent_create_check_constraint,
     idempotent_create_index,

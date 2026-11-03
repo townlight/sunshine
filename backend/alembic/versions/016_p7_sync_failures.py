@@ -10,7 +10,7 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-from civiccore.migrations.guards import idempotent_create_table
+from townlight_core.migrations.guards import idempotent_create_table
 
 revision: str = '016_p7_sync_failures'
 down_revision: Union[str, None] = '015_p6b_scheduler'

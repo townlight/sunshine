@@ -1,7 +1,7 @@
 import pytest
 from httpx import AsyncClient
 
-from app.config import APP_VERSION
+from townlight_records.config import APP_VERSION
 
 
 @pytest.mark.asyncio

@@ -1,4 +1,4 @@
-"""Tests for backend.app.config startup validation (T2C bootstrap hardening).
+"""Tests for backend.townlight_records.config startup validation (T2C bootstrap hardening).
 
 Covers:
 - FIRST_ADMIN_PASSWORD validator (placeholder, blocklist, length, valid)
@@ -12,7 +12,7 @@ from __future__ import annotations
 import pytest
 from pydantic import ValidationError
 
-from app.config import Settings
+from townlight_records.config import Settings
 
 
 _VALID_JWT = "a" * 64

@@ -1,7 +1,7 @@
 # Release Signing and Provenance
 
 Townlight Records consumes the canonical Townlight release-provenance gate from
-`civiccore.release_provenance`. The local `scripts/verify-release-provenance.py`
+`townlight_core.release_provenance`. The local `scripts/verify-release-provenance.py`
 wrapper exists only so repo workflows have a stable command.
 
 GitHub release pages can show a "Verified" badge for the target commit even
@@ -24,12 +24,12 @@ tag identity:
 ```bash
 cosign verify-blob release-attestation.json \
   --bundle release-attestation.json.bundle \
-  --certificate-identity "https://github.com/CivicSuite/civicrecords-ai/.github/workflows/release.yml@refs/tags/<tag>" \
+  --certificate-identity "https://github.com/townlight/sunshine/.github/workflows/release.yml@refs/tags/<tag>" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 
-sha256sum -c CivicSunshine-<version>-Setup.exe.sha256
+sha256sum -c "Townlight Records-<version>-Setup.exe.sha256"
 python scripts/verify-release-provenance.py <tag> \
-  --repo CivicSuite/civicrecords-ai \
+  --repo townlight/sunshine \
   --attestation release-attestation.json \
   --bundle release-attestation.json.bundle \
   --artifacts-dir .
@@ -53,7 +53,7 @@ Defect an outside auditor can verify:
 Reproducer:
 
 ```bash
-python scripts/verify-release-provenance.py v1.4.10 --repo CivicSuite/civicrecords-ai
+python scripts/verify-release-provenance.py v1.4.10 --repo townlight/sunshine
 ```
 
 Expected output:

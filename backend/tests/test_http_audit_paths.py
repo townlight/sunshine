@@ -5,11 +5,11 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import select
 
-from app.audit import middleware
-from app.audit.logger import verify_chain
-from app.database import get_async_session
-from app.main import create_app
-from app.models.audit import AuditLog
+from townlight_records.audit import middleware
+from townlight_records.audit.logger import verify_chain
+from townlight_records.database import get_async_session
+from townlight_records.main import create_app
+from townlight_records.models.audit import AuditLog
 from tests.conftest import override_get_session, test_session_maker as session_maker
 
 
@@ -19,7 +19,7 @@ async def test_native_http_audit_keeps_long_route_evidence(client, tmp_path, mon
     # supervised native router; unauthenticated writes must remain denied and logged.
     app = create_app(
         desktop_profile_root=tmp_path,
-        desktop_enabled_modules=frozenset({"civiccore", "civicrecords-ai"}),
+        desktop_enabled_modules=frozenset({"townlight_core", "townlight_records"}),
         desktop_domain_enabled=True,
     )
     app.dependency_overrides[get_async_session] = override_get_session

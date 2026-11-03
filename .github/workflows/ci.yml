@@ -124,7 +124,7 @@ jobs:
         # docker-compose.yml reads env_file: .env. We synthesize a minimal,
         # per-run .env with a real JWT_SECRET (config.py rejects insecure
         # defaults at startup, so a placeholder value would fail).
-        #   - DATABASE_URL points at the isolated civicrecords_test database
+        #   - DATABASE_URL points at the isolated townlight_records_test database
         #   - JWT_SECRET is 64 hex chars, generated per-run
         #   - FIRST_ADMIN_PASSWORD is also random per-run
         # Nothing here is secret across runs; the file is thrown away with the
@@ -136,11 +136,11 @@ jobs:
           openssl rand -hex 16 > data/secrets/first_admin_password
           chmod 0400 data/secrets/jwt_secret data/secrets/first_admin_password
           cat > .env <<EOF
-          DATABASE_URL=postgresql+asyncpg://civicrecords:civicrecords@postgres:5432/civicrecords_test
+          DATABASE_URL=postgresql+asyncpg://townlight_records:townlight_records@postgres:5432/townlight_records_test
           FIRST_ADMIN_EMAIL=admin@example.org
           JWT_SECRET_FILE=/run/secrets/jwt_secret
           FIRST_ADMIN_PASSWORD_FILE=/run/secrets/first_admin_password
-          CIVICRECORDS_SECRET_DIR=./data/secrets
+          TOWNLIGHT_RECORDS_SECRET_DIR=./data/secrets
           OLLAMA_BASE_URL=http://ollama:11434
           REDIS_URL=redis://redis:6379/0
           AUDIT_RETENTION_DAYS=1095
@@ -156,16 +156,16 @@ jobs:
         run: docker compose exec -T -u root postgres bash -c 'apt-get update && apt-get install -y postgresql-17-postgis-3'
 
       - name: Create isolated test database
-        # Tests run against civicrecords_test, not the default civicrecords DB,
+        # Tests run against townlight_records_test, not the default townlight_records DB,
         # so a future integration test that touches data never contaminates
         # a hypothetical dev DB that shares the same volume. Self-hosted
         # runners can retain a database from an interrupted prior run, so drop
         # the isolated test DB before recreating it.
         run: |
           docker compose exec -T postgres \
-            dropdb -U civicrecords --if-exists civicrecords_test
+            dropdb -U townlight_records --if-exists townlight_records_test
           docker compose exec -T postgres \
-            createdb -U civicrecords civicrecords_test
+            createdb -U townlight_records townlight_records_test
 
       - name: Build api image
         run: docker compose build api
@@ -212,7 +212,7 @@ jobs:
         run: |
           set -o pipefail
           docker compose run --rm --no-deps \
-            -e CIVICRECORDS_REPO_ROOT=/repo \
+            -e TOWNLIGHT_RECORDS_REPO_ROOT=/repo \
             -e TOWNLIGHT_TEST_RUNTIME_ROOT=/repo/.ci-python \
             -e PYTHONPATH=/repo/.ci-python:/app \
             -v "$PWD:/repo:ro" \
@@ -233,7 +233,7 @@ jobs:
         run: |
           set -o pipefail
           docker compose run --rm --no-deps \
-            -e CIVICRECORDS_REPO_ROOT=/repo \
+            -e TOWNLIGHT_RECORDS_REPO_ROOT=/repo \
             -e TOWNLIGHT_TEST_RUNTIME_ROOT=/repo/.ci-python \
             -e PYTHONPATH=/repo/.ci-python:/app \
             -v "$PWD:/repo:ro" \
@@ -315,12 +315,12 @@ jobs:
           printf '%s\n' 'CHANGE-ME-on-first-login' > data/secrets/first_admin_password
           chmod 0400 data/secrets/jwt_secret data/secrets/first_admin_password
           cat > .env <<EOF
-          DATABASE_URL=postgresql+asyncpg://civicrecords:civicrecords@postgres:5432/civicrecords
+          DATABASE_URL=postgresql+asyncpg://townlight_records:townlight_records@postgres:5432/townlight_records
           ENCRYPTION_KEY=${ENCRYPTION_KEY}
           FIRST_ADMIN_EMAIL=admin@example.org
           JWT_SECRET_FILE=/run/secrets/jwt_secret
           FIRST_ADMIN_PASSWORD_FILE=/run/secrets/first_admin_password
-          CIVICRECORDS_SECRET_DIR=./data/secrets
+          TOWNLIGHT_RECORDS_SECRET_DIR=./data/secrets
           OLLAMA_BASE_URL=http://ollama:11434
           REDIS_URL=redis://redis:6379/0
           AUDIT_RETENTION_DAYS=1095
@@ -330,7 +330,7 @@ jobs:
         run: docker compose build api
 
       - name: docker compose run with placeholder password must exit non-zero
-        # Run a one-shot container that imports app.config — exactly what the
+        # Run a one-shot container that imports townlight_records.config — exactly what the
         # api container does at startup. Capture stdout+stderr; assert the
         # exit code is non-zero AND the error mentions FIRST_ADMIN_PASSWORD.
         # `--no-deps` keeps the test focused on the import-time failure
@@ -339,7 +339,7 @@ jobs:
         run: |
           set +e
           docker compose run --rm --no-deps \
-            api python -c "from app.config import Settings; Settings()" \
+            api python -c "from townlight_records.config import Settings; Settings()" \
             > bootstrap.out 2> bootstrap.err
           rc=$?
           set -e
@@ -367,7 +367,7 @@ jobs:
           chmod 0400 data/secrets/first_admin_password
           set +e
           docker compose run --rm --no-deps \
-            api python -c "from app.config import Settings; Settings()" \
+            api python -c "from townlight_records.config import Settings; Settings()" \
             > bootstrap-ok.out 2> bootstrap-ok.err
           rc=$?
           set -e
@@ -516,11 +516,11 @@ jobs:
           openssl rand -hex 16 > data/secrets/first_admin_password
           chmod 0400 data/secrets/jwt_secret data/secrets/first_admin_password
           cat > .env <<EOF
-          DATABASE_URL=postgresql+asyncpg://civicrecords:civicrecords@postgres:5432/civicrecords_test
+          DATABASE_URL=postgresql+asyncpg://townlight_records:townlight_records@postgres:5432/townlight_records_test
           FIRST_ADMIN_EMAIL=admin@example.org
           JWT_SECRET_FILE=/run/secrets/jwt_secret
           FIRST_ADMIN_PASSWORD_FILE=/run/secrets/first_admin_password
-          CIVICRECORDS_SECRET_DIR=./data/secrets
+          TOWNLIGHT_RECORDS_SECRET_DIR=./data/secrets
           OLLAMA_BASE_URL=http://ollama:11434
           REDIS_URL=redis://redis:6379/0
           AUDIT_RETENTION_DAYS=1095

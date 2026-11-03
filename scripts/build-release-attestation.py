@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from civiccore.release_provenance import build_release_attestation, canonical_json_bytes
+from townlight_core.release_provenance import build_release_attestation, canonical_json_bytes
 
 
 def main() -> int:

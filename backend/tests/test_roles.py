@@ -4,7 +4,7 @@ import uuid
 import pytest
 from httpx import AsyncClient
 
-from app.models.user import UserRole
+from townlight_records.models.user import UserRole
 
 
 def test_user_role_enum_has_all_six_roles():
@@ -16,7 +16,7 @@ def test_user_role_enum_has_all_six_roles():
 
 def test_role_hierarchy_order():
     """Role hierarchy matches canonical spec ordering."""
-    from app.auth.dependencies import ROLE_HIERARCHY
+    from townlight_records.auth.dependencies import ROLE_HIERARCHY
 
     assert ROLE_HIERARCHY[UserRole.ADMIN] > ROLE_HIERARCHY[UserRole.REVIEWER]
     assert ROLE_HIERARCHY[UserRole.REVIEWER] > ROLE_HIERARCHY[UserRole.STAFF]
@@ -27,7 +27,7 @@ def test_role_hierarchy_order():
 
 def test_all_roles_in_hierarchy():
     """Every role in the enum has a hierarchy entry."""
-    from app.auth.dependencies import ROLE_HIERARCHY
+    from townlight_records.auth.dependencies import ROLE_HIERARCHY
 
     for role in UserRole:
         assert role in ROLE_HIERARCHY, f"{role.value} missing from ROLE_HIERARCHY"
@@ -81,7 +81,7 @@ async def test_liaison_department_scoping(client: AsyncClient, admin_token: str)
     resource for non-admin users — cross-department access is denied in
     every case except admin bypass and exact-match.
     """
-    from app.auth.dependencies import require_department_scope
+    from townlight_records.auth.dependencies import require_department_scope
 
     # Create a mock-like user object
     class MockUser:

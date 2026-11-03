@@ -93,8 +93,8 @@ async def _seed_document_with_dept(dept_id: uuid.UUID | None, filename_suffix: s
     Returns the document's id. Matches the pattern used at the bottom of
     test_department_scoping.py.
     """
-    from app.models.document import DataSource, Document, SourceType
-    from app.models.user import User, UserRole
+    from townlight_records.models.document import DataSource, Document, SourceType
+    from townlight_records.models.user import User, UserRole
     from tests.conftest import _create_test_user, test_session_maker
 
     seed_email = f"seed-{uuid.uuid4().hex[:8]}@test.com"

@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Townlight Records &mdash; IT Administrator Manual v1.4.1</title>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   CivicSunshine — IT Administrator Manual
+   Version 1.4.1 | Professional Operations Manual
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --blue-50:  #e8f0f8;
+  --blue-100: #c5d9ed;
+  --blue-200: #9fbfdf;
+  --blue-300: #6fa0cc;
+  --blue-400: #4a86b8;
+  --blue-500: #2e6da0;
+  --blue-600: #265a85;
+  --blue-700: #1e4a6e;
+  --blue-800: #1a3d5c;
+  --blue-900: #1e3a5f;
+  --blue-950: #0f1f33;
+
+  --gray-50:  #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #adb5bd;
+  --gray-500: #6c757d;
+  --gray-600: #495057;
+  --gray-700: #343a40;
+  --gray-800: #212529;
+
+  --code-bg:    #0d1117;
+  --code-fg:    #c9d1d9;
+  --code-green: #7ee787;
+  --code-blue:  #79c0ff;
+  --code-orange:#ffa657;
+  --code-red:   #ff7b72;
+  --code-purple:#d2a8ff;
+  --code-comment:#8b949e;
+
+  --warn-bg:  #fff3cd;
+  --warn-border: #ffc107;
+  --warn-text: #664d03;
+
+  --tip-bg:  #d1e7dd;
+  --tip-border: #198754;
+  --tip-text: #0f5132;
+
+  --security-bg:  #f8d7da;
+  --security-border: #dc3545;
+  --security-text: #842029;
+
+  --info-bg:  #cfe2ff;
+  --info-border: #0d6efd;
+  --info-text: #084298;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+body {
+  font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── Top Navigation ────────────────────────────────────────────────────── */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--blue-950);
+  border-bottom: 3px solid var(--blue-500);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 56px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.topnav .brand {
+  font-weight: 700;
+  color: #fff;
+  font-size: 15px;
+  margin-right: 24px;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+.topnav a {
+  color: var(--blue-200);
+  text-decoration: none;
+  font-size: 12.5px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.topnav a:hover {
+  background: var(--blue-800);
+  color: #fff;
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+/* ── Cover / Header ────────────────────────────────────────────────────── */
+.cover {
+  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-950) 100%);
+  color: #fff;
+  padding: 56px 40px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(46,109,160,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; position: relative; }
+.cover .subtitle { font-size: 16px; color: var(--blue-200); margin-bottom: 20px; position: relative; }
+.cover .meta { display: flex; gap: 16px; flex-wrap: wrap; position: relative; }
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.badge-version { background: var(--blue-500); color: #fff; }
+.badge-date { background: rgba(255,255,255,0.15); color: var(--blue-100); }
+.badge-class { background: rgba(25,135,84,0.8); color: #fff; }
+.badge-license { background: rgba(255,193,7,0.85); color: #000; }
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+.section {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 36px 40px;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.section h2 {
+  font-size: 22px;
+  color: var(--blue-900);
+  border-bottom: 2px solid var(--blue-100);
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+.section h3 {
+  font-size: 17px;
+  color: var(--blue-800);
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.section h4 {
+  font-size: 15px;
+  color: var(--blue-700);
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+p { margin-bottom: 14px; }
+
+/* ── Tables ────────────────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 14px;
+}
+thead th {
+  background: var(--blue-900);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+thead th:first-child { border-radius: 6px 0 0 0; }
+thead th:last-child { border-radius: 0 6px 0 0; }
+tbody td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--gray-200);
+  vertical-align: top;
+}
+tbody tr:nth-child(even) { background: var(--gray-50); }
+tbody tr:hover { background: var(--blue-50); }
+td code, th code {
+  background: var(--gray-100);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--blue-800);
+}
+
+/* ── Code Blocks ───────────────────────────────────────────────────────── */
+pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: 18px 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 14px 0 20px;
+  border: 1px solid #21262d;
+}
+pre .comment { color: var(--code-comment); }
+pre .keyword { color: var(--code-purple); }
+pre .string { color: var(--code-green); }
+pre .cmd { color: var(--code-blue); }
+pre .flag { color: var(--code-orange); }
+pre .output { color: var(--code-comment); font-style: italic; }
+pre .var { color: var(--code-orange); }
+
+code {
+  font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 13.5px;
+}
+p code, li code {
+  background: var(--gray-100);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--blue-800);
+  font-size: 13px;
+}
+
+/* ── Callout Boxes ─────────────────────────────────────────────────────── */
+.callout {
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 18px 0;
+  border-left: 4px solid;
+  font-size: 14px;
+}
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.callout-tip { background: var(--tip-bg); border-color: var(--tip-border); color: var(--tip-text); }
+.callout-warn { background: var(--warn-bg); border-color: var(--warn-border); color: var(--warn-text); }
+.callout-security { background: var(--security-bg); border-color: var(--security-border); color: var(--security-text); }
+.callout-info { background: var(--info-bg); border-color: var(--info-border); color: var(--info-text); }
+
+/* ── Lists ─────────────────────────────────────────────────────────────── */
+ul, ol { margin: 10px 0 16px 24px; }
+li { margin-bottom: 6px; }
+ul ul, ol ol { margin-top: 4px; margin-bottom: 4px; }
+
+/* ── Anchor links ──────────────────────────────────────────────────────── */
+.section h2 a.anchor {
+  color: var(--blue-900);
+  text-decoration: none;
+}
+.section h2 a.anchor:hover { text-decoration: underline; }
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 32px 24px;
+  color: var(--gray-500);
+  font-size: 13px;
+  border-top: 1px solid var(--gray-200);
+  margin-top: 48px;
+}
+
+/* ── Print Styles ──────────────────────────────────────────────────────── */
+@media print {
+  .topnav { display: none; }
+  body { font-size: 11pt; background: #fff; }
+  .container { max-width: 100%; padding: 0; }
+  .cover { background: var(--blue-900) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-after: always; }
+  .section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  pre { font-size: 9pt; white-space: pre-wrap; word-break: break-all; }
+  table { font-size: 10pt; }
+  thead th { background: var(--blue-900) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .callout { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--blue-700); }
+  .badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section { padding: 24px 20px; }
+  .cover { padding: 32px 24px; }
+  .cover h1 { font-size: 24px; }
+  .topnav { padding: 0 12px; }
+  .topnav a { font-size: 11px; padding: 4px 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TOP NAVIGATION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<nav class="topnav">
+  <span class="brand">Townlight Records</span>
+  <a href="#overview">Overview</a>
+  <a href="#hardware">Hardware</a>
+  <a href="#installation">Installation</a>
+  <a href="#configuration">Configuration</a>
+  <a href="#users">Users</a>
+  <a href="#datasources">Data Sources</a>
+  <a href="#models">Models</a>
+  <a href="#exemptions">Exemptions</a>
+  <a href="#compliance">Compliance</a>
+  <a href="#security">Security</a>
+  <a href="#backup">Backup</a>
+  <a href="#monitoring">Monitoring</a>
+  <a href="#upgrading">Upgrading</a>
+  <a href="#appendices">Appendices</a>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     COVER
+     ═══════════════════════════════════════════════════════════════════════ -->
+<header class="cover">
+  <h1>IT Administrator Manual</h1>
+  <div class="subtitle">Townlight Records &mdash; AI-Powered Open Records Support for American Cities</div>
+  <div class="meta">
+    <span class="badge badge-version">v1.4.1</span>
+    <span class="badge badge-date">April 2026</span>
+    <span class="badge badge-class">CAIA: Not High-Risk</span>
+    <span class="badge badge-license">AGPL-3.0</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     v1.2.0 UPDATE NOTICE
+     Covers additions between this manual's original v1.1.0 authorship and
+     the current v1.2.0 release. Canonical truth for these items lives in
+     CHANGELOG.md [1.2.0], USER-MANUAL.md §B.3, and docs/UNIFIED-SPEC.md
+     §§8.7–8.10.
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="v1-2-0-notice" style="margin:1.5rem 0;padding:1.25rem 1.5rem;border-left:4px solid #15803d;background:#f0fdf4;border-radius:6px;">
+  <h2 style="margin-top:0;"><a class="anchor" href="#v1-2-0-notice">v1.2.0 — what changed since this manual was authored</a></h2>
+  <p>
+    This administrator manual was first written against <strong>v1.1.0</strong>. The <strong>v1.2.0</strong> release (2026-04-23) adds five operator-facing capabilities that are <em>not</em> individually documented in every section below. Where this manual and the CHANGELOG disagree, the CHANGELOG wins. Always treat <a href="https://github.com/townlight/sunshine/blob/master/CHANGELOG.md#120---2026-04-23">CHANGELOG.md §[1.2.0]</a> as the authoritative delta.
+  </p>
+  <ul>
+    <li><strong>T6 at-rest encryption for connector credentials (ENG-001 closed).</strong> <code>data_sources.connection_config</code> is now stored as a Fernet envelope (AES-128-CBC + HMAC-SHA256). A new required <code>ENCRYPTION_KEY</code> env var drives the encryption; the installer auto-generates a Fernet key on fresh install and prints a loud &quot;BACK IT UP SEPARATELY FROM YOUR DATABASE&quot; banner. Operator section: <a href="https://github.com/townlight/sunshine/blob/master/USER-MANUAL.md">USER-MANUAL.md §B.3.2</a>. Spec: <a href="https://github.com/townlight/sunshine/blob/master/docs/UNIFIED-SPEC.md">UNIFIED-SPEC §8.10</a>. Reversible Alembic migration <code>019_encrypt_connection_config</code>. <em>Losing the key means losing decryption access to every connector&apos;s credentials — no recovery path in v1.2.0.</em></li>
+    <li><strong>T5D install-time portal switch.</strong> New <code>PORTAL_MODE</code> env var (<code>private</code> default, <code>public</code> opt-in). Private mode is the existing staff-only posture; public mode exposes exactly three surfaces — landing page, resident-registration path, authenticated records-request submission for <code>UserRole.PUBLIC</code>. Nothing else. Operator section: USER-MANUAL.md §B.3.1. Spec: UNIFIED-SPEC §8.9.</li>
+    <li><strong>T5E Windows unsigned double-click installer.</strong> Real <code>.exe</code> shipped as a GitHub Release asset (<code>Townlight Records-1.2.0-Setup.exe</code> + <code>.sha256</code>). <strong>Unsigned by design</strong> per locked signing posture α — SmartScreen will show &quot;Windows protected your PC — Unknown publisher.&quot; Remediation: <strong>More info → Run anyway</strong>, then confirm UAC. Two-shortcut flow: <em>Start Townlight Records</em> (daily <code>docker compose up -d</code>) and <em>Install or Repair Townlight Records</em> (full bootstrap + model pick + pull). macOS/Linux remain on the guided-script path (<code>install.sh</code>).</li>
+    <li><strong>T5C 4-model Gemma 4 installer picker.</strong> <code>gemma4:e4b</code> is the default selected model. The fake tags <code>gemma4:12b</code> and <code>gemma4:27b</code> that appeared in earlier hardware-detect scripts have been purged. <code>gemma4:26b</code> / <code>gemma4:31b</code> are still selectable but gated behind an explicit &quot;requires stronger hardware&quot; acknowledgement against the locked 32 GB target profile. The embedding model <code>nomic-embed-text</code> is auto-pulled alongside the selected LLM.</li>
+    <li><strong>T5A/T5B operator surface.</strong> T5A makes the single-phase adaptive onboarding interview actually persist each answer and transition <code>onboarding_status</code> through the <code>not_started → in_progress → complete</code> lifecycle. T5B auto-seeds 175 state-scoped exemption rules, 5 compliance templates, and 12 notification templates on first boot via <code>app/main.lifespan</code>; idempotent via skip-if-exists so admin customizations survive re-seeds.</li>
+  </ul>
+  <p>
+    <strong>Test coverage at v1.2.0:</strong> 617 backend pytest + 36 frontend vitest, CI-verified (GitHub Actions run 24859606170 on commit <code>cc06abc</code>). See <a href="https://github.com/townlight/sunshine/releases/tag/v1.2.0">the v1.2.0 release page</a> for the curated release notes.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     1. SYSTEM OVERVIEW
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="overview">
+  <h2><a class="anchor" href="#overview">1. System Overview</a></h2>
+
+  <h3>Architecture Summary</h3>
+  <p>
+    Townlight Records is a locally-hosted, Docker Compose-based application that assists municipal clerks in processing open records (public records / FOIA) requests. The system runs entirely on-premises with no cloud dependencies, no telemetry, and no outbound data transmission. All AI inference is performed locally via Ollama using open-weight models.
+  </p>
+  <p>
+    The architecture follows a standard three-tier pattern: a React single-page application serves as the administrative front end, communicating with a FastAPI REST backend, which in turn interfaces with PostgreSQL (with pgvector for semantic search), Redis (for task queuing), and Ollama (for local LLM inference). Asynchronous document ingestion is handled by Celery workers with Redis as the message broker.
+  </p>
+  <p>
+    For the full architectural diagram and data flow, refer to <code>docs/architecture/system-architecture.html</code>.
+  </p>
+
+  <h3>Docker Services</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Image</th>
+        <th>Port</th>
+        <th>Purpose</th>
+        <th>Health Check</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>postgres</code></td>
+        <td><code>pgvector/pgvector:pg17</code></td>
+        <td>5432 (internal)</td>
+        <td>Primary database with vector search extensions</td>
+        <td><code>pg_isready -U civicrecords</code></td>
+      </tr>
+      <tr>
+        <td><code>redis</code></td>
+        <td><code>redis:7.2-alpine</code></td>
+        <td>6379 (internal)</td>
+        <td>Task queue broker and result backend</td>
+        <td><code>redis-cli ping</code></td>
+      </tr>
+      <tr>
+        <td><code>ollama</code></td>
+        <td><code>ollama/ollama:latest</code></td>
+        <td>11434 (internal)</td>
+        <td>Local LLM inference engine</td>
+        <td><code>ollama list</code></td>
+      </tr>
+      <tr>
+        <td><code>api</code></td>
+        <td>Custom (Dockerfile.backend)</td>
+        <td>8000</td>
+        <td>FastAPI REST API server</td>
+        <td><code>curl -sf http://localhost:8000/health</code></td>
+      </tr>
+      <tr>
+        <td><code>worker</code></td>
+        <td>Custom (Dockerfile.backend)</td>
+        <td>&mdash;</td>
+        <td>Celery async task worker (ingestion, embeddings)</td>
+        <td><code>celery inspect ping</code></td>
+      </tr>
+      <tr>
+        <td><code>beat</code></td>
+        <td>Custom (Dockerfile.backend)</td>
+        <td>&mdash;</td>
+        <td>Celery periodic task scheduler</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td><code>frontend</code></td>
+        <td>Custom (Dockerfile.frontend)</td>
+        <td>8080</td>
+        <td>React admin panel (served via nginx)</td>
+        <td><code>curl -sf http://localhost:80/</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Technology Stack</h3>
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th><th>Version</th></tr></thead>
+    <tbody>
+      <tr><td>Runtime</td><td>Python</td><td>3.12</td></tr>
+      <tr><td>API Framework</td><td>FastAPI</td><td>0.115+</td></tr>
+      <tr><td>ORM</td><td>SQLAlchemy</td><td>2.0</td></tr>
+      <tr><td>Migrations</td><td>Alembic</td><td>1.13+</td></tr>
+      <tr><td>Auth</td><td>FastAPI-Users + JWT</td><td>&mdash;</td></tr>
+      <tr><td>Task Queue</td><td>Celery</td><td>5.x</td></tr>
+      <tr><td>Database</td><td>PostgreSQL + pgvector</td><td>17</td></tr>
+      <tr><td>Cache / Broker</td><td>Redis</td><td>7.2 (BSD licensed)</td></tr>
+      <tr><td>AI Inference</td><td>Ollama</td><td>latest</td></tr>
+      <tr><td>Frontend</td><td>React + shadcn/ui + Tailwind CSS</td><td>18.x</td></tr>
+      <tr><td>Containerization</td><td>Docker Compose</td><td>v2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>License Compliance</h3>
+  <p>
+    Townlight Records is released under the <strong>AGPL-3.0-only</strong>. All runtime dependencies use permissive or weak-copyleft licenses (MIT, Apache 2.0, BSD, LGPL, MPL). Redis is pinned to version 7.2 (BSD licensed); version 8.x and later changed to a non-permissive license and must not be used.
+  </p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Warning</div>
+    Do not upgrade the Redis image beyond <code>redis:7.2-alpine</code>. Redis 8.x uses the Server Side Public License (SSPL), which is incompatible with the project's permissive licensing requirements.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     2. HARDWARE REQUIREMENTS
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="hardware">
+  <h2><a class="anchor" href="#hardware">2. Hardware Requirements</a></h2>
+
+  <h3>Minimum Specification</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Minimum</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>CPU</td><td>8 cores (x86_64 or ARM64)</td><td>Modern Intel Core i7 / AMD Ryzen 7 or better</td></tr>
+      <tr><td>RAM</td><td>32 GB</td><td>Required for 12B parameter model inference</td></tr>
+      <tr><td>Storage</td><td>50 GB SSD</td><td>OS + Docker images + models + small document corpus</td></tr>
+      <tr><td>Network</td><td>1 Gbps Ethernet</td><td>Internal network only; no internet required at runtime</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Recommended Specification</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Recommended</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>CPU</td><td>12&ndash;16 cores</td><td>Intel Xeon / AMD EPYC for production workloads</td></tr>
+      <tr><td>RAM</td><td>64 GB</td><td>Recommended tier; headroom for workstation Gemma 4 tags (<code>26b</code>/<code>31b</code>) plus a large document corpus</td></tr>
+      <tr><td>Storage</td><td>2 TB NVMe SSD</td><td>Room for extensive document archives and database growth</td></tr>
+      <tr><td>GPU (optional)</td><td>Dedicated GPU with 8+ GB VRAM</td><td>Dramatically accelerates inference; see GPU support below</td></tr>
+    </tbody>
+  </table>
+
+  <h3>GPU Acceleration Support</h3>
+  <table>
+    <thead><tr><th>Platform</th><th>GPU Framework</th><th>Deployment Method</th></tr></thead>
+    <tbody>
+      <tr><td>Linux (AMD)</td><td>ROCm</td><td><code>docker-compose.gpu.yml</code> overlay with GPU device passthrough</td></tr>
+      <tr><td>Windows (AMD/other)</td><td>DirectML</td><td>Host-native Ollama via <code>docker-compose.host-ollama.yml</code></td></tr>
+      <tr><td>Linux/Windows (NVIDIA)</td><td>CUDA</td><td>NVIDIA Container Toolkit + Ollama GPU support</td></tr>
+    </tbody>
+  </table>
+  <p>
+    The installer automatically detects GPU hardware and selects the appropriate Docker Compose overlay. GPU acceleration is optional; the system functions fully on CPU-only hardware.
+  </p>
+
+  <h3>Performance Target</h3>
+  <div class="callout callout-info">
+    <div class="callout-title">Performance Benchmark</div>
+    On the baseline target profile (Windows 11 Pro 23H2+, 8 cores, 32 GB RAM, CPU inference with <code>gemma4:e4b</code>), the system targets completion of a single records query &mdash; including document retrieval, exemption scanning, and LLM analysis &mdash; in under 30 seconds.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     3. INSTALLATION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="installation">
+  <h2><a class="anchor" href="#installation">3. Installation</a></h2>
+
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>Docker Engine 24.0+ and Docker Compose v2 (included with Docker Desktop on Windows/macOS)</li>
+    <li>At least 32 GB RAM available to Docker (configure in Docker Desktop &rarr; Settings &rarr; Resources)</li>
+    <li>50 GB free disk space</li>
+    <li>Network access to Docker Hub during initial installation (for image pulls)</li>
+    <li>For GPU acceleration: appropriate drivers installed (AMD ROCm, NVIDIA CUDA, or DirectML)</li>
+  </ul>
+
+  <h3>Windows Installation</h3>
+  <p>Open PowerShell as Administrator in the project directory and run:</p>
+  <pre><span class="cmd">.\install.ps1</span></pre>
+  <p>The script performs the following steps:</p>
+  <ol>
+    <li>Verifies Docker Desktop is installed and the daemon is running</li>
+    <li>Verifies Docker Compose v2 is available</li>
+    <li>Creates <code>.env</code> from <code>.env.example</code> and generates a cryptographically random JWT secret</li>
+    <li>Pauses for you to configure admin credentials in <code>.env</code></li>
+    <li>Runs hardware detection (<code>scripts/detect_hardware.ps1</code>) and writes <code>.env.hardware</code></li>
+    <li>Selects the appropriate Docker Compose overlay (GPU or host Ollama if applicable)</li>
+    <li>Pulls base Docker images and builds application images</li>
+    <li>Starts PostgreSQL and Redis; waits for database readiness (up to 60 seconds)</li>
+    <li>Runs Alembic database migrations</li>
+    <li>Starts all seven services</li>
+    <li>Waits for the API health endpoint to respond</li>
+    <li>Pulls the embedding model (<code>nomic-embed-text</code>)</li>
+    <li>Prints the recommended language model command and access URLs</li>
+  </ol>
+
+  <h3>Linux Installation (Ubuntu/Debian)</h3>
+  <p>Run from the project directory:</p>
+  <pre><span class="cmd">chmod +x install.sh</span>
+<span class="cmd">./install.sh</span></pre>
+  <p>The script will automatically install Docker and Docker Compose if they are not present on the system. On Linux with AMD GPUs, the script detects ROCm support and applies the <code>docker-compose.gpu.yml</code> overlay for GPU device passthrough.</p>
+
+  <h3>macOS Installation</h3>
+  <p>Docker Desktop for Mac is required. Install it from <a href="https://www.docker.com/products/docker-desktop/">docker.com</a>, then run:</p>
+  <pre><span class="cmd">chmod +x install.sh</span>
+<span class="cmd">./install.sh</span></pre>
+  <p>macOS does not support GPU passthrough to Docker containers. All inference runs on CPU.</p>
+
+  <h3>Post-Installation Verification</h3>
+  <p>After installation completes, verify that all services are healthy:</p>
+  <pre><span class="comment"># Check all container health statuses</span>
+<span class="cmd">docker compose ps</span>
+<span class="output">NAME                STATUS              PORTS
+civicrecords-api    Up (healthy)        0.0.0.0:8000->8000/tcp
+civicrecords-beat   Up
+civicrecords-frontend Up (healthy)      0.0.0.0:8080->80/tcp
+civicrecords-ollama Up (healthy)
+civicrecords-postgres Up (healthy)      5432/tcp
+civicrecords-redis  Up (healthy)        6379/tcp
+civicrecords-worker Up (healthy)</span>
+
+<span class="comment"># Test API health endpoint</span>
+<span class="cmd">curl http://localhost:8000/health</span>
+<span class="output">{"status":"ok","version":"1.4.1"}</span>
+
+<span class="comment"># Verify OpenAPI documentation is accessible</span>
+<span class="cmd">curl -s http://localhost:8000/docs | head -1</span>
+
+<span class="comment"># Verify frontend is serving</span>
+<span class="cmd">curl -s -o /dev/null -w "%{http_code}" http://localhost:8080</span>
+<span class="output">200</span>
+
+<span class="comment"># Run data sovereignty verification</span>
+<span class="cmd">bash scripts/verify-sovereignty.sh</span>    <span class="comment"># Linux/macOS</span>
+<span class="cmd">.\scripts\verify-sovereignty.ps1</span>      <span class="comment"># Windows</span></pre>
+
+  <h3>First Admin Account Setup</h3>
+  <p>
+    The system automatically creates the first administrator account on startup using the credentials specified in the <code>.env</code> file:
+  </p>
+  <ul>
+    <li><code>FIRST_ADMIN_EMAIL</code> &mdash; the login email for the initial admin (default: <code>admin@example.gov</code>)</li>
+    <li><code>FIRST_ADMIN_PASSWORD</code> &mdash; the initial password (must be changed from the default)</li>
+  </ul>
+  <div class="callout callout-security">
+    <div class="callout-title">Security</div>
+    The application refuses to start if <code>JWT_SECRET</code> is left at its default placeholder value. The installer generates a secure secret automatically, but if you are configuring <code>.env</code> manually, generate one with: <code>openssl rand -hex 32</code>
+  </div>
+  <p>
+    After installation, navigate to <code>http://&lt;server-ip&gt;:8080</code> to access the admin panel and log in with the configured credentials. Townlight Records locks staff/admin screens until the initial administrator password is changed from the account screen.
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     4. CONFIGURATION REFERENCE
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="configuration">
+  <h2><a class="anchor" href="#configuration">4. Configuration Reference</a></h2>
+
+  <h3>Environment Variables (.env)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Description</th>
+        <th>Default</th>
+        <th>Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>DATABASE_URL</code></td>
+        <td>PostgreSQL connection string (asyncpg driver)</td>
+        <td><code>postgresql+asyncpg://civicrecords:civicrecords@postgres:5432/civicrecords</code></td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>JWT_SECRET</code></td>
+        <td>Secret key for signing JWT tokens. Minimum 32 characters. Application refuses to start with insecure defaults.</td>
+        <td>None (must be set)</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>JWT_LIFETIME_SECONDS</code></td>
+        <td>JWT token expiration time in seconds</td>
+        <td><code>3600</code> (1 hour)</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><code>FIRST_ADMIN_EMAIL</code></td>
+        <td>Email address for the auto-created initial admin account</td>
+        <td><code>admin@example.gov</code></td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>FIRST_ADMIN_PASSWORD</code></td>
+        <td>Password for the initial admin account</td>
+        <td>None (must be set)</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>OLLAMA_BASE_URL</code></td>
+        <td>URL for the Ollama inference server</td>
+        <td><code>http://ollama:11434</code></td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>REDIS_URL</code></td>
+        <td>Redis connection string for Celery task queue</td>
+        <td><code>redis://redis:6379/0</code></td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>AUDIT_RETENTION_DAYS</code></td>
+        <td>Number of days to retain audit log entries</td>
+        <td><code>1095</code> (3 years)</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><code>CORS_ORIGINS</code></td>
+        <td>Allowed CORS origins (JSON list format)</td>
+        <td><code>["http://localhost:8080"]</code></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><code>EMBEDDING_MODEL</code></td>
+        <td>Ollama model name for document embeddings</td>
+        <td><code>nomic-embed-text</code></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><code>CHAT_MODEL</code></td>
+        <td>Ollama model name for query analysis and summarization</td>
+        <td><code>gemma4:e4b</code></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><code>VISION_MODEL</code></td>
+        <td>Ollama model name for document image/PDF analysis</td>
+        <td><code>gemma4:e4b</code></td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Hardware Detection (.env.hardware)</h3>
+  <p>
+    The installer generates a <code>.env.hardware</code> file with auto-detected values. These variables are consumed by the Docker Compose overlays and are not typically edited manually.
+  </p>
+  <table>
+    <thead><tr><th>Variable</th><th>Description</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>CIVICRECORDS_GPU_ENABLED</code></td><td>Whether a compatible GPU was detected</td><td><code>true</code></td></tr>
+      <tr><td><code>CIVICRECORDS_PLATFORM</code></td><td>Detected GPU platform identifier</td><td><code>AMD</code></td></tr>
+      <tr><td><code>CIVICRECORDS_GFX_VERSION</code></td><td>GPU microarchitecture version</td><td><code>gfx1100</code></td></tr>
+      <tr><td><code>CIVICRECORDS_TOTAL_RAM_GB</code></td><td>Total system RAM in gigabytes</td><td><code>64</code></td></tr>
+      <tr><td><code>CIVICRECORDS_RECOMMENDED_MODEL</code></td><td>Default pre-filled into the installer picker (operator can change)</td><td><code>gemma4:e4b</code></td></tr>
+      <tr><td><code>CIVICRECORDS_USE_HOST_OLLAMA</code></td><td>Use native host Ollama instead of container (Windows GPU)</td><td><code>true</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>GPU Configuration</h3>
+  <p>GPU support is configured through Docker Compose overlay files:</p>
+  <ul>
+    <li><code>docker-compose.gpu.yml</code> &mdash; Linux AMD ROCm: passes GPU devices into the Ollama container</li>
+    <li><code>docker-compose.host-ollama.yml</code> &mdash; Windows DirectML: replaces containerized Ollama with host-native Ollama for GPU access</li>
+    <li>NVIDIA CUDA: use the NVIDIA Container Toolkit and set <code>deploy.resources.reservations.devices</code> in a custom overlay</li>
+  </ul>
+
+  <h3>Docker Compose Overrides</h3>
+  <p>
+    The system supports standard Docker Compose override patterns. To customize resource limits, port mappings, or volume mounts without modifying the base file, create a <code>docker-compose.override.yml</code>:
+  </p>
+  <pre><span class="comment"># docker-compose.override.yml</span>
+<span class="keyword">services</span>:
+  <span class="var">api</span>:
+    <span class="keyword">ports</span>:
+      - <span class="string">"443:8000"</span>
+    <span class="keyword">deploy</span>:
+      <span class="keyword">resources</span>:
+        <span class="keyword">limits</span>:
+          <span class="var">memory</span>: <span class="string">4G</span></pre>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     5. USER & DEPARTMENT ADMINISTRATION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="users">
+  <h2><a class="anchor" href="#users">5. User &amp; Department Administration</a></h2>
+
+  <h3>Creating Users</h3>
+  <p>
+    User accounts are created exclusively by administrators through the admin API or admin panel. There is no self-registration. This is a deliberate security design: only authorized municipal staff should have access to the system.
+  </p>
+  <pre><span class="comment"># Create a new user via the API</span>
+<span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/admin/users \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{
+    "email": "clerk@city.gov",
+    "password": "SecurePassword123!",
+    "full_name": "Jane Doe",
+    "role": "staff"
+  }'</span></pre>
+
+  <h3>Roles and Permissions</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Code</th>
+        <th>Create Requests</th>
+        <th>Search Documents</th>
+        <th>Review / Approve</th>
+        <th>Manage Users</th>
+        <th>System Config</th>
+        <th>Audit Logs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Admin</strong></td>
+        <td><code>admin</code></td>
+        <td>Yes</td>
+        <td>Yes (all depts)</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><strong>Reviewer</strong></td>
+        <td><code>reviewer</code></td>
+        <td>Yes</td>
+        <td>Yes (all depts)</td>
+        <td>Yes</td>
+        <td>No</td>
+        <td>No</td>
+        <td>View only</td>
+      </tr>
+      <tr>
+        <td><strong>Staff</strong></td>
+        <td><code>staff</code></td>
+        <td>Yes</td>
+        <td>Own dept only</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td><strong>Read Only</strong></td>
+        <td><code>read_only</code></td>
+        <td>No</td>
+        <td>Own dept only</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Creating Departments</h3>
+  <pre><span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/departments/ \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{"name": "Public Works", "description": "Roads, water, utilities"}'</span></pre>
+
+  <h3>Assigning Users to Departments</h3>
+  <p>
+    Use the <code>PATCH /departments/{dept_id}</code> endpoint to update department membership, or assign a department when creating users via the admin panel. A user can belong to one department at a time.
+  </p>
+
+  <h3>Department Scoping Behavior</h3>
+  <ul>
+    <li><strong>Staff</strong> and <strong>Read Only</strong> users can only search documents and view requests within their assigned department.</li>
+    <li><strong>Reviewer</strong> and <strong>Admin</strong> users have cross-department visibility and can view all documents and requests.</li>
+    <li>Documents ingested from a data source are associated with the department that owns that data source.</li>
+    <li>If a user has no department assigned, they cannot see any department-scoped content (except Admins, who see everything).</li>
+  </ul>
+
+  <h3>Service Accounts for Federation</h3>
+  <p>
+    Service accounts enable machine-to-machine API access for integrations with other municipal systems (e.g., a records management system pushing documents). Service accounts authenticate with API keys rather than JWT tokens.
+  </p>
+  <pre><span class="comment"># Create a service account</span>
+<span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/service-accounts/ \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{"name": "RMS Integration", "description": "Automated document feed from Records Management System"}'</span></pre>
+  <div class="callout callout-security">
+    <div class="callout-title">Security</div>
+    The API key is returned only once at creation time. It is stored as a bcrypt hash in the database and cannot be retrieved. Record it securely immediately. If lost, create a new service account.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     6. DATA SOURCE MANAGEMENT
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="datasources">
+  <h2><a class="anchor" href="#datasources">6. Data Source Management</a></h2>
+
+  <h3>Adding File Directory Sources</h3>
+  <p>
+    A directory data source points to a file system path accessible to the API container. This path must be mounted as a Docker volume.
+  </p>
+  <pre><span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/datasources/ \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{
+    "name": "City Council Minutes",
+    "source_type": "directory",
+    "config": {"path": "/data/council-minutes"}
+  }'</span></pre>
+
+  <h3>Uploading Files</h3>
+  <p>
+    Files can be uploaded directly through the API or the admin panel. Uploaded files are stored in the <code>uploads</code> Docker volume at <code>/tmp/civicrecords-uploads</code> inside the container.
+  </p>
+  <pre><span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/datasources/upload \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-F</span> <span class="string">"file=@meeting-minutes-2025.pdf"</span></pre>
+
+  <h3>Ingestion Pipeline Overview</h3>
+  <ol>
+    <li><strong>Discovery</strong> &mdash; Files in a data source directory are scanned and new/changed files are identified by hash comparison.</li>
+    <li><strong>Parsing</strong> &mdash; Each file is processed by the appropriate parser based on file extension.</li>
+    <li><strong>Chunking</strong> &mdash; Parsed text is split into overlapping chunks suitable for embedding and retrieval.</li>
+    <li><strong>Embedding</strong> &mdash; Each chunk is embedded using the configured embedding model (<code>nomic-embed-text</code> by default) and stored as a vector in pgvector.</li>
+    <li><strong>Indexing</strong> &mdash; Document metadata and chunk vectors are written to PostgreSQL for both keyword and semantic search.</li>
+  </ol>
+  <p>Ingestion is performed asynchronously by the Celery worker service.</p>
+
+  <h3>Triggering Ingestion</h3>
+  <pre><span class="comment"># Trigger ingestion for a specific data source</span>
+<span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/datasources/<span class="var">{source_id}</span>/ingest \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span></pre>
+
+  <h3>Monitoring Ingestion Status</h3>
+  <pre><span class="comment"># View data source statistics including ingestion progress</span>
+<span class="cmd">curl</span> http://localhost:8000/datasources/stats \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span></pre>
+  <p>Each document tracks its ingestion status: <code>pending</code>, <code>processing</code>, <code>completed</code>, or <code>failed</code>.</p>
+
+  <h3>Supported File Formats</h3>
+  <table>
+    <thead><tr><th>Format</th><th>Extensions</th><th>Parser</th><th>Track</th></tr></thead>
+    <tbody>
+      <tr><td>PDF</td><td><code>.pdf</code></td><td>PyMuPDF / Vision model fallback</td><td>Text + OCR</td></tr>
+      <tr><td>Microsoft Word</td><td><code>.docx</code></td><td>python-docx</td><td>Text</td></tr>
+      <tr><td>Plain Text</td><td><code>.txt</code></td><td>Direct read</td><td>Text</td></tr>
+      <tr><td>CSV</td><td><code>.csv</code></td><td>CSV parser</td><td>Tabular</td></tr>
+      <tr><td>Markdown</td><td><code>.md</code></td><td>Direct read</td><td>Text</td></tr>
+      <tr><td>HTML</td><td><code>.html</code>, <code>.htm</code></td><td>BeautifulSoup</td><td>Text</td></tr>
+      <tr><td>JSON</td><td><code>.json</code></td><td>JSON parser</td><td>Structured</td></tr>
+      <tr><td>Email</td><td><code>.eml</code></td><td>Email parser</td><td>Text</td></tr>
+      <tr><td>Images</td><td><code>.png</code>, <code>.jpg</code>, <code>.tiff</code></td><td>Vision model OCR</td><td>OCR</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Troubleshooting Ingestion Failures</h3>
+  <ul>
+    <li><strong>Document stuck in "processing"</strong> &mdash; Check that the worker service is running: <code>docker compose ps worker</code>. Restart if needed: <code>docker compose restart worker</code>.</li>
+    <li><strong>"Failed" status</strong> &mdash; Check worker logs: <code>docker compose logs worker --tail 100</code>. Common causes: unsupported file format, corrupt file, or Ollama not responding (for vision model parsing).</li>
+    <li><strong>Embedding failures</strong> &mdash; Verify the embedding model is pulled: <code>docker compose exec ollama ollama list</code>. If <code>nomic-embed-text</code> is missing, pull it.</li>
+    <li><strong>Large file timeouts</strong> &mdash; Very large PDFs (100+ pages) may exceed the default Celery task timeout. Monitor the worker logs for timeout errors.</li>
+  </ul>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     7. MODEL MANAGEMENT
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="models">
+  <h2><a class="anchor" href="#models">7. Model Management</a></h2>
+
+  <h3>Recommended Models</h3>
+  <p>
+    Townlight Records is optimized for the <strong>Gemma 4</strong> family of open-weight models from Google. These models provide strong instruction-following, good factual accuracy, and are released under permissive licenses suitable for government use.
+  </p>
+  <p>The installer picker presents all four supported Gemma 4 tags. The default is <code>gemma4:e4b</code>. Only <code>e2b</code> and <code>e4b</code> are supportable at the 32 GB baseline target profile; <code>26b</code> and <code>31b</code> require stronger hardware and are gated behind an explicit confirmation in the installer.</p>
+  <table>
+    <thead><tr><th>Model</th><th>Class</th><th>Parameters</th><th>Disk</th><th>RAM (advisory)</th><th>Supportable at baseline</th></tr></thead>
+    <tbody>
+      <tr><td><code>gemma4:e2b</code></td><td>Edge</td><td>2.3B effective (5.1B w/ embeddings)</td><td>7.2 GB</td><td>~16 GB</td><td>Yes</td></tr>
+      <tr><td><code>gemma4:e4b</code> <em>(default)</em></td><td>Edge</td><td>4.5B effective (8B w/ embeddings)</td><td>9.6 GB</td><td>~20 GB</td><td>Yes</td></tr>
+      <tr><td><code>gemma4:26b</code></td><td>Workstation MoE</td><td>25.2B total / 3.8B active</td><td>18 GB</td><td>48+ GB recommended</td><td>No (32 GB baseline)</td></tr>
+      <tr><td><code>gemma4:31b</code></td><td>Workstation dense</td><td>30.7B</td><td>20 GB</td><td>64+ GB; GPU recommended</td><td>No (32 GB baseline)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Pulling Models via Ollama</h3>
+  <pre><span class="comment"># Pull the embedding model (required)</span>
+<span class="cmd">docker compose exec ollama ollama pull nomic-embed-text</span>
+
+<span class="comment"># Pull the default chat/vision model</span>
+<span class="cmd">docker compose exec ollama ollama pull gemma4:e4b</span>
+<span class="comment"># OR a smaller edge model for tighter installs:</span>
+<span class="cmd">docker compose exec ollama ollama pull gemma4:e2b</span>
+<span class="comment"># OR workstation models (require 48+ GB RAM for 26b, 64+ GB RAM and GPU for 31b):</span>
+<span class="cmd">docker compose exec ollama ollama pull gemma4:26b</span>
+<span class="cmd">docker compose exec ollama ollama pull gemma4:31b</span>
+
+<span class="comment"># If using host-native Ollama (Windows GPU):</span>
+<span class="cmd">ollama pull nomic-embed-text</span>
+<span class="cmd">ollama pull gemma4:e4b</span>
+
+<span class="comment"># Verify installed models</span>
+<span class="cmd">docker compose exec ollama ollama list</span></pre>
+
+  <h3>Model Registry</h3>
+  <p>
+    The model registry tracks compliance metadata for every model used in the system. This supports audit and governance requirements by recording which model version produced each analysis.
+  </p>
+  <pre><span class="comment"># View registered models</span>
+<span class="cmd">curl</span> http://localhost:8000/admin/models/registry \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span>
+
+<span class="comment"># Register a new model with compliance metadata</span>
+<span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/admin/models/registry \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{
+    "model_name": "gemma4:e4b",
+    "version": "latest",
+    "license": "Apache 2.0",
+    "provider": "Google",
+    "purpose": "Records query analysis and exemption reasoning"
+  }'</span></pre>
+
+  <h3>Switching Models</h3>
+  <p>
+    To change the active model, update the <code>CHAT_MODEL</code> and/or <code>VISION_MODEL</code> variables in <code>.env</code> and restart the API service:
+  </p>
+  <pre><span class="comment"># Edit .env to set the new model (any Ollama tag; picker defaults are four Gemma 4 tags)</span>
+<span class="comment"># CHAT_MODEL=gemma4:e2b</span>
+<span class="comment"># VISION_MODEL=gemma4:e2b</span>
+
+<span class="comment"># Restart API to pick up the change</span>
+<span class="cmd">docker compose restart api</span></pre>
+
+  <h3>Embedding Model</h3>
+  <p>
+    The embedding model (<code>nomic-embed-text</code> by default) converts document chunks into vector representations for semantic search. Changing the embedding model requires re-ingesting all documents to rebuild the vector index.
+  </p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Warning</div>
+    Changing <code>EMBEDDING_MODEL</code> invalidates all existing document embeddings. You must re-ingest every data source after changing this value. This can be a time-consuming operation for large document corpora.
+  </div>
+
+  <h3>Model Resource Requirements</h3>
+  <table>
+    <thead><tr><th>Model</th><th>Disk Space</th><th>RAM (inference)</th><th>GPU VRAM</th><th>Avg. Query Time (CPU)</th></tr></thead>
+    <tbody>
+      <tr><td><code>nomic-embed-text</code></td><td>~275 MB</td><td>~1 GB</td><td>~512 MB</td><td>&lt;1 sec / chunk</td></tr>
+      <tr><td><code>gemma4:e2b</code></td><td>7.2 GB</td><td>~16 GB</td><td>~8 GB</td><td>8&ndash;15 sec</td></tr>
+      <tr><td><code>gemma4:e4b</code> <em>(default)</em></td><td>9.6 GB</td><td>~20 GB</td><td>~10 GB</td><td>10&ndash;20 sec</td></tr>
+      <tr><td><code>gemma4:26b</code></td><td>18 GB</td><td>48+ GB recommended</td><td>~20 GB</td><td>20&ndash;40 sec</td></tr>
+      <tr><td><code>gemma4:31b</code></td><td>20 GB</td><td>64+ GB recommended</td><td>~24 GB</td><td>30&ndash;60 sec</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     8. EXEMPTION RULES ADMINISTRATION
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="exemptions">
+  <h2><a class="anchor" href="#exemptions">8. Exemption Rules Administration</a></h2>
+
+  <h3>How the Rules Engine Works</h3>
+  <p>
+    Townlight Records uses a <strong>rules-primary, LLM-secondary</strong> architecture for exemption detection. When a document is scanned for potential exemptions (e.g., personal privacy, law enforcement confidentiality, trade secrets):
+  </p>
+  <ol>
+    <li><strong>Deterministic rules</strong> are evaluated first. These are pattern-based rules tied to specific state statutes. Each rule defines keywords, patterns, and the statutory citation it implements.</li>
+    <li><strong>LLM analysis</strong> runs second, using the language model to identify exemptions that pattern matching may miss. The LLM provides reasoning for each flagged exemption.</li>
+    <li><strong>Human review</strong> is always required. The system flags potential exemptions but never automatically redacts or denies records. A human reviewer must accept, modify, or dismiss each flag.</li>
+  </ol>
+  <div class="callout callout-tip">
+    <div class="callout-title">Tip</div>
+    The rules-primary approach ensures that well-known exemption patterns are caught consistently regardless of LLM behavior. The LLM layer adds coverage for nuanced cases that rules alone would miss.
+  </div>
+
+  <h3>50-State Coverage</h3>
+  <p>
+    The system ships with approximately 180 exemption rules covering all 50 U.S. states plus federal FOIA categories. Rules are seeded from the <code>backend/scripts/seed_rules.py</code> script and stored in the <code>exemption_rules</code> database table.
+  </p>
+
+  <h3>Viewing Rules by State</h3>
+  <pre><span class="comment"># List all exemption rules (filterable by state)</span>
+<span class="cmd">curl</span> <span class="string">"http://localhost:8000/exemptions/rules/?state=CO"</span> \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span></pre>
+
+  <h3>Creating Custom Rules</h3>
+  <pre><span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/exemptions/rules/ \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{
+    "state": "CO",
+    "statute": "CRS 24-72-204(3)(a)(IV)",
+    "category": "Trade Secrets",
+    "description": "Trade secrets, privileged information, confidential commercial data",
+    "keywords": ["trade secret", "proprietary", "confidential commercial"],
+    "rule_type": "pattern",
+    "enabled": true
+  }'</span></pre>
+
+  <h3>Enabling / Disabling Rules</h3>
+  <pre><span class="comment"># Disable a specific rule</span>
+<span class="cmd">curl</span> <span class="flag">-X PATCH</span> http://localhost:8000/exemptions/rules/<span class="var">{rule_id}</span> \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{"enabled": false}'</span></pre>
+
+  <h3>Running the Seed Script</h3>
+  <p>To populate or reset the exemption rules database with the built-in rule set:</p>
+  <pre><span class="cmd">docker compose exec api python -m scripts.seed_rules</span></pre>
+  <div class="callout callout-warn">
+    <div class="callout-title">Warning</div>
+    Running the seed script on an existing installation will recreate default rules. Custom rules you have created will not be affected, but modified default rules may be overwritten. Back up your rules before re-seeding.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     9. COMPLIANCE & AUDIT
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="compliance">
+  <h2><a class="anchor" href="#compliance">9. Compliance &amp; Audit</a></h2>
+
+  <h3>Hash-Chained Audit Log Architecture</h3>
+  <p>
+    Every significant action in the system (login, document access, search queries, exemption decisions, request status changes) generates an immutable audit log entry. Each entry includes a SHA-256 hash of its contents chained to the previous entry's hash, creating a tamper-evident log structure similar to a blockchain.
+  </p>
+  <p>
+    If any entry is modified or deleted, the chain verification will fail at that point, providing cryptographic proof of tampering. This design satisfies records retention and legal discovery requirements.
+  </p>
+
+  <h3>Audit Log Retention</h3>
+  <p>
+    The default retention period is <strong>1,095 days (3 years)</strong>, configurable via the <code>AUDIT_RETENTION_DAYS</code> environment variable. Entries older than this threshold are eligible for archival.
+  </p>
+  <div class="callout callout-security">
+    <div class="callout-title">Security</div>
+    Consult your municipality's records retention schedule before reducing the default retention period. Many jurisdictions require minimum retention periods of 3&ndash;7 years for government records.
+  </div>
+
+  <h3>Verifying Audit Chain Integrity</h3>
+  <pre><span class="comment"># Verify the audit log hash chain is intact</span>
+<span class="cmd">curl</span> http://localhost:8000/audit/verify \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span>
+<span class="output">{"valid": true, "entries_checked": 14523, "chain_intact": true}</span></pre>
+
+  <h3>Exporting Audit Logs</h3>
+  <pre><span class="comment"># Export audit logs (supports CSV and JSON formats)</span>
+<span class="cmd">curl</span> <span class="string">"http://localhost:8000/audit/export?format=csv&amp;start_date=2026-01-01&amp;end_date=2026-03-31"</span> \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-o</span> audit-q1-2026.csv
+
+<span class="comment"># JSON export</span>
+<span class="cmd">curl</span> <span class="string">"http://localhost:8000/audit/export?format=json"</span> \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-o</span> audit-full.json</pre>
+
+  <h3>Compliance Template Documents</h3>
+  <p>The system includes five compliance template documents stored at <code>backend/compliance_templates/</code>:</p>
+  <table>
+    <thead><tr><th>Template</th><th>File</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>AI Governance Policy</td><td><code>ai-governance-policy.md</code></td><td>Organizational AI use policy framework</td></tr>
+      <tr><td>AI Use Disclosure</td><td><code>ai-use-disclosure.md</code></td><td>Public notice that AI is used in records processing</td></tr>
+      <tr><td>CAIA Impact Assessment</td><td><code>caia-impact-assessment.md</code></td><td>Colorado AI Act risk classification assessment</td></tr>
+      <tr><td>Data Residency Attestation</td><td><code>data-residency-attestation.md</code></td><td>Certification that all data remains on-premises</td></tr>
+      <tr><td>Response Letter Disclosure</td><td><code>response-letter-disclosure.md</code></td><td>AI disclosure language for inclusion in response letters</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Rendering Templates with City Profile</h3>
+  <p>
+    Templates contain placeholder variables (city name, contact information, etc.) that are populated from the city profile:
+  </p>
+  <pre><span class="comment"># Set up the city profile first</span>
+<span class="cmd">curl</span> <span class="flag">-X POST</span> http://localhost:8000/city-profile \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span> \
+  <span class="flag">-H</span> <span class="string">"Content-Type: application/json"</span> \
+  <span class="flag">-d</span> <span class="string">'{
+    "city_name": "City of Boulder",
+    "state": "CO",
+    "contact_email": "records@bouldercolorado.gov"
+  }'</span>
+
+<span class="comment"># Render a template with city profile data</span>
+<span class="cmd">curl</span> http://localhost:8000/exemptions/templates/<span class="var">{template_id}</span>/render \
+  <span class="flag">-H</span> <span class="string">"Authorization: Bearer &lt;admin-jwt-token&gt;"</span></pre>
+
+  <h3>Data Sovereignty Verification</h3>
+  <p>Run the sovereignty verification script to confirm that no data leaves the local system:</p>
+  <pre><span class="comment"># Linux / macOS</span>
+<span class="cmd">bash scripts/verify-sovereignty.sh</span>
+
+<span class="comment"># Windows</span>
+<span class="cmd">.\scripts\verify-sovereignty.ps1</span></pre>
+  <p>
+    This script inspects Docker network configuration, DNS resolution settings, and container firewall rules to verify that no container has outbound internet access.
+  </p>
+
+  <h3>CAIA Classification</h3>
+  <p>
+    Under the Colorado Artificial Intelligence Act (SB 24-205), Townlight Records is classified as <strong>not high-risk</strong>. The system does not autonomously make or substantially contribute to consequential decisions. All exemption flags and document classifications require human review and approval before any action is taken. The system is an assistive tool, not a decision-maker. The full impact assessment is documented in <code>backend/compliance_templates/caia-impact-assessment.md</code>.
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     10. SECURITY
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="security">
+  <h2><a class="anchor" href="#security">10. Security</a></h2>
+
+  <h3>Network Configuration</h3>
+  <p>
+    By default, only the API (port 8000) and frontend (port 8080) services expose ports to the host. All other services (PostgreSQL, Redis, Ollama) communicate over Docker's internal network and are not accessible from outside the Docker Compose stack.
+  </p>
+  <div class="callout callout-security">
+    <div class="callout-title">Security</div>
+    The system is designed for deployment on a private, trusted network behind a firewall. Do not expose ports 8000 or 8080 directly to the public internet. Use a reverse proxy (nginx, Caddy, or HAProxy) with TLS termination for any external access.
+  </div>
+
+  <h3>HTTPS / TLS Setup</h3>
+  <p>
+    Townlight Records does not include a built-in TLS certificate. To enable HTTPS, place a reverse proxy in front of the application:
+  </p>
+  <pre><span class="comment"># Example: nginx reverse proxy configuration</span>
+<span class="keyword">server</span> {
+    <span class="var">listen</span> 443 ssl;
+    <span class="var">server_name</span> records.city.gov;
+
+    <span class="var">ssl_certificate</span>     /etc/ssl/certs/records.city.gov.crt;
+    <span class="var">ssl_certificate_key</span> /etc/ssl/private/records.city.gov.key;
+
+    <span class="keyword">location</span> /api/ {
+        <span class="var">proxy_pass</span> http://127.0.0.1:8000/;
+    }
+    <span class="keyword">location</span> / {
+        <span class="var">proxy_pass</span> http://127.0.0.1:8080/;
+    }
+}</pre>
+
+  <h3>JWT Secret Management</h3>
+  <ul>
+    <li>The JWT secret must be at least 32 characters long.</li>
+    <li>The application <strong>refuses to start</strong> if the JWT secret is set to a known insecure default (<code>CHANGE-ME</code>, empty string, or the placeholder value).</li>
+    <li>Generate a secure secret: <code>openssl rand -hex 32</code></li>
+    <li>Store the <code>.env</code> file with restricted permissions: <code>chmod 600 .env</code></li>
+    <li>If the JWT secret is rotated, all existing sessions are invalidated and users must re-authenticate.</li>
+  </ul>
+
+  <h3>Login Rate Limiting</h3>
+  <p>
+    The login endpoint (<code>POST /auth/jwt/login</code>) is rate-limited to <strong>5 requests per minute per IP address</strong>. Exceeding this limit returns HTTP 429 (Too Many Requests). The rate limiter uses in-memory tracking with a maximum of 10,000 tracked IPs and automatic expiry of stale entries.
+  </p>
+
+  <h3>No Default Passwords</h3>
+  <p>
+    The installer generates a random JWT secret and forces the administrator to set the initial admin password before the first start. The application will not start with placeholder credentials.
+  </p>
+
+  <h3>No Telemetry or Outbound Connections</h3>
+  <p>
+    Townlight Records makes <strong>zero outbound network connections</strong> during normal operation. There is no telemetry, no analytics, no update checking, and no "phone home" behavior. All AI inference happens locally via Ollama. The system can operate on a completely air-gapped network after initial Docker image pulls.
+  </p>
+
+  <h3>Role-Based Access Control</h3>
+  <p>
+    All API endpoints enforce role-based access control (RBAC) using the <code>require_role()</code> dependency. See the <a href="#users">User &amp; Department Administration</a> section for the full role permissions matrix. Key restrictions:
+  </p>
+  <ul>
+    <li>User management endpoints (<code>/admin/*</code>) require the <code>admin</code> role.</li>
+    <li>Audit log export requires the <code>admin</code> role.</li>
+    <li>Document search is scoped by department for <code>staff</code> and <code>read_only</code> roles.</li>
+    <li>Request approval workflows require the <code>reviewer</code> or <code>admin</code> role.</li>
+  </ul>
+
+  <h3>Service Account API Key Hashing</h3>
+  <p>
+    Service account API keys are hashed with bcrypt before storage. The plaintext key is returned exactly once at creation time and is never stored or logged. Authentication of service account requests validates the provided key against the stored hash.
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     11. BACKUP & RECOVERY
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="backup">
+  <h2><a class="anchor" href="#backup">11. Backup &amp; Recovery</a></h2>
+
+  <h3>What to Back Up</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Location</th><th>Contents</th><th>Priority</th></tr></thead>
+    <tbody>
+      <tr><td>PostgreSQL database</td><td><code>pgdata</code> Docker volume</td><td>All application data: users, documents, audit logs, search indices, rules</td><td>Critical</td></tr>
+      <tr><td>Environment files</td><td><code>.env</code>, <code>.env.hardware</code></td><td>Configuration, JWT secret, database credentials</td><td>Critical</td></tr>
+      <tr><td>Uploaded documents</td><td><code>uploads</code> Docker volume</td><td>Original files uploaded through the admin panel</td><td>High</td></tr>
+      <tr><td>Ollama models</td><td><code>ollamadata</code> Docker volume</td><td>Downloaded model weights (~8&ndash;17 GB)</td><td>Low (re-downloadable)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>PostgreSQL Backup</h3>
+  <pre><span class="comment"># Create a full database dump</span>
+<span class="cmd">docker compose exec -T postgres pg_dump -U civicrecords civicrecords</span> &gt; backup-$(date +%Y%m%d).sql
+
+<span class="comment"># Compressed backup (recommended for large databases)</span>
+<span class="cmd">docker compose exec -T postgres pg_dump -U civicrecords -Fc civicrecords</span> &gt; backup-$(date +%Y%m%d).dump
+
+<span class="comment"># Back up environment files</span>
+<span class="cmd">cp .env .env.backup-$(date +%Y%m%d)</span>
+
+<span class="comment"># Back up uploaded documents volume</span>
+<span class="cmd">docker run --rm -v civicrecords-ai_uploads:/data -v $(pwd)/backups:/backup alpine \
+  tar czf /backup/uploads-$(date +%Y%m%d).tar.gz -C /data .</span></pre>
+
+  <h3>Restore Procedure</h3>
+  <pre><span class="comment"># 1. Stop the application</span>
+<span class="cmd">docker compose down</span>
+
+<span class="comment"># 2. Start only the database</span>
+<span class="cmd">docker compose up -d postgres</span>
+
+<span class="comment"># 3. Wait for database readiness</span>
+<span class="cmd">docker compose exec -T postgres pg_isready -U civicrecords</span>
+
+<span class="comment"># 4. Drop and recreate the database</span>
+<span class="cmd">docker compose exec -T postgres dropdb -U civicrecords civicrecords</span>
+<span class="cmd">docker compose exec -T postgres createdb -U civicrecords civicrecords</span>
+
+<span class="comment"># 5a. Restore from SQL dump</span>
+<span class="cmd">docker compose exec -T postgres psql -U civicrecords civicrecords</span> &lt; backup-20260401.sql
+
+<span class="comment"># 5b. OR restore from compressed dump</span>
+<span class="cmd">docker compose exec -T postgres pg_restore -U civicrecords -d civicrecords</span> &lt; backup-20260401.dump
+
+<span class="comment"># 6. Start all services</span>
+<span class="cmd">docker compose up -d</span>
+
+<span class="comment"># 7. Verify health</span>
+<span class="cmd">curl http://localhost:8000/health</span></pre>
+
+  <h3>Backup Schedule Recommendations</h3>
+  <table>
+    <thead><tr><th>Backup Type</th><th>Frequency</th><th>Retention</th></tr></thead>
+    <tbody>
+      <tr><td>Full database dump</td><td>Daily</td><td>30 days</td></tr>
+      <tr><td>Environment file backup</td><td>On every change</td><td>Indefinite</td></tr>
+      <tr><td>Uploaded documents</td><td>Weekly</td><td>90 days</td></tr>
+      <tr><td>Off-site copy</td><td>Weekly</td><td>1 year</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-tip">
+    <div class="callout-title">Tip</div>
+    Automate backups with a cron job. Store backups on a separate physical disk or network share. Test restore procedures quarterly.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     12. MONITORING & TROUBLESHOOTING
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="monitoring">
+  <h2><a class="anchor" href="#monitoring">12. Monitoring &amp; Troubleshooting</a></h2>
+
+  <h3>Health Endpoint</h3>
+  <pre><span class="cmd">curl http://localhost:8000/health</span>
+<span class="output">{"status":"ok","version":"1.4.1"}</span></pre>
+  <p>
+    The <code>GET /health</code> endpoint returns HTTP 200 with the application version when the API is operational. Use this for load balancer health checks and monitoring systems.
+  </p>
+
+  <h3>Docker Service Health Checks</h3>
+  <pre><span class="comment"># View health status of all services</span>
+<span class="cmd">docker compose ps</span>
+
+<span class="comment"># View health check logs for a specific service</span>
+<span class="cmd">docker inspect --format='{{json .State.Health}}' civicrecords-api-1</span></pre>
+
+  <h3>Common Issues</h3>
+  <table>
+    <thead><tr><th>Symptom</th><th>Likely Cause</th><th>Resolution</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>API returns 500 on startup</td>
+        <td>Database migration failure</td>
+        <td>Check logs: <code>docker compose logs api</code>. Run migrations manually: <code>docker compose exec api alembic upgrade head</code></td>
+      </tr>
+      <tr>
+        <td>Search returns no results</td>
+        <td>Embedding model not pulled</td>
+        <td>Pull the model: <code>docker compose exec ollama ollama pull nomic-embed-text</code></td>
+      </tr>
+      <tr>
+        <td>Ingestion stuck at "processing"</td>
+        <td>Worker service crashed or not running</td>
+        <td>Check and restart: <code>docker compose restart worker</code></td>
+      </tr>
+      <tr>
+        <td>Login returns 429</td>
+        <td>Rate limit exceeded (5/min per IP)</td>
+        <td>Wait 60 seconds. If persistent, check for brute-force attempts in audit logs.</td>
+      </tr>
+      <tr>
+        <td>Ollama timeout errors</td>
+        <td>Insufficient RAM for model</td>
+        <td>Switch to a smaller model or add RAM. Check: <code>docker stats</code></td>
+      </tr>
+      <tr>
+        <td>"JWT_SECRET is set to an insecure default"</td>
+        <td><code>.env</code> not configured</td>
+        <td>Generate a secret: <code>openssl rand -hex 32</code> and set in <code>.env</code></td>
+      </tr>
+      <tr>
+        <td>Frontend shows blank page</td>
+        <td>API not reachable from browser</td>
+        <td>Verify CORS_ORIGINS in <code>.env</code> includes the frontend URL</td>
+      </tr>
+      <tr>
+        <td>PostgreSQL won't start</td>
+        <td>Corrupted data volume or port conflict</td>
+        <td>Check logs: <code>docker compose logs postgres</code>. Verify port 5432 is not in use.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Log Locations</h3>
+  <pre><span class="comment"># API server logs</span>
+<span class="cmd">docker compose logs api --tail 100 -f</span>
+
+<span class="comment"># Worker (ingestion) logs</span>
+<span class="cmd">docker compose logs worker --tail 100 -f</span>
+
+<span class="comment"># Database logs</span>
+<span class="cmd">docker compose logs postgres --tail 50</span>
+
+<span class="comment"># Ollama inference logs</span>
+<span class="cmd">docker compose logs ollama --tail 50</span>
+
+<span class="comment"># All services combined</span>
+<span class="cmd">docker compose logs --tail 200 -f</span></pre>
+
+  <h3>Checking Ollama Model Status</h3>
+  <pre><span class="cmd">docker compose exec ollama ollama list</span>
+<span class="output">NAME                  ID           SIZE     MODIFIED
+nomic-embed-text      274b5616...  274 MB   3 days ago
+gemma4:e4b            c6eb396d...  9.6 GB   3 days ago</span></pre>
+
+  <h3>Database Connectivity Checks</h3>
+  <pre><span class="comment"># Test database connectivity from the API container</span>
+<span class="cmd">docker compose exec api python -c "
+from app.database import engine
+import asyncio
+async def check():
+    async with engine.connect() as conn:
+        result = await conn.execute(text('SELECT 1'))
+        print('Database OK:', result.scalar())
+from sqlalchemy import text
+asyncio.run(check())
+"</span>
+
+<span class="comment"># Direct PostgreSQL check</span>
+<span class="cmd">docker compose exec postgres pg_isready -U civicrecords</span>
+<span class="output">/var/run/postgresql:5432 - accepting connections</span></pre>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     13. UPGRADING
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="upgrading">
+  <h2><a class="anchor" href="#upgrading">13. Upgrading</a></h2>
+
+  <h3>Upgrade Procedure</h3>
+  <ol>
+    <li>
+      <strong>Back up the database</strong> before any upgrade:
+      <pre><span class="cmd">docker compose exec -T postgres pg_dump -U civicrecords -Fc civicrecords</span> &gt; pre-upgrade-backup.dump</pre>
+    </li>
+    <li>
+      <strong>Pull the latest code:</strong>
+      <pre><span class="cmd">git pull origin main</span></pre>
+    </li>
+    <li>
+      <strong>Rebuild Docker images:</strong>
+      <pre><span class="cmd">docker compose build</span></pre>
+    </li>
+    <li>
+      <strong>Run database migrations:</strong>
+      <pre><span class="cmd">docker compose run --rm api alembic upgrade head</span></pre>
+    </li>
+    <li>
+      <strong>Restart all services:</strong>
+      <pre><span class="cmd">docker compose up -d</span></pre>
+    </li>
+    <li>
+      <strong>Verify health:</strong>
+      <pre><span class="cmd">curl http://localhost:8000/health</span></pre>
+    </li>
+  </ol>
+  <div class="callout callout-tip">
+    <div class="callout-title">Tip</div>
+    The API service automatically runs Alembic migrations on startup. However, running migrations explicitly as a separate step (step 4) allows you to catch migration errors before bringing the full stack online.
+  </div>
+
+  <h3>Database Migrations</h3>
+  <p>
+    Townlight Records uses <strong>Alembic</strong> for database schema migrations. Migration files are stored in <code>backend/alembic/versions/</code>. Key commands:
+  </p>
+  <pre><span class="comment"># Apply all pending migrations</span>
+<span class="cmd">docker compose exec api alembic upgrade head</span>
+
+<span class="comment"># Check current migration version</span>
+<span class="cmd">docker compose exec api alembic current</span>
+
+<span class="comment"># View migration history</span>
+<span class="cmd">docker compose exec api alembic history</span></pre>
+
+  <h3>Version Compatibility</h3>
+  <p>
+    Always upgrade sequentially through minor versions. Skipping major versions may result in migration conflicts. Check the <code>CHANGELOG.md</code> for breaking changes between versions.
+  </p>
+
+  <h3>Rollback Procedure</h3>
+  <ol>
+    <li>
+      <strong>Stop all services:</strong>
+      <pre><span class="cmd">docker compose down</span></pre>
+    </li>
+    <li>
+      <strong>Restore the database from the pre-upgrade backup:</strong>
+      <pre><span class="cmd">docker compose up -d postgres</span>
+<span class="cmd">docker compose exec -T postgres dropdb -U civicrecords civicrecords</span>
+<span class="cmd">docker compose exec -T postgres createdb -U civicrecords civicrecords</span>
+<span class="cmd">docker compose exec -T postgres pg_restore -U civicrecords -d civicrecords</span> &lt; pre-upgrade-backup.dump</pre>
+    </li>
+    <li>
+      <strong>Check out the previous version:</strong>
+      <pre><span class="cmd">git checkout v1.0.0</span>  <span class="comment"># Replace with the target version tag</span></pre>
+    </li>
+    <li>
+      <strong>Rebuild and restart:</strong>
+      <pre><span class="cmd">docker compose build</span>
+<span class="cmd">docker compose up -d</span></pre>
+    </li>
+  </ol>
+  <div class="callout callout-warn">
+    <div class="callout-title">Warning</div>
+    Rolling back Alembic migrations with <code>alembic downgrade</code> is possible but risky in production. Prefer a full database restore from backup for rollback scenarios.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     14. APPENDICES
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="appendices">
+  <h2><a class="anchor" href="#appendices">14. Appendices</a></h2>
+
+  <h3>Appendix A: Complete API Endpoint Reference</h3>
+  <table>
+    <thead>
+      <tr><th>Method</th><th>Path</th><th>Auth</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Health</td></tr>
+      <tr><td><code>GET</code></td><td><code>/health</code></td><td>None</td><td>Application health check and version</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Authentication</td></tr>
+      <tr><td><code>POST</code></td><td><code>/auth/jwt/login</code></td><td>None</td><td>Authenticate and receive JWT token</td></tr>
+      <tr><td><code>POST</code></td><td><code>/auth/jwt/logout</code></td><td>JWT</td><td>Invalidate current session</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Users</td></tr>
+      <tr><td><code>GET</code></td><td><code>/users/me</code></td><td>JWT</td><td>Get current authenticated user profile</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/users/me</code></td><td>JWT</td><td>Update current user profile</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Administration</td></tr>
+      <tr><td><code>GET</code></td><td><code>/admin/status</code></td><td>Admin</td><td>System status overview</td></tr>
+      <tr><td><code>GET</code></td><td><code>/admin/users</code></td><td>Admin</td><td>List all users</td></tr>
+      <tr><td><code>POST</code></td><td><code>/admin/users</code></td><td>Admin</td><td>Create a new user account</td></tr>
+      <tr><td><code>GET</code></td><td><code>/admin/models</code></td><td>Admin</td><td>List available Ollama models</td></tr>
+      <tr><td><code>GET</code></td><td><code>/admin/models/registry</code></td><td>Admin</td><td>List registered models with compliance metadata</td></tr>
+      <tr><td><code>POST</code></td><td><code>/admin/models/registry</code></td><td>Admin</td><td>Register a model with compliance metadata</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/admin/models/registry/{model_id}</code></td><td>Admin</td><td>Update model registry entry</td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/admin/models/registry/{model_id}</code></td><td>Admin</td><td>Remove model from registry</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Audit</td></tr>
+      <tr><td><code>GET</code></td><td><code>/audit/logs</code></td><td>Admin</td><td>Query audit log entries with filters</td></tr>
+      <tr><td><code>GET</code></td><td><code>/audit/verify</code></td><td>Admin</td><td>Verify audit log hash chain integrity</td></tr>
+      <tr><td><code>GET</code></td><td><code>/audit/export</code></td><td>Admin</td><td>Export audit logs (CSV/JSON)</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Data Sources</td></tr>
+      <tr><td><code>POST</code></td><td><code>/datasources/</code></td><td>Admin</td><td>Create a new data source</td></tr>
+      <tr><td><code>GET</code></td><td><code>/datasources/</code></td><td>JWT</td><td>List data sources</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/datasources/{source_id}</code></td><td>Admin</td><td>Update data source configuration</td></tr>
+      <tr><td><code>POST</code></td><td><code>/datasources/{source_id}/ingest</code></td><td>Admin</td><td>Trigger ingestion for a data source</td></tr>
+      <tr><td><code>POST</code></td><td><code>/datasources/upload</code></td><td>JWT</td><td>Upload a file for ingestion</td></tr>
+      <tr><td><code>GET</code></td><td><code>/datasources/stats</code></td><td>JWT</td><td>Data source ingestion statistics</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Documents</td></tr>
+      <tr><td><code>GET</code></td><td><code>/documents/</code></td><td>JWT</td><td>List ingested documents</td></tr>
+      <tr><td><code>GET</code></td><td><code>/documents/{document_id}</code></td><td>JWT</td><td>Get document details and metadata</td></tr>
+      <tr><td><code>GET</code></td><td><code>/documents/{document_id}/chunks</code></td><td>JWT</td><td>Get document chunks with embeddings info</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Search</td></tr>
+      <tr><td><code>POST</code></td><td><code>/search/query</code></td><td>JWT</td><td>Execute a semantic + keyword search query</td></tr>
+      <tr><td><code>GET</code></td><td><code>/search/sessions</code></td><td>JWT</td><td>List search sessions</td></tr>
+      <tr><td><code>GET</code></td><td><code>/search/sessions/{session_id}</code></td><td>JWT</td><td>Get search session details and results</td></tr>
+      <tr><td><code>GET</code></td><td><code>/search/filters</code></td><td>JWT</td><td>Get available search filter options</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Records Requests</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/</code></td><td>JWT</td><td>Create a new records request</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/</code></td><td>JWT</td><td>List records requests</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/stats</code></td><td>JWT</td><td>Request processing statistics</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}</code></td><td>JWT</td><td>Get request details</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/requests/{request_id}</code></td><td>JWT</td><td>Update request details</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/documents</code></td><td>JWT</td><td>Attach documents to a request</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}/documents</code></td><td>JWT</td><td>List documents attached to a request</td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/requests/{request_id}/documents/{doc_id}</code></td><td>JWT</td><td>Remove document from a request</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/submit-review</code></td><td>JWT</td><td>Submit request for review</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/ready-for-release</code></td><td>Reviewer</td><td>Mark request ready for release</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/approve</code></td><td>Reviewer</td><td>Approve and finalize request</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/reject</code></td><td>Reviewer</td><td>Reject request with reason</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}/timeline</code></td><td>JWT</td><td>Get request timeline / activity log</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/timeline</code></td><td>JWT</td><td>Add timeline entry</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}/messages</code></td><td>JWT</td><td>Get request messages / correspondence</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/messages</code></td><td>JWT</td><td>Send a message on a request</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}/fees</code></td><td>JWT</td><td>Get fee schedule for a request</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/fees</code></td><td>JWT</td><td>Add fee line items to a request</td></tr>
+      <tr><td><code>POST</code></td><td><code>/requests/{request_id}/response-letter</code></td><td>JWT</td><td>Generate response letter</td></tr>
+      <tr><td><code>GET</code></td><td><code>/requests/{request_id}/response-letter</code></td><td>JWT</td><td>Get response letter</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/requests/{request_id}/response-letter/{letter_id}</code></td><td>JWT</td><td>Update response letter</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Exemptions</td></tr>
+      <tr><td><code>POST</code></td><td><code>/exemptions/rules/</code></td><td>Admin</td><td>Create an exemption rule</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/rules/</code></td><td>JWT</td><td>List exemption rules (filterable by state)</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/exemptions/rules/{rule_id}</code></td><td>Admin</td><td>Update or disable an exemption rule</td></tr>
+      <tr><td><code>POST</code></td><td><code>/exemptions/scan/{request_id}</code></td><td>JWT</td><td>Run exemption scan on request documents</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/flags/{request_id}</code></td><td>JWT</td><td>Get exemption flags for a request</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/exemptions/flags/{flag_id}</code></td><td>Reviewer</td><td>Accept, modify, or dismiss an exemption flag</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/dashboard</code></td><td>JWT</td><td>Exemption analytics dashboard data</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/dashboard/accuracy</code></td><td>JWT</td><td>Exemption detection accuracy metrics</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/dashboard/export</code></td><td>Admin</td><td>Export exemption dashboard data</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/templates/</code></td><td>JWT</td><td>List disclosure templates</td></tr>
+      <tr><td><code>POST</code></td><td><code>/exemptions/templates/</code></td><td>Admin</td><td>Create a disclosure template</td></tr>
+      <tr><td><code>GET</code></td><td><code>/exemptions/templates/{template_id}/render</code></td><td>JWT</td><td>Render template with city profile data</td></tr>
+      <tr><td><code>PUT</code></td><td><code>/exemptions/templates/{template_id}</code></td><td>Admin</td><td>Update a disclosure template</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Departments</td></tr>
+      <tr><td><code>POST</code></td><td><code>/departments/</code></td><td>Admin</td><td>Create a department</td></tr>
+      <tr><td><code>GET</code></td><td><code>/departments/</code></td><td>JWT</td><td>List departments</td></tr>
+      <tr><td><code>GET</code></td><td><code>/departments/{dept_id}</code></td><td>JWT</td><td>Get department details</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/departments/{dept_id}</code></td><td>Admin</td><td>Update department details or membership</td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/departments/{dept_id}</code></td><td>Admin</td><td>Delete a department</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Service Accounts</td></tr>
+      <tr><td><code>POST</code></td><td><code>/service-accounts/</code></td><td>Admin</td><td>Create a service account (returns API key once)</td></tr>
+      <tr><td><code>GET</code></td><td><code>/service-accounts/</code></td><td>Admin</td><td>List service accounts</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/service-accounts/{account_id}</code></td><td>Admin</td><td>Update or deactivate a service account</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Analytics</td></tr>
+      <tr><td><code>GET</code></td><td><code>/analytics/operational</code></td><td>JWT</td><td>Operational analytics and dashboard metrics</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">City Profile</td></tr>
+      <tr><td><code>GET</code></td><td><code>/city-profile</code></td><td>JWT</td><td>Get the city profile</td></tr>
+      <tr><td><code>POST</code></td><td><code>/city-profile</code></td><td>Admin</td><td>Create the city profile</td></tr>
+      <tr><td><code>PATCH</code></td><td><code>/city-profile</code></td><td>Admin</td><td>Update the city profile</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Systems Catalog</td></tr>
+      <tr><td><code>GET</code></td><td><code>/catalog/domains</code></td><td>JWT</td><td>List catalog domains (functional areas)</td></tr>
+      <tr><td><code>GET</code></td><td><code>/catalog/systems</code></td><td>JWT</td><td>List cataloged municipal systems</td></tr>
+      <tr><td><code>POST</code></td><td><code>/catalog/load</code></td><td>Admin</td><td>Load/reload systems catalog from seed data</td></tr>
+
+      <tr><td colspan="4" style="background:var(--blue-50);font-weight:600;color:var(--blue-900);">Notifications</td></tr>
+      <tr><td><code>GET</code></td><td><code>/notifications/templates</code></td><td>JWT</td><td>List notification templates</td></tr>
+      <tr><td><code>GET</code></td><td><code>/notifications/log</code></td><td>JWT</td><td>View notification delivery log</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Appendix B: Database Schema Overview</h3>
+  <p>The system uses 29 PostgreSQL tables. Key tables and their relationships:</p>
+  <table>
+    <thead><tr><th>Table</th><th>Purpose</th><th>Key Relationships</th></tr></thead>
+    <tbody>
+      <tr><td><code>users</code></td><td>User accounts and authentication</td><td>Has many requests, belongs to department</td></tr>
+      <tr><td><code>departments</code></td><td>Organizational departments</td><td>Has many users, has many data sources</td></tr>
+      <tr><td><code>data_sources</code></td><td>Registered document data sources</td><td>Has many documents, belongs to department</td></tr>
+      <tr><td><code>documents</code></td><td>Ingested document records</td><td>Belongs to data source, has many chunks</td></tr>
+      <tr><td><code>document_chunks</code></td><td>Text chunks with vector embeddings</td><td>Belongs to document (pgvector column)</td></tr>
+      <tr><td><code>model_registry</code></td><td>AI model compliance tracking</td><td>Referenced by audit entries</td></tr>
+      <tr><td><code>search_sessions</code></td><td>Search session containers</td><td>Has many queries, belongs to user</td></tr>
+      <tr><td><code>search_queries</code></td><td>Individual search queries</td><td>Belongs to session, has many results</td></tr>
+      <tr><td><code>search_results</code></td><td>Search result rankings</td><td>Belongs to query, references document chunks</td></tr>
+      <tr><td><code>records_requests</code></td><td>Open records request lifecycle</td><td>Has many documents, flags, timeline entries</td></tr>
+      <tr><td><code>request_documents</code></td><td>Documents attached to requests</td><td>Join table: requests &harr; documents</td></tr>
+      <tr><td><code>document_cache</code></td><td>Cached document analysis results</td><td>Belongs to request</td></tr>
+      <tr><td><code>exemption_rules</code></td><td>Statutory exemption rule definitions</td><td>Referenced by exemption flags</td></tr>
+      <tr><td><code>exemption_flags</code></td><td>Flagged exemptions on request documents</td><td>Belongs to request, references rule</td></tr>
+      <tr><td><code>disclosure_templates</code></td><td>Response letter disclosure templates</td><td>Referenced by response letters</td></tr>
+      <tr><td><code>request_timelines</code></td><td>Request activity timeline entries</td><td>Belongs to request</td></tr>
+      <tr><td><code>request_messages</code></td><td>Correspondence on requests</td><td>Belongs to request, belongs to user</td></tr>
+      <tr><td><code>response_letters</code></td><td>Generated response letters</td><td>Belongs to request</td></tr>
+      <tr><td><code>fee_schedules</code></td><td>Fee schedule definitions</td><td>Has many line items</td></tr>
+      <tr><td><code>fee_line_items</code></td><td>Individual fee entries</td><td>Belongs to fee schedule</td></tr>
+      <tr><td><code>notification_templates</code></td><td>Email/notification templates</td><td>Referenced by notification log</td></tr>
+      <tr><td><code>notification_log</code></td><td>Notification delivery records</td><td>References template and user</td></tr>
+      <tr><td><code>prompt_templates</code></td><td>LLM prompt templates</td><td>Used by search and exemption modules</td></tr>
+      <tr><td><code>city_profiles</code></td><td>Municipality configuration data</td><td>Referenced by template rendering</td></tr>
+      <tr><td><code>system_catalog</code></td><td>Municipal IT systems catalog</td><td>Has many connector templates</td></tr>
+      <tr><td><code>connector_templates</code></td><td>Integration connector definitions</td><td>Belongs to catalog system</td></tr>
+      <tr><td><code>service_accounts</code></td><td>Machine-to-machine API accounts</td><td>Hashed API key, audit-logged</td></tr>
+      <tr><td><code>audit_log</code></td><td>Tamper-evident hash-chained audit log</td><td>References user, hash chain to previous entry</td></tr>
+      <tr><td><code>alembic_version</code></td><td>Database migration version tracking</td><td>Managed by Alembic</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Appendix C: Docker Compose Environment Variables</h3>
+  <p>
+    The following environment variables are set within <code>docker-compose.yml</code> for infrastructure services:
+  </p>
+  <table>
+    <thead><tr><th>Service</th><th>Variable</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td><code>postgres</code></td><td><code>POSTGRES_USER</code></td><td><code>civicrecords</code></td></tr>
+      <tr><td><code>postgres</code></td><td><code>POSTGRES_PASSWORD</code></td><td><code>civicrecords</code></td></tr>
+      <tr><td><code>postgres</code></td><td><code>POSTGRES_DB</code></td><td><code>civicrecords</code></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-security">
+    <div class="callout-title">Security</div>
+    The default PostgreSQL credentials (<code>civicrecords/civicrecords</code>) are acceptable because the database is only accessible within the Docker internal network. However, for defense-in-depth, consider changing them in production by overriding the <code>postgres</code> service environment and updating <code>DATABASE_URL</code> accordingly.
+  </div>
+  <p>Application services (<code>api</code>, <code>worker</code>, <code>beat</code>) load their configuration from the <code>.env</code> file via the <code>env_file</code> directive in <code>docker-compose.yml</code>.</p>
+
+  <h3>Appendix D: Supported Platforms Matrix</h3>
+  <table>
+    <thead><tr><th>Platform</th><th>Architecture</th><th>Docker</th><th>GPU Support</th><th>Installer</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Ubuntu 22.04 / 24.04</td><td>x86_64</td><td>Docker Engine</td><td>ROCm (AMD), CUDA (NVIDIA)</td><td><code>install.sh</code></td><td>Fully supported</td></tr>
+      <tr><td>Debian 12</td><td>x86_64</td><td>Docker Engine</td><td>ROCm (AMD), CUDA (NVIDIA)</td><td><code>install.sh</code></td><td>Fully supported</td></tr>
+      <tr><td>RHEL 9 / Rocky 9</td><td>x86_64</td><td>Docker Engine</td><td>ROCm (AMD), CUDA (NVIDIA)</td><td><code>install.sh</code></td><td>Community tested</td></tr>
+      <tr><td>Windows 10/11 Pro</td><td>x86_64</td><td>Docker Desktop</td><td>DirectML (native Ollama)</td><td><code>install.ps1</code></td><td>Fully supported</td></tr>
+      <tr><td>macOS 13+ (Intel)</td><td>x86_64</td><td>Docker Desktop</td><td>None (CPU only)</td><td><code>install.sh</code></td><td>Supported</td></tr>
+      <tr><td>macOS 13+ (Apple Silicon)</td><td>ARM64</td><td>Docker Desktop</td><td>None (CPU only)</td><td><code>install.sh</code></td><td>Supported</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="footer">
+  Townlight Records v1.4.1 &mdash; IT Administrator Manual<br>
+  AGPL-3.0 &mdash; Open Source<br>
+  Generated April 2026
+</div>
+
+</div><!-- .container -->
+</body>
+</html>

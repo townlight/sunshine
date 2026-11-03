@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy import text
 
-from app.models.document import SourceType
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 
@@ -29,7 +29,7 @@ async def _seed_source(session, source_id, name):
 @pytest.mark.asyncio
 async def test_retrying_rows_processed_before_discover(db_session):
     """retrying rows in sync_failures are processed before discover() on same tick."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "ordering-test")
@@ -49,7 +49,7 @@ async def test_retrying_rows_processed_before_discover(db_session):
 
     async def mock_fetch(path):
         calls.append(("fetch", path))
-        from app.connectors.base import FetchedDocument
+        from townlight_records.connectors.base import FetchedDocument
         return FetchedDocument(
             source_path=path, filename="x.json", file_type="json",
             content=b'{"id": 1}', file_size=9, metadata={},
@@ -66,8 +66,8 @@ async def test_retrying_rows_processed_before_discover(db_session):
     mock_connector.fetch = AsyncMock(side_effect=mock_fetch)
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -83,7 +83,7 @@ async def test_retrying_rows_processed_before_discover(db_session):
 @pytest.mark.asyncio
 async def test_retrying_row_resolved_on_success(db_session):
     """A retrying row that fetches successfully → status=resolved, resolved_at set."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "resolve-test")
@@ -103,7 +103,7 @@ async def test_retrying_row_resolved_on_success(db_session):
     failure_id = failure.id
 
     async def mock_fetch(path):
-        from app.connectors.base import FetchedDocument
+        from townlight_records.connectors.base import FetchedDocument
         return FetchedDocument(
             source_path=path, filename="x.json", file_type="json",
             content=b'{"id": 1}', file_size=9, metadata={},
@@ -116,8 +116,8 @@ async def test_retrying_row_resolved_on_success(db_session):
     mock_connector.fetch = AsyncMock(side_effect=mock_fetch)
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         result = await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -134,7 +134,7 @@ async def test_retrying_row_resolved_on_success(db_session):
 @pytest.mark.asyncio
 async def test_retrying_row_increments_retry_count_on_failure(db_session):
     """A retrying row that fails again → retry_count incremented, status remains retrying."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "retry-count-test")
@@ -159,7 +159,7 @@ async def test_retrying_row_increments_retry_count_on_failure(db_session):
     mock_connector.fetch = AsyncMock(side_effect=RuntimeError("still failing"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
     await run_connector_sync_with_retry(
         connector=mock_connector,
         source_id=str(source_id),

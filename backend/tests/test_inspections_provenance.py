@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
-from app.requests.planning_sources import validate_document
+from townlight_records.requests.planning_sources import validate_document
 
 
 def test_inspections_document_rechecks_provider_and_exact_bytes():
@@ -30,7 +30,7 @@ def test_inspections_document_rechecks_provider_and_exact_bytes():
 @pytest.mark.parametrize("provider_available", [True, False])
 def test_shared_session_preserves_inspections_provenance_provider(monkeypatch, provider_available):
     """Suite snapshots use the shared dependency, without native_records_user."""
-    from app import database
+    from townlight_records import database
 
     text = '{"public_summary":"Fictional reviewed intake."}'
     digest = hashlib.sha256(text.encode()).hexdigest()

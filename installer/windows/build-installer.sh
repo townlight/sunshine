@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build the CivicSunshine Windows installer using Inno Setup.
+# Build the Townlight Records Windows installer using Inno Setup.
 #
 # T5E (Tier 5 Blocker E) — UNSIGNED BY DESIGN. No code-signing step here.
 # Scott locked B3 signing posture = α (unsigned) on 2026-04-22.
@@ -14,7 +14,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-echo "=== Building CivicSunshine Windows Installer (UNSIGNED) ==="
+echo "=== Building Townlight Records Windows Installer (UNSIGNED) ==="
 echo "Repo root: $REPO_ROOT"
 
 # ─── Locate Inno Setup compiler ───────────────────────────────────────────
@@ -63,7 +63,7 @@ check_file "Dockerfile.frontend"
 check_file "LICENSE"
 check_file "README.md"
 check_dir  "scripts"
-check_dir  "backend/app"
+check_dir  "backend/townlight_records"
 check_dir  "frontend/src"
 check_dir  "docs"
 check_file "installer/windows/launch-install.ps1"
@@ -81,7 +81,7 @@ echo "All bundle sources present."
 
 # ─── Resolve the installer version (single authoritative source) ─────────
 # Precedence:
-#   1. CIVICRECORDS_VERSION env var (CI sets this from the git tag, with
+#   1. TOWNLIGHT_RECORDS_VERSION env var (CI sets this from the git tag, with
 #      any leading "v" stripped, on tagged release builds).
 #   2. backend/pyproject.toml [project] version = "..." (authoritative for
 #      untagged local dev builds).
@@ -92,8 +92,8 @@ echo "All bundle sources present."
 # the artifact name produced here matches the artifact name the release
 # workflow uploads.
 resolve_version() {
-    if [ -n "${CIVICRECORDS_VERSION:-}" ]; then
-        echo "$CIVICRECORDS_VERSION"
+    if [ -n "${TOWNLIGHT_RECORDS_VERSION:-}" ]; then
+        echo "$TOWNLIGHT_RECORDS_VERSION"
         return 0
     fi
     local pyproject="$REPO_ROOT/backend/pyproject.toml"
@@ -114,8 +114,8 @@ resolve_version() {
 
 APP_VERSION=$(resolve_version) || exit 1
 echo "Resolved installer version: $APP_VERSION"
-if [ -n "${CIVICRECORDS_VERSION:-}" ]; then
-    echo "  source: \$CIVICRECORDS_VERSION (CI / tag override)"
+if [ -n "${TOWNLIGHT_RECORDS_VERSION:-}" ]; then
+    echo "  source: \$TOWNLIGHT_RECORDS_VERSION (CI / tag override)"
 else
     echo "  source: backend/pyproject.toml (authoritative for local dev)"
 fi
@@ -134,13 +134,13 @@ echo "Compiling installer…"
 # Fix: pre-convert the .iss path to Windows form with cygpath, then turn
 # path conversion off for the single ISCC invocation so "/DMyAppVersion=…"
 # arrives verbatim.
-ISS_SCRIPT_WIN="$(cygpath -w "$REPO_ROOT/installer/windows/civicrecords-ai.iss")"
+ISS_SCRIPT_WIN="$(cygpath -w "$REPO_ROOT/installer/windows/townlight_records.iss")"
 MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' "$ISCC" "/DMyAppVersion=$APP_VERSION" "$ISS_SCRIPT_WIN"
 
-# OutputBaseFilename in the .iss is CivicSunshine-{#MyAppVersion}-Setup,
+# OutputBaseFilename in the .iss is Townlight Records-{#MyAppVersion}-Setup,
 # so the expected artifact name below is derived from the same resolved
 # version. Any drift here is a bug in this script or in the .iss.
-OUTPUT="$REPO_ROOT/build/CivicSunshine-${APP_VERSION}-Setup.exe"
+OUTPUT="$REPO_ROOT/build/Townlight Records-${APP_VERSION}-Setup.exe"
 if [ -f "$OUTPUT" ]; then
     SIZE=$(du -h "$OUTPUT" | cut -f1)
     # SHA-256 for release-page verification (operators can compare

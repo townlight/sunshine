@@ -11,10 +11,10 @@ import pytest
 from sqlalchemy import select
 from httpx import AsyncClient
 
-from app.models.request import RecordsRequest, RequestStatus
-from app.models.notifications import NotificationLog, NotificationTemplate
-from app.models.user import User
-from app.requests.deadline_check import (
+from townlight_records.models.request import RecordsRequest, RequestStatus
+from townlight_records.models.notifications import NotificationLog, NotificationTemplate
+from townlight_records.models.user import User
+from townlight_records.requests.deadline_check import (
     check_deadline_approaching,
     check_deadline_overdue,
 )
@@ -65,7 +65,7 @@ async def _seed_deadline_templates(session) -> None:
 
 async def _create_staff_user(session) -> User:
     """Create a staff user with a unique email for use as assigned_to."""
-    from app.models.user import UserRole
+    from townlight_records.models.user import UserRole
     user = User(
         id=uuid.uuid4(),
         email=f"staff-deadline-{uuid.uuid4().hex[:8]}@test.gov",

@@ -31,7 +31,7 @@ def test_co4_tier1_ledger_static_check_passes() -> None:
     )
 
     assert result.returncode == 0, result.stderr
-    assert "PASS: 1 CivicSuite/civicrecords-ai CO-4 target release(s) are ledgered" in result.stdout
+    assert "PASS: 1 Townlight/townlight_records CO-4 target release(s) are ledgered" in result.stdout
 
 
 def test_co4_tier1_ledger_marks_v1410_as_pre_gate_only() -> None:

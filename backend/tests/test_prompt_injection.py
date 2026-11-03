@@ -1,6 +1,6 @@
 """Tests for prompt injection defense in context_manager.py."""
 
-from app.llm.context_manager import sanitize_for_llm, assemble_context
+from townlight_records.llm.context_manager import sanitize_for_llm, assemble_context
 
 
 def test_sanitize_role_override_ignore_instructions():

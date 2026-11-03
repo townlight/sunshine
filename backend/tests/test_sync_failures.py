@@ -6,7 +6,7 @@ from datetime import datetime, timezone, timedelta
 import pytest
 from sqlalchemy import text
 
-from app.models.document import SourceType
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 
@@ -30,7 +30,7 @@ async def _seed_source(session, source_id: uuid.UUID, name: str):
 @pytest.mark.asyncio
 async def test_failed_record_creates_sync_failure_row(db_session):
     """After a failed record fetch, a sync_failures row is created with correct fields."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     source_id = uuid.uuid4()
     # Create a data_source to satisfy FK
     await _seed_source(db_session, source_id, "fail-test")
@@ -57,7 +57,7 @@ async def test_failed_record_creates_sync_failure_row(db_session):
 @pytest.mark.asyncio
 async def test_dead_letter_at_retry_count_5(db_session):
     """retry_count reaches 5 → status should be set to permanently_failed."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "deadletter-test")
     await db_session.commit()
@@ -84,7 +84,7 @@ async def test_dead_letter_at_retry_count_5(db_session):
 @pytest.mark.asyncio
 async def test_dead_letter_at_7_days(db_session):
     """first_failed_at > 7 days ago, retry_count < 5 → permanently_failed (time threshold)."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "time-deadletter")
     await db_session.commit()
@@ -114,7 +114,7 @@ async def test_dead_letter_at_7_days(db_session):
 @pytest.mark.asyncio
 async def test_404_response_creates_tombstone(db_session):
     """Task retries return 404 → status=tombstone, not retrying."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "tombstone-test")
     await db_session.commit()
@@ -137,7 +137,7 @@ async def test_404_response_creates_tombstone(db_session):
 async def test_dismiss_sets_dismissed_status_not_deletes(db_session):
     """Dismiss → status=dismissed, row present, dismissed_at + dismissed_by set."""
     from sqlalchemy import select
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "dismiss-test")
     await db_session.commit()
@@ -175,7 +175,7 @@ async def test_dismiss_sets_dismissed_status_not_deletes(db_session):
 async def test_cascade_delete_removes_failures_and_run_log(db_session):
     """Delete DataSource → sync_failures + sync_run_log rows cascade-deleted."""
     from sqlalchemy import select, text
-    from app.models.sync_failure import SyncFailure, SyncRunLog
+    from townlight_records.models.sync_failure import SyncFailure, SyncRunLog
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "cascade-test")
     await db_session.commit()

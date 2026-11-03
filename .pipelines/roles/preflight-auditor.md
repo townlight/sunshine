@@ -28,7 +28,7 @@ gh run list -R <org>/<module> --workflow=release.yml --limit 5
 gh run list -R <org>/<module> --workflow=ci.yml --limit 5
 ```
 
-A workflow with 0s-duration failures in 5+ recent runs is a known-broken workflow. Audit finding TEST-022 from `audit-civicsuite-2026-05-09` documented exactly this pattern. If you see it, the workflow YAML is broken; combine with Check 1.
+A workflow with 0s-duration failures in 5+ recent runs is a known-broken workflow. Audit finding TEST-022 from `audit-townlight-2026-05-09` documented exactly this pattern. If you see it, the workflow YAML is broken; combine with Check 1.
 
 ### Check 3 - Scripts referenced by workflows exist and execute
 
@@ -60,11 +60,11 @@ rm -rf .venv-* node_modules/.cache 2>/dev/null
 bash scripts/verify-release.sh
 ```
 
-Local persisted state hides bugs. The civicrecords-ai email-validator bug only fired on fresh pgdata; local Docker volumes kept passing because the admin user existed from prior runs. **Always wipe before pre-flight.**
+Local persisted state hides bugs. The townlight_records email-validator bug only fired on fresh pgdata; local Docker volumes kept passing because the admin user existed from prior runs. **Always wipe before pre-flight.**
 
 ### Check 5 - Cross-platform reality check
 
-If the release workflow has a Windows job that runs Linux-only commands (or vice versa), flag it as Bug-Class-B (Windows/Linux mismatch) without trying to run it on the wrong platform. The fix pattern from civicrecords-ai PR #71 (split Linux verify + Windows installer) is the template.
+If the release workflow has a Windows job that runs Linux-only commands (or vice versa), flag it as Bug-Class-B (Windows/Linux mismatch) without trying to run it on the wrong platform. The fix pattern from townlight_records PR #71 (split Linux verify + Windows installer) is the template.
 
 Common patterns to flag:
 - `runs-on: windows-latest` with `docker compose up` on Linux images
@@ -77,11 +77,11 @@ Run a deliberate-failure scenario locally: stop a dependent service, then run th
 
 If the script doesn't dump container logs / env shape / dependency state on failure, that's a diagnostic gap. Add it as part of the Phase 0 bundled fix.
 
-The civicrecords-ai diagnostic dump PR #72 is the template - when compose health-check fails, dump `docker compose logs api postgres redis ollama` + redacted .env + `docker compose ps` before declaring fail.
+The townlight_records diagnostic dump PR #72 is the template - when compose health-check fails, dump `docker compose logs api postgres redis ollama` + redacted .env + `docker compose ps` before declaring fail.
 
 ### Check 7 - Audit punchlist correlation
 
-Read `audit-civicsuite-2026-05-09/sprint-punchlist.md` (or equivalent audit doc for the current project). Cross-reference every finding tagged for this module's release infrastructure. If audit findings exist for this module that overlap with checks 1-6, name them in the Phase 0 report. The audit knew about these bugs - don't rediscover them.
+Read `audit-townlight-2026-05-09/sprint-punchlist.md` (or equivalent audit doc for the current project). Cross-reference every finding tagged for this module's release infrastructure. If audit findings exist for this module that overlap with checks 1-6, name them in the Phase 0 report. The audit knew about these bugs - don't rediscover them.
 
 ## Bundled fix PR
 
@@ -92,7 +92,7 @@ Every bug found by checks 1-6 goes into ONE pull request:
 - Each commit in the PR addresses ONE bug class with a focused message
 - CI on the PR must pass
 
-DO NOT open multiple PRs for related infrastructure fixes. The civicrecords-ai sweep used 4 PRs for what should have been 1 - that's the anti-pattern this role exists to prevent.
+DO NOT open multiple PRs for related infrastructure fixes. The townlight_records sweep used 4 PRs for what should have been 1 - that's the anti-pattern this role exists to prevent.
 
 ## When to skip a module entirely
 

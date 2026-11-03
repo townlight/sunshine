@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import pytest
 from httpx import AsyncClient
 
-from app.requests.router import (
+from townlight_records.requests.router import (
     _LETTER_DISCLAIMER,
     _parse_ollama_generate_text,
     _try_llm_generation,
@@ -14,11 +14,11 @@ from app.requests.router import (
 
 
 def test_records_generation_payload_uses_pinned_runtime_model(monkeypatch):
-    monkeypatch.setenv("LLM_MODEL", "civicsuite-gemma4-12b-qat:q4_0")
+    monkeypatch.setenv("LLM_MODEL", "townlight-gemma4-12b-qat:q4_0")
 
     payload = _records_generation_payload("Draft a response letter.")
 
-    assert payload["model"] == "civicsuite-gemma4-12b-qat:q4_0"
+    assert payload["model"] == "townlight-gemma4-12b-qat:q4_0"
     assert payload["raw"] is True
     assert payload["stream"] is False
     assert "<start_of_turn>user" in payload["prompt"]
@@ -86,8 +86,8 @@ async def test_try_llm_generation_returns_local_ai_letter(monkeypatch):
             captured["json"] = json
             return FakeResponse()
 
-    monkeypatch.setenv("LLM_MODEL", "civicsuite-gemma4-12b-qat:q4_0")
-    monkeypatch.setattr("app.requests.router.httpx.AsyncClient", FakeAsyncClient)
+    monkeypatch.setenv("LLM_MODEL", "townlight-gemma4-12b-qat:q4_0")
+    monkeypatch.setattr("townlight_records.requests.router.httpx.AsyncClient", FakeAsyncClient)
 
     req = SimpleNamespace(
         requester_name="D105 Records Requester",
@@ -102,7 +102,7 @@ async def test_try_llm_generation_returns_local_ai_letter(monkeypatch):
     assert "D105-AI-MODEL-MARKER-20260620 local records letter." in generated
     assert _LETTER_DISCLAIMER in generated
     payload = captured["json"]
-    assert payload["model"] == "civicsuite-gemma4-12b-qat:q4_0"
+    assert payload["model"] == "townlight-gemma4-12b-qat:q4_0"
     assert payload["raw"] is True
     assert payload["stream"] is False
     assert "D105-AI-MODEL-MARKER-20260620" in payload["prompt"]

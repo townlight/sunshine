@@ -5,7 +5,7 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy import text
 
-from app.models.document import SourceType
+from townlight_records.models.document import SourceType
 from tests.conftest import build_data_source
 
 @pytest.mark.asyncio
@@ -113,12 +113,12 @@ async def test_health_status_healthy_default(client: AsyncClient, admin_token: s
 
 
 @pytest.mark.asyncio
-async def test_datasource_list_uses_shared_civiccore_next_run_projection(
+async def test_datasource_list_uses_shared_townlight_core_next_run_projection(
     client: AsyncClient,
     admin_token: str,
     db_session,
 ):
-    """Scheduled source list status should include CivicCore-computed next run."""
+    """Scheduled source list status should include TownlightCore-computed next run."""
     source_id = uuid.uuid4()
     user_id = (await db_session.execute(text("SELECT id FROM users LIMIT 1"))).scalar_one()
     await build_data_source(

@@ -2,16 +2,16 @@
 <!DOCTYPE svg
   PUBLIC '-//W3C//DTD SVG 1.0//EN'
   'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
-<svg width="920" height="780" preserveAspectRatio="xMinYMin meet" viewBox="0 0 920 780" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="971.2125" height="796.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 971 796" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<title>...</title>
 	<desc>...</desc>
 	<clipPath id="clip">
-		<rect x="0" y="0" width="920" height="780"/>
+		<rect x="0" y="0" width="971.2125" height="796.0"/>
 	</clipPath>
-	<g id="group" transform="scale(1,-1) translate(0,-780)" style="clip-path: url(#clip)">
-		<g transform="">
+	<g id="group" transform="scale(1,-1) translate(0,-796)" style="clip-path: url(#clip)">
+		<g transform=" matrix(1,0,0,1,43.2125,8)">
 			<rect x="0" y="0" width="920" height="780" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="311.019" y="756" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1512) scale(1,-1)">Townlight Records — System Components (v1.2)</text>
+			<text x="276.803" y="756" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1512) scale(1,-1)">Townlight Records — Standalone System Components</text>
 			<rect x="30" y="144" width="860" height="102" rx="4" ry="4" style="stroke: rgb(10%,22%,36%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(93%,96%,100%); fill-rule: evenodd;"/>
 			<rect x="30" y="220" width="860" height="26" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(10%,22%,36%); fill-rule: evenodd;"/>
 			<text x="261.8075" y="228" style="font-family: Helvetica-Bold; font-size: 11px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,456) scale(1,-1)">Browser Layer (Staff; optional Public surface when PORTAL_MODE=public)</text>

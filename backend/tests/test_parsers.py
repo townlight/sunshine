@@ -1,12 +1,12 @@
 import tempfile
 import zipfile
 from pathlib import Path
-from civiccore.ingest.parsers import detect_parser, is_image_file
-from civiccore.ingest.parsers.text import TextParser
-from civiccore.ingest.parsers.csv_parser import CsvParser
-from civiccore.ingest.parsers.html import HtmlParser
-from civiccore.ingest.parsers.docx import DocxParser
-from civiccore.ingest.parsers.xlsx import XlsxParser
+from townlight_core.ingest.parsers import detect_parser, is_image_file
+from townlight_core.ingest.parsers.text import TextParser
+from townlight_core.ingest.parsers.csv_parser import CsvParser
+from townlight_core.ingest.parsers.html import HtmlParser
+from townlight_core.ingest.parsers.docx import DocxParser
+from townlight_core.ingest.parsers.xlsx import XlsxParser
 
 def test_text_parser():
     with tempfile.NamedTemporaryFile(suffix=".txt", mode="w", delete=False, encoding="utf-8") as f:

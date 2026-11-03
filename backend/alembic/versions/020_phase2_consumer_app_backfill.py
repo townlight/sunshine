@@ -6,28 +6,28 @@ Create Date: 2026-04-25
 
 Context
 -------
-civiccore's ``civiccore_0002_llm`` migration ALTERs the shared
+townlight_core's ``townlight_core_0002_llm`` migration ALTERs the shared
 ``prompt_templates`` table to:
 
 * rename ``name`` → ``template_name``
-* add ``consumer_app VARCHAR(100) NOT NULL DEFAULT 'civiccore'``
+* add ``consumer_app VARCHAR(100) NOT NULL DEFAULT 'townlight_core'``
 * add ``is_override BOOLEAN NOT NULL DEFAULT false``
 * drop ``UNIQUE(name)`` and add ``UNIQUE(consumer_app, template_name, version)``
 
 After that ALTER runs against an existing records-ai DB, every existing
-``prompt_templates`` row inherits ``consumer_app='civiccore'`` and
+``prompt_templates`` row inherits ``consumer_app='townlight_core'`` and
 ``is_override=false`` from the column defaults. But those rows were written
-by records-ai (civiccore v0.2.0 ships no DB-seed templates), and the
-template resolver in :func:`civiccore.llm.templates.resolve_template`
+by records-ai (townlight_core v0.2.0 ships no DB-seed templates), and the
+template resolver in :func:`townlight_core.llm.templates.resolve_template`
 needs records-ai-owned rows to carry the records-ai consumer label so the
-override registry resolves them in front of any civiccore default. Without
+override registry resolves them in front of any townlight_core default. Without
 this backfill, records-ai prompts would never be reached by the resolver.
 
 The backfill is intentionally a single ``UPDATE`` with no WHERE pattern
-beyond ``consumer_app = 'civiccore'`` — civiccore v0.2.0 ships zero
-DB-seed prompt rows, so any row currently labelled ``'civiccore'`` is
+beyond ``consumer_app = 'townlight_core'`` — townlight_core v0.2.0 ships zero
+DB-seed prompt rows, so any row currently labelled ``'townlight_core'`` is
 records-ai data. Idempotency: re-running this migration after the records
-rows already carry ``'civicrecords-ai'`` matches zero rows and is a no-op.
+rows already carry ``'townlight_records'`` matches zero rows and is a no-op.
 """
 
 from typing import Sequence, Union
@@ -43,14 +43,14 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    # Re-label every legacy 'civiccore'-defaulted row as a records-ai override.
+    # Re-label every legacy 'townlight_core'-defaulted row as a records-ai override.
     # Idempotent: matches zero rows on re-run after the relabel has already happened.
     op.execute(
         """
         UPDATE prompt_templates
-        SET consumer_app = 'civicrecords-ai',
+        SET consumer_app = 'townlight_records',
             is_override = true
-        WHERE consumer_app = 'civiccore'
+        WHERE consumer_app = 'townlight_core'
         """
     )
 
@@ -60,8 +60,8 @@ def downgrade() -> None:
     op.execute(
         """
         UPDATE prompt_templates
-        SET consumer_app = 'civiccore',
+        SET consumer_app = 'townlight_core',
             is_override = false
-        WHERE consumer_app = 'civicrecords-ai'
+        WHERE consumer_app = 'townlight_records'
         """
     )

@@ -11,7 +11,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 import fastapi_users_db_sqlalchemy.generics
 
-from civiccore.migrations.guards import (
+from townlight_core.migrations.guards import (
     idempotent_add_column,
     idempotent_create_foreign_key,
     idempotent_create_table,
