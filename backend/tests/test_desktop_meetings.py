@@ -22,16 +22,16 @@ from tests.test_desktop_records import native_api as native_api, native_profile 
 @pytest.mark.parametrize("product_profile", ["meetings-beta", "city-core"])
 @pytest.mark.asyncio
 async def test_meetings_native_postgres_actor_permissions_and_process_restart(native_api, monkeypatch, tmp_path, product_profile):
-    from civicclerk.meeting_lifecycle import MeetingStore
-    from civicclerk.agenda_lifecycle import AgendaItemRepository
-    from civicclerk.minutes import MinutesDraftRepository
-    from civicclerk.packet_assembly import PacketAssemblyRepository
-    from civicclerk.notice_checklist import NoticeChecklistRepository
-    from civicclerk.transcripts import TranscriptRepository
-    from civicclerk.public_archive import PublicArchiveRepository
-    from civicclerk.motion_vote import MotionVoteRepository
-    from civicclerk.packet_notice import PacketStore
-    from civicsuite_runtime.meetings_bridge import router
+    from townlight_meetings.meeting_lifecycle import MeetingStore
+    from townlight_meetings.agenda_lifecycle import AgendaItemRepository
+    from townlight_meetings.minutes import MinutesDraftRepository
+    from townlight_meetings.packet_assembly import PacketAssemblyRepository
+    from townlight_meetings.notice_checklist import NoticeChecklistRepository
+    from townlight_meetings.transcripts import TranscriptRepository
+    from townlight_meetings.public_archive import PublicArchiveRepository
+    from townlight_meetings.motion_vote import MotionVoteRepository
+    from townlight_meetings.packet_notice import PacketStore
+    from townlight_runtime.meetings_bridge import router
     api, proof, actor_id, app = native_api
     url = TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2")
     for repository in (MeetingStore(db_url=url), AgendaItemRepository(db_url=url),
@@ -41,7 +41,7 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
         repository.engine.dispose()
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
     app.include_router(router)
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civicclerk"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_meetings"})
     meeting_path = "/desktop/v1/meetings/meetings"
     agenda_path = "/desktop/v1/meetings/agenda-items"
     meeting = {"title": "Redstone Council", "scheduled_start": "2026-10-20T18:00:00-06:00", "location": "Synthetic town hall"}
@@ -77,7 +77,7 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
     paths = [entry for entry in sys.path if entry]
     script = (
         f"import sys; sys.path[:0]={paths!r}; "
-        "from civicsuite_runtime.services import create_runtime_app; import uvicorn; "
+        "from townlight_runtime.services import create_runtime_app; import uvicorn; "
         f"uvicorn.run(create_runtime_app(domain_enabled=True),host='127.0.0.1',port={port},access_log=False,log_level='warning')"
     )
     environment = {**os.environ, "DATABASE_URL": TEST_DATABASE_URL,
@@ -145,7 +145,7 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
                         assert delivered.status_code == 200, delivered.text
                         from pathlib import Path
                         bundle = Path(delivered.json()["delivery_history"][0]["bundle_path"])
-                        from civiccore.exports import validate_bundle
+                        from townlight_core.exports import validate_bundle
                         validate_bundle(bundle)
                         assert (bundle/"sources/001-source.txt").read_bytes() == managed.read_bytes()
                         managed.write_bytes(b"Unexpected changed bytes")
@@ -313,13 +313,13 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
                         headers=use_role("clerk")
                         engine = sa.create_engine(url)
                         with engine.begin() as connection:
-                            connection.execute(sa.text("ALTER TABLE civicclerk.meetings RENAME TO m1_unready_records"))
+                            connection.execute(sa.text("ALTER TABLE townlight_meetings.meetings RENAME TO m1_unready_records"))
                         try:
                             response = await runtime.post(meeting_path, json=meeting, headers=headers)
                             assert response.status_code == 503, response.text
                         finally:
                             with engine.begin() as connection:
-                                connection.execute(sa.text("ALTER TABLE civicclerk.m1_unready_records RENAME TO meetings"))
+                                connection.execute(sa.text("ALTER TABLE townlight_meetings.m1_unready_records RENAME TO meetings"))
                             engine.dispose()
             finally:
                 process.terminate()
@@ -327,7 +327,7 @@ async def test_meetings_native_postgres_actor_permissions_and_process_restart(na
     engine = sa.create_engine(url)
     try:
         with engine.connect() as connection:
-            assert connection.scalar(sa.text("SELECT count(*) FROM civicclerk.meetings")) == 4
-            assert connection.scalar(sa.text("SELECT count(*) FROM civicclerk.agenda_items")) == 1
+            assert connection.scalar(sa.text("SELECT count(*) FROM townlight_meetings.meetings")) == 4
+            assert connection.scalar(sa.text("SELECT count(*) FROM townlight_meetings.agenda_items")) == 1
     finally:
         engine.dispose()

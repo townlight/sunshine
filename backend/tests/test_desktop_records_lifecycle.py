@@ -9,9 +9,9 @@ import uuid
 import pytest
 from sqlalchemy import select
 
-from app.models.audit import AuditLog
-from app.models.request import RecordsRequest
-from app.schemas.request import RequestUpdate
+from townlight_records.models.audit import AuditLog
+from townlight_records.models.request import RecordsRequest
+from townlight_records.schemas.request import RequestUpdate
 from tests.conftest import test_session_maker as session_factory
 from tests.test_desktop_records import INTAKE, native_api as native_api # noqa: F401
 from tests.test_desktop_session import native_profile as native_profile # noqa: F401
@@ -165,11 +165,11 @@ async def test_invalid_command_and_money_accept_no_partial_work(native_api):
 @pytest.mark.asyncio
 async def test_existing_web_writer_cannot_leave_native_approval_on_replaced_text(native_api):
     """The shared row must not acquire an approval bypass through another writer."""
-    from app.requests.router import update_request
+    from townlight_records.requests.router import update_request
 
     _ = native_api
     async with session_factory() as session:
-        from app.models.user import User
+        from townlight_records.models.user import User
         actor = (await session.execute(select(User).where(
             User.email == "seed-admin@test.internal"
         ))).scalar_one()
@@ -198,15 +198,17 @@ async def test_runtime_readiness_requires_the_lifecycle_schema(client, monkeypat
     assert runtime_root is not None, "Install the pinned paired Townlight runtime for desktop tests"
     monkeypatch.syspath_prepend(str(runtime_root))
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
-    from civicsuite_runtime.services import _domain_database_status
+    from townlight_runtime.services import _domain_database_status
 
-    from civicaccess.access_review import AccessibilityReviewRepository
-    from civicsuite_runtime.access_bridge import ensure_native_schema
+    from townlight_access.access_review import AccessibilityReviewRepository
+    from townlight_runtime.access_bridge import ensure_native_schema
     repository = AccessibilityReviewRepository(db_url=TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2"))
     try:
         ensure_native_schema(repository.engine)
-        from civicsuite_runtime.records_import_store import ensure_schema
-        from civicsuite_runtime.native_accounts import metadata
+        from townlight_notice.workflow import NoticeWorkflow
+        NoticeWorkflow(repository.engine)
+        from townlight_runtime.records_import_store import ensure_schema
+        from townlight_runtime.native_accounts import metadata
         ensure_schema(repository.engine)
         metadata.create_all(repository.engine)
     finally:

@@ -1,4 +1,4 @@
-# CivicSunshine - Data Sovereignty Check (Windows)
+# Townlight Records - Data Sovereignty Check (Windows)
 
 Write-Host "============================================" -ForegroundColor Cyan
 Write-Host "  Townlight Records - Data Sovereignty Check"
@@ -76,7 +76,7 @@ try {
 
 Write-Host ""
 Write-Host "4. Checking for telemetry..."
-$hits = Get-ChildItem -Path "backend/app" -Recurse -Include "*.py" | Select-String -Pattern "analytics|telemetry|sentry|datadog|newrelic|mixpanel|segment|amplitude" -List
+$hits = Get-ChildItem -Path "backend/townlight_records" -Recurse -Include "*.py" | Select-String -Pattern "analytics|telemetry|sentry|datadog|newrelic|mixpanel|segment|amplitude" -List
 if ($hits.Count -eq 0) {
     Check "No telemetry in application code" "PASS"
 } else {

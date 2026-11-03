@@ -2,16 +2,16 @@
 <!DOCTYPE svg
   PUBLIC '-//W3C//DTD SVG 1.0//EN'
   'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
-<svg width="920" height="600" preserveAspectRatio="xMinYMin meet" viewBox="0 0 920 600" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="936" height="616" preserveAspectRatio="xMinYMin meet" viewBox="0 0 936 616" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<title>...</title>
 	<desc>...</desc>
 	<clipPath id="clip">
-		<rect x="0" y="0" width="920" height="600"/>
+		<rect x="0" y="0" width="936" height="616"/>
 	</clipPath>
-	<g id="group" transform="scale(1,-1) translate(0,-600)" style="clip-path: url(#clip)">
-		<g transform="">
+	<g id="group" transform="scale(1,-1) translate(0,-616)" style="clip-path: url(#clip)">
+		<g transform=" matrix(1,0,0,1,8,8)">
 			<rect x="0" y="0" width="920" height="600" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="310.228" y="576" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1152) scale(1,-1)">Townlight Records — Sync Failure State Machine</text>
+			<text x="295.45799999999997" y="576" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1152) scale(1,-1)">Townlight Records — Sync Failure State Machine</text>
 			<rect x="390.0" y="480" width="140.0" height="52" rx="8" ry="8" style="stroke: rgb(8%,39%,20%); stroke-linecap: butt; stroke-width: 2; fill: rgb(86%,98%,90%); fill-rule: evenodd;"/>
 			<rect x="390.0" y="510" width="140.0" height="22" rx="8" ry="0" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(8%,39%,20%); fill-rule: evenodd;"/>
 			<text x="443.746" y="518" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,1036) scale(1,-1)">Healthy</text>

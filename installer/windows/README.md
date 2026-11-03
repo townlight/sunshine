@@ -15,7 +15,7 @@ does not pretend to offer it.
 
 ## What you will see on first run
 
-When you double-click `CivicSunshine-<version>-Setup.exe`:
+When you double-click `Townlight Records-<version>-Setup.exe`:
 
 1. A blue **"Windows protected your PC"** dialog appears, sourced from
    Microsoft SmartScreen. The headline reads:
@@ -34,7 +34,7 @@ defect in the installer or of a real risk. You are in control.
 
 1. Click the **"More info"** link at the top of the SmartScreen dialog.
 2. A second line appears naming the **Publisher** as **"Unknown
-   publisher"** and the **App** as `CivicSunshine-<version>-Setup.exe`.
+   publisher"** and the **App** as `Townlight Records-<version>-Setup.exe`.
 3. Click the **"Run anyway"** button that just appeared at the bottom.
 4. The Windows User Account Control (UAC) elevation dialog appears next
    (the installer requires admin). Confirm it.
@@ -44,7 +44,7 @@ published SHA-256 checksum** to verify you have the same binary the
 release page advertises:
 
 ```powershell
-Get-FileHash -Algorithm SHA256 .\CivicSunshine-<version>-Setup.exe
+Get-FileHash -Algorithm SHA256 .\Townlight Records-<version>-Setup.exe
 ```
 
 Compare the output against the SHA-256 value printed alongside the
@@ -58,7 +58,7 @@ not run it** — download again from the release page directly.
 
 1. Copies the Townlight Records source tree (backend, frontend, docs,
    scripts, `install.ps1`, `docker-compose.yml`, etc.) to
-   `C:\Program Files\CivicSunshine\`.
+   `C:\Program Files\Townlight Records\`.
 2. Creates Start Menu shortcuts and (optionally) a Desktop shortcut.
 3. Runs the post-install bootstrap via `installer\windows\launch-install.ps1`,
    which in turn runs:
@@ -103,7 +103,7 @@ the installer or re-pull models.
   the prereq check prints the exact commands to run.
 - **Does not sign the installer.** See the first paragraph.
 - **Does not modify Windows Defender, firewall, or any system-wide
-  setting** beyond the files it installs to `Program Files\CivicSunshine\`
+  setting** beyond the files it installs to `Program Files\Townlight Records\`
   and the Start Menu entries it creates.
 - **Does not pull any model on daily starts.** Model pulls only happen
   inside `install.ps1`, which is only reached via the "Install or
@@ -123,7 +123,7 @@ this table:
 | Step | Yes does | No does |
 |---|---|---|
 | **1. Stop the Compose stack?** | Runs `docker compose down` in the install dir. Stops the 7 containers. Releases host ports 8000 and 8080. **Does NOT remove Docker volumes** — `docker compose down` without `-v` never touches volumes. | Containers keep running. You can stop them later yourself with `docker compose down` (the Compose file stays on disk inside Docker Desktop's image cache even after uninstall, but you will not have the compose YAML on disk any more — so stop the stack first if you want a clean exit). |
-| **2. Delete local app files under the install dir?** | `DelTree` removes `{app}\data`, `{app}\logs`, `{app}\config` from `Program Files\CivicSunshine\`. These are local project-workspace files, app log files, and runtime config overrides. **These are NOT the database.** | These directories are preserved. They survive the uninstall untouched — `[Dirs] uninsneveruninstall` in the `.iss` file. |
+| **2. Delete local app files under the install dir?** | `DelTree` removes `{app}\data`, `{app}\logs`, `{app}\config` from `Program Files\Townlight Records\`. These are local project-workspace files, app log files, and runtime config overrides. **These are NOT the database.** | These directories are preserved. They survive the uninstall untouched — `[Dirs] uninsneveruninstall` in the `.iss` file. |
 
 **What is always preserved, regardless of your answers above:**
 
@@ -139,7 +139,7 @@ run this **before** starting the uninstaller, while the compose file is
 still on disk:
 
 ```powershell
-cd "C:\Program Files\CivicSunshine"
+cd "C:\Program Files\Townlight Records"
 docker compose down -v
 ```
 
@@ -159,7 +159,7 @@ any tagged commit.
 
 ## Version + provenance
 
-- Installer source: `installer/windows/civicrecords-ai.iss`
+- Installer source: `installer/windows/townlight_records.iss`
 - Build driver:     `installer/windows/build-installer.sh`
 - Release pipeline: `.github/workflows/release.yml`
 - Upstream baseline: the Inno Setup skeleton + release pattern are

@@ -20,8 +20,8 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    # source_type is a SHARED (CivicCore-owned) enum. On a fresh install the
-    # civiccore baseline declares it with the canonical post-rename values
+    # source_type is a SHARED (TownlightCore-owned) enum. On a fresh install the
+    # townlight_core baseline declares it with the canonical post-rename values
     # ('manual_drop', 'file_system') already, so 'upload'/'directory' do not
     # exist and the bare RENAME would raise. Gate each rename on the source
     # value's presence in pg_enum so the migration is a no-op when the

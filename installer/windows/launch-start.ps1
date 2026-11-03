@@ -1,16 +1,16 @@
-# CivicSunshine -- Daily start flow (T5E).
+# Townlight Records -- Daily start flow (T5E).
 #
 # This script brings up the existing Docker Compose stack and opens the
 # admin panel. It does NOT run the prereq check, does NOT invoke
 # install.ps1, does NOT re-pull any model, and does NOT re-seed data.
 #
 # Invoked from:
-#   - Start Menu shortcut "Start CivicSunshine"
-#   - Desktop shortcut "Start CivicSunshine" (if the desktopicon task
+#   - Start Menu shortcut "Start Townlight Records"
+#   - Desktop shortcut "Start Townlight Records" (if the desktopicon task
 #     was selected at install time)
 #
 # For first-run install, LLM changes, or repair, use the separate
-# "Install or Repair CivicSunshine" shortcut (launch-install.ps1).
+# "Install or Repair Townlight Records" shortcut (launch-install.ps1).
 #
 # Called with:
 #   powershell -ExecutionPolicy Bypass -NoProfile -File launch-start.ps1

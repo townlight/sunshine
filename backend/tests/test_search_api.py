@@ -17,7 +17,7 @@ async def test_search_requires_auth(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_search_empty_db(client: AsyncClient, admin_token: str):
     """Search on empty DB should return 0 results, not error."""
-    with patch("app.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
+    with patch("townlight_records.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
         mock_embed.return_value = [0.1] * 768
         resp = await client.post(
             "/search/query",
@@ -34,7 +34,7 @@ async def test_search_empty_db(client: AsyncClient, admin_token: str):
 @pytest.mark.asyncio
 async def test_search_creates_session(client: AsyncClient, admin_token: str):
     """First search should create a session."""
-    with patch("app.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
+    with patch("townlight_records.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
         mock_embed.return_value = [0.1] * 768
         resp = await client.post(
             "/search/query",
@@ -89,7 +89,7 @@ async def test_export_dept_scoping(
         captured_filters.update(filters or {})
         return []
 
-    with patch("app.search.router.hybrid_search", side_effect=fake_hybrid_search):
+    with patch("townlight_records.search.router.hybrid_search", side_effect=fake_hybrid_search):
         resp = await client.get(
             "/search/export",
             params={"query": "budget"},

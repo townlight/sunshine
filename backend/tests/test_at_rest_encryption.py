@@ -2,7 +2,7 @@
 
 Covers:
 
-1. :mod:`app.security.at_rest` unit tests — encrypt/decrypt round-trip,
+1. :mod:`townlight_records.security.at_rest` unit tests — encrypt/decrypt round-trip,
    envelope shape, invalid-token rejection, version dispatch,
    ``is_encrypted`` detector.
 2. Startup config validator — :meth:`Settings.check_encryption_key`
@@ -24,8 +24,8 @@ from httpx import AsyncClient
 from pydantic import ValidationError
 from sqlalchemy import text
 
-from app.config import Settings
-from app.security.at_rest import (
+from townlight_records.config import Settings
+from townlight_records.security.at_rest import (
     AtRestDecryptionError,
     decrypt_json,
     encrypt_json,
@@ -270,7 +270,7 @@ def test_encrypted_envelope_is_stable_under_reencryption_check():
     assert is_encrypted(env1)
     # Simulate what EncryptedJSONB.process_bind_param does on an
     # already-encrypted value — it should NOT re-wrap.
-    from app.models.document import EncryptedJSONB
+    from townlight_records.models.document import EncryptedJSONB
     td = EncryptedJSONB()
     bound = td.process_bind_param(env1, None)
     assert bound == env1  # no re-wrapping

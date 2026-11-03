@@ -12,8 +12,8 @@ services:
   api:
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
-      - CIVICRECORDS_GPU_ENABLED=true
-      - CIVICRECORDS_USE_HOST_OLLAMA=true
+      - TOWNLIGHT_RECORDS_GPU_ENABLED=true
+      - TOWNLIGHT_RECORDS_USE_HOST_OLLAMA=true
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # Remove Ollama from depends_on since we're using host Ollama
@@ -26,7 +26,7 @@ services:
   worker:
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
-      - CIVICRECORDS_GPU_ENABLED=true
+      - TOWNLIGHT_RECORDS_GPU_ENABLED=true
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:

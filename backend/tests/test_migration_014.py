@@ -22,7 +22,7 @@ def test_migration_014_revision_metadata():
 
 def test_connector_type_column_on_document_model():
     """Document ORM model has connector_type mapped column."""
-    from app.models.document import Document
+    from townlight_records.models.document import Document
     from sqlalchemy import inspect
     mapper = inspect(Document)
     col_names = [c.key for c in mapper.mapper.column_attrs]
@@ -31,7 +31,7 @@ def test_connector_type_column_on_document_model():
 
 def test_updated_at_column_on_document_model():
     """Document ORM model has updated_at mapped column."""
-    from app.models.document import Document
+    from townlight_records.models.document import Document
     from sqlalchemy import inspect
     mapper = inspect(Document)
     col_names = [c.key for c in mapper.mapper.column_attrs]

@@ -8,8 +8,8 @@ import pytest
 def test_suite_session_adapter_exposes_password_rotation_gate(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setenv("CIVICCORE_SUITE_SESSION_SECRET", "records-suite-session-secret")
-    from app.auth.suite_session import (
+    monkeypatch.setenv("TOWNLIGHT_CORE_SUITE_SESSION_SECRET", "records-suite-session-secret")
+    from townlight_records.auth.suite_session import (
         SuiteSessionUser,
         issue_suite_session_for_test,
         validate_suite_session_for_user,

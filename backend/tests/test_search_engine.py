@@ -1,8 +1,8 @@
 import uuid
 
-from civiccore.search import reciprocal_rank_fusion
+from townlight_core.search import reciprocal_rank_fusion
 
-from app.search.engine import SearchHit
+from townlight_records.search.engine import SearchHit
 
 
 def test_rrf_combines_results():

@@ -6,7 +6,7 @@ import uuid
 import pytest
 from sqlalchemy import func, select
 
-from app.models.records_artifacts import RequestArtifact, RequestPublication
+from townlight_records.models.records_artifacts import RequestArtifact, RequestPublication
 from tests.conftest import test_session_maker as session_factory
 from tests.test_desktop_records import native_api as native_api # noqa: F401
 from tests.test_desktop_session import native_profile as native_profile # noqa: F401

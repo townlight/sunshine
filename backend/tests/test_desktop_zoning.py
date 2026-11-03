@@ -1,4 +1,4 @@
-"""P2: native CivicZone import/lookup against real PostGIS and Code citations."""
+"""P2: native TownlightZoning import/lookup against real PostGIS and Code citations."""
 
 from __future__ import annotations
 
@@ -14,14 +14,14 @@ from sqlalchemy import create_engine, text
 
 from tests.conftest import TEST_DATABASE_URL
 
-pytest.importorskip("civiczone")
+pytest.importorskip("townlight_zoning")
 
 from tests.test_desktop_records import native_api, native_profile  # noqa: F401
 
 
 def _sibling(name: str) -> Path:
-    root = os.environ.get("CIVICRECORDS_REPO_ROOT")
-    if root:
+    root = os.environ.get("TOWNLIGHT_RECORDS_REPO_ROOT")
+    if root and (Path(root) / ".ci-siblings" / name).is_dir():
         return Path(root) / ".ci-siblings" / name
     return next(
         parent / name for parent in Path(__file__).resolve().parents if (parent / name).is_dir()
@@ -36,11 +36,11 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
             monkeypatch.setattr(logger, "disabled", logger.disabled)
     api, original_proof, actor_id, app = native_api
 
-    from civicsuite_runtime.code_bridge import router as code_router
-    from civicsuite_runtime.zoning_bridge import router as zoning_router
-    from civicsuite_runtime.migrate import _run_alembic
-    import civiccode.main as code
-    import civiczone
+    from townlight_runtime.code_bridge import router as code_router
+    from townlight_runtime.zoning_bridge import router as zoning_router
+    from townlight_runtime.migrate import _run_alembic
+    import townlight_code.main as code
+    import townlight_zoning
 
     for cache_name in (
         "_source_registry_repository",
@@ -61,11 +61,11 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
 
     app.include_router(code_router)
     app.include_router(zoning_router)
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civiccode", "civiczone"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_code", "townlight_zoning"})
 
     syncurl = TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2")
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
-    monkeypatch.setenv("CIVICCODE_SOURCE_REGISTRY_DB_URL", syncurl)
+    monkeypatch.setenv("TOWNLIGHT_CODE_SOURCE_REGISTRY_DB_URL", syncurl)
 
     code_root = Path(code.__file__).parent
     _run_alembic(
@@ -74,7 +74,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
         code_root / "migrations",
         syncurl,
     )
-    zone_root = Path(civiczone.__file__).parent
+    zone_root = Path(townlight_zoning.__file__).parent
     _run_alembic(
         "Zoning",
         zone_root / "migrations/alembic.ini",
@@ -82,7 +82,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
         syncurl,
     )
 
-    from civicsuite_runtime.code_meetings import ensure_schema
+    from townlight_runtime.code_meetings import ensure_schema
 
     schema_engine = create_engine(syncurl)
     try:
@@ -141,7 +141,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
     session["session_hash"] = proof
     session_path.write_text(json.dumps(session))
     headers = {"X-Townlight-Session": proof}
-    monkeypatch.setattr("app.auth.desktop_session.time.time", lambda: datetime.now().timestamp())
+    monkeypatch.setattr("townlight_records.auth.desktop_session.time.time", lambda: datetime.now().timestamp())
 
     code_resp = await api.post("/desktop/v1/code/imports", json=code_payload, headers=headers)
     assert code_resp.status_code == 200, code_resp.text
@@ -157,7 +157,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
         with db_engine.connect() as conn:
             actor_row = conn.execute(
                 text(
-                    "SELECT actor_id FROM civiczone.geo_imports WHERE jurisdiction = :jurisdiction"
+                    "SELECT actor_id FROM townlight_zoning.geo_imports WHERE jurisdiction = :jurisdiction"
                 ),
                 {"jurisdiction": "Z1-Connected-Acceptance"},
             ).scalar_one()
@@ -209,7 +209,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
     )
     assert forged.status_code == 401
 
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civiccode"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_code"})
     disabled = await api.post(
         "/desktop/v1/zoning/parcels/lookup",
         json={"jurisdiction": "Z1-Connected-Acceptance", "query": "P1"},
@@ -217,7 +217,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
     )
     assert disabled.status_code == 403
 
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civiccode", "civiczone"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_code", "townlight_zoning"})
     app.state.desktop_domain_enabled = False
     inactive = await api.post(
         "/desktop/v1/zoning/parcels/lookup",
@@ -228,7 +228,7 @@ async def test_zoning_native_postgres_import(native_api, monkeypatch):  # noqa: 
 
 
 async def _check_z2(api, headers, actor_id, app, syncurl, monkeypatch):
-    from civicsuite_runtime.zoning_bridge import public_router
+    from townlight_runtime.zoning_bridge import public_router
 
     app.include_router(public_router)
     u = lambda p: p  # noqa: E731
@@ -286,9 +286,9 @@ async def _check_z2(api, headers, actor_id, app, syncurl, monkeypatch):
     assert r.status_code == 401, r.text
     r = await api.get(u("/desktop/v1/zoning/workspace"), headers=headers)
     assert r.status_code == 200 and len(r.json().get("reviews", [])) >= 2, r.text
-    r = await api.post(u("/civiczone/questions"), json=q)
+    r = await api.post(u("/townlight_zoning/questions"), json=q)
     assert r.status_code == 200 and "PRIVATE NOTE" not in r.text, r.text
-    r = await api.get(u("/civiczone/workspace"))
+    r = await api.get(u("/townlight_zoning/workspace"))
     assert r.status_code == 404, r.text
     r = await api.post(
         u("/desktop/v1/zoning/outlines"),
@@ -297,7 +297,7 @@ async def _check_z2(api, headers, actor_id, app, syncurl, monkeypatch):
     )
     assert r.status_code == 200, r.text
     snapshot = _z2_original(syncurl, qid, actor_id)
-    monkeypatch.setattr("civicsuite_runtime.zoning_bridge.date", FutureDate)
+    monkeypatch.setattr("townlight_runtime.zoning_bridge.date", FutureDate)
     r = await api.post("/desktop/v1/zoning/questions", json=q, headers=headers)
     assert (
         r.status_code == 200
@@ -314,7 +314,7 @@ async def _check_z2(api, headers, actor_id, app, syncurl, monkeypatch):
     engine = create_engine(syncurl)
     with engine.connect() as conn:
         orig = conn.execute(
-            text("SELECT context FROM civiczone.zone_question_ledger_records WHERE id=:id"),
+            text("SELECT context FROM townlight_zoning.zone_question_ledger_records WHERE id=:id"),
             {"id": qid},
         ).scalar()
         assert orig == snapshot
@@ -328,7 +328,7 @@ def _z2_original(syncurl, qid, actor_id):
         with engine.connect() as conn:
             row = conn.execute(
                 text(
-                    "SELECT context, actor_id FROM civiczone.zone_question_ledger_records WHERE id=:id"
+                    "SELECT context, actor_id FROM townlight_zoning.zone_question_ledger_records WHERE id=:id"
                 ),
                 {"id": qid},
             ).one()
@@ -337,7 +337,7 @@ def _z2_original(syncurl, qid, actor_id):
             assert original_context["answer"] == "allowed"
             cnt = conn.execute(
                 text(
-                    "SELECT COUNT(*) FROM civiczone.question_events WHERE question_id=:id AND event_type='human_correction'"
+                    "SELECT COUNT(*) FROM townlight_zoning.question_events WHERE question_id=:id AND event_type='human_correction'"
                 ),
                 {"id": qid},
             ).scalar()
@@ -355,10 +355,10 @@ class FutureDate(date):
 
 async def _check_z3(api, headers, actor_id, app, syncurl, qid):
     import json
-    from civicclerk.meeting_lifecycle import MeetingStore
-    from civicclerk.public_archive import PublicArchiveRepository
-    from civicclerk.records_sources import public_documents as meeting_docs
-    from civicsuite_runtime.zoning_records import public_documents as zoning_docs
+    from townlight_meetings.meeting_lifecycle import MeetingStore
+    from townlight_meetings.public_archive import PublicArchiveRepository
+    from townlight_meetings.records_sources import public_documents as meeting_docs
+    from townlight_runtime.zoning_records import public_documents as zoning_docs
 
     store = MeetingStore(db_url=syncurl)
     try:
@@ -380,8 +380,8 @@ async def _check_z3(api, headers, actor_id, app, syncurl, qid):
         repo.engine.dispose()
     archive_id = archive.id
     modules = list(getattr(app.state, "desktop_enabled_modules", None) or [])
-    if "civicclerk" not in modules:
-        modules.append("civicclerk")
+    if "townlight_meetings" not in modules:
+        modules.append("townlight_meetings")
     app.state.desktop_enabled_modules = modules
 
     def provider(query="", source_id=None):
@@ -539,7 +539,7 @@ async def _z3_records(api, headers, app, qid, snapshot):
 async def _z3_visibility(api, headers, app, syncurl, qid, snapshot):
     import json
     from sqlalchemy import create_engine
-    from civiccode.source_registry import source_registry_records as sourcetable
+    from townlight_code.source_registry import source_registry_records as sourcetable
 
     original_text = snapshot.get("text")
     original_hash = snapshot.get("sha256") or snapshot.get("expected_sha256")
@@ -547,7 +547,7 @@ async def _z3_visibility(api, headers, app, syncurl, qid, snapshot):
         "/desktop/v1/zoning/meetings/search", json={"query": "Fictional"}, headers={}
     )
     assert r.status_code == 401, r.text
-    r = await api.get(f"/civiczone/questions/{qid}/history", headers={})
+    r = await api.get(f"/townlight_zoning/questions/{qid}/history", headers={})
     assert r.status_code == 404, r.text
     r = await api.post(
         f"/desktop/v1/zoning/questions/{qid}/snapshots",
@@ -613,7 +613,7 @@ async def _z3_permissions(api, headers, app, syncurl, qid, snapshot, archive_id,
         with engine.begin() as conn:
             conn.execute(
                 text(
-                    "UPDATE civicclerk.public_meeting_records SET visibility='closed_session' WHERE id=:id"
+                    "UPDATE townlight_meetings.public_meeting_records SET visibility='closed_session' WHERE id=:id"
                 ),
                 {"id": archive_id},
             )
@@ -635,7 +635,7 @@ async def _z3_permissions(api, headers, app, syncurl, qid, snapshot, archive_id,
         assert "Fictional minutes, not an amendment" not in r.text
         with engine.connect() as conn:
             payload = conn.execute(
-                text("SELECT payload FROM civiczone.question_events WHERE id=:id"),
+                text("SELECT payload FROM townlight_zoning.question_events WHERE id=:id"),
                 {"id": snapshot["version"]},
             ).scalar_one()
         assert payload["text"] == snapshot["text"]
@@ -645,7 +645,7 @@ async def _z3_permissions(api, headers, app, syncurl, qid, snapshot, archive_id,
             with engine.begin() as conn:
                 conn.execute(
                     text(
-                        "UPDATE civicclerk.public_meeting_records SET visibility='public' WHERE id=:id"
+                        "UPDATE townlight_meetings.public_meeting_records SET visibility='public' WHERE id=:id"
                     ),
                     {"id": archive_id},
                 )

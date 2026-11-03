@@ -8,7 +8,7 @@ from tests.test_desktop_records import native_api, native_profile  # noqa: F401
 async def check_code_source_boundary(runtime, headers, endpoint, source):
     import sqlalchemy as sa
     from tests.conftest import TEST_DATABASE_URL
-    from civiccode.source_registry import source_registry_records as table
+    from townlight_code.source_registry import source_registry_records as table
 
     engine = sa.create_engine(TEST_DATABASE_URL.replace('+asyncpg', '+psycopg2'))
     try:
@@ -155,10 +155,10 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
             monkeypatch.setattr(logger, "disabled", logger.disabled)
     api, proof, actor_id, app = native_api
 
-    from civicsuite_runtime.code_bridge import router
+    from townlight_runtime.code_bridge import router
 
     app.include_router(router)
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civiccode"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_code"})
 
     response = await api.get(
         "/desktop/v1/code/workspace", headers={"X-Townlight-Session": proof},
@@ -166,16 +166,16 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
     assert response.status_code == 403
 
     from pathlib import Path
-    import civiccode.main as code
+    import townlight_code.main as code
     from tests.conftest import TEST_DATABASE_URL
-    from civicsuite_runtime.migrate import _run_alembic
+    from townlight_runtime.migrate import _run_alembic
 
     root = Path(code.__file__).parent
     url = TEST_DATABASE_URL.replace("+asyncpg", "+psycopg2")
     monkeypatch.setenv("DATABASE_URL", TEST_DATABASE_URL)
-    monkeypatch.setenv("CIVICCODE_SOURCE_REGISTRY_DB_URL", url)
+    monkeypatch.setenv("TOWNLIGHT_CODE_SOURCE_REGISTRY_DB_URL", url)
     _run_alembic("Code", root / "migrations/alembic.ini", root / "migrations", url)
-    from civicsuite_runtime.code_meetings import ensure_schema
+    from townlight_runtime.code_meetings import ensure_schema
     import sqlalchemy as sa
     schema_engine = sa.create_engine(url)
     try:
@@ -208,8 +208,9 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
 
     import os
     code_source = (
-        Path(os.environ["CIVICRECORDS_REPO_ROOT"]) / ".ci-siblings" / "ordinances"
-        if os.environ.get("CIVICRECORDS_REPO_ROOT")
+        Path(os.environ["TOWNLIGHT_RECORDS_REPO_ROOT"]) / ".ci-siblings" / "ordinances"
+        if os.environ.get("TOWNLIGHT_RECORDS_REPO_ROOT") and
+        (Path(os.environ["TOWNLIGHT_RECORDS_REPO_ROOT"]) / ".ci-siblings" / "ordinances").is_dir()
         else next(
             parent / "ordinances"
             for parent in Path(__file__).resolve().parents
@@ -263,7 +264,7 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
     assert resp.status_code == 200, resp.text
     assert resp.json()["titles"][0]["title_name"] == "Animals"
 
-    from civicsuite_runtime.code_public import router as public_router
+    from townlight_runtime.code_public import router as public_router
     app.include_router(public_router)
     private_note = "PRIVATE INTERPRETATION C1"
     resp = await api.post(
@@ -271,12 +272,12 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
         json={"note_text": private_note}, headers=headers,
     )
     assert resp.status_code == 200, resp.text
-    for path in ("/civiccode/sections/6.12.040", "/civiccode/sections/6.12.040/export"):
+    for path in ("/townlight_code/sections/6.12.040", "/townlight_code/sections/6.12.040/export"):
         resp = await api.get(path)
         assert resp.status_code == 200, resp.text
         assert "six backyard chickens" in resp.text
         assert private_note not in resp.text
-    resp = await api.get("/civiccode/search", params={"q": private_note})
+    resp = await api.get("/townlight_code/search", params={"q": private_note})
     assert resp.status_code == 200
     assert "No matching code sections yet." in resp.text
     resp = await api.get(
@@ -311,16 +312,16 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
         "--factory", "--host", "127.0.0.1", "--port", str(port),
         "--no-access-log", "--log-level", "warning",
     ]
-    import civicclerk
-    _run_alembic("Meetings", Path(civicclerk.__file__).parent / "migrations/alembic.ini",
-                 Path(civicclerk.__file__).parent / "migrations", url)
+    import townlight_meetings
+    _run_alembic("Meetings", Path(townlight_meetings.__file__).parent / "migrations/alembic.ini",
+                 Path(townlight_meetings.__file__).parent / "migrations", url)
     staff[0]["role"] = "city-staff"
     staff_path.write_text(json.dumps(staff))
     message = f"{staff[0]['email']}\ncity-staff\n{expiry}\n{staff[0]['passcode_hash']}"
     token = hmac.new(bytes(range(32)), message.encode(), hashlib.sha256).hexdigest()
     session_path.write_text(json.dumps({**staff[0], "expires_at_unix_seconds": expiry, "session_hash": token}))
     headers = {"X-Townlight-Session": token}
-    from civicsuite_runtime.records_import_store import metadata as import_metadata
+    from townlight_runtime.records_import_store import metadata as import_metadata
     fixture_engine = sa.create_engine(url)
     try:
         import_metadata.create_all(fixture_engine)
@@ -365,7 +366,7 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
                         assert c3_readback.status_code == 200, c3_readback.text
                         assert c3_readback.json() == c3_view
                     if iteration == 0 and os.environ.get("TOWNLIGHT_TEST_NATIVE_CODE_TRANSPORT") == "1":
-                        import civicsuite_runtime.services as _civicsuite_services
+                        import townlight_runtime.services as _townlight_services
                         nativebundle = dict(payload, job_id="import_native_code_c1")
                         bundlepath = tmp_path / "native-code.json"
                         bundlepath.write_text(json.dumps(nativebundle), encoding="utf-8")
@@ -373,7 +374,7 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
                             **environment, "TOWNLIGHT_TEST_SESSION_PROOF": token,
                             "TOWNLIGHT_TEST_CODE_BUNDLE": str(bundlepath),
                         }
-                        desktoppath = Path(_civicsuite_services.__file__).resolve().parents[3]
+                        desktoppath = Path(_townlight_services.__file__).resolve().parents[3]
                         result = subprocess.run(
                             ["cargo", "test", "--offline", "--manifest-path", "src-tauri/Cargo.toml",
                              "-j", "1", "native_code_roundtrip_with_real_runtime", "--", "--ignored", "--nocapture"],
@@ -384,8 +385,8 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
                 process.terminate()
                 process.wait(timeout=10)
 
-    monkeypatch.delenv("CIVICCODE_AI_MODE", raising=False)
-    monkeypatch.delenv("CIVICCODE_OLLAMA_URL", raising=False)
+    monkeypatch.delenv("TOWNLIGHT_CODE_AI_MODE", raising=False)
+    monkeypatch.delenv("TOWNLIGHT_CODE_OLLAMA_URL", raising=False)
     question = "What does section 6.12.040 say?"
     section_number = "6.12.040"
     response = await api.post(
@@ -410,7 +411,7 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
     code.SECTION_STORE.create_version(code.SectionVersionCreate.model_validate({
         **old, "version_id": "overlap_c1", "body": "Conflicting synthetic text."
     }).model_dump())
-    from civicsuite_runtime.code_records import public_documents
+    from townlight_runtime.code_records import public_documents
     assert public_documents(url, query='6.12.040', as_of='2025-06-01') == []
     refused_response = await api.post(
         "/desktop/v1/code/questions",
@@ -421,7 +422,7 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
     assert refused_response.json()["status"] == "refused"
 
     answer_response = await api.get(
-        "/civiccode/answer",
+        "/townlight_code/answer",
         params={"q": question, "section_number": section_number, "as_of": "2025-06-01"},
     )
     assert answer_response.status_code == 200
@@ -429,14 +430,14 @@ async def test_code_native_postgres_import(native_api, monkeypatch, tmp_path):  
     assert "Conflicting synthetic text." not in answer_response.text
 
     # C2 uses the same real database/native actor, not an in-memory sender.
-    import civicclerk
-    from civicsuite_runtime.code_meetings_bridge import code_router, meetings_router
-    from civicsuite_runtime.meetings_bridge import router as clerk_router
-    _run_alembic("Meetings", Path(civicclerk.__file__).parent / "migrations/alembic.ini",
-                 Path(civicclerk.__file__).parent / "migrations", url)
+    import townlight_meetings
+    from townlight_runtime.code_meetings_bridge import code_router, meetings_router
+    from townlight_runtime.meetings_bridge import router as clerk_router
+    _run_alembic("Meetings", Path(townlight_meetings.__file__).parent / "migrations/alembic.ini",
+                 Path(townlight_meetings.__file__).parent / "migrations", url)
     for paired_router in (code_router, meetings_router, clerk_router):
         app.include_router(paired_router)
-    app.state.desktop_enabled_modules = frozenset({"civicrecords-ai", "civiccode", "civicclerk"})
+    app.state.desktop_enabled_modules = frozenset({"townlight_records", "townlight_code", "townlight_meetings"})
     staff[0]["role"] = "city-staff"
     staff_path.write_text(json.dumps(staff))
     message = f"{staff[0]['email']}\n{staff[0]['role']}\n{expiry}\n{staff[0]['passcode_hash']}"

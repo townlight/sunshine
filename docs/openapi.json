@@ -3,7 +3,7 @@
   "info": {
     "title": "Townlight Records",
     "description": "AI-powered open records support for American cities",
-    "version": "1.8.0.dev1"
+    "version": "1.8.0.dev2"
   },
   "paths": {
     "/auth/jwt/login": {

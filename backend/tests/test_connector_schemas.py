@@ -1,8 +1,8 @@
 import pytest
 from pydantic import ValidationError
-from app.schemas.connectors.rest_api import RestApiConfig
-from app.schemas.connectors.odbc import ODBCConfig
-from app.schemas.connectors import ConnectorConfig
+from townlight_records.schemas.connectors.rest_api import RestApiConfig
+from townlight_records.schemas.connectors.odbc import ODBCConfig
+from townlight_records.schemas.connectors import ConnectorConfig
 
 
 class TestRestApiConfig:

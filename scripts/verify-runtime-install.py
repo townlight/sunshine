@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Build and install CivicSunshine in a fresh virtualenv, then prove app import."""
+"""Build and install Townlight Records in a fresh virtualenv, then prove app import."""
 
 from __future__ import annotations
 
 import os
+import argparse
+import hashlib
 import shutil
 import subprocess
 import sys
@@ -22,7 +24,15 @@ def run(cmd: list[str], *, cwd: Path, env: dict[str, str] | None = None) -> None
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="civicrecords-runtime-install-") as tmp:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--core-wheel', type=Path, required=True,
+                        help='Exact new Core wheel built for this coordinated candidate')
+    args = parser.parse_args()
+    core_wheel = args.core_wheel.resolve(strict=True)
+    if core_wheel.name != 'townlight_core-1.3.0.dev2-py3-none-any.whl':
+        parser.error('Expected the coordinated townlight-core 1.3.0.dev2 wheel')
+    print('Core wheel SHA256:', hashlib.sha256(core_wheel.read_bytes()).hexdigest())
+    with tempfile.TemporaryDirectory(prefix="townlight_records-runtime-install-") as tmp:
         tmpdir = Path(tmp)
         build_venv = tmpdir / "build-venv"
         install_venv = tmpdir / "install-venv"
@@ -44,12 +54,15 @@ def main() -> int:
             print("RUNTIME-INSTALL-PROOF: FAILED - no wheel produced")
             return 1
 
-        run([str(install_python), "-m", "pip", "install", str(wheels[-1])], cwd=BACKEND)
+        run([str(install_python), "-m", "pip", "install", str(core_wheel)], cwd=tmpdir)
+        run([str(install_python), "-m", "pip", "install", str(wheels[-1])], cwd=tmpdir)
 
         env = os.environ.copy()
+        # Prove installed bytes, without sibling/source imports from the caller.
+        env.pop('PYTHONPATH', None)
         env.update(
             {
-                "DATABASE_URL": "postgresql+asyncpg://civicrecords:civicrecords@127.0.0.1:5432/civicrecords_runtime_proof",
+                "DATABASE_URL": "postgresql+asyncpg://townlight_records:townlight_records@127.0.0.1:5432/townlight_records_runtime_proof",
                 "JWT_SECRET": "runtimeproof" * 4,
                 "FIRST_ADMIN_EMAIL": "admin@example.gov",
                 "FIRST_ADMIN_PASSWORD": "RuntimeProofPassword2026",
@@ -65,7 +78,11 @@ def main() -> int:
             [
                 str(install_python),
                 "-c",
-                "from app.main import app; "
+                "from townlight_records.main import app; "
+                "from townlight_records.config import APP_VERSION; "
+                "from importlib.metadata import version; "
+                "assert APP_VERSION == version('townlight-records') == '1.8.0.dev2'; "
+                "assert version('townlight-core') == '1.3.0.dev2'; "
                 "from fastapi.testclient import TestClient; "
                 "r=TestClient(app).get('/health'); "
                 "assert r.status_code == 200, r.text; "

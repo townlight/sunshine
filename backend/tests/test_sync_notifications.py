@@ -22,7 +22,7 @@ def _make_source():
 @pytest.mark.asyncio
 async def test_single_circuit_open_sends_individual_notification():
     """A lone circuit-open queues one individual notification, no digest."""
-    from app.notifications.sync_notifications import notify_circuit_open, _PENDING_CIRCUIT_OPENS
+    from townlight_records.notifications.sync_notifications import notify_circuit_open, _PENDING_CIRCUIT_OPENS
 
     _PENDING_CIRCUIT_OPENS.clear()
     source = _make_source()
@@ -36,10 +36,10 @@ async def test_single_circuit_open_sends_individual_notification():
         digest_calls.append(list(source_ids))
 
     with patch(
-        "app.notifications.sync_notifications._queue_individual_circuit_open",
+        "townlight_records.notifications.sync_notifications._queue_individual_circuit_open",
         side_effect=fake_individual,
     ), patch(
-        "app.notifications.sync_notifications._queue_digest_notification",
+        "townlight_records.notifications.sync_notifications._queue_digest_notification",
         side_effect=fake_digest,
     ):
         await notify_circuit_open(None, source)
@@ -56,7 +56,7 @@ async def test_multiple_circuit_opens_batched_to_digest():
 
     Spec ref: 'D12 — 3 sources circuit-open within 5-min window → 1 digest email, not 3'
     """
-    from app.notifications.sync_notifications import notify_circuit_open, _PENDING_CIRCUIT_OPENS
+    from townlight_records.notifications.sync_notifications import notify_circuit_open, _PENDING_CIRCUIT_OPENS
 
     _PENDING_CIRCUIT_OPENS.clear()
     sources = [_make_source() for _ in range(3)]
@@ -70,10 +70,10 @@ async def test_multiple_circuit_opens_batched_to_digest():
         digest_calls.append(list(source_ids))
 
     with patch(
-        "app.notifications.sync_notifications._queue_individual_circuit_open",
+        "townlight_records.notifications.sync_notifications._queue_individual_circuit_open",
         side_effect=fake_individual,
     ), patch(
-        "app.notifications.sync_notifications._queue_digest_notification",
+        "townlight_records.notifications.sync_notifications._queue_digest_notification",
         side_effect=fake_digest,
     ):
         for source in sources:

@@ -4,9 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn townlight_records.main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
-      - ./backend/app:/app/app
+      - ./backend/townlight_records:/app/townlight_records
       - ./backend/tests:/app/tests
       - ./backend/alembic:/app/alembic
     ports:
@@ -14,7 +14,7 @@ services:
 
   worker:
     volumes:
-      - ./backend/app:/app/app
+      - ./backend/townlight_records:/app/townlight_records
 
   postgres:
     ports:

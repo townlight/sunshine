@@ -51,7 +51,7 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 
-from civiccore.migrations.guards import idempotent_add_column
+from townlight_core.migrations.guards import idempotent_add_column
 
 
 # revision identifiers
@@ -78,7 +78,7 @@ def upgrade() -> None:
     #    server_default ensures any pre-existing rows backfill cleanly. The
     #    model declares default=1 (Python-side) so new ORM inserts will also
     #    pass an explicit value.
-    #    SHARED table (exemption_rules is CivicCore-owned) — guarded.
+    #    SHARED table (exemption_rules is TownlightCore-owned) — guarded.
     idempotent_add_column(
         "exemption_rules",
         sa.Column("version", sa.Integer(), nullable=False, server_default="1"),

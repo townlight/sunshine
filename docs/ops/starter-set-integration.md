@@ -11,7 +11,7 @@ runtime pin, selectability, and honest boundary language.
 Run the module-side check from this repo:
 
 ```powershell
-python scripts\check_starter_set_integration.py --umbrella-root ..\civicsuite --require-archives
+python scripts\check_starter_set_integration.py --umbrella-root ..\townlight --require-archives
 ```
 
 The check verifies that:

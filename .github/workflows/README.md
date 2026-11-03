@@ -52,7 +52,7 @@ openssl rand -hex 16 > data/secrets/first_admin_password
 chmod 0400 data/secrets/jwt_secret data/secrets/first_admin_password
 
 docker compose up -d --wait postgres redis
-docker compose exec -T postgres createdb -U civicrecords civicrecords_test
+docker compose exec -T postgres createdb -U townlight_records townlight_records_test
 
 # Reproduce the CI checks
 docker compose build api

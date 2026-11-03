@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from civiccore.release_provenance import main
+from townlight_core.release_provenance import main
 
 
 if __name__ == "__main__":

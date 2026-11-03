@@ -20,7 +20,7 @@ os.environ["TESTING"] = "1"
 # T6 / ENG-001 — provide a valid Fernet key for at-rest encryption tests.
 # Generated once per pytest process. The testing=True short-circuit in
 # Settings.check_encryption_key means this env var isn't strictly required
-# to pass startup validation, but `app.security.at_rest._get_fernet()`
+# to pass startup validation, but `townlight_records.security.at_rest._get_fernet()`
 # will still try to build a real Fernet instance on first encrypt/decrypt,
 # and that call fails with a cryptic binascii error if the key is empty
 # or malformed. Setting a real Fernet-generated key here makes every test
@@ -31,13 +31,13 @@ if not os.environ.get("ENCRYPTION_KEY"):
 
 
 
-import app.database
-from app.config import settings
-from app.database import get_async_session
-from app.main import create_app
-from app.models.user import User, UserRole
-from app.models.departments import Department
-from app.models.sync_failure import SyncFailure, SyncRunLog  # noqa: F401 — registers with Base.metadata
+import townlight_records.database
+from townlight_records.config import settings
+from townlight_records.database import get_async_session
+from townlight_records.main import create_app
+from townlight_records.models.user import User, UserRole
+from townlight_records.models.departments import Department
+from townlight_records.models.sync_failure import SyncFailure, SyncRunLog  # noqa: F401 — registers with Base.metadata
 
 # Cross-repository desktop tests use the same pinned runtime as the installer.
 # CI supplies installed sibling packages; local work uses the adjacent checkout.
@@ -53,7 +53,7 @@ if DESKTOP_RUNTIME_ROOT is not None:
 
 # Build test database URL — replace only the database name (last segment)
 _base = settings.database_url.rsplit("/", 1)[0]
-TEST_DATABASE_URL = f"{_base}/civicrecords_test"
+TEST_DATABASE_URL = f"{_base}/townlight_records_test"
 
 # Sync URL for schema setup/teardown (avoids async concurrency issues)
 _sync_url = TEST_DATABASE_URL.replace("postgresql+asyncpg", "postgresql+psycopg2")
@@ -84,7 +84,7 @@ test_session_maker = _SessionProxy()
 @pytest.fixture
 def department_read_grant(client, monkeypatch):
     """Explicit synthetic persisted authority for tests that exercise request reads."""
-    from civiccore.auth.department_scope import record_department_grant
+    from townlight_core.auth.department_scope import record_department_grant
 
     scope_id = "records-test"
     monkeypatch.setattr(settings, "authority_scope_id", scope_id)
@@ -116,7 +116,7 @@ def get_test_session():
 
 @pytest.fixture
 def setup_db():
-    """Drop and recreate civicrecords_test, install vector, run migrations, seed admin.
+    """Drop and recreate townlight_records_test, install vector, run migrations, seed admin.
 
     Drops and recreates the entire test database each time so the vector extension
     and all catalog state are always clean. DROP SCHEMA CASCADE orphans the
@@ -131,16 +131,16 @@ def setup_db():
 
     backend_dir = str(Path(__file__).parent.parent)
 
-    # Connect to the live database to drop and recreate the test database.
-    # This guarantees a clean catalog — no dangling extension OIDs, no stale types.
-    _main_sync_url = _sync_url.rsplit("/", 1)[0] + "/civicrecords"
-    main_engine = create_engine(_main_sync_url, echo=False)
+    # Use the maintenance database even when CI config points at the test database.
+    # A connection cannot drop its own database.
+    maintenance_url = sa.engine.make_url(_sync_url).set(database="postgres")
+    main_engine = create_engine(maintenance_url, echo=False)
     with main_engine.connect().execution_options(isolation_level="AUTOCOMMIT") as conn:
         # WITH (FORCE) atomically terminates all connections before dropping —
         # avoids the race condition between pg_terminate_backend and DROP DATABASE
         # (requires PostgreSQL 13+; the project targets PostgreSQL 17).
-        conn.execute(sa.text("DROP DATABASE IF EXISTS civicrecords_test WITH (FORCE)"))
-        conn.execute(sa.text("CREATE DATABASE civicrecords_test"))
+        conn.execute(sa.text("DROP DATABASE IF EXISTS townlight_records_test WITH (FORCE)"))
+        conn.execute(sa.text("CREATE DATABASE townlight_records_test"))
     main_engine.dispose()
 
     sync_engine = create_engine(_sync_url, echo=False)
@@ -194,8 +194,8 @@ async def client(setup_db) -> AsyncGenerator[AsyncClient, None]:
     _test_engine = create_async_engine(TEST_DATABASE_URL, echo=False, poolclass=NullPool)
     _test_session_maker = async_sessionmaker(_test_engine, class_=AsyncSession, expire_on_commit=False)
 
-    original_session_maker = app.database.async_session_maker
-    app.database.async_session_maker = _test_session_maker
+    original_session_maker = townlight_records.database.async_session_maker
+    townlight_records.database.async_session_maker = _test_session_maker
 
     _app = create_app()
     _app.dependency_overrides[get_async_session] = override_get_session
@@ -204,7 +204,7 @@ async def client(setup_db) -> AsyncGenerator[AsyncClient, None]:
     ) as ac:
         yield ac
 
-    app.database.async_session_maker = original_session_maker
+    townlight_records.database.async_session_maker = original_session_maker
     await _test_engine.dispose()
     # Flush asyncpg's pending cancel/close callbacks so PostgreSQL can immediately
     # reclaim the connection slots.  Without this, GC-triggered Connection._cancel()
@@ -221,8 +221,8 @@ async def client(setup_db) -> AsyncGenerator[AsyncClient, None]:
 async def _create_test_user(email: str, password: str, full_name: str, role: UserRole) -> None:
     """Create a user directly via UserManager (no HTTP endpoint needed)."""
     from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
-    from app.auth.manager import UserManager
-    from app.schemas.user import AdminUserCreate
+    from townlight_records.auth.manager import UserManager
+    from townlight_records.schemas.user import AdminUserCreate
 
     async with _test_session_maker() as session:
         user_db = SQLAlchemyUserDatabase(session, User)
@@ -251,7 +251,7 @@ async def build_data_source(session, **kwargs):
     defaults (``id=uuid.uuid4()``, ``is_active=True``, ``created_at=now()``,
     etc.) fill the rest. Works with any AsyncSession the caller provides.
     """
-    from app.models.document import DataSource
+    from townlight_records.models.document import DataSource
 
     ds = DataSource(**kwargs)
     session.add(ds)
@@ -304,8 +304,8 @@ async def _create_test_user_in_dept(
 ) -> None:
     """Create a user with a department assignment."""
     from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
-    from app.auth.manager import UserManager
-    from app.schemas.user import AdminUserCreate
+    from townlight_records.auth.manager import UserManager
+    from townlight_records.schemas.user import AdminUserCreate
 
     async with _test_session_maker() as session:
         user_db = SQLAlchemyUserDatabase(session, User)

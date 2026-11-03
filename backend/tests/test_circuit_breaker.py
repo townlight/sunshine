@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy import text
 
-from app.models.document import DataSource, SourceType
+from townlight_records.models.document import DataSource, SourceType
 from tests.conftest import build_data_source
 
 
@@ -23,7 +23,7 @@ async def _seed_admin_user_id(session):
 @pytest.mark.asyncio
 async def test_circuit_opens_after_5_consecutive_full_run_failures(db_session):
     """5 consecutive all-fail runs → sync_paused=True, consecutive_failure_count=5."""
-    from app.connectors.base import DiscoveredRecord
+    from townlight_records.connectors.base import DiscoveredRecord
 
     source_id = uuid.uuid4()
     await build_data_source(
@@ -52,7 +52,7 @@ async def test_circuit_opens_after_5_consecutive_full_run_failures(db_session):
     mock_connector.fetch = AsyncMock(side_effect=IOError("network down"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     for _ in range(5):
         mock_connector.close = MagicMock()
@@ -70,7 +70,7 @@ async def test_circuit_opens_after_5_consecutive_full_run_failures(db_session):
 @pytest.mark.asyncio
 async def test_circuit_does_not_open_at_4_failures(db_session):
     """4 consecutive all-fail runs → sync_paused=False, counter=4."""
-    from app.connectors.base import DiscoveredRecord
+    from townlight_records.connectors.base import DiscoveredRecord
 
     source_id = uuid.uuid4()
     await build_data_source(
@@ -99,7 +99,7 @@ async def test_circuit_does_not_open_at_4_failures(db_session):
     mock_connector.fetch = AsyncMock(side_effect=IOError("network down"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     for _ in range(4):
         mock_connector.close = MagicMock()
@@ -117,7 +117,7 @@ async def test_circuit_does_not_open_at_4_failures(db_session):
 @pytest.mark.asyncio
 async def test_success_resets_consecutive_failure_count(db_session):
     """3 failures then 1 success → consecutive_failure_count=0, sync_paused=False."""
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
 
     source_id = uuid.uuid4()
     await build_data_source(
@@ -149,8 +149,8 @@ async def test_success_resets_consecutive_failure_count(db_session):
     ))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -184,7 +184,7 @@ async def test_zero_records_discovered_does_not_increment_counter(db_session):
     )
     await db_session.commit()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     mock_connector = AsyncMock()
     mock_connector.connector_type = "rest_api"
@@ -201,11 +201,11 @@ async def test_zero_records_discovered_does_not_increment_counter(db_session):
 
     await db_session.refresh(
         await db_session.get(
-            __import__("app.models.document", fromlist=["DataSource"]).DataSource,
+            __import__("townlight_records.models.document", fromlist=["DataSource"]).DataSource,
             source_id
         )
     )
-    from app.models.document import DataSource
+    from townlight_records.models.document import DataSource
     source = await db_session.get(DataSource, source_id)
     assert source.consecutive_failure_count == 0
     assert source.sync_paused is False
@@ -214,9 +214,9 @@ async def test_zero_records_discovered_does_not_increment_counter(db_session):
 @pytest.mark.asyncio
 async def test_retry_success_with_zero_new_records_resets_counter(db_session):
     """0 new records discovered, but retrying rows succeed → counter resets to 0 (D-FAIL-4)."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     import uuid
-    from app.connectors.base import FetchedDocument
+    from townlight_records.connectors.base import FetchedDocument
 
     source_id = uuid.uuid4()
     await build_data_source(
@@ -256,8 +256,8 @@ async def test_retry_success_with_zero_new_records_resets_counter(db_session):
     ))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -284,7 +284,7 @@ async def test_grace_period_trips_circuit_at_2_failures_not_5(db_session):
     This verifies the grace-period fast-feedback path: admins know within 2
     sync ticks if their fix didn't work, instead of waiting for 5 more failures.
     """
-    from app.connectors.base import DiscoveredRecord
+    from townlight_records.connectors.base import DiscoveredRecord
 
     source_id = uuid.uuid4()
     # Simulate a source that was just unpaused — consecutive_failure_count=0,
@@ -316,7 +316,7 @@ async def test_grace_period_trips_circuit_at_2_failures_not_5(db_session):
     mock_connector.fetch = AsyncMock(side_effect=IOError("still broken"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
 
     # First failure — counter becomes 1, threshold=2, not yet tripped
     await run_connector_sync_with_retry(
@@ -345,7 +345,7 @@ async def test_grace_period_clears_on_success(db_session):
     """After unpause (grace_period sentinel), a successful sync clears the sentinel
     so the source returns to normal 5-failure threshold.
     """
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
 
     source_id = uuid.uuid4()
     await build_data_source(
@@ -378,8 +378,8 @@ async def test_grace_period_clears_on_success(db_session):
     ))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),

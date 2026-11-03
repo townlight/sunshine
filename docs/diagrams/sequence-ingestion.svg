@@ -2,16 +2,16 @@
 <!DOCTYPE svg
   PUBLIC '-//W3C//DTD SVG 1.0//EN'
   'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
-<svg width="920" height="680" preserveAspectRatio="xMinYMin meet" viewBox="0 0 920 680" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="936" height="696" preserveAspectRatio="xMinYMin meet" viewBox="0 0 936 696" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<title>...</title>
 	<desc>...</desc>
 	<clipPath id="clip">
-		<rect x="0" y="0" width="920" height="680"/>
+		<rect x="0" y="0" width="936" height="696"/>
 	</clipPath>
-	<g id="group" transform="scale(1,-1) translate(0,-680)" style="clip-path: url(#clip)">
-		<g transform="">
+	<g id="group" transform="scale(1,-1) translate(0,-696)" style="clip-path: url(#clip)">
+		<g transform=" matrix(1,0,0,1,8,8)">
 			<rect x="0" y="0" width="920" height="680" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
-			<text x="305.951" y="656" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1312) scale(1,-1)">Townlight Records — Ingestion Pipeline Sequence</text>
+			<text x="291.181" y="656" style="font-family: Helvetica-Bold; font-size: 14px;fill: rgb(10%,22%,36%); stroke:none;" transform="translate(0,1312) scale(1,-1)">Townlight Records — Ingestion Pipeline Sequence</text>
 			<rect x="37.42857142857143" y="589" width="108.00000000000001" height="36" rx="4" ry="4" style="stroke: rgb(57%,25%,5%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(99%,95%,78%); fill-rule: evenodd;"/>
 			<text x="69.42057142857144" y="601" style="font-family: Helvetica-Bold; font-size: 8px;fill: rgb(57%,25%,5%); stroke:none;" transform="translate(0,1202) scale(1,-1)">Celery Beat</text>
 			<rect x="160.28571428571428" y="589" width="108.0" height="36" rx="4" ry="4" style="stroke: rgb(8%,39%,20%); stroke-linecap: butt; stroke-width: 1.5; fill: rgb(86%,98%,90%); fill-rule: evenodd;"/>

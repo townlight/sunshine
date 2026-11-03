@@ -19,7 +19,7 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-from civiccore.migrations.guards import idempotent_alter_column
+from townlight_core.migrations.guards import idempotent_alter_column
 
 revision: str = '018_city_profile_state_nullable'
 down_revision: Union[str, None] = '017_rename_connector_enum_values'

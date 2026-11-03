@@ -5,7 +5,7 @@ from sqlalchemy import select
 from httpx import AsyncClient
 
 from tests.conftest import _create_test_user, test_session_maker
-from app.models.user import User, UserRole
+from townlight_records.models.user import User, UserRole
 
 
 @pytest.mark.asyncio

@@ -225,7 +225,7 @@ async def test_liaison_can_search(
     liaison_token_dept_a: str,
 ):
     """LIAISON role should be able to POST /search/query (returns 200, not 403)."""
-    with patch("app.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
+    with patch("townlight_records.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
         mock_embed.return_value = [0.1] * 768
         resp = await client.post(
             "/search/query",
@@ -253,8 +253,8 @@ async def test_liaison_search_excludes_dept_b(
     security boundary under test.
     """
     from tests.conftest import test_session_maker, _create_test_user
-    from app.models.document import DataSource, Document, DocumentChunk, SourceType
-    from app.models.user import User, UserRole
+    from townlight_records.models.document import DataSource, Document, DocumentChunk, SourceType
+    from townlight_records.models.user import User, UserRole
     import sqlalchemy as sa
 
     unique_term = f"dept_b_classified_{uuid.uuid4().hex[:8]}"
@@ -304,7 +304,7 @@ async def test_liaison_search_excludes_dept_b(
 
     # Search as liaison in dept A using an embedding that perfectly matches
     # the dept B chunk — scoping must exclude it regardless of similarity.
-    with patch("app.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
+    with patch("townlight_records.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
         mock_embed.return_value = [0.9] * 768
         resp = await client.post(
             "/search/query",

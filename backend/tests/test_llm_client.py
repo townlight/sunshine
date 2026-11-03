@@ -6,7 +6,7 @@ app.llm.client.generate() instead of calling Ollama directly.
 Also includes regression tests for the PR #42 audit findings:
 - ``_get_provider()`` must construct ``OllamaProvider`` with kwargs (the
   keyword-only signature), not positionally with an ``OllamaConfig``.
-- ``generate()`` must call the civiccore provider with
+- ``generate()`` must call the townlight_core provider with
   ``system_prompt`` / ``user_content`` kwargs — NOT the legacy ``prompt=``
   kwarg the records-ai shim used to send.
 """
@@ -16,9 +16,9 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from app.llm import client as llm_client_module
-from civiccore.llm.providers import OllamaProvider
-from civiccore.llm.providers.base import LLMProvider
+from townlight_records.llm import client as llm_client_module
+from townlight_core.llm.providers import OllamaProvider
+from townlight_core.llm.providers.base import LLMProvider
 
 
 @pytest.mark.asyncio
@@ -26,10 +26,10 @@ async def test_llm_reviewer_uses_central_client():
     """llm_reviewer.llm_suggest_exemptions() routes through app.llm.client.generate()."""
     mock_response = "EXEMPTION|PII|John Doe SSN 123-45-6789|0.9"
 
-    with patch("app.exemptions.llm_reviewer.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.exemptions.llm_reviewer.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = mock_response
 
-        from app.exemptions.llm_reviewer import llm_suggest_exemptions
+        from townlight_records.exemptions.llm_reviewer import llm_suggest_exemptions
 
         result = await llm_suggest_exemptions(
             text="John Doe SSN 123-45-6789 lives at 123 Main St",
@@ -52,14 +52,14 @@ async def test_llm_reviewer_uses_central_client():
 @pytest.mark.asyncio
 async def test_synthesizer_uses_central_client():
     """synthesizer.synthesize_answer() routes through app.llm.client.generate()."""
-    from app.search.engine import SearchHit
+    from townlight_records.search.engine import SearchHit
 
     mock_answer = "Based on the documents, the city council approved the rezoning. [Doc: minutes.pdf, Page: 3]"
 
-    with patch("app.search.synthesizer.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.search.synthesizer.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = mock_answer
 
-        from app.search.synthesizer import synthesize_answer
+        from townlight_records.search.synthesizer import synthesize_answer
 
         hits = [
             SearchHit(
@@ -87,8 +87,8 @@ async def test_synthesizer_uses_central_client():
 
 
 @pytest.mark.asyncio
-async def test_llm_extractor_uses_civiccore_provider():
-    """The shared OCR extractor now comes from civiccore.ingest."""
+async def test_llm_extractor_uses_townlight_core_provider():
+    """The shared OCR extractor now comes from townlight_core.ingest."""
     import tempfile
     from pathlib import Path
 
@@ -101,8 +101,8 @@ async def test_llm_extractor_uses_civiccore_provider():
 
     fake_provider = FakeProvider()
 
-    with patch("civiccore.ingest.llm_extractor._get_provider", return_value=fake_provider):
-        from civiccore.ingest.llm_extractor import extract_text_multimodal
+    with patch("townlight_core.ingest.llm_extractor._get_provider", return_value=fake_provider):
+        from townlight_core.ingest.llm_extractor import extract_text_multimodal
 
         # Create a minimal test image file (just needs to exist for read_bytes)
         with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f:
@@ -144,7 +144,7 @@ def test_get_provider_constructs_ollama_provider_with_kwargs(monkeypatch):
 
 class _StrictFakeProvider(LLMProvider):
     """Fake that rejects the legacy 'prompt=' kwarg the records-ai shim used
-    to send. Mirrors the civiccore OllamaProvider strictness."""
+    to send. Mirrors the townlight_core OllamaProvider strictness."""
 
     def __init__(self) -> None:
         self.last_call_kwargs: dict | None = None
@@ -182,10 +182,10 @@ def _async_return(value):
 
 @pytest.mark.asyncio
 async def test_generate_uses_system_prompt_and_user_content_kwargs(monkeypatch):
-    """generate() must call provider with civiccore's signature (system_prompt, user_content).
+    """generate() must call provider with townlight_core's signature (system_prompt, user_content).
 
     Regression: PR #42 originally called provider.generate(prompt=...) which
-    raised 'unexpected keyword argument prompt' because civiccore's OllamaProvider
+    raised 'unexpected keyword argument prompt' because townlight_core's OllamaProvider
     expects system_prompt + user_content separately.
     """
     fake = _StrictFakeProvider()
@@ -198,7 +198,7 @@ async def test_generate_uses_system_prompt_and_user_content_kwargs(monkeypatch):
         _async_return(8192),
     )
 
-    from app.llm.client import generate
+    from townlight_records.llm.client import generate
 
     result = await generate(
         system_prompt="be helpful",

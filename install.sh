@@ -2,8 +2,8 @@
 set -euo pipefail
 
 echo "================================================================================"
-echo "  CivicSuite SERVER installation — clerks access via browser at http://<server>:8080"
-echo "  CivicSunshine — Installation Script"
+echo "  Townlight SERVER installation — clerks access via browser at http://<server>:8080"
+echo "  Townlight Records — Installation Script"
 echo "  Supports: Linux (Ubuntu/Debian), macOS"
 echo "================================================================================"
 echo ""
@@ -59,7 +59,7 @@ if [ ! -f .env ]; then
     # URL-safe base64 encoding 32 random bytes. `openssl rand -base64 32`
     # produces standard base64; swap `+`→`-` and `/`→`_` for URL-safe.
     ENCRYPTION_KEY=$(openssl rand -base64 32 | tr '+/' '-_')
-    SECRET_DIR="${CIVICRECORDS_SECRET_DIR:-./data/secrets}"
+    SECRET_DIR="${TOWNLIGHT_RECORDS_SECRET_DIR:-./data/secrets}"
     mkdir -p "$SECRET_DIR"
     umask 077
     printf '%s\n' "$JWT_SECRET" > "$SECRET_DIR/jwt_secret"
@@ -100,13 +100,13 @@ if [ ! -f .env ]; then
     # safer posture — staff-only, no public surface). Operators choose
     # "public" to expose the resident landing page + submission form +
     # resident-registration path (locked B4=(b) minimal surface).
-    # Non-interactive installs can set CIVICRECORDS_PORTAL_MODE before
+    # Non-interactive installs can set TOWNLIGHT_RECORDS_PORTAL_MODE before
     # invoking install.sh to skip the prompt.
-    if [ -n "$CIVICRECORDS_PORTAL_MODE" ]; then
-        PORTAL_MODE_CHOICE=$(echo "$CIVICRECORDS_PORTAL_MODE" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+    if [ -n "$TOWNLIGHT_RECORDS_PORTAL_MODE" ]; then
+        PORTAL_MODE_CHOICE=$(echo "$TOWNLIGHT_RECORDS_PORTAL_MODE" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
         if [ "$PORTAL_MODE_CHOICE" != "public" ] && [ "$PORTAL_MODE_CHOICE" != "private" ]; then
             echo ""
-            echo "[WARN] CIVICRECORDS_PORTAL_MODE='$CIVICRECORDS_PORTAL_MODE' is not 'public' or 'private' — falling back to 'private'."
+            echo "[WARN] TOWNLIGHT_RECORDS_PORTAL_MODE='$TOWNLIGHT_RECORDS_PORTAL_MODE' is not 'public' or 'private' — falling back to 'private'."
             PORTAL_MODE_CHOICE="private"
         else
             echo ""
@@ -149,7 +149,7 @@ fi
 # B2 / QA-002: migrate existing .env files from recoverable container env
 # secrets to Docker-mounted secret files. Fresh .env.example files already have
 # these keys; older v1.5.x installs are rewritten in place.
-SECRET_DIR=$(grep -E '^CIVICRECORDS_SECRET_DIR=' .env 2>/dev/null | tail -1 | cut -d= -f2-)
+SECRET_DIR=$(grep -E '^TOWNLIGHT_RECORDS_SECRET_DIR=' .env 2>/dev/null | tail -1 | cut -d= -f2-)
 SECRET_DIR="${SECRET_DIR:-./data/secrets}"
 mkdir -p "$SECRET_DIR"
 umask 077
@@ -173,16 +173,16 @@ if [ "$OS" = "Darwin" ]; then
     sed -i '' '/^FIRST_ADMIN_PASSWORD=/d' .env
     sed -i '' '/^JWT_SECRET_FILE=/d' .env
     sed -i '' '/^FIRST_ADMIN_PASSWORD_FILE=/d' .env
-    sed -i '' '/^CIVICRECORDS_SECRET_DIR=/d' .env
+    sed -i '' '/^TOWNLIGHT_RECORDS_SECRET_DIR=/d' .env
 else
     sed -i '/^JWT_SECRET=/d' .env
     sed -i '/^FIRST_ADMIN_PASSWORD=/d' .env
     sed -i '/^JWT_SECRET_FILE=/d' .env
     sed -i '/^FIRST_ADMIN_PASSWORD_FILE=/d' .env
-    sed -i '/^CIVICRECORDS_SECRET_DIR=/d' .env
+    sed -i '/^TOWNLIGHT_RECORDS_SECRET_DIR=/d' .env
 fi
 cat >> .env <<EOF
-CIVICRECORDS_SECRET_DIR=$SECRET_DIR
+TOWNLIGHT_RECORDS_SECRET_DIR=$SECRET_DIR
 EOF
 
 # T5C correction pass (2026-04-21): the detect_hardware.sh gate now exits 1
@@ -202,8 +202,8 @@ echo "Detecting hardware capabilities..."
 if ! bash scripts/detect_hardware.sh; then
     echo ""
     echo "[ERROR] Hardware gate failed. This machine has less than ${MIN_RAM_GB} GB RAM, the"
-    echo "        CivicSuite SERVER floor (MIN_RAM_GB — see scripts/detect_hardware.sh)."
-    echo "        CivicSuite is a SERVER product: one server per city runs the full stack"
+    echo "        Townlight SERVER floor (MIN_RAM_GB — see scripts/detect_hardware.sh)."
+    echo "        Townlight is a SERVER product: one server per city runs the full stack"
     echo "        (postgres + redis + ollama + api + worker + beat + frontend) and clerks"
     echo "        reach it via browser at http://<server>:8080 — this gate checks the"
     echo "        server box, not a clerk workstation."
@@ -223,7 +223,7 @@ fi
 # ─── Select Compose Configuration ────────────────────────────────────────────
 COMPOSE_FILES="-f docker-compose.yml"
 
-if [ "${CIVICRECORDS_GPU_ENABLED:-false}" = "true" ]; then
+if [ "${TOWNLIGHT_RECORDS_GPU_ENABLED:-false}" = "true" ]; then
     echo "GPU acceleration enabled — using ROCm device passthrough"
     COMPOSE_FILES="$COMPOSE_FILES -f docker-compose.gpu.yml"
 else
@@ -247,7 +247,7 @@ docker compose $COMPOSE_FILES --env-file .env up -d postgres redis
 
 echo ">>> Waiting for database..."
 for i in $(seq 1 30); do
-    if docker compose exec -T postgres pg_isready -U civicrecords -q 2>/dev/null; then
+    if docker compose exec -T postgres pg_isready -U townlight_records -q 2>/dev/null; then
         echo "[OK] Database is ready"
         break
     fi
@@ -299,7 +299,7 @@ fi
 # gemma4:31b require stronger hardware and are gated behind an explicit
 # "yes" confirmation.
 # Non-interactive install (CI, piped stdin): default is used unless env var
-# CIVICRECORDS_SELECTED_MODEL=<tag> is set.
+# TOWNLIGHT_RECORDS_SELECTED_MODEL=<tag> is set.
 
 echo ""
 echo ">>> Waiting for Ollama to be ready..."
@@ -334,7 +334,7 @@ for M in $SUPPORTED_MODELS; do
     fi
 done
 
-SELECTED_MODEL="${CIVICRECORDS_SELECTED_MODEL:-}"
+SELECTED_MODEL="${TOWNLIGHT_RECORDS_SELECTED_MODEL:-}"
 
 if [ -n "$EXISTING_MODEL" ] && [ -z "$SELECTED_MODEL" ]; then
     echo ""
@@ -345,7 +345,7 @@ else
     echo ""
     echo "===== Gemma 4 model picker ====="
     echo ""
-    echo "CivicSunshine supports four Gemma 4 models. The target profile is"
+    echo "Townlight Records supports four Gemma 4 models. The target profile is"
     echo "Windows 11 Pro 23H2+ / 32 GB RAM minimum (64 GB recommended) /"
     echo "GPU optional / CPU-only supported. Models 26b and 31b require stronger"
     echo "hardware than the baseline and must be selected explicitly."
@@ -357,7 +357,7 @@ else
     echo ""
 
     if [ -n "$SELECTED_MODEL" ]; then
-        echo "Using CIVICRECORDS_SELECTED_MODEL=$SELECTED_MODEL (non-interactive override)."
+        echo "Using TOWNLIGHT_RECORDS_SELECTED_MODEL=$SELECTED_MODEL (non-interactive override)."
     elif [ -t 0 ]; then
         printf "Enter 1-4 (or press Enter for default gemma4:e4b): "
         read -r CHOICE
@@ -397,7 +397,7 @@ else
     else
         SELECTED_MODEL="$DEFAULT_MODEL"
         echo "Non-interactive install — selecting default: $SELECTED_MODEL"
-        echo "Override by setting CIVICRECORDS_SELECTED_MODEL=<tag> before running."
+        echo "Override by setting TOWNLIGHT_RECORDS_SELECTED_MODEL=<tag> before running."
     fi
 
     echo ""
@@ -424,7 +424,7 @@ fi
 
 echo ""
 echo "================================================================================"
-echo "  CivicSuite SERVER installation — clerks access via browser at http://${IP}:8080"
+echo "  Townlight SERVER installation — clerks access via browser at http://${IP}:8080"
 echo "  Installation complete!"
 echo ""
 echo "  Clerk URL:    http://${IP}:8080   (any modern browser, zero client install)"
@@ -432,8 +432,8 @@ echo "  Admin panel:  http://${IP}:8080"
 echo "  API:          http://${IP}:8000"
 echo "  API docs:     http://${IP}:8000/docs"
 echo ""
-if [ "${CIVICRECORDS_GPU_ENABLED:-false}" = "true" ]; then
-    echo "  GPU inference: ENABLED (${CIVICRECORDS_PLATFORM} / GFX ${CIVICRECORDS_GFX_VERSION})"
+if [ "${TOWNLIGHT_RECORDS_GPU_ENABLED:-false}" = "true" ]; then
+    echo "  GPU inference: ENABLED (${TOWNLIGHT_RECORDS_PLATFORM} / GFX ${TOWNLIGHT_RECORDS_GFX_VERSION})"
 else
     echo "  GPU inference: DISABLED (CPU only)"
     echo "  See docs for GPU enablement on AMD Ryzen"

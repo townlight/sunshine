@@ -5,8 +5,8 @@ from httpx import AsyncClient
 @pytest.mark.asyncio
 async def test_write_audit_log_creates_entry(client: AsyncClient):
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log
-    from civiccore.audit import compute_persisted_audit_hash
+    from townlight_records.audit.logger import write_audit_log
+    from townlight_core.audit import compute_persisted_audit_hash
 
     async with test_session_maker() as session:
         entry = await write_audit_log(
@@ -32,7 +32,7 @@ async def test_write_audit_log_creates_entry(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_hash_chain_links_entries(client: AsyncClient):
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log
+    from townlight_records.audit.logger import write_audit_log
 
     async with test_session_maker() as session:
         entry1 = await write_audit_log(
@@ -47,7 +47,7 @@ async def test_hash_chain_links_entries(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_verify_chain_passes(client: AsyncClient):
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log, verify_chain
+    from townlight_records.audit.logger import write_audit_log, verify_chain
 
     async with test_session_maker() as session:
         await write_audit_log(session=session, action="a", resource_type="test")
@@ -61,11 +61,11 @@ async def test_verify_chain_passes(client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_verify_chain_detects_tampered_civiccore_hash_payload(client: AsyncClient):
+async def test_verify_chain_detects_tampered_townlight_core_hash_payload(client: AsyncClient):
     from sqlalchemy import update
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log, verify_chain
-    from app.models.audit import AuditLog
+    from townlight_records.audit.logger import write_audit_log, verify_chain
+    from townlight_records.models.audit import AuditLog
 
     async with test_session_maker() as session:
         entry = await write_audit_log(session=session, action="created", resource_type="test")
@@ -86,9 +86,9 @@ async def test_verify_chain_detects_tampered_civiccore_hash_payload(client: Asyn
 async def test_write_audit_log_direct(client: AsyncClient):
     """Verify audit log entries can be written and read back."""
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log
+    from townlight_records.audit.logger import write_audit_log
     from sqlalchemy import select
-    from app.models.audit import AuditLog
+    from townlight_records.models.audit import AuditLog
 
     async with test_session_maker() as session:
         await write_audit_log(
@@ -129,7 +129,7 @@ async def test_concurrent_append_serializes_even_without_a_head(client, monkeypa
     import asyncio
     from sqlalchemy import text
     from tests.conftest import test_session_maker
-    from app.audit import logger
+    from townlight_records.audit import logger
 
     if seed_head:
         async with test_session_maker() as session:
@@ -198,8 +198,8 @@ async def test_caller_owned_audit_is_rolled_back_with_the_operation(client):
     """P2: an audit append must not commit an enclosing domain operation."""
     from sqlalchemy import func, select
     from tests.conftest import test_session_maker
-    from app.audit.logger import write_audit_log
-    from app.models.audit import AuditLog
+    from townlight_records.audit.logger import write_audit_log
+    from townlight_records.models.audit import AuditLog
 
     async with test_session_maker() as session:
         await write_audit_log(session, "aborted_operation", "test", commit=False)

@@ -1,117 +1,33 @@
-<a id="civicsunshine--development-standards"></a>
-
 # Townlight Records — Development Standards
 
-## Current Governance Override - Agent Pipeline For Codex
+## Governing contract and current candidate
 
-The retired `coder-ui-qa-test` skill is no longer authoritative for this
-repository. Productization work must use Agent Pipeline for Codex, following
-the active `.agent-runs/<run-id>/` manifest, scope lock, run log, and policy
-gates when a run is active.
+Scott's bounded completion contract governs. Legacy skills, pipeline profiles,
+automatic delegation and repeated generic audits apply only when explicitly
+invoked. Preserve the actual product specification, required CI, security/data
+safeguards, signatures/recovery and exact installed acceptance. Agent reports
+and source tests do not establish installed behavior or delivery.
 
-Before any push, release, or tag, run the relevant repository gates directly
-and record the evidence in the active pipeline run when one exists. For
-Townlight Records, that normally includes recovery gates, release gates,
-secret-scan/provenance checks, backend tests, frontend tests, Docker/runtime
-proofs for install surfaces, and docs truth checks that match the changed
-surface.
+The principal distribution is `townlight-records` 1.8.0.dev2, imported as
+`townlight_records` from `backend/townlight_records`. The public ASGI object is
+`townlight_records.main:app`; Celery uses `townlight_records.worker`.
+Core is `townlight-core==1.3.0.dev2`, pinned by full commit in
+`config/core-source.json`. `scripts/install-core-candidate.py` builds that source
+wheel before package installation. Never relabel an old release artifact.
 
-Do not stop at a report, recommendation, or PR opening during an authorized
-pipeline run. Push, monitor CI for the pushed head, inspect failures, fix within
-scope, and repeat until checks are green or a verified blocker is recorded by
-the pipeline stop controls.
+The selected Windows native runtime and standalone React/Docker application
+remain separate deployment paths. This candidate supports fresh branded
+databases/profiles and refuses unmarked legacy city data. It supplies no
+in-place naming upgrade or old import shim. The sole approved retained old
+active identifier is `%LOCALAPPDATA%\CivicSuite` for that profile path only.
+Historical receipts, ADRs and tagged releases keep original identities.
+Other old active names require Scott's approval in the single exception registry.
 
-## Historical Retired Rule 0 — CODER-UI-QA-TEST SKILL (superseded)
-
-This retained historical section is superseded by Agent Pipeline for Codex above. Do not load or require the retired `coder-ui-qa-test` skill for current CivicSunshine work.
-
-## Hard Rule 1 — AUDITOR PROTOCOL (non-negotiable, no exceptions)
-
-**The auditor is not a reporter. The auditor runs the stack.**
-
-This rule governs every session that operates in an audit, review, or sign-off capacity. Violations of this rule are audit failures, not procedural oversights.
-
----
-
-### 1a — Mandatory First Commands (run BEFORE reading any dev report)
-
-Before opening any dev team summary, QA report, or test results file, the auditor MUST run these commands and paste the raw output into the Verification Log:
-
-```bash
-# 1. What does git actually say is in this repo?
-git log --oneline -10
-
-# 2. How many tests exist — independently of what any report claims?
-docker compose run --rm api python -m pytest tests --collect-only -q 2>&1 | tail -5
-
-# 3. What does the full test suite actually produce?
-docker compose run --rm api python -m pytest tests -q 2>&1 | tail -20
-
-# 4. Does the frontend build and pass its own tests?
-cd frontend && npm test -- --run 2>&1 | tail -20
-```
-
-**No exceptions.** If Docker is not running, start it. If a command fails, the failure is the finding — do not assume it would have passed. Do not substitute a dev-reported result for an auditor-run result. Do not read the dev report first and then decide these commands are unnecessary.
-
----
-
-### 1b — Evidence Classification: Auditor-Run vs. Dev-Reported
-
-Every item in the Verification Log MUST be labeled with its evidence source:
-
-- **[AUDITOR-RUN]** — The auditor executed this command. Raw output is pasted in the log. This is verified evidence.
-- **[DEV-REPORTED]** — The dev team claims this. The auditor has not independently verified it. This is an assertion, not evidence.
-
-A Verification Log that consists entirely of [DEV-REPORTED] items is not a Verification Log — it is a summary of claims. The auditor's job is to convert [DEV-REPORTED] items into [AUDITOR-RUN] items or flag them as unverified.
-
-**Sign-off is blocked** when any item in the critical path (test suite, Docker health, UI runtime, Rule 9 deliverables) is [DEV-REPORTED] and has not been converted to [AUDITOR-RUN].
-
----
-
-### 1c — Auditor Scope Declaration
-
-The auditor:
-- **Runs** the test suite and reads the output directly
-- **Starts** Docker Compose and verifies health endpoints
-- **Opens** files on disk and reads them — does not accept "file exists" claims
-- **Counts** tests independently of any reported number
-- **Walks** UI paths in the browser when UI-touching work is under review
-- **Reads** git log independently of any "what we committed" summary
-
-The auditor does **not**:
-- Accept a passing test count from a dev report without running `--collect-only` independently
-- Sign off on a file existing without reading its path from disk
-- Treat "the dev team verified this" as equivalent to "the auditor verified this"
-- Skip a checklist item because the dev report says it is done
-
----
-
-### 1d — Auditor Refusal Template
-
-Apply exactly when asked to sign off without having run the suite:
-
-> I can't sign off yet. The following items are [DEV-REPORTED] and have not been converted to [AUDITOR-RUN] evidence:
-> - [list each unverified item]
->
-> These are required by Hard Rule 1 (Auditor Protocol). I'll run the commands now unless you explicitly override this rule with the words "override rule 1" — in which case I'll note the override and the items that were not independently verified.
-
-**Override phrase:** Only the literal phrase `"override rule 1"` from the human bypasses the auditor evidence gate. No implied authorization.
-
----
-
-### 1e — What the Previous Auditor Got Wrong (do not repeat)
-
-These are the specific failure modes that caused this rule to be written:
-
-1. Accepted "423 tests passing" from a dev report without running `--collect-only`. Actual collection was 278. A 35% gap was never caught.
-2. Never read `AGENTS.md`. It documented a broken integration test path. An external reviewer caught it on first read.
-3. Signed off on UI features that were tested against mocks, not live Docker. The `/api/` prefix bug rendered all P7 interactive features broken in production — the auditor missed it entirely.
-4. Pattern-matched on what felt covered (code review, spec compliance, test counts) and skipped what required mechanical execution (load this skill, run this command, walk this UI path).
-5. Treated the dev team's "done" summary as the completion signal. The audit loop exists to catch what the builder missed, not to validate what the builder wrote.
-
-If you catch yourself doing any of these — stop. Run the commands. Open the files. Walk the UI. Then sign off.
-
----
+Run affected backend/frontend checks and required CI/recovery/provenance gates.
+Preserve the requirement to collect and execute the actual backend suite;
+record skips/failures and actual Docker/installed limits explicitly. Reuse
+unaffected evidence. Test data must remain isolated; no production data mutation
+is authorized by this file. Remote publication requires its separate approval.
 
 ## Project
 
@@ -133,15 +49,15 @@ Every sub-project must pass ALL verification gates before merge:
 
 #### Testing Prerequisites (PostgreSQL permissions and cleanup)
 
-The test runner's `setup_db` fixture drops and recreates `civicrecords_test` per test, so PostgreSQL must grant DROP/CREATE DATABASE privileges to the `civicrecords` user (the default docker compose config does — this matters only for custom deployments).
+The test runner's `setup_db` fixture drops and recreates `townlight_records_test` per test, so PostgreSQL must grant DROP/CREATE DATABASE privileges to the `townlight_records` user (the default docker compose config does — this matters only for custom deployments).
 
-**First-run cleanup:** If a previous test run died mid-fixture, `civicrecords_test` may already exist. That surfaces as a cryptic `DuplicateDatabaseError` in the first test. Drop it manually before rerunning:
+**First-run cleanup:** If a previous test run died mid-fixture, `townlight_records_test` may already exist. That surfaces as a cryptic `DuplicateDatabaseError` in the first test. Drop it manually before rerunning:
 
 ```bash
-docker compose exec postgres dropdb -U civicrecords civicrecords_test
+docker compose exec postgres dropdb -U townlight_records townlight_records_test
 ```
 
-The suite expects to own `civicrecords_test` exclusively. Do not run tests against a shared test database.
+The suite expects to own `townlight_records_test` exclusively. Do not run tests against a shared test database.
 
 **Accepted warning baseline:** The suite emits `RuntimeWarning: coroutine 'Connection._cancel' was never awaited` and related `SAWarning: garbage collector is trying to clean up non-checked-in connection` in teardown. These are a known limitation of NullPool + asyncpg event-loop timing: when pytest-asyncio closes a per-function event loop, any `Connection._cancel` coroutines scheduled by asyncpg's cleanup have no loop to run on. The conftest mitigates this with `asyncio.sleep + gc.collect` in client/db_session teardown, but cannot eliminate it entirely. Current baseline is **~110 warnings per full run of 432 tests** (see `backend/test_results_full.txt`). Counts materially above ~150 indicate a new leak — investigate before shipping.
 
@@ -173,7 +89,7 @@ After every `git push`, verify the remote state matches what you expect — not 
 - `git diff HEAD origin/master` to confirm nothing diverged
 - If a specific file matters, verify it exists on remote
 
-Same principle applies to all deployment actions: verify the outcome, not the action. Seed scripts must be run against the production database and verified in the running UI. Connectors must be wired into the pipeline with integration tests. Code that exists but has no caller is not shipped.
+For authorized deployment, verify the actual result. Never seed or change a production database merely to satisfy a generic workflow instruction. Existing integrations require meaningful caller and integration evidence; source presence alone is insufficient.
 
 ## Code Standards
 

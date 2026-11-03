@@ -5,7 +5,7 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy import text, select, func
 
-from app.models.document import DataSource, SourceType
+from townlight_records.models.document import DataSource, SourceType
 from tests.conftest import build_data_source
 
 
@@ -26,7 +26,7 @@ async def _seed_source(session, source_id: uuid.UUID, name: str, **extra):
 @pytest.mark.asyncio
 async def test_retry_all_permanently_failed(client: AsyncClient, admin_token: str, db_session):
     """retry-all resets permanently_failed rows to retrying."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "bulk-retry")
@@ -62,7 +62,7 @@ async def test_retry_all_permanently_failed(client: AsyncClient, admin_token: st
 @pytest.mark.asyncio
 async def test_dismiss_all_permanently_failed(client: AsyncClient, admin_token: str, db_session):
     """dismiss-all soft-deletes permanently_failed rows (status=dismissed, dismissed_at set)."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "bulk-dismiss")
@@ -133,7 +133,7 @@ async def test_unpause_source(client: AsyncClient, admin_token: str, db_session)
 @pytest.mark.asyncio
 async def test_list_sync_failures_filters_by_status(client: AsyncClient, admin_token: str, db_session):
     """GET /datasources/{id}/sync-failures?status=retrying returns only retrying rows."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "filter-test")

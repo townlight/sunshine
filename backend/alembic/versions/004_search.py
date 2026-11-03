@@ -50,10 +50,10 @@ def upgrade() -> None:
     op.create_index("ix_search_results_chunk_id", "search_results", ["chunk_id"])
 
     # Add tsvector column to document_chunks for full-text search.
-    # IF NOT EXISTS keeps this idempotent: civiccore's baseline migration
+    # IF NOT EXISTS keeps this idempotent: townlight_core's baseline migration
     # (per ADR-0003) creates document_chunks with this column already present;
     # records' own history still applies this op for v1.2.x deployments that
-    # predate the civiccore extraction. Both paths converge on the same schema.
+    # predate the townlight_core extraction. Both paths converge on the same schema.
     op.execute("""
         ALTER TABLE document_chunks
         ADD COLUMN IF NOT EXISTS content_tsvector tsvector

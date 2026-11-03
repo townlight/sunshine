@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from sqlalchemy import text
 
-from app.models.document import DataSource, SourceType
+from townlight_records.models.document import DataSource, SourceType
 from tests.conftest import build_data_source
 
 
@@ -30,14 +30,14 @@ async def _seed_source(session, source_id, name, **extra):
 @pytest.mark.asyncio
 async def test_partial_failure_cursor_advances_past_successes(db_session):
     """8 records succeed, 2 fail → cursor advances, 2 rows in sync_failures."""
-    from app.models.sync_failure import SyncFailure
+    from townlight_records.models.sync_failure import SyncFailure
     from sqlalchemy import select, func
 
     source_id = uuid.uuid4()
     await _seed_source(db_session, source_id, "cursor-test")
     await db_session.commit()
 
-    from app.connectors.base import DiscoveredRecord, FetchedDocument
+    from townlight_records.connectors.base import DiscoveredRecord, FetchedDocument
 
     fail_paths = {
         "https://api.example.com/records/3",
@@ -66,8 +66,8 @@ async def test_partial_failure_cursor_advances_past_successes(db_session):
     mock_connector.fetch = AsyncMock(side_effect=selective_fetch)
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
-    with patch("app.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
+    with patch("townlight_records.ingestion.sync_runner.ingest_structured_record", new=AsyncMock(return_value=MagicMock())):
         result = await run_connector_sync_with_retry(
             connector=mock_connector,
             source_id=str(source_id),
@@ -97,7 +97,7 @@ async def test_full_failure_does_not_advance_cursor(db_session):
     await _seed_source(db_session, source_id, "all-fail")
     await db_session.commit()
 
-    from app.connectors.base import DiscoveredRecord
+    from townlight_records.connectors.base import DiscoveredRecord
 
     discovered = [
         DiscoveredRecord(
@@ -113,7 +113,7 @@ async def test_full_failure_does_not_advance_cursor(db_session):
     mock_connector.fetch = AsyncMock(side_effect=IOError("network down"))
     mock_connector.close = MagicMock()
 
-    from app.ingestion.sync_runner import run_connector_sync_with_retry
+    from townlight_records.ingestion.sync_runner import run_connector_sync_with_retry
     result = await run_connector_sync_with_retry(
         connector=mock_connector,
         source_id=str(source_id),

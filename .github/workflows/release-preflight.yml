@@ -28,7 +28,7 @@ on:
         required: false
         type: string
       fixtures_only:
-        description: Run only CivicCore's adversarial fixture suite as a hypothetical corrected-release dry-run
+        description: Run only Townlight Core's adversarial fixture suite as a hypothetical corrected-release dry-run
         required: false
         default: "false"
         type: choice
@@ -48,16 +48,18 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-      - name: Install CivicCore release-provenance helper
-        run: python -m pip install https://github.com/townlight/core/releases/download/v1.2.0/civiccore-1.2.0-py3-none-any.whl
-      - name: Checkout canonical CivicCore provenance fixtures
+      - name: Install Townlight Core release-provenance helper
+        run: |
+          python -m pip install build
+          python scripts/install-core-candidate.py
+      - name: Checkout canonical Townlight Core provenance fixtures
         uses: actions/checkout@v6
         with:
           repository: townlight/core
-          ref: v1.2.0
-          path: .tmp-civiccore
+          ref: 3021821bf9a92c790a399ad12aed821d65b09105
+          path: .tmp-townlight_core
       - name: Verify adversarial release provenance fixtures
-        run: python scripts/verify-release-provenance.py --fixtures-dir .tmp-civiccore/tests/fixtures/release_provenance
+        run: python scripts/verify-release-provenance.py --fixtures-dir .tmp-townlight_core/tests/fixtures/release_provenance
       - name: Install cosign
         if: ${{ inputs.fixtures_only != 'true' }}
         uses: sigstore/cosign-installer@v4.1.1

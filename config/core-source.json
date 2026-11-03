@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/townlight/core.git",
+  "commit": "3021821bf9a92c790a399ad12aed821d65b09105",
+  "distribution": "townlight-core",
+  "version": "1.3.0.dev2",
+  "import_package": "townlight_core"
+}

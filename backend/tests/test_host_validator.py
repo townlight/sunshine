@@ -1,4 +1,4 @@
-"""Unit tests for backend.app.security.host_validator (T2C SSRF hardening).
+"""Unit tests for backend.townlight_records.security.host_validator (T2C SSRF hardening).
 
 Every blocked range listed in the remediation plan is exercised here, plus the
 allowlist override, plus the ODBC connection-string parser and its fail-closed
@@ -6,7 +6,7 @@ behavior on ambiguous input.
 """
 import pytest
 
-from app.security.host_validator import (
+from townlight_records.security.host_validator import (
     extract_odbc_host,
     is_blocked_host,
     validate_odbc_connection_string,

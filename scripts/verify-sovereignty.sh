@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "============================================"
-echo "  CivicSunshine - Data Sovereignty Check"
+echo "  Townlight Records - Data Sovereignty Check"
 echo "============================================"
 echo ""
 
@@ -62,7 +62,7 @@ echo ""
 echo "3. Checking data storage locations..."
 VOLUMES=$(docker compose config --volumes 2>/dev/null)
 for vol in $VOLUMES; do
-    DRIVER=$(docker volume inspect "$(docker compose config --format json | python3 -c "import sys,json; c=json.load(sys.stdin); print(c.get('name','civicrecords-ai') + '_$vol')" 2>/dev/null)" --format '{{.Driver}}' 2>/dev/null | tr -d '\r' || echo "local")
+    DRIVER=$(docker volume inspect "$(docker compose config --format json | python3 -c "import sys,json; c=json.load(sys.stdin); print(c.get('name','townlight_records') + '_$vol')" 2>/dev/null)" --format '{{.Driver}}' 2>/dev/null | tr -d '\r' || echo "local")
     if [ "$DRIVER" = "local" ]; then
         check "Volume '$vol' uses local storage driver" "PASS"
     else
@@ -72,7 +72,7 @@ done
 
 echo ""
 echo "4. Checking for telemetry endpoints..."
-TELEMETRY_HITS=$(grep -r "analytics\|telemetry\|sentry\|datadog\|newrelic\|mixpanel\|segment\|amplitude" backend/app/ --include="*.py" -l 2>/dev/null || true)
+TELEMETRY_HITS=$(grep -r "analytics\|telemetry\|sentry\|datadog\|newrelic\|mixpanel\|segment\|amplitude" backend/townlight_records/ --include="*.py" -l 2>/dev/null || true)
 if [ -z "$TELEMETRY_HITS" ]; then
     check "No telemetry libraries found in application code" "PASS"
 else

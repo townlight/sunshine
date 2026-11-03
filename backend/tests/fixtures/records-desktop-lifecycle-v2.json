@@ -5,7 +5,7 @@
     "purpose": "temporary-migration-proof",
     "expires_when": "python-postgres-records-authoritative",
     "base_contract_sha256": "601ca9449f3e55f49b9b3443e6222514ce3bd5cf9923722a7e3da83d392fd995",
-    "fixture_sha256": "a9c242a3f2618a69d7effb1d0d17d2df06f6744c8c351bba4065d315c94575b4",
+    "fixture_sha256": "d9aaa79403cfca2711e8031439fbab8bf9f70a20b8afc293faef8edd683ffbd6",
     "watermark": "SYNTHETIC DEMONSTRATION DATA - NOT A REAL MUNICIPAL RECORD",
     "behavior_source": "Published rc.3 acceptance and workflows.rs accepted regression tests; not a new product policy"
   },

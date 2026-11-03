@@ -18,7 +18,7 @@ Thank you for your interest in contributing to Townlight Records. This project h
 ```bash
 # Clone the repository
 git clone https://github.com/townlight/sunshine.git
-cd civicrecords-ai
+cd townlight_records
 
 # Option A: Use the installer (recommended)
 bash install.sh          # Linux/macOS
@@ -64,10 +64,10 @@ pip install -e ".[dev]"
 
 # Start PostgreSQL and create test database
 docker compose up -d postgres redis
-docker compose exec postgres createdb -U civicrecords civicrecords_test
+docker compose exec postgres createdb -U townlight_records townlight_records_test
 
 # Run tests
-TESTING=1 DATABASE_URL=postgresql+asyncpg://civicrecords:civicrecords@localhost:5432/civicrecords \
+TESTING=1 DATABASE_URL=postgresql+asyncpg://townlight_records:townlight_records@localhost:5432/townlight_records \
   python -m pytest tests/ -v
 ```
 

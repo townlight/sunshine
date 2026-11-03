@@ -1,6 +1,6 @@
 import pytest
-from app.connectors import get_connector
-from app.connectors.base import BaseConnector, DiscoveredRecord, FetchedDocument, HealthCheckResult, HealthStatus
+from townlight_records.connectors import get_connector
+from townlight_records.connectors.base import BaseConnector, DiscoveredRecord, FetchedDocument, HealthCheckResult, HealthStatus
 
 
 class _MinimalConnector(BaseConnector):

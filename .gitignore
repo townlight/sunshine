@@ -47,3 +47,5 @@ temp_*.tsx
 .pipeline-cw/
 
 .agent-runs/
+# Exact source-built dependency wheels used only for candidate verification.
+.candidate-wheels/

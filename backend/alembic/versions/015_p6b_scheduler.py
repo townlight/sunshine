@@ -14,7 +14,7 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy import inspect, text
 
-from civiccore.migrations.guards import (
+from townlight_core.migrations.guards import (
     has_table,
     idempotent_add_column,
 )
@@ -78,7 +78,7 @@ def upgrade() -> None:
     )
 
     # Data migration: convert legacy schedule_minutes to cron sync_schedule.
-    # On a fresh install (civiccore baseline created data_sources WITHOUT the
+    # On a fresh install (townlight_core baseline created data_sources WITHOUT the
     # legacy schedule_minutes column, since baseline reflects records HEAD
     # state where 015 already dropped it), the column does not exist and the
     # SELECT would raise. Gate the entire conversion on column presence.

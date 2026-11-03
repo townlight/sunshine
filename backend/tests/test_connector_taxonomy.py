@@ -8,8 +8,8 @@ Verifies that:
 - test-connection returns actionable errors for file_system and manual_drop
 """
 import pytest
-from app.models.document import SourceType
-from app.connectors import _REGISTRY
+from townlight_records.models.document import SourceType
+from townlight_records.connectors import _REGISTRY
 
 
 # ── Enum / Registry ─────────────────────────────────────────────────────────
@@ -35,10 +35,10 @@ class TestCanonicalVocabulary:
 
     def test_registry_connectors_are_importable(self):
         """Each registered connector class must be importable and instantiable."""
-        from app.connectors.file_system import FileSystemConnector
-        from app.connectors.manual_drop import ManualDropConnector
-        from app.connectors.rest_api import RestApiConnector
-        from app.connectors.odbc import OdbcConnector
+        from townlight_records.connectors.file_system import FileSystemConnector
+        from townlight_records.connectors.manual_drop import ManualDropConnector
+        from townlight_records.connectors.rest_api import RestApiConnector
+        from townlight_records.connectors.odbc import OdbcConnector
 
         assert _REGISTRY["file_system"] is FileSystemConnector
         assert _REGISTRY["manual_drop"] is ManualDropConnector
@@ -47,7 +47,7 @@ class TestCanonicalVocabulary:
 
     def test_imap_class_exists_on_disk_but_not_in_registry(self):
         """ImapEmailConnector may remain as roadmap groundwork but must not ship."""
-        from app.connectors.imap_email import ImapEmailConnector
+        from townlight_records.connectors.imap_email import ImapEmailConnector
         assert ImapEmailConnector is not None
         assert "imap_email" not in _REGISTRY
 
@@ -58,12 +58,12 @@ class TestConnectionActionableErrors:
     """Test-connection responses must be human-actionable, not vague."""
 
     def _make_request(self, **kwargs):
-        from app.datasources.router import TestConnectionRequest
+        from townlight_records.datasources.router import TestConnectionRequest
         return TestConnectionRequest(**kwargs)
 
     @pytest.mark.asyncio
     async def test_file_system_missing_path_returns_clear_error(self):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="file_system", path=None)
         resp = await test_connection(req, user=None)
         assert resp.success is False
@@ -71,7 +71,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_file_system_nonexistent_path_names_path_in_error(self, tmp_path):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         bad = str(tmp_path / "does_not_exist")
         req = self._make_request(source_type="file_system", path=bad)
         resp = await test_connection(req, user=None)
@@ -80,7 +80,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_file_system_valid_path_returns_success(self, tmp_path):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="file_system", path=str(tmp_path))
         resp = await test_connection(req, user=None)
         assert resp.success is True
@@ -88,7 +88,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_manual_drop_missing_path_returns_clear_error(self):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="manual_drop", path=None)
         resp = await test_connection(req, user=None)
         assert resp.success is False
@@ -96,7 +96,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_manual_drop_nonexistent_path_names_path(self, tmp_path):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         bad = str(tmp_path / "missing_drop")
         req = self._make_request(source_type="manual_drop", path=bad)
         resp = await test_connection(req, user=None)
@@ -105,14 +105,14 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_manual_drop_valid_path_returns_success(self, tmp_path):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="manual_drop", path=str(tmp_path))
         resp = await test_connection(req, user=None)
         assert resp.success is True
 
     @pytest.mark.asyncio
     async def test_unknown_source_type_returns_failure(self):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="imap")
         resp = await test_connection(req, user=None)
         assert resp.success is False
@@ -120,7 +120,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_rest_api_without_config_returns_clear_error(self):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="rest_api", rest_api_config=None)
         resp = await test_connection(req, user=None)
         assert resp.success is False
@@ -128,7 +128,7 @@ class TestConnectionActionableErrors:
 
     @pytest.mark.asyncio
     async def test_odbc_without_config_returns_clear_error(self):
-        from app.datasources.router import test_connection
+        from townlight_records.datasources.router import test_connection
         req = self._make_request(source_type="odbc", odbc_config=None)
         resp = await test_connection(req, user=None)
         assert resp.success is False

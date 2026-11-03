@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def _repo_root() -> Path:
-    env_root = os.environ.get("CIVICRECORDS_REPO_ROOT")
+    env_root = os.environ.get("TOWNLIGHT_RECORDS_REPO_ROOT")
     if env_root:
         root = Path(env_root)
         if (root / "docker-compose.yml").is_file():
@@ -44,9 +44,9 @@ def test_env_example_declares_no_b2_secret_env_names():
 def test_compose_mounts_secrets_via_docker_secret_block():
     compose = (REPO_ROOT / "docker-compose.yml").read_text(encoding="utf-8")
     assert "secrets:" in compose
-    assert "file: ${CIVICRECORDS_SECRET_DIR:-./data/secrets}/jwt_secret" in compose
+    assert "file: ${TOWNLIGHT_RECORDS_SECRET_DIR:-./data/secrets}/jwt_secret" in compose
     assert (
-        "file: ${CIVICRECORDS_SECRET_DIR:-./data/secrets}/first_admin_password"
+        "file: ${TOWNLIGHT_RECORDS_SECRET_DIR:-./data/secrets}/first_admin_password"
         in compose
     )
 

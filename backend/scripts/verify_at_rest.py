@@ -32,8 +32,8 @@ import sys
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from app.config import settings
-from app.security.at_rest import is_encrypted
+from townlight_records.config import settings
+from townlight_records.security.at_rest import is_encrypted
 
 
 async def _main() -> int:

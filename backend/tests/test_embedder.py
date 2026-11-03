@@ -1,6 +1,6 @@
 import pytest
 
-from civiccore.ingest import embedder
+from townlight_core.ingest import embedder
 
 
 class _FakeProvider:
@@ -12,7 +12,7 @@ class _FakeProvider:
 
 
 @pytest.mark.asyncio
-async def test_records_ai_uses_civiccore_embed_text(monkeypatch):
+async def test_records_ai_uses_townlight_core_embed_text(monkeypatch):
     monkeypatch.setattr(embedder, "_get_provider", lambda base_url="http://localhost:11434": _FakeProvider())
 
     result = await embedder.embed_text("test text")
@@ -22,7 +22,7 @@ async def test_records_ai_uses_civiccore_embed_text(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_records_ai_uses_civiccore_embed_batch(monkeypatch):
+async def test_records_ai_uses_townlight_core_embed_batch(monkeypatch):
     monkeypatch.setattr(embedder, "_get_provider", lambda base_url="http://localhost:11434": _FakeProvider())
 
     result = await embedder.embed_batch(["text 1", "text 2"])
@@ -33,7 +33,7 @@ async def test_records_ai_uses_civiccore_embed_batch(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_records_ai_civiccore_embed_batch_empty():
+async def test_records_ai_townlight_core_embed_batch_empty():
     result = await embedder.embed_batch([])
 
     assert result == []

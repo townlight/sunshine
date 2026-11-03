@@ -27,7 +27,7 @@ async def test_search_export_csv_returns_csv(client: AsyncClient, admin_token: s
     Mocks app.search.engine.embed_text so the test is hermetic — no outbound
     HTTP to Ollama. Matches the pattern already used in test_search_api.py.
     """
-    with patch("app.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
+    with patch("townlight_records.search.engine.embed_text", new_callable=AsyncMock) as mock_embed:
         mock_embed.return_value = [0.1] * 768
         resp = await client.get(
             "/search/export?query=test&format=csv",

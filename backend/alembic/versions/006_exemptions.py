@@ -8,7 +8,7 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 
-from civiccore.migrations.guards import (
+from townlight_core.migrations.guards import (
     idempotent_create_index,
     idempotent_create_table,
 )

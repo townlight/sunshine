@@ -130,7 +130,7 @@ def _is_broad_prefix(prefix: str) -> bool:
       - `src/`, `lib/`, `civiccast/`, `app/`
 
     Examples that do not match:
-      - `src/auth/`, `civiccast/stream/`, `civicrecords-ai/civicrecords_ai/`
+      - `src/auth/`, `civiccast/stream/`, `townlight_records/townlight_records/`
 
     A broad prefix authorizes large blast radius; the schema requires
     `forbidden_paths` to be populated in that case.

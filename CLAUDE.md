@@ -136,8 +136,8 @@ Every sub-project must pass ALL verification gates before merge:
 
 ### Integration Tests
 - Require Docker: `docker compose up -d postgres redis`
-- Create test database: `docker compose exec postgres createdb -U civicrecords civicrecords_test`
-- Run: `DATABASE_URL=postgresql+asyncpg://civicrecords:civicrecords@localhost:5432/civicrecords_test python -m pytest tests/ -v`
+- Create test database: `docker compose exec postgres createdb -U townlight_records townlight_records_test`
+- Run: `DATABASE_URL=postgresql+asyncpg://townlight_records:townlight_records@localhost:5432/townlight_records_test python -m pytest tests/ -v`
 
 ### Docker Verification
 - `docker compose build` must succeed with no errors

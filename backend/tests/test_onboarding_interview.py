@@ -17,7 +17,7 @@ from httpx import AsyncClient
 @pytest.mark.asyncio
 async def test_interview_returns_next_question(client: AsyncClient, admin_token: str):
     """POST /onboarding/interview returns a question and target field."""
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "Welcome! What's the name of your city?"
 
         resp = await client.post(
@@ -45,7 +45,7 @@ async def test_interview_skips_completed_fields(client: AsyncClient, admin_token
         headers={"Authorization": f"Bearer {admin_token}"},
     )
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "What county is Springfield in?"
 
         resp = await client.post(
@@ -72,7 +72,7 @@ async def test_interview_requires_admin(client: AsyncClient):
 @pytest.mark.asyncio
 async def test_interview_falls_back_on_llm_failure(client: AsyncClient, admin_token: str):
     """Interview returns default question when LLM fails."""
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.side_effect = RuntimeError("Ollama unavailable")
 
         resp = await client.post(
@@ -108,7 +108,7 @@ async def test_first_time_onboarding_creates_profile(
     assert get_resp.status_code == 200
     assert get_resp.json() is None
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "Which US state is your municipality in?"
 
         resp = await client.post(
@@ -139,7 +139,7 @@ async def test_partial_progress_persists_across_rounds(
     """T5A test 2: each answer persists and survives across multiple turns."""
     headers = {"Authorization": f"Bearer {admin_token}"}
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…next question…"
 
         # Turn 1: city_name.
@@ -194,7 +194,7 @@ async def test_has_dedicated_it_string_to_bool(client: AsyncClient, admin_token:
     headers = {"Authorization": f"Bearer {admin_token}"}
 
     # Bootstrap with city_name to create the row.
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…"
         await client.post(
             "/onboarding/interview",
@@ -216,7 +216,7 @@ async def test_has_dedicated_it_string_to_bool(client: AsyncClient, admin_token:
     )
 
     # Flip to no on the same profile (updating an existing row).
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…"
         r_no = await client.post(
             "/onboarding/interview",
@@ -261,7 +261,7 @@ async def test_onboarding_status_transitions(client: AsyncClient, admin_token: s
         ("monthly_request_volume", "20-50"),
     ]
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…next…"
 
         for i, (field, answer) in enumerate(answers):
@@ -316,7 +316,7 @@ async def test_skip_advances_past_field_without_persisting(
     """
     headers = {"Authorization": f"Bearer {admin_token}"}
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…"
 
         # Answer city_name so a profile row exists.
@@ -371,7 +371,7 @@ async def test_skip_closure_when_only_skipped_fields_remain(
     """
     headers = {"Authorization": f"Bearer {admin_token}"}
 
-    with patch("app.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
+    with patch("townlight_records.onboarding.router.generate", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = "…"
 
         # Fill every field except `county`, carrying county in skipped_fields.

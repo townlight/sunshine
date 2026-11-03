@@ -8,7 +8,7 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 
-from civiccore.migrations.guards import idempotent_create_table
+from townlight_core.migrations.guards import idempotent_create_table
 
 revision: str = "003"
 down_revision: Union[str, None] = "002"

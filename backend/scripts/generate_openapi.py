@@ -30,14 +30,14 @@ import sys
 from pathlib import Path
 
 # Ensure backend/ (the parent of this scripts/ dir) is on sys.path so that
-# `from app.main import app` resolves whether the script is invoked from the
+# `from townlight_records.main import app` resolves whether the script is invoked from the
 # repo root, from backend/, or from inside the Docker container (/app).
 _backend_root = Path(__file__).resolve().parent.parent
 if str(_backend_root) not in sys.path:
     sys.path.insert(0, str(_backend_root))
 
 # ---------------------------------------------------------------------------
-# Provide placeholder values so app.config.Settings() can be instantiated
+# Provide placeholder values so townlight_records.config.Settings() can be instantiated
 # at import time without live infrastructure. The validators only reject
 # the documented insecure defaults; these values are not used beyond import.
 # ---------------------------------------------------------------------------
@@ -69,7 +69,7 @@ os.environ.setdefault(
     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
 )
 
-from app.main import app  # noqa: E402 — env must be set before this import
+from townlight_records.main import app  # noqa: E402 — env must be set before this import
 
 schema = app.openapi()
 output = json.dumps(schema, indent=2) + "\n"

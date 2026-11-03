@@ -1,4 +1,4 @@
-# CivicSunshine Ã¢â‚¬â€ Windows Installation Script
+# Townlight Records Ã¢â‚¬â€ Windows Installation Script
 # Requires: Windows 10/11 with Docker Desktop
 
 Write-Host "============================================" -ForegroundColor Cyan
@@ -55,7 +55,7 @@ if (-not (Test-Path ".env")) {
     $rng.GetBytes($keyBytes)
     $rng.Dispose()
     $encryptionKey = ([Convert]::ToBase64String($keyBytes)) -replace '\+','-' -replace '/','_'
-    $secretDir = if ($env:CIVICRECORDS_SECRET_DIR) { $env:CIVICRECORDS_SECRET_DIR } else { ".\data\secrets" }
+    $secretDir = if ($env:TOWNLIGHT_RECORDS_SECRET_DIR) { $env:TOWNLIGHT_RECORDS_SECRET_DIR } else { ".\data\secrets" }
     New-Item -ItemType Directory -Force -Path $secretDir | Out-Null
     $jwtSecretPath = Join-Path $secretDir "jwt_secret"
     $adminPasswordPath = Join-Path $secretDir "first_admin_password"
@@ -95,12 +95,12 @@ if (-not (Test-Path ".env")) {
     Write-Host ""
     Read-Host "Press Enter to continue, or Ctrl+C to edit .env first"
 
-    $portalMode = $env:CIVICRECORDS_PORTAL_MODE
+    $portalMode = $env:TOWNLIGHT_RECORDS_PORTAL_MODE
     if ($portalMode) {
         $portalMode = $portalMode.Trim().ToLower()
         if ($portalMode -ne "public" -and $portalMode -ne "private") {
             Write-Host ""
-            Write-Host "[WARN] CIVICRECORDS_PORTAL_MODE='$portalMode' is not 'public' or 'private' -- falling back to 'private'." -ForegroundColor Yellow
+            Write-Host "[WARN] TOWNLIGHT_RECORDS_PORTAL_MODE='$portalMode' is not 'public' or 'private' -- falling back to 'private'." -ForegroundColor Yellow
             $portalMode = "private"
         } else {
             Write-Host ""
@@ -143,8 +143,8 @@ if (-not (Test-Path ".env")) {
 # secrets to Docker-mounted secret files. Fresh .env.example files already have
 # these keys; older v1.5.x installs are rewritten in place.
 $envLines = Get-Content ".env" -ErrorAction SilentlyContinue
-$secretDirLine = $envLines | Where-Object { $_ -match '^CIVICRECORDS_SECRET_DIR=' } | Select-Object -Last 1
-$secretDir = if ($secretDirLine) { ($secretDirLine -split '=', 2)[1] } elseif ($env:CIVICRECORDS_SECRET_DIR) { $env:CIVICRECORDS_SECRET_DIR } else { ".\data\secrets" }
+$secretDirLine = $envLines | Where-Object { $_ -match '^TOWNLIGHT_RECORDS_SECRET_DIR=' } | Select-Object -Last 1
+$secretDir = if ($secretDirLine) { ($secretDirLine -split '=', 2)[1] } elseif ($env:TOWNLIGHT_RECORDS_SECRET_DIR) { $env:TOWNLIGHT_RECORDS_SECRET_DIR } else { ".\data\secrets" }
 New-Item -ItemType Directory -Force -Path $secretDir | Out-Null
 $jwtSecretPath = Join-Path $secretDir "jwt_secret"
 $adminPasswordPath = Join-Path $secretDir "first_admin_password"
@@ -173,9 +173,9 @@ $filteredEnv = $envLines | Where-Object {
     $_ -notmatch '^FIRST_ADMIN_PASSWORD=' -and
     $_ -notmatch '^JWT_SECRET_FILE=' -and
     $_ -notmatch '^FIRST_ADMIN_PASSWORD_FILE=' -and
-    $_ -notmatch '^CIVICRECORDS_SECRET_DIR='
+    $_ -notmatch '^TOWNLIGHT_RECORDS_SECRET_DIR='
 }
-$filteredEnv += "CIVICRECORDS_SECRET_DIR=$secretDir"
+$filteredEnv += "TOWNLIGHT_RECORDS_SECRET_DIR=$secretDir"
 Set-Content ".env" -Value ($filteredEnv -join "`n") -NoNewline
 
 Write-Host ""
@@ -199,8 +199,8 @@ if (Test-Path ".env.hardware") {
 
 # Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Select Compose Configuration Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 $composeFiles = @("-f", "docker-compose.yml")
-$useHostOllama = $hardwareEnv["CIVICRECORDS_USE_HOST_OLLAMA"] -eq "true"
-$gpuEnabled = $hardwareEnv["CIVICRECORDS_GPU_ENABLED"] -eq "true"
+$useHostOllama = $hardwareEnv["TOWNLIGHT_RECORDS_USE_HOST_OLLAMA"] -eq "true"
+$gpuEnabled = $hardwareEnv["TOWNLIGHT_RECORDS_GPU_ENABLED"] -eq "true"
 
 if ($useHostOllama) {
     Write-Host "GPU acceleration enabled - using native Ollama on host (DirectML)" -ForegroundColor Green
@@ -228,7 +228,7 @@ if (Test-Path ".env.hardware") {
 Write-Host ">>> Waiting for database..."
 $dbReady = $false
 for ($i = 1; $i -le 30; $i++) {
-    $result = docker compose exec -T postgres pg_isready -U civicrecords -q 2>$null
+    $result = docker compose exec -T postgres pg_isready -U townlight_records -q 2>$null
     if ($LASTEXITCODE -eq 0) {
         Write-Host "[OK] Database is ready" -ForegroundColor Green
         $dbReady = $true
@@ -279,7 +279,7 @@ if (-not $healthy) {
 # gemma4:31b require stronger hardware and are gated behind an explicit
 # "yes" confirmation.
 # Non-interactive install: default is used unless env var
-# CIVICRECORDS_SELECTED_MODEL=<tag> is set.
+# TOWNLIGHT_RECORDS_SELECTED_MODEL=<tag> is set.
 
 $defaultModel = "gemma4:e4b"
 $supportedModels = @("gemma4:e2b", "gemma4:e4b", "gemma4:26b", "gemma4:31b")
@@ -334,7 +334,7 @@ foreach ($m in $supportedModels) {
     }
 }
 
-$selectedModel = $env:CIVICRECORDS_SELECTED_MODEL
+$selectedModel = $env:TOWNLIGHT_RECORDS_SELECTED_MODEL
 
 if ($existingModel -and -not $selectedModel) {
     Write-Host ""
@@ -357,11 +357,11 @@ if ($existingModel -and -not $selectedModel) {
     Write-Host ""
 
     if ($selectedModel) {
-        Write-Host "Using CIVICRECORDS_SELECTED_MODEL=$selectedModel (non-interactive override)."
+        Write-Host "Using TOWNLIGHT_RECORDS_SELECTED_MODEL=$selectedModel (non-interactive override)."
     } elseif ([Console]::IsInputRedirected) {
         $selectedModel = $defaultModel
         Write-Host "Non-interactive install - selecting default: $selectedModel"
-        Write-Host "Override by setting `$env:CIVICRECORDS_SELECTED_MODEL=<tag> before running."
+        Write-Host "Override by setting `$env:TOWNLIGHT_RECORDS_SELECTED_MODEL=<tag> before running."
     } else {
         $choice = Read-Host "Enter 1-4 (or press Enter for default gemma4:e4b)"
         switch ($choice) {
@@ -435,7 +435,7 @@ Write-Host "  API:          http://${ip}:8000"
 Write-Host "  API docs:     http://${ip}:8000/docs"
 Write-Host ""
 if ($gpuEnabled) {
-    $plat = $hardwareEnv["CIVICRECORDS_PLATFORM"]
+    $plat = $hardwareEnv["TOWNLIGHT_RECORDS_PLATFORM"]
     if ($useHostOllama) {
         Write-Host "  GPU inference: ENABLED (Native Ollama / DirectML / $plat)" -ForegroundColor Green
     } else {

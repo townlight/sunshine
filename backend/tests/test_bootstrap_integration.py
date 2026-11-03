@@ -1,7 +1,7 @@
 """Integration tests for the T2C fresh-start bootstrap failure path.
 
 This file does what the T2C remediation plan literally asked for: prove that
-a fresh process loading app.config with the `.env.example` placeholder for
+a fresh process loading townlight_records.config with the `.env.example` placeholder for
 ``FIRST_ADMIN_PASSWORD`` exits non-zero and surfaces the validator's error.
 That is the same import-time path that runs when ``docker compose up`` boots
 the api container — when ``Settings()`` raises at module load, uvicorn never
@@ -44,7 +44,7 @@ _ENV_PASSTHROUGH = frozenset({
 # Project root that contains the `app` package. When the subprocess runs from
 # tmp_path (so .env in the parent's cwd can't interfere), Python's default
 # sys.path is just cwd; without an explicit PYTHONPATH the subprocess can't
-# `from app.config import ...`. This file lives at backend/tests/, so the
+# `from townlight_records.config import ...`. This file lives at backend/tests/, so the
 # parent of its directory is the import root (`/app` in the docker container,
 # `<repo>/backend` locally).
 _PROJECT_ROOT = str(pathlib.Path(__file__).resolve().parent.parent)
@@ -52,7 +52,7 @@ _PROJECT_ROOT = str(pathlib.Path(__file__).resolve().parent.parent)
 _VALID_JWT = "a" * 64
 _VALID_PASSWORD = "S3cure!FreshAdminPwd-2026"
 _PLACEHOLDER_PASSWORD = "CHANGE-ME-on-first-login"  # exact .env.example value
-_BOOTSTRAP_SNIPPET = "from app.config import Settings; Settings()"
+_BOOTSTRAP_SNIPPET = "from townlight_records.config import Settings; Settings()"
 
 # T6 / ENG-001 — these tests verify the FIRST_ADMIN_PASSWORD validator.
 # Starting with Tier 6, Settings.check_encryption_key runs earlier in the
@@ -73,7 +73,7 @@ def _minimal_env(**overrides: str) -> dict[str, str]:
     Carries only the platform basics needed to launch Python; deliberately
     omits the test process's TESTING flag and its own valid password so the
     subprocess sees a fresh environment with only the overrides we set.
-    Forces PYTHONPATH to include the project root so `from app.config import
+    Forces PYTHONPATH to include the project root so `from townlight_records.config import
     Settings` resolves even when cwd is a tmp dir.
     """
     env = {k: v for k, v in os.environ.items() if k in _ENV_PASSTHROUGH}

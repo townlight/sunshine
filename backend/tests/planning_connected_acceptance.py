@@ -19,15 +19,15 @@ from tests.test_desktop_records_lifecycle import operation
 
 
 async def check_planning(api, headers, actor_id, records_app, url, zoning, archive_id):
-    from civicplan.main import app as planning_app
-    from civicplan.migrations import source_engine, upgrade
-    from civicplan.source_store import PlanSourceRepository
-    from civicplan.source_bundle import PlanBundle
-    from civicplan.workflow_store import WorkflowRepository
-    from civicsuite_runtime.planning_connections import configure
+    from townlight_planning.main import app as planning_app
+    from townlight_planning.migrations import source_engine, upgrade
+    from townlight_planning.source_store import PlanSourceRepository
+    from townlight_planning.source_bundle import PlanBundle
+    from townlight_planning.workflow_store import WorkflowRepository
+    from townlight_runtime.planning_connections import configure
 
     records_app.state.desktop_enabled_modules = frozenset({
-        *records_app.state.desktop_enabled_modules, "civicplan", "civicaccess"})
+        *records_app.state.desktop_enabled_modules, "townlight_planning", "townlight_access"})
     configure(records_app, planning_app, url)
     engine = source_engine(url)
     upgrade(engine)
@@ -54,7 +54,7 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
                                   planning_app.state.planning_access_rewrite)
     # A direct dependency override supplies the same persisted repository to the
     # trusted service API without changing process-wide database/key configuration.
-    from civicplan.source_api import repository, staff
+    from townlight_planning.source_api import repository, staff
     planning_app.dependency_overrides[repository] = lambda: sources
     planning_app.dependency_overrides[staff] = lambda: "fixture-trusted-service"
     client = TestClient(planning_app)
@@ -66,7 +66,7 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
                  "selected_policies": [ref], "staff_notes": "PRIVATE staff note", "linked_sources": [
                      {"provider": provider, "source_id": source["source_id"], "expected_sha256": source["sha256"],
                       "relation": "hearing"} for provider, source in (("meetings", meeting), ("zoning", zoning))]}
-        saved = client.post("/api/v1/civicplan/analyses", json=draft)
+        saved = client.post("/api/v1/townlight_planning/analyses", json=draft)
         assert saved.status_code == 200, saved.text
         first = saved.json()
         draft.update(expected_previous_revision=first["revision_id"], audience="public", review_state="reviewed",
@@ -74,7 +74,7 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
                      review_notes="Staff checked selected sources.", analysis_text="Staff edited conditional analysis.",
                      public_summary="Public explanation under cited planning policy; no determination.",
                      considerations=[{"policy": ref, "stance": "uncertain", "note": "Staff reconcile applicability."}])
-        path = "/api/v1/civicplan/analyses/" + first["analysis_id"]
+        path = "/api/v1/townlight_planning/analyses/" + first["analysis_id"]
         edited = client.post(path + "/revisions", json=draft)
         assert edited.status_code == 200, edited.text
         current = edited.json()
@@ -84,9 +84,9 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
         assert "PRIVATE" not in snapshot["text"]
         assert meeting["text"] in snapshot["text"] and zoning["source_id"] in snapshot["text"]
         assert "land-use determinations" in snapshot["text"]
-        exported = client.get("/api/v1/civicplan/snapshots/" + snapshot["version"] + "/export")
+        exported = client.get("/api/v1/townlight_planning/snapshots/" + snapshot["version"] + "/export")
         assert exported.content == snapshot["text"].encode()
-        advice = client.post("/api/v1/civicplan/snapshots/" + snapshot["version"] + "/access-advice")
+        advice = client.post("/api/v1/townlight_planning/snapshots/" + snapshot["version"] + "/access-advice")
         assert advice.status_code == 200 and advice.json()["original"] == snapshot["text"]
         assert advice.json()["advice"]["review_required"] is True
 
@@ -125,7 +125,7 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
 
         def visibility(value):
             with engine.begin() as connection:
-                connection.execute(text("UPDATE civicclerk.public_meeting_records SET visibility=:value WHERE id=:id"),
+                connection.execute(text("UPDATE townlight_meetings.public_meeting_records SET visibility=:value WHERE id=:id"),
                                    {"value": value, "id": archive_id})
         visibility("closed_session")
         assert workflow.public_documents(source_id=snapshot["source_id"]) == []
@@ -179,6 +179,6 @@ async def check_planning(api, headers, actor_id, records_app, url, zoning, archi
             (evidence_root / "connected-files.json").write_text(json.dumps(files, indent=2), encoding="utf-8")
     finally:
         with engine.begin() as connection:
-            connection.execute(text("UPDATE civicclerk.public_meeting_records SET visibility='public' WHERE id=:id"), {"id": archive_id})
+            connection.execute(text("UPDATE townlight_meetings.public_meeting_records SET visibility='public' WHERE id=:id"), {"id": archive_id})
         planning_app.dependency_overrides.clear()
         engine.dispose()

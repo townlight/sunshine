@@ -1,12 +1,12 @@
-# CivicSunshine — Install / Repair flow (T5E).
+# Townlight Records — Install / Repair flow (T5E).
 #
 # This script runs the full first-run bootstrap or an on-demand repair.
 # Invoked from:
 #   - Inno Setup's [Run] section immediately after Setup completes (first run)
-#   - Start Menu shortcut "Install or Repair CivicSunshine" (manual repair)
+#   - Start Menu shortcut "Install or Repair Townlight Records" (manual repair)
 #
 # It is NOT the daily-start flow. The daily-start flow is launch-start.ps1,
-# wired to the Start Menu / Desktop shortcut "Start CivicSunshine".
+# wired to the Start Menu / Desktop shortcut "Start Townlight Records".
 #
 # Steps:
 #   1. Run prereq-check.ps1. Exit if a required prereq is missing.

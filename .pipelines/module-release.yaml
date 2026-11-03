@@ -1,9 +1,9 @@
 # module-release pipeline - the 4-phase pattern that prevents the
-# "cascading CI bug discovery" failure mode from civicrecords-ai v1.5.0.
+# "cascading CI bug discovery" failure mode from townlight_records v1.5.0.
 #
 # Use when:
 #   - Bumping a module to a new version
-#   - Releasing a downstream-dependency change (e.g. civiccore pin sweep)
+#   - Releasing a downstream-dependency change (e.g. townlight_core pin sweep)
 #   - Any work whose end-state is a published release artifact
 #
 # DO NOT use for:
@@ -12,7 +12,7 @@
 #   - Documentation-only changes
 #
 # Why this exists:
-#   The CivicSuite recovery sweep of 2026-05-10 burned 8 hours on a single
+#   The Townlight recovery sweep of 2026-05-10 burned 8 hours on a single
 #   module migration because three latent release-workflow bugs surfaced
 #   one at a time during Phase 3 (remote release). Each surface required
 #   a PR + merge + tag-move + 4-minute CI cycle. This pipeline forces all

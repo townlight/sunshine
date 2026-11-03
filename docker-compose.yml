@@ -2,13 +2,13 @@ services:
   postgres:
     image: pgvector/pgvector:pg17
     environment:
-      POSTGRES_USER: civicrecords
-      POSTGRES_PASSWORD: civicrecords
-      POSTGRES_DB: civicrecords
+      POSTGRES_USER: townlight_records
+      POSTGRES_PASSWORD: townlight_records
+      POSTGRES_DB: townlight_records
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U civicrecords"]
+      test: ["CMD-SHELL", "pg_isready -U townlight_records"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -42,9 +42,9 @@ services:
       - jwt_secret
       - first_admin_password
     ports:
-      - "${CIVICRECORDS_API_PORT:-8000}:8000"
+      - "${TOWNLIGHT_RECORDS_API_PORT:-8000}:8000"
     volumes:
-      - uploads:/tmp/civicrecords-uploads
+      - uploads:/tmp/townlight_records-uploads
       - cache:/data/cache
     depends_on:
       postgres:
@@ -66,9 +66,9 @@ services:
     secrets:
       - jwt_secret
       - first_admin_password
-    command: celery -A app.worker worker --loglevel=info
+    command: celery -A townlight_records.worker worker --loglevel=info
     volumes:
-      - uploads:/tmp/civicrecords-uploads
+      - uploads:/tmp/townlight_records-uploads
       - cache:/data/cache
     depends_on:
       postgres:
@@ -76,7 +76,7 @@ services:
       redis:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "celery -A app.worker inspect ping || exit 1"]
+      test: ["CMD-SHELL", "celery -A townlight_records.worker inspect ping || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -89,7 +89,7 @@ services:
     secrets:
       - jwt_secret
       - first_admin_password
-    command: celery -A app.worker beat --loglevel=info
+    command: celery -A townlight_records.worker beat --loglevel=info
     depends_on:
       redis:
         condition: service_healthy
@@ -99,7 +99,7 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     ports:
-      - "${CIVICRECORDS_WEB_PORT:-8080}:80"
+      - "${TOWNLIGHT_RECORDS_WEB_PORT:-8080}:80"
     depends_on:
       api:
         condition: service_healthy
@@ -118,6 +118,6 @@ volumes:
 
 secrets:
   jwt_secret:
-    file: ${CIVICRECORDS_SECRET_DIR:-./data/secrets}/jwt_secret
+    file: ${TOWNLIGHT_RECORDS_SECRET_DIR:-./data/secrets}/jwt_secret
   first_admin_password:
-    file: ${CIVICRECORDS_SECRET_DIR:-./data/secrets}/first_admin_password
+    file: ${TOWNLIGHT_RECORDS_SECRET_DIR:-./data/secrets}/first_admin_password

@@ -4,9 +4,10 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 
 
-ROOT = Path(os.environ.get("CIVICRECORDS_REPO_ROOT", Path(__file__).resolve().parents[2]))
+ROOT = Path(os.environ.get("TOWNLIGHT_RECORDS_REPO_ROOT", Path(__file__).resolve().parents[2]))
 
 
 def _write_umbrella_fixture(root: Path) -> None:
@@ -21,23 +22,23 @@ def _write_umbrella_fixture(root: Path) -> None:
                 "profiles": [
                     {
                         "id": "clerk-core",
-                        "modules": ["civiccore", "civicrecords-ai", "civicclerk"],
+                        "modules": ["townlight_core", "townlight_records", "townlight_meetings"],
                     }
                 ],
                 "modules": [
-                    {"id": "civiccore", "current_version": "1.2.0", "selectable": False},
+                    {"id": "townlight_core", "current_version": "1.3.0.dev2", "selectable": False},
                     {
-                        "id": "civicrecords-ai",
-                        "current_version": "1.7.3",
+                        "id": "townlight_records",
+                        "current_version": "1.8.0.dev2",
                         "selectable": True,
-                        "civiccore_requirement": "1.2.0",
-                        "dependencies": ["civiccore"],
+                        "townlight_core_requirement": "1.3.0.dev2",
+                        "dependencies": ["townlight_core"],
                     },
                     {
-                        "id": "civicclerk",
-                        "current_version": "1.0.4",
+                        "id": "townlight_meetings",
+                        "current_version": "1.0.5",
                         "selectable": True,
-                        "dependencies": ["civiccore"],
+                        "dependencies": ["townlight_core"],
                     },
                 ],
             }
@@ -47,18 +48,18 @@ def _write_umbrella_fixture(root: Path) -> None:
     (docs / "starter-set-release-contract.md").write_text(
         "\n".join(
             [
-                "CivicSunshine reports v1.7.3",
-                "CivicMeetings reports v1.0.4 with CivicCore v1.2.0",
-                "--staff-mode bearer --workflow-proof",
-                "Package Cleanroom Contract",
-                "workflow_proof_requested=true",
-                "not yet a claim that CivicSunshine and CivicMeetings exchange workflow records",
+                "| Records | townlight-records | 1.8.0.dev2 |",
+                "Townlight Meetings reports version 1.0.5 with Townlight Core 1.3.0.dev2",
+                "Package workflow proof and source-only checks do not certify an installer.",
+                "new empty database and fresh profile",
+                "No in-place upgrade or import shim is supported.",
+                "Meetings → Station → Records",
             ]
         ),
         encoding="utf-8",
     )
-    (dist / "CivicSuite-clerk-core-linux-0.1.0.tar.gz").write_text("linux\n", encoding="utf-8")
-    (dist / "CivicSuite-clerk-core-windows-0.1.0.zip").write_text("windows\n", encoding="utf-8")
+    (dist / "Townlight-clerk-core-linux-0.1.0.tar.gz").write_text("linux\n", encoding="utf-8")
+    (dist / "Townlight-clerk-core-windows-0.1.0.zip").write_text("windows\n", encoding="utf-8")
 
 
 def test_starter_set_integration_passes_with_umbrella_contract(tmp_path: Path) -> None:
@@ -67,7 +68,7 @@ def test_starter_set_integration_passes_with_umbrella_contract(tmp_path: Path) -
 
     result = subprocess.run(
         [
-            "python",
+            sys.executable,
             "scripts/check_starter_set_integration.py",
             "--umbrella-root",
             str(tmp_path),
@@ -83,19 +84,21 @@ def test_starter_set_integration_passes_with_umbrella_contract(tmp_path: Path) -
 
     assert result.returncode == 0, result.stdout + result.stderr
     assert "starter_set_ready=true" in result.stdout
-    assert "release_evidence_ready=true" in result.stdout
+    assert "release_evidence_ready=false" in result.stdout
     assert "[PASS] clerk-core profile order" in result.stdout
-    assert "[PASS] CivicSunshine module contract" in result.stdout
-    assert "[PASS] CivicMeetings pairing" in result.stdout
+    assert "[PASS] Townlight Records module contract" in result.stdout
+    assert "[PASS] Townlight Meetings pairing" in result.stdout
     assert "[PASS] starter-set release contract" in result.stdout
     assert "[PASS] starter-set archives" in result.stdout
-    assert "STARTER-SET-INTEGRATION: RELEASE-EVIDENCE-READY" in result.stdout
-    assert '"release_evidence_ready": true' in report.read_text(encoding="utf-8")
+    assert "STARTER-SET-INTEGRATION: SOURCE-READY" in result.stdout
+    payload = json.loads(report.read_text(encoding="utf-8"))
+    assert payload["release_evidence_ready"] is False
+    assert payload["installed_acceptance_verified"] is False
 
 
 def test_starter_set_integration_print_only_documents_contract() -> None:
     result = subprocess.run(
-        ["python", "scripts/check_starter_set_integration.py", "--print-only"],
+        [sys.executable, "scripts/check_starter_set_integration.py", "--print-only"],
         cwd=ROOT,
         check=False,
         capture_output=True,
@@ -111,7 +114,7 @@ def test_starter_set_integration_print_only_documents_contract() -> None:
 def test_starter_set_integration_fails_when_manifest_is_missing(tmp_path: Path) -> None:
     result = subprocess.run(
         [
-            "python",
+            sys.executable,
             "scripts/check_starter_set_integration.py",
             "--umbrella-root",
             str(tmp_path),

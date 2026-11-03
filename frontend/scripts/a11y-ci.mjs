@@ -8,7 +8,7 @@ import { chromium } from "playwright";
 const require = createRequire(import.meta.url);
 const axeSource = readFileSync(require.resolve("axe-core/axe.min.js"), "utf8");
 const viteBin = join(dirname(require.resolve("vite/package.json")), "bin", "vite.js");
-const port = Number(process.env.CIVICRECORDS_A11Y_PORT || 4173);
+const port = Number(process.env.TOWNLIGHT_RECORDS_A11Y_PORT || 4173);
 const url = `http://127.0.0.1:${port}/`;
 const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 

@@ -40,7 +40,7 @@ async def test_test_connection_does_not_persist(client: AsyncClient, admin_token
     """Test-connection does NOT create a DataSource record."""
     from sqlalchemy import select, func
     from tests.conftest import test_session_maker
-    from app.models.document import DataSource
+    from townlight_records.models.document import DataSource
 
     # Count before
     async with test_session_maker() as session:

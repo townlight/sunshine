@@ -1,8 +1,8 @@
 """Seed exemption rules for all 50 states + DC."""
 import asyncio
-from app.database import async_session_maker
-from app.models.exemption import ExemptionRule, RuleType
-from app.models.user import User
+from townlight_records.database import async_session_maker
+from townlight_records.models.exemption import ExemptionRule, RuleType
+from townlight_records.models.user import User
 from sqlalchemy import select
 
 COLORADO_CORA_RULES = [

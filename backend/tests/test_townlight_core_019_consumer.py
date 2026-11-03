@@ -1,0 +1,98 @@
+"""TownlightCore v0.22.0 shared contract smoke tests for Records-AI."""
+
+from datetime import datetime, timezone
+
+from townlight_core.connectors import (
+    DELTA_QUERY_PARAMS,
+    SyncCircuitState,
+    build_sync_source_status,
+    plan_vendor_delta_request,
+)
+from townlight_core.testing.mock_city import (
+    assert_secret_free_report,
+    mock_city_report,
+    run_mock_city_backup_retention_suite,
+    run_mock_city_contract_suite,
+    run_mock_city_idp_contract_suite,
+)
+from townlight_core.security import (
+    parse_csv_setting,
+    validate_fernet_key_setting,
+    validate_password_setting,
+    validate_secret_setting,
+)
+from townlight_core.scheduling import compute_next_sync_at, validate_cron_expression
+
+
+def test_records_ai_can_use_shared_vendor_delta_planner():
+    """Records-AI should consume the suite-wide delta URL contract from TownlightCore."""
+
+    watermark = datetime(2026, 5, 2, 16, 30, tzinfo=timezone.utc)
+
+    plan = plan_vendor_delta_request(
+        connector="legistar",
+        source_url="https://legistar.mock-city.example.gov/v1/meetings",
+        changed_since=watermark,
+    )
+
+    assert DELTA_QUERY_PARAMS["legistar"] == "LastModifiedDate"
+    assert plan.connector == "legistar"
+    assert plan.cursor_param == "LastModifiedDate"
+    assert plan.request_url == (
+        "https://legistar.mock-city.example.gov/v1/meetings"
+        "?LastModifiedDate=2026-05-02T16%3A30%3A00Z"
+    )
+
+
+def test_records_ai_can_use_shared_mock_city_contract_report():
+    """The reusable mock city suite should be usable without TownlightMeetings imports."""
+
+    report = mock_city_report()
+
+    assert report["mock_city"] == "City of Brookfield"
+    assert all(check.ok for check in run_mock_city_contract_suite())
+    assert all(check.ok for check in run_mock_city_idp_contract_suite())
+    assert all(check.ok for check in run_mock_city_backup_retention_suite())
+    assert_secret_free_report(report)
+
+
+def test_records_ai_consumes_shared_startup_config_validation():
+    """Records-AI startup hardening should come from TownlightCore, not local copies."""
+
+    assert parse_csv_setting("roles, groups, ,department") == ["roles", "groups", "department"]
+    validate_secret_setting("a" * 64, setting_name="JWT_SECRET")
+    validate_password_setting("S3cure!FreshAdminPwd-2026", setting_name="FIRST_ADMIN_PASSWORD")
+
+    from cryptography.fernet import Fernet
+
+    validate_fernet_key_setting(Fernet.generate_key().decode(), setting_name="ENCRYPTION_KEY")
+
+
+def test_records_ai_consumes_shared_schedule_validation():
+    """Records-AI scheduler hardening should come from TownlightCore, not local copies."""
+
+    validate_cron_expression("*/5 * * * *")
+    next_run = compute_next_sync_at("0 2 * * *", None)
+
+    assert next_run.isoformat() == "1970-01-01T02:00:00+00:00"
+
+
+def test_records_ai_consumes_shared_sync_source_status_projection():
+    """Datasource list health and next-run status should come from TownlightCore."""
+
+    status = build_sync_source_status(
+        SyncCircuitState(
+            connector="rest_api",
+            source_name="Records vendor API",
+            active_failure_count=1,
+            last_sync_status="partial",
+        ),
+        sync_schedule="0 2 * * *",
+        last_sync_at=None,
+    )
+
+    assert status.health_status == "degraded"
+    assert status.active_failure_count == 1
+    assert status.last_sync_status == "partial"
+    assert status.next_sync_at.isoformat() == "1970-01-01T02:00:00+00:00"
+    assert "Review active failures" in status.fix

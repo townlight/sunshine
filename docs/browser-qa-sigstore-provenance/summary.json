@@ -7,11 +7,11 @@
     "activeBefore": "BODY",
     "focusAfterTab": {
       "tag": "A",
-      "text": "CivicRecords AI",
+      "text": "TownlightRecords",
       "href": "#"
     },
     "consoleMessages": [],
-    "screenshot": "C:\\Users\\scott\\OneDrive\\Desktop\\Claude\\civicrecords-ai\\docs\\browser-qa-sigstore-provenance\\desktop.png"
+    "screenshot": "C:\\Users\\scott\\OneDrive\\Desktop\\Claude\\townlight_records\\docs\\browser-qa-sigstore-provenance\\desktop.png"
   },
   {
     "viewport": "mobile-390",
@@ -21,10 +21,10 @@
     "activeBefore": "BODY",
     "focusAfterTab": {
       "tag": "A",
-      "text": "CivicRecords AI",
+      "text": "TownlightRecords",
       "href": "#"
     },
     "consoleMessages": [],
-    "screenshot": "C:\\Users\\scott\\OneDrive\\Desktop\\Claude\\civicrecords-ai\\docs\\browser-qa-sigstore-provenance\\mobile-390.png"
+    "screenshot": "C:\\Users\\scott\\OneDrive\\Desktop\\Claude\\townlight_records\\docs\\browser-qa-sigstore-provenance\\mobile-390.png"
   }
 ]

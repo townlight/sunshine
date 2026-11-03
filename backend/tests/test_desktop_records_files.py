@@ -4,9 +4,9 @@ import hashlib
 import pytest
 from sqlalchemy import func, select
 
-from app.models.document import Document
-from app.models.records_files import RequestFileEvidence, RequestReleaseCopy
-from app.models.audit import AuditLog
+from townlight_records.models.document import Document
+from townlight_records.models.records_files import RequestFileEvidence, RequestReleaseCopy
+from townlight_records.models.audit import AuditLog
 from tests.conftest import test_session_maker as session_factory
 from tests.test_desktop_records import native_api as native_api # noqa: F401
 from tests.test_desktop_session import native_profile as native_profile # noqa: F401

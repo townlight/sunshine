@@ -1,7 +1,7 @@
 {
-  "name": "civicrecords-admin",
+  "name": "townlight-records-admin",
   "private": true,
-  "version": "1.7.3",
+  "version": "1.8.0-dev.2",
   "type": "module",
   "scripts": {
     "dev": "vite",

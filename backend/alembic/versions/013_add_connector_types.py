@@ -8,7 +8,7 @@ from typing import Sequence, Union
 import sqlalchemy as sa
 from alembic import op
 
-from civiccore.migrations.guards import idempotent_add_column
+from townlight_core.migrations.guards import idempotent_add_column
 
 revision: str = '013_connector_types'
 down_revision: Union[str, None] = '012_liaison_public_roles'
@@ -18,8 +18,8 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     # Add new SourceType enum values.
-    # source_type is a SHARED (CivicCore-owned) enum, but ADD VALUE IF NOT EXISTS
-    # is natively idempotent — civiccore baseline can pre-declare these and the
+    # source_type is a SHARED (TownlightCore-owned) enum, but ADD VALUE IF NOT EXISTS
+    # is natively idempotent — townlight_core baseline can pre-declare these and the
     # statements still run cleanly here.
     op.execute("ALTER TYPE source_type ADD VALUE IF NOT EXISTS 'rest_api'")
     op.execute("ALTER TYPE source_type ADD VALUE IF NOT EXISTS 'odbc'")
