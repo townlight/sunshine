@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_FILES = [
     "docs/release-recovery-status.md",
-    "docs/audits/townlight_records-audit-full-2026-05-07.md",
+    "docs/audits/civicrecords-ai-audit-full-2026-05-07.md",
     "frontend/playwright.config.ts",
     "frontend/e2e/townlight_records-user-flows.spec.ts",
     "scripts/verify-secret-scan.py",
@@ -93,7 +93,11 @@ def main() -> int:
                 or (rel == "docs/index.html" and 'href="./versions.html"' in text)
             )
         )
-        if not (has_beta_label or (has_legacy_warning and has_current_recovery_label)):
+        has_naming_candidate_label = all(
+            token in text
+            for token in ("Townlight Beta 1", "townlight-records", "1.8.0.dev2", "AGPL-3.0-only")
+        ) and "naming" in lower and "candidate" in lower
+        if not (has_beta_label or has_naming_candidate_label or (has_legacy_warning and has_current_recovery_label)):
             fail(
                 f"{rel}: missing exact Beta 1 identity or historical recovery warning/label",
                 failures,

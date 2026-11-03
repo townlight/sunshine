@@ -9,3 +9,5 @@ The [May 7 recovery record](history/pre-naming-2026-11/docs/release-recovery-sta
 retains its original release identities and restrictions. It is evidence for those
 versions, not a signoff for this candidate. Do not rewrite tags or old receipts.
 Use the [current manual](../USER-MANUAL.md) for candidate procedures and limits.
+
+Historical release v1.4.10 remains provisional and do-not-promote.

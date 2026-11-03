@@ -1,6 +1,6 @@
 # Townlight Records — specification and current source map
 
-Prepared naming candidate: `townlight-records` 1.8.0.dev2, principal import
+Townlight Beta 1 naming candidate (AGPL-3.0-only): `townlight-records` 1.8.0.dev2, principal import
 `townlight_records`, paired with `townlight-core` 1.3.0.dev2. Signed Windows
 installed acceptance and publication remain pending.
 
