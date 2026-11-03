@@ -437,3 +437,9 @@ This edition is authored from the immutable corresponding-source companion, the 
 - [Installed domain OpenAPI](docs/beta-1/reference/desktop-domain-openapi.json)
 - [Workflow matrix](docs/beta-1/reference/workflow-matrix.json)
 - [Full AGPL text](docs/beta-1/reference/AGPL-3.0.txt)
+
+## Public meeting portal (separately deployed beta)
+
+Townlight's separately deployed portal can publish a reviewed Meetings archive with an explicitly selected, verified Records release copy of the matching completed Station recording. Staff must separately approve publication; fulfilling a Records request does not make the copy public. Review public text and the selected file, then use the Wagtail superuser publication form. Explicit withdrawal hides the published meeting and file. An unsuccessful sync preserves the previous publication. Keep the private original and never expose the native session proof. See the [portal guide](https://github.com/townlight/townlight/blob/main/docs/portal/guide.md) for staff steps, setup, API, recovery and source obligations.
+
+This portal beta is distributed separately from the desktop installer. The existing signed Beta 1 installer and historical Sandbox results do not establish that it contains or deploys this portal. CivicCast remains separate.
