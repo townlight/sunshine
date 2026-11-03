@@ -131,10 +131,10 @@ def setup_db():
 
     backend_dir = str(Path(__file__).parent.parent)
 
-    # Connect to the live database to drop and recreate the test database.
-    # This guarantees a clean catalog — no dangling extension OIDs, no stale types.
-    _main_sync_url = settings.database_url.replace("postgresql+asyncpg", "postgresql+psycopg2")
-    main_engine = create_engine(_main_sync_url, echo=False)
+    # Use the maintenance database even when CI config points at the test database.
+    # A connection cannot drop its own database.
+    maintenance_url = sa.engine.make_url(_sync_url).set(database="postgres")
+    main_engine = create_engine(maintenance_url, echo=False)
     with main_engine.connect().execution_options(isolation_level="AUTOCOMMIT") as conn:
         # WITH (FORCE) atomically terminates all connections before dropping —
         # avoids the race condition between pg_terminate_backend and DROP DATABASE
