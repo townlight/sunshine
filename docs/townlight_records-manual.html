@@ -1,1956 +1,1007 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Townlight Records &mdash; Unified Manual v1.4.1</title>
-<style>
-/* ===== RESET & BASE ===== */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #1a1a2e; background: #f8f9fa; line-height: 1.7;
-}
-a { color: #1e3a5f; text-decoration: none; }
-a:hover { text-decoration: underline; }
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Townlight Records Manual | Townlight Windows Beta 1</title><style>
+:root{--ink:#182f3a;--muted:#526775;--accent:#006b64;--paper:#fff;--wash:#f1f6f5;--line:#cfdddf;--warm:#dceab2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 "Segoe UI",Arial,sans-serif}a{color:#006b64;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #a25900;outline-offset:4px}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:1rem;z-index:20}header{border-bottom:1px solid var(--line);padding:1.1rem 5vw;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}header .brand{font-size:1.3rem;font-weight:750;letter-spacing:-.04em;text-decoration:none;color:var(--ink)}header nav{margin-left:auto;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.88rem}.edition{font:700 .72rem/1.5 "Segoe UI",sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}.wrap{max-width:1240px;margin:auto;padding:0 4vw}.hero{padding:5rem 0 3.2rem;max-width:950px}.hero h1{font-size:clamp(2.5rem,5vw,4.7rem);line-height:1.08;letter-spacing:-.045em;margin:1rem 0 1.5rem;font-weight:650}.hero .lead{font-size:1.26rem;max-width:780px;color:var(--muted)}.actions{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.8rem 0}.button{display:inline-block;padding:.7rem 1.15rem;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-weight:650}.button.primary{background:var(--accent);color:#fff}.facts{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}.section{padding:3rem 0;border-top:1px solid var(--line)}h2{font-size:1.8rem;line-height:1.3;letter-spacing:-.025em;margin:2.5rem 0 1rem}h3{font-size:1.18rem;line-height:1.45;margin:1.8rem 0 .7rem}h4{font-size:1rem;margin:1.3rem 0 .6rem}p{margin:.85rem 0 1rem}ul,ol{padding-left:1.6rem}li{margin:.4rem 0}strong{font-weight:650}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem}.product{border-top:3px solid var(--accent);padding:1.4rem 0}.product h3{font-size:1.65rem;margin:.4rem 0}.product p{color:var(--muted)}.number{font-size:.76rem;letter-spacing:.1em}.split{display:grid;grid-template-columns:1fr 1fr;gap:3rem}.flow{width:100%;height:auto;display:block;margin:1.8rem 0}.caption{font-size:.85rem;color:var(--muted)}.reading{max-width:860px}.doclayout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:3rem;max-width:1320px;margin:auto;padding:2rem 4vw}.toc{font-size:.84rem;align-self:start;position:sticky;top:1rem;max-height:90vh;overflow:auto;padding-right:.8rem}.toc ul{list-style:none;padding:0}.toc li{margin:.5rem 0}.toc li li{padding-left:.8rem}.toc a{text-decoration:none}.docbody{min-width:0}.docbody h1{font-size:2.7rem;line-height:1.1;letter-spacing:-.04em}.docbody h2{border-top:1px solid var(--line);padding-top:1.8rem}.docbody img{max-width:100%;height:auto}.docmeta{color:var(--muted);font-size:.9rem}.docbody section{scroll-margin-top:1rem}table{width:100%;border-collapse:collapse;font-size:.87rem;line-height:1.5;margin:1.3rem 0;table-layout:auto}th{text-align:left;background:var(--wash);font-weight:650}th,td{padding:.65rem .7rem;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}thead{display:table-header-group}pre{background:#f2f5f6;padding:1rem;border:1px solid #dfe7e8;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;font:13px/1.6 Consolas,monospace}code{font: .85em/1.6 Consolas,monospace;overflow-wrap:anywhere}pre code{font-size:inherit}blockquote{border-left:3px solid var(--accent);padding-left:1rem;margin-left:0;color:var(--muted)}.search{padding:.65rem;border:1px solid #789399;border-radius:4px;width:100%;font:inherit}.search-status{font-size:.8rem;color:var(--muted)}footer{border-top:1px solid var(--line);padding:2rem 5vw;margin-top:3rem;font-size:.85rem;color:var(--muted);display:flex;gap:2rem;justify-content:space-between;flex-wrap:wrap}.small{font-size:.9rem;color:var(--muted)}.api-entry{padding:1.2rem 0;border-top:1px solid var(--line)}.api-entry h3{overflow-wrap:anywhere}.method{font-size:.76rem;font-weight:750;color:var(--accent)}details{margin:1rem 0}summary{cursor:pointer;font-weight:650}.index-columns{columns:2;column-gap:2rem}.index-columns li{break-inside:avoid}
+@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.doclayout{grid-template-columns:1fr;gap:1rem}.toc{position:static;max-height:none}.hero{padding-top:3rem}header nav{margin-left:0}.docbody h1{font-size:2.2rem}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.wrap{padding:0 6vw}header{padding:1rem 6vw}.hero h1{font-size:2.6rem}.index-columns{columns:1}table{font-size:.78rem}th,td{padding:.45rem}.doclayout{padding:1rem 6vw}.facts{gap:.5rem}}
+main,.toc a,.hero h1{overflow-wrap:anywhere}
+@page{size:Letter;margin:.7in .65in .75in}
+@media print{html{scroll-behavior:auto}body{font:10.5pt/1.45 Arial,sans-serif;color:#172f39}header,footer,.search-area,.screen-only{display:none}.doclayout{display:block;padding:0;max-width:none}.toc{position:static;max-height:none;overflow:visible;font-size:10pt;break-after:page}.toc>h2{border:0}.toc ul{columns:2;column-gap:.3in}.toc li{break-inside:avoid}.docbody h1{font-size:30pt}.docbody h2{font-size:19pt;break-after:avoid;padding-top:.15in;margin-top:.35in}.docbody h3{font-size:12pt;break-after:avoid}.docbody h4{break-after:avoid}p{orphans:3;widows:3}pre{font-size:8.2pt;line-height:1.4;padding:.1in;break-inside:auto}table{font-size:8.4pt;line-height:1.35}th,td{padding:.06in .07in}tr{break-inside:avoid}.flow{max-height:6in;object-fit:contain;break-inside:avoid}a{color:#172f39;text-decoration:underline}.cover{break-after:page;padding-top:1in}.cover .edition{font-size:11pt}.cover h1{font-size:32pt}.cover .lead{font-size:14pt}.api-entry{break-inside:auto}.api-entry h3{break-after:avoid}.index-columns{columns:2}}
+</style></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="https://townlight.github.io/index.html">Townlight</a>
+<nav aria-label="Main"><a href="https://townlight.github.io/manuals/suite.html">Suite manual</a>
+<a href="https://townlight.github.io/versions.html">Versions and Windows release</a>
+<a href="https://townlight.github.io/terms.html">Terms and license</a></nav></header>
+<main id="main" class="reading wrap"><p class="edition">Windows x64 Beta 1 · MSI 1.7.0.1</p>
+<p>The signed <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1-windows-1.7.0.1">Windows x64 beta 1.7.0.1</a> passed the documented fresh Windows Sandbox checks with synthetic data.</p>
 
-/* ===== COVER PAGE ===== */
-.cover {
-  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #1e3a5f 0%, #2c5f8a 40%, #3a7cb8 70%, #4a90c4 100%);
-  color: #fff; text-align: center; padding: 3rem 2rem; position: relative; overflow: hidden;
-}
-.cover::before {
-  content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 60%),
-              radial-gradient(circle at 70% 60%, rgba(255,255,255,0.04) 0%, transparent 50%);
-  pointer-events: none;
-}
-.cover-logo { font-size: 1.1rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.7; margin-bottom: 1.5rem; }
-.cover h1 { font-size: 3.2rem; font-weight: 700; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.cover .subtitle { font-size: 1.4rem; font-weight: 300; margin-bottom: 2rem; opacity: 0.9; }
-.cover .version-badge {
-  display: inline-block; padding: 0.4rem 1.6rem; border: 2px solid rgba(255,255,255,0.5);
-  border-radius: 100px; font-size: 0.95rem; letter-spacing: 0.1em; margin-bottom: 2.5rem;
-}
-.cover .meta { font-size: 0.9rem; opacity: 0.65; line-height: 1.8; }
-
-/* ===== TOP NAV ===== */
-.topnav {
-  position: sticky; top: 0; z-index: 1000;
-  background: #1e3a5f; color: #fff; display: flex; align-items: center;
-  padding: 0 2rem; height: 52px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.topnav .brand { font-weight: 700; font-size: 1rem; margin-right: 2rem; white-space: nowrap; }
-.topnav a { color: rgba(255,255,255,0.85); font-size: 0.85rem; padding: 0.3rem 0.8rem; border-radius: 4px; transition: background 0.15s; }
-.topnav a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
-.topnav a.active { background: rgba(255,255,255,0.18); color: #fff; }
-.topnav .spacer { flex: 1; }
-
-/* ===== LAYOUT ===== */
-.container { max-width: 960px; margin: 0 auto; padding: 2rem 2rem 4rem; }
-
-/* ===== TABLE OF CONTENTS ===== */
-.toc { background: #fff; border: 1px solid #dde3ea; border-radius: 8px; padding: 2rem 2.5rem; margin-bottom: 3rem; }
-.toc h2 { font-size: 1.5rem; color: #1e3a5f; border-bottom: 2px solid #1e3a5f; padding-bottom: 0.5rem; margin-bottom: 1.2rem; }
-.toc-part { font-weight: 700; color: #1e3a5f; font-size: 1rem; margin: 1.2rem 0 0.4rem; }
-.toc ol { list-style: none; counter-reset: toc-section; padding-left: 0; }
-.toc ol li { counter-increment: toc-section; padding: 0.2rem 0; }
-.toc ol li a { display: block; padding: 0.25rem 0.5rem; border-radius: 4px; transition: background 0.1s; }
-.toc ol li a:hover { background: #eef3f8; }
-.toc ol li a::before { content: counter(toc-section) ". "; font-weight: 600; color: #2c5f8a; }
-.toc .appendix-list { list-style: none; padding-left: 0; }
-.toc .appendix-list li a::before { content: none; }
-
-/* ===== HEADINGS ===== */
-h2.section-title {
-  font-size: 1.8rem; color: #1e3a5f; border-bottom: 3px solid #1e3a5f;
-  padding-bottom: 0.5rem; margin: 3rem 0 1.5rem;
-}
-h3 { font-size: 1.3rem; color: #2c5f8a; margin: 2rem 0 0.8rem; }
-h4 { font-size: 1.1rem; color: #3a6b94; margin: 1.5rem 0 0.6rem; }
-.part-divider {
-  text-align: center; padding: 3rem 0 1rem; margin: 3rem 0 1rem;
-  border-top: 4px solid #1e3a5f;
-}
-.part-divider h2 { font-size: 2rem; color: #1e3a5f; border: none; margin: 0; }
-.part-divider p { color: #5a6a7a; font-size: 1rem; margin-top: 0.3rem; }
-
-/* ===== PARAGRAPHS & LISTS ===== */
-p { margin-bottom: 1rem; }
-ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
-li { margin-bottom: 0.3rem; }
-
-/* ===== TABLES ===== */
-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.92rem; }
-th { background: #1e3a5f; color: #fff; text-align: left; padding: 0.65rem 0.8rem; font-weight: 600; }
-td { padding: 0.55rem 0.8rem; border-bottom: 1px solid #dde3ea; }
-tr:nth-child(even) td { background: #f4f7fa; }
-tr:hover td { background: #e8eef5; }
-
-/* ===== CALLOUT BOXES ===== */
-.callout {
-  border-left: 4px solid; border-radius: 4px; padding: 1rem 1.2rem;
-  margin: 1.2rem 0; background: #fff;
-}
-.callout-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
-.callout.tip { border-color: #2e7d32; }
-.callout.tip .callout-title { color: #2e7d32; }
-.callout.note { border-color: #1565c0; }
-.callout.note .callout-title { color: #1565c0; }
-.callout.warning { border-color: #e65100; }
-.callout.warning .callout-title { color: #e65100; }
-.callout.security { border-color: #c62828; background: #fef5f5; }
-.callout.security .callout-title { color: #c62828; }
-
-/* ===== CODE BLOCKS ===== */
-code { font-family: "Cascadia Code", "Fira Code", "Source Code Pro", Consolas, monospace; font-size: 0.88em; }
-:not(pre) > code { background: #e8eef5; padding: 0.15em 0.4em; border-radius: 3px; }
-pre {
-  background: #0d1117; color: #e6edf3; padding: 1.2rem 1.4rem; border-radius: 6px;
-  overflow-x: auto; margin: 1rem 0 1.5rem; line-height: 1.55; font-size: 0.88rem;
-}
-pre code { background: none; padding: 0; color: inherit; }
-
-/* ===== SVG DIAGRAMS ===== */
-.diagram-container { margin: 2rem 0; text-align: center; overflow-x: auto; }
-.diagram-container svg { max-width: 100%; height: auto; }
-.diagram-caption { font-size: 0.85rem; color: #5a6a7a; margin-top: 0.5rem; font-style: italic; }
-
-/* ===== PRINT ===== */
-@media print {
-  .topnav, .cover { display: none; }
-  body { font-size: 11pt; color: #000; background: #fff; }
-  .container { max-width: 100%; padding: 0; }
-  h2.section-title, .part-divider { page-break-before: always; }
-  pre { border: 1px solid #ccc; background: #f5f5f5; color: #000; }
-  table { font-size: 9pt; }
-  th { background: #ccc; color: #000; }
-  a { color: #000; }
-  .callout { border-left-width: 3px; }
-  .toc { page-break-after: always; }
-}
-</style>
-</head>
-<body>
-
-<!-- ==================== COVER PAGE ==================== -->
-<div class="cover">
-  <div class="cover-logo">Municipal Open Records Platform</div>
-  <h1>Townlight Records</h1>
-  <div class="subtitle">Unified Operations Manual</div>
-  <div class="version-badge">Version 1.4.1</div>
-  <div class="meta">
-    Staff User Guide &amp; IT Administration Reference<br>
-    April 2026<br>
-    AI-Powered Open Records Support for American Cities
-  </div>
-</div>
-
-<!-- ==================== v1.2.0 UPDATE NOTICE ==================== -->
-<!-- This unified manual was originally authored against v1.1.0. The v1.2.0
-     release (2026-04-23) adds operator-facing capabilities that post-date
-     the body of this manual. Authoritative delta lives in CHANGELOG.md,
-     USER-MANUAL.md §B.3, and docs/UNIFIED-SPEC.md §§8.7–8.10. -->
-<div style="margin:2rem auto;max-width:900px;padding:1.25rem 1.5rem;border-left:4px solid #15803d;background:#f0fdf4;border-radius:6px;">
-  <h2 style="margin-top:0;">v1.2.0 — what changed since this manual was authored</h2>
-  <p>
-    This unified manual was first written against <strong>v1.1.0</strong>. Five operator-facing capabilities landed in the <strong>v1.2.0</strong> release (2026-04-23) and are not individually documented in every section below. Where this manual and the current CHANGELOG disagree, the CHANGELOG wins.
-  </p>
-  <ul>
-    <li><strong>At-rest encryption (ENG-001 closed).</strong> Connector credentials stored in <code>data_sources.connection_config</code> are now encrypted at rest via a Fernet envelope. New required <code>ENCRYPTION_KEY</code> env var (installer auto-generates on fresh install; losing the key means losing credential access — there is no recovery path in v1.2.0, so back it up separately from your database). Full operator guide: <a href="https://github.com/townlight/sunshine/blob/master/USER-MANUAL.md">USER-MANUAL.md §B.3.2</a>.</li>
-    <li><strong>Install-time portal switch.</strong> New <code>PORTAL_MODE</code> env var (<code>private</code> default, <code>public</code> opt-in). Public mode exposes a minimal three-surface public area — landing page, resident-registration, and authenticated records-request submission — and nothing more. No anonymous submission, no published-records search, no resident dashboard. See USER-MANUAL.md §B.3.1.</li>
-    <li><strong>Windows double-click installer (unsigned).</strong> A real <code>.exe</code> (<code>Townlight Records-1.2.0-Setup.exe</code> + <code>.sha256</code>) now ships on every <code>v*</code> tag. <strong>Unsigned by design</strong> — SmartScreen will warn on first run; click <strong>More info → Run anyway</strong>. macOS/Linux continue on the guided-script path (<code>install.sh</code>).</li>
-    <li><strong>4-model Gemma 4 installer picker.</strong> Default is <code>gemma4:e4b</code>; the older fake tags <code>gemma4:12b</code> / <code>gemma4:27b</code> have been purged repo-wide; <code>gemma4:26b</code> / <code>gemma4:31b</code> remain selectable but require an explicit "stronger hardware required" acknowledgement against the locked 32 GB baseline.</li>
-    <li><strong>Onboarding persistence + first-boot seeding.</strong> The adaptive onboarding interview now persists each answer and transitions <code>onboarding_status</code>; first boot automatically seeds 175 state exemption rules, 5 compliance templates, and 12 notification templates (idempotent skip-if-exists so admin edits survive re-seeds).</li>
-  </ul>
-  <p style="margin-bottom:0;">
-    Canonical narrative: <a href="https://github.com/townlight/sunshine/releases/tag/v1.2.0">the v1.2.0 release page</a> · <a href="https://github.com/townlight/sunshine/blob/master/CHANGELOG.md#120---2026-04-23">CHANGELOG §[1.2.0]</a> · <a href="https://github.com/townlight/sunshine/blob/master/docs/UNIFIED-SPEC.md">UNIFIED-SPEC</a>.
-  </p>
-</div>
-
-<!-- ==================== TOP NAV ==================== -->
-<nav class="topnav" id="topnav">
-  <span class="brand">Townlight Records Manual</span>
-  <a href="#toc">Contents</a>
-  <a href="#part1">Part I: User Guide</a>
-  <a href="#part2">Part II: IT Admin</a>
-  <a href="#appendices">Appendices</a>
-  <span class="spacer"></span>
-  <a href="#sec-1">1</a><a href="#sec-2">2</a><a href="#sec-3">3</a><a href="#sec-4">4</a><a href="#sec-5">5</a>
-  <a href="#sec-6">6</a><a href="#sec-7">7</a><a href="#sec-8">8</a><a href="#sec-9">9</a><a href="#sec-10">10</a>
-  <a href="#sec-11">11</a><a href="#sec-12">12</a><a href="#sec-13">13</a><a href="#sec-14">14</a><a href="#sec-15">15</a>
-  <a href="#sec-16">16</a><a href="#sec-17">17</a><a href="#sec-18">18</a><a href="#sec-19">19</a><a href="#sec-20">20</a>
-  <a href="#sec-21">21</a><a href="#sec-22">22</a><a href="#sec-23">23</a><a href="#sec-24">24</a>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#townlight-records-manual"
+id="toc-townlight-records-manual">Townlight Records Manual</a>
+<ul>
+<li><a href="#contents" id="toc-contents">Contents</a></li>
+<li><a href="#using-this-manual" id="toc-using-this-manual">Using this
+manual</a></li>
+<li><a href="#beta-identity" id="toc-beta-identity">Beta
+identity</a></li>
+<li><a href="#first-run" id="toc-first-run">First run</a></li>
+<li><a href="#daily-workflow" id="toc-daily-workflow">Daily
+workflow</a></li>
+<li><a href="#connected-workflows"
+id="toc-connected-workflows">Connected workflows</a></li>
+<li><a href="#architecture" id="toc-architecture">Architecture</a></li>
+<li><a href="#fees-messages-notifications-and-local-intake"
+id="toc-fees-messages-notifications-and-local-intake">Fees messages
+notifications and local intake</a></li>
+<li><a href="#technical-specifications"
+id="toc-technical-specifications">Technical specifications</a></li>
+<li><a href="#configuration-and-administration"
+id="toc-configuration-and-administration">Configuration and
+administration</a></li>
+<li><a href="#api-and-integration-examples"
+id="toc-api-and-integration-examples">API and integration
+examples</a></li>
+<li><a href="#mcp-and-automation-boundary"
+id="toc-mcp-and-automation-boundary">MCP and automation
+boundary</a></li>
+<li><a href="#security-and-permissions"
+id="toc-security-and-permissions">Security and permissions</a></li>
+<li><a href="#backup-recovery-and-maintenance"
+id="toc-backup-recovery-and-maintenance">Backup recovery and
+maintenance</a></li>
+<li><a href="#troubleshooting"
+id="toc-troubleshooting">Troubleshooting</a></li>
+<li><a href="#verified-workflows-and-limits"
+id="toc-verified-workflows-and-limits">Verified workflows and
+limits</a></li>
+<li><a href="#terms-of-service-and-license"
+id="toc-terms-of-service-and-license">Terms of service and
+license</a></li>
+<li><a href="#glossary" id="toc-glossary">Glossary</a></li>
+<li><a href="#alphabetical-subject-index"
+id="toc-alphabetical-subject-index">Alphabetical subject index</a></li>
+<li><a href="#source-and-document-control"
+id="toc-source-and-document-control">Source and document
+control</a></li>
+</ul></li>
+</ul>
 </nav>
-
-<!-- ==================== MAIN CONTENT ==================== -->
-<div class="container">
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc" id="toc">
-  <h2>Table of Contents</h2>
-
-  <div class="toc-part">Part I &mdash; User Guide (Records Staff)</div>
-  <ol>
-    <li><a href="#sec-1">Welcome</a></li>
-    <li><a href="#sec-2">Signing In</a></li>
-    <li><a href="#sec-3">Dashboard Overview</a></li>
-    <li><a href="#sec-4">Searching for Records</a></li>
-    <li><a href="#sec-5">Managing Records Requests</a></li>
-    <li><a href="#sec-6">Reviewing Exemption Flags</a></li>
-    <li><a href="#sec-7">Response Letters</a></li>
-    <li><a href="#sec-8">Timeline &amp; Messaging</a></li>
-    <li><a href="#sec-9">Fee Tracking</a></li>
-    <li><a href="#sec-10">Department Access</a></li>
-    <li><a href="#sec-11">Quick Reference</a></li>
-  </ol>
-
-  <div class="toc-part">Part II &mdash; IT Administration Guide</div>
-  <ol start="12">
-    <li><a href="#sec-12">System Architecture</a></li>
-    <li><a href="#sec-13">Hardware Requirements</a></li>
-    <li><a href="#sec-14">Installation</a></li>
-    <li><a href="#sec-15">Configuration Reference</a></li>
-    <li><a href="#sec-16">User &amp; Department Administration</a></li>
-    <li><a href="#sec-17">Data Source Management</a></li>
-    <li><a href="#sec-18">Model Management</a></li>
-    <li><a href="#sec-19">Exemption Rules Administration</a></li>
-    <li><a href="#sec-20">Compliance &amp; Audit</a></li>
-    <li><a href="#sec-21">Security</a></li>
-    <li><a href="#sec-22">Backup &amp; Recovery</a></li>
-    <li><a href="#sec-23">Monitoring &amp; Troubleshooting</a></li>
-    <li><a href="#sec-24">Upgrading</a></li>
-  </ol>
-
-  <div class="toc-part">Appendices</div>
-  <ul class="appendix-list">
-    <li><a href="#appendix-a">A. API Endpoint Reference</a></li>
-    <li><a href="#appendix-b">B. Database Schema Overview</a></li>
-    <li><a href="#appendix-c">C. Supported Platforms</a></li>
-  </ul>
-</div>
-
-<!-- ============================================================ -->
-<!--                     PART I: USER GUIDE                        -->
-<!-- ============================================================ -->
-<div class="part-divider" id="part1">
-  <h2>Part I: User Guide</h2>
-  <p>For City Clerks, Records Officers, Department Liaisons, and City Managers</p>
-</div>
-
-<!-- SECTION 1 -->
-<h2 class="section-title" id="sec-1">1. Welcome</h2>
-
-<h3>What Townlight Records Does</h3>
-<p>Townlight Records is a tool that helps your city respond to public records requests faster, more consistently, and with greater confidence. When a resident submits a records request, the system searches across your city's record sources &mdash; meeting minutes, resolutions, ordinances, permits, and more &mdash; and presents the most relevant results in seconds. It also suggests which exemptions might apply, drafts response letters, and tracks every request from receipt to fulfillment.</p>
-
-<h3>What Townlight Records Is Not</h3>
-<p>Townlight Records is an assistant, not a decision-maker. Everything it does is a recommendation for you to review. The system suggests and drafts; you review and approve. Every exemption flag, every response letter, and every release decision requires a human sign-off.</p>
-<p>It is not a public portal. Residents do not interact with Townlight Records directly. You use it internally to process their requests.</p>
-
-<h3>Privacy by Design</h3>
-<p>Townlight Records runs entirely on your city's local network or on-premises servers. No records or request data leave your infrastructure. The AI models run locally &mdash; no cloud AI services are used.</p>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  This manual is written for city staff members who use Townlight Records day to day: city clerks who process records requests, records officers who manage compliance, department liaisons who search for and provide departmental records, and city managers who oversee the process. You do not need any technical background to use the system.
-</div>
-
-<h3>Who This Manual Is For</h3>
+<h1 id="townlight-records-manual">Townlight Records Manual</h1>
+<p><strong>Townlight Beta 1</strong> · Naming candidate documentation
+edition 2 November 2026</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#using-this-manual">Using this manual</a></li>
+<li><a href="#beta-identity">Beta identity</a></li>
+<li><a href="#first-run">First run</a></li>
+<li><a href="#daily-workflow">Daily workflow</a></li>
+<li><a href="#connected-workflows">Connected workflows</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#fees-messages-notifications-and-local-intake">Fees
+messages notifications and local intake</a></li>
+<li><a href="#technical-specifications">Technical
+specifications</a></li>
+<li><a href="#configuration-and-administration">Configuration and
+administration</a></li>
+<li><a href="#api-and-integration-examples">API and integration
+examples</a></li>
+<li><a href="#mcp-and-automation-boundary">MCP and automation
+boundary</a></li>
+<li><a href="#security-and-permissions">Security and
+permissions</a></li>
+<li><a href="#backup-recovery-and-maintenance">Backup recovery and
+maintenance</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#verified-workflows-and-limits">Verified workflows and
+limits</a></li>
+<li><a href="#terms-of-service-and-license">Terms of service and
+license</a></li>
+<li><a href="#glossary">Glossary</a></li>
+<li><a href="#alphabetical-subject-index">Alphabetical subject
+index</a></li>
+<li><a href="#source-and-document-control">Source and document
+control</a></li>
+</ul>
+<h2 id="using-this-manual">Using this manual</h2>
+<p>Townlight Records helps records officers, clerks and authorized
+reviewers. Records manages request intake, responsive evidence, review
+and the final response. Material received from another Townlight product
+is evidence for a request. Records separately controls release
+decisions, response approval, exports and fulfillment.</p>
+<p>Staff should begin with First run and Daily workflow. Administrators
+should also read Architecture, Technical specifications, Configuration,
+Security and Recovery. Developers should use the exact API/data
+dictionary and examples. The table of contents and alphabetical subject
+index link to the relevant sections in the HTML edition; the PDF
+preserves headings and searchable text. An editable Word edition is
+included with the same documentation companion.</p>
+<h2 id="beta-identity">Beta identity</h2>
 <table>
-  <tr><th>Role</th><th>Primary Tasks</th></tr>
-  <tr><td>City Clerk</td><td>Receive and process incoming records requests, search for responsive documents, draft and send response letters</td></tr>
-  <tr><td>Records Officer</td><td>Manage compliance, review exemption flags, approve response letters, oversee request workflows</td></tr>
-  <tr><td>Department Liaison</td><td>Search for records within your department, attach documents to requests, provide context for department-specific records</td></tr>
-  <tr><td>City Manager</td><td>Monitor dashboard for workload and compliance, review reports, oversee department performance</td></tr>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Identity</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documentation</td>
+<td>Townlight Beta 1 naming, Access and Notice candidate</td>
+</tr>
+<tr>
+<td>Intended installer version</td>
+<td>1.7.0.1</td>
+</tr>
+<tr>
+<td>Product component</td>
+<td>townlight-records 1.8.0.dev2</td>
+</tr>
+<tr>
+<td>Principal import package</td>
+<td>townlight_records</td>
+</tr>
+<tr>
+<td>Native desktop source version</td>
+<td>1.7.0-1</td>
+</tr>
+<tr>
+<td>Candidate hashes</td>
+<td><a href="https://github.com/townlight/townlight/releases/download/townlight-beta-1-windows-1.7.0.1/SHA256SUMS-Windows-1.7.0.1.txt">SHA-256 checksums</a> and <a href="https://github.com/townlight/townlight/releases/download/townlight-beta-1-windows-1.7.0.1/ACCEPTANCE-Windows-1.7.0.1.md">Windows acceptance summary</a></td>
+</tr>
+<tr>
+<td>Current owned software license</td>
+<td>AGPL-3.0-only</td>
+</tr>
+<tr>
+<td>Acceptance composition</td>
+<td>Fresh Windows x64 profile; inspections-preview; Station configured
+separately</td>
+</tr>
+</tbody>
 </table>
-
-<!-- SECTION 2 -->
-<h2 class="section-title" id="sec-2">2. Signing In</h2>
-
-<h3>How to Access Townlight Records</h3>
-<p>Open your web browser (Chrome, Edge, or Firefox are recommended) and navigate to the address provided by your IT department. In most installations, this is:</p>
-<pre><code>http://localhost:8080</code></pre>
-<p>If your city has deployed Townlight Records on a shared network server, your IT administrator will provide the correct address (for example, <code>http://records.yourcity.local:8080</code>).</p>
-
-<h3>Logging In</h3>
-<ol>
-  <li>Enter your <strong>email address</strong> in the Email field.</li>
-  <li>Enter your <strong>password</strong> in the Password field.</li>
-  <li>Select <strong>Sign In</strong>.</li>
+<p>Use an empty database and fresh Windows profile. The installer refuses legacy profile initialization. The approved profile path is <code>%LOCALAPPDATA%\CivicSuite</code>. Keep existing profiles and backups.</p>
+<h2 id="first-run">First run</h2>
+<ol type="1">
+<li>Download the signed MSI, matching source companion and checksums from the <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1-windows-1.7.0.1">public Windows release</a>.</li>
+<li>Verify the MSI hash and Authenticode publisher before installing on a fresh Windows profile. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-beta-1-windows-1.7.0.1/ACCEPTANCE-Windows-1.7.0.1.md">Windows acceptance summary</a> for the tested setup.</li>
+<li>Launch Townlight under the intended named Windows account. Choose
+the storage folders. Select <strong>Townlight Inspections
+candidate</strong> (<code>inspections-preview</code>) for the bounded
+desktop composition, including Access and Notice. A narrower default
+selection will not expose all workspaces.</li>
+<li>Enter the city profile, time zone and contacts. Create the first
+named local administrator, sign in and choose protected backup storage.
+<strong>Continue without local AI</strong> is valid for the
+deterministic workflows.</li>
+<li>Run Health Check and wait for readiness. Open Townlight. In System
+Health select <strong>Finish Records Migration</strong> to activate the
+canonical Python/PostgreSQL runtime. Do not fabricate migration receipts
+or seed accounts.</li>
+<li>Create named staff through Settings. Import authorized sources using
+each product’s source library. All examples in this package are
+synthetic; they are not municipal authority.</li>
+<li>Provision Station separately if it is part of the beta exercise.
+Selecting the desktop composition does not start or configure Station.
+Configure vision explicitly only if automatic photo drafting is
+selected.</li>
 </ol>
-<p>Your account is created by your IT administrator. If you do not have an account, contact your IT department.</p>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  If you see a "connection refused" or "page cannot be displayed" error, the Townlight Records server may not be running. Contact your IT administrator.
-</div>
-
-<h3>Logging Out</h3>
-<p>Select your name or initials in the upper-right corner of any page, then select <strong>Sign Out</strong>. Your session expires automatically after a period of inactivity (configured by your IT administrator, typically 30 minutes).</p>
-
-<h3>Password Changes</h3>
-<p>Password management is handled by your IT administrator. If you need to change your password, contact them directly. Self-service password reset is not available in the current version.</p>
-
-<!-- SECTION 3 -->
-<h2 class="section-title" id="sec-3">3. Dashboard Overview</h2>
-
-<h3>The Main Dashboard</h3>
-<p>After signing in, you land on the Dashboard. This is your home screen and provides an at-a-glance view of your workload and the overall status of records requests in the system.</p>
-
-<h3>Dashboard Components</h3>
+<h2 id="daily-workflow">Daily workflow</h2>
+<p><a name="workflow-1"></a></p>
+<h3 id="receive-and-identify-the-request">1. Receive and identify the
+request</h3>
+<p>Create the request with its requester, description and recorded
+deadline basis. Save it and retain the request identifier. Record
+assignment, clarification and work in the request history.</p>
+<p><a name="workflow-2"></a></p>
+<h3 id="find-responsive-evidence">2. Find responsive evidence</h3>
+<p>Search only the permitted sources. Inspect the source title, date,
+citation, visibility and version before attaching responsive material.
+Open the saved attachment to confirm that it is the intended
+evidence.</p>
+<p><a name="workflow-3"></a></p>
+<h3 id="preserve-the-original">3. Preserve the original</h3>
+<p>Keep original bytes and their hash. Add a separately reviewed
+release-ready or redacted copy when needed. Renaming a private file does
+not remove private content.</p>
+<p><a name="workflow-4"></a></p>
+<h3 id="record-each-release-decision">4. Record each release
+decision</h3>
+<p>Explicitly record release, redact or exempt for the relevant
+document, with the applicable reason and source. Do not treat an AI
+suggestion or another product’s review as the Records legal
+decision.</p>
+<p><a name="workflow-5"></a></p>
+<h3 id="draft-and-approve">5. Draft and approve</h3>
+<p>Draft the response and review the selected attachments. Record
+approval of the exact response text. Editing that text changes its hash
+and requires a new approval.</p>
+<p><a name="workflow-6"></a></p>
+<h3 id="export-both-artifacts">6. Export both artifacts</h3>
+<p>Export the approved response and the release package. If release is
+refused, inspect the missing decision, approval or source-permission
+message. Resolve that condition before trying again.</p>
+<p><a name="workflow-7"></a></p>
+<h3 id="fulfill-and-retain">7. Fulfill and retain</h3>
+<p>Use the explicit fulfillment action only after checking the outgoing
+artifacts. Retain the response, package and history. A preview,
+attachment or export by itself does not fulfill the request.</p>
+<h3 id="working-safely">Working safely</h3>
+<p>Use your own named account and save before leaving a screen. A saved
+draft is durable; unsaved form text may not be. If a write has an
+unknown result, reopen its record before repeating it.</p>
+<p>Read source jurisdiction, dates, citation, version and visibility. A
+copied source hash identifies exact bytes, not their legal
+applicability. If a source changes or permission is removed, resolve the
+source problem rather than substituting stale cached content.</p>
+<p>Keep originals and derivatives separate. Review the intended audience
+before export. A public summary excludes private fields only through the
+applicable copy contract and your review. A renamed private packet is
+still private content.</p>
+<p>Drafting, review, approval, attachment, export, fulfillment and
+publication are separate operations. A Townlight workpaper does not
+itself adopt law, issue a permit, impose a fine or release a records
+response. The responsible staff member records the applicable
+decision.</p>
+<h2 id="connected-workflows">Connected workflows</h2>
+<p>Receives selected evidence from Meetings, Code, Zoning, Planning,
+Permitting, Inspections and Station. Station originals are locked
+private evidence. A product’s public copy remains subject to the Records
+response workflow.</p>
 <table>
-  <tr><th>Component</th><th>Description</th></tr>
-  <tr><td>Open Requests Counter</td><td>The total number of records requests currently in progress (not yet closed or fulfilled).</td></tr>
-  <tr><td>Approaching Deadlines</td><td>Requests with statutory deadlines within the next 3 business days, highlighted in amber or red depending on urgency.</td></tr>
-  <tr><td>Status Distribution</td><td>A breakdown of all active requests by their current status (received, searching, in review, etc.).</td></tr>
-  <tr><td>Recent Activity</td><td>A timeline of the most recent actions across all requests: status changes, documents attached, letters sent.</td></tr>
-  <tr><td>My Assigned Requests</td><td>Requests specifically assigned to you. This is your personal work queue.</td></tr>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Material</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>A request description and requester, authorized source documents,
+explicit cross-product evidence selections and a reviewer’s
+decisions.</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>A retained request history, reviewed attachments, approved response
+text and a release package after the applicable release checks.</td>
+</tr>
+</tbody>
 </table>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  Check the dashboard at the start of each workday to identify urgent deadlines and new assignments.
-</div>
-
-<h3>Navigation Sidebar</h3>
-<p>The left sidebar provides links to the main areas of the application:</p>
+<h3 id="product-boundary">Product boundary</h3>
+<p>The selected staff workflow is accepted. A resident internet
+deployment, every jurisdiction’s requirements, complete federation and
+exhaustive redaction/accessibility behavior are not certified by that
+acceptance. SMTP code exists; logging a message or outbox entry does not
+establish email delivery.</p>
+<h2 id="architecture">Architecture</h2>
+<figure>
+<img src="https://townlight.github.io/assets/records-architecture.svg"
+alt="Townlight Records architecture and evidence flow" />
+<figcaption aria-hidden="true">Townlight Records architecture and
+evidence flow</figcaption>
+</figure>
+<p>The drawing shows the principal staff/evidence path. Native commands
+carry trusted identity to Python business services; PostgreSQL and
+retained original files hold durable state. A downstream copy does not
+silently transfer decision authority. Station has its own configured
+authority/media boundary, database and mutable files. The
+connected-workflow text supplies the drawing’s reading order and
+accessibility alternative.</p>
+<h2 id="fees-messages-notifications-and-local-intake">Fees messages
+notifications and local intake</h2>
+<h3 id="record-a-fee-line-or-waiver">Record a fee line or waiver</h3>
+<p>Open the saved request’s existing fee controls. Enter the
+description, adopted schedule/source basis and exact amount in dollars
+and cents. For example, a synthetic line can use description “Synthetic
+reproduction,” basis “Fictional test schedule” and amount
+<code>12.50</code>. Save and reopen the request. Inspect
+<code>fee_line_items</code>, <code>fee_status</code> and the resulting
+estimate. The native line validator accepts positive exact cents;
+additional fractional cents, negative values and a zero line are
+refused.</p>
+<p>To waive the request fee, record the actual waiver reason and save
+through the waiver control. Reopen the request and confirm waived status
+and the zero-dollar waiver explanation. Adding a later line preserves
+the waiver in the current workflow; do not assume it reinstates a
+payable balance. These are Records workflow amounts and decisions, not
+an official permit-fee calculator or payment service.</p>
+<p>A trusted native client uses <code>records_domain_request</code> with
+<code>operation: 'apply'</code>, the real <code>request_id</code>, and
+<code>action</code>/<code>payload</code> fields from the fragments below
+at the same level as <code>operation</code> and <code>request_id</code>.
+Examples of command payloads follow; IDs and permissions still come from
+the signed-in synthetic account.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;action&quot;</span><span class="fu">:</span><span class="st">&quot;add-records-fee-line&quot;</span><span class="fu">,</span><span class="dt">&quot;payload&quot;</span><span class="fu">:{</span><span class="dt">&quot;feeLineDescription&quot;</span><span class="fu">:</span><span class="st">&quot;Synthetic reproduction&quot;</span><span class="fu">,</span><span class="dt">&quot;feeScheduleBasis&quot;</span><span class="fu">:</span><span class="st">&quot;Fictional test schedule&quot;</span><span class="fu">,</span><span class="dt">&quot;feeLineAmount&quot;</span><span class="fu">:</span><span class="st">&quot;12.50&quot;</span><span class="fu">}}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;action&quot;</span><span class="fu">:</span><span class="st">&quot;waive-records-fee&quot;</span><span class="fu">,</span><span class="dt">&quot;payload&quot;</span><span class="fu">:{</span><span class="dt">&quot;feeWaiverReason&quot;</span><span class="fu">:</span><span class="st">&quot;Synthetic public-interest exercise&quot;</span><span class="fu">}}</span></span></code></pre></div>
+<p>Use the exact outer apply contract in the API reference rather than
+sending these command fragments to an arbitrary URL. After either
+operation, read the request again; a saved amount does not approve or
+fulfill the response.</p>
+<h3 id="save-staff-and-requester-messages">Save staff and requester
+messages</h3>
+<p>In the saved request, enter a message and use its explicit send/save
+action. The native <code>add-records-message</code> command’s payload
+uses <code>requestMessageBody</code>, for example “Synthetic
+clarification received.” Inspect the retained message/timeline and
+intended audience before repeating the action. A persisted staff message
+or locally queued notification does not prove an email reached a
+requester. For a clarification requiring a response, retain the
+clarification note and keep the request’s actual status distinct from
+completion.</p>
+<h3 id="configure-templates-and-inspect-the-outbox">Configure templates
+and inspect the outbox</h3>
+<p>Administrators use the existing <code>/notifications/templates</code>
+create/list/update API under the application’s real authenticated
+authority. A template supplies <code>event_type</code>,
+<code>channel</code> (default <code>email</code>),
+<code>subject_template</code> and <code>body_template</code>. Use the
+event name actually produced by the selected workflow and the variables
+it supplies; template existence alone does not cause that event to be
+emitted. Staff inspect <code>/notifications/log</code> for recipient,
+rendered content, status and error information.</p>
+<p>The existing delivery function is
+<code>app.notifications.smtp_delivery.deliver_queued_notifications(session)</code>.
+A technical operator invokes it only in the matching configured
+application environment, with an application-owned async session. It
+processes <strong>queued email</strong> entries, commits
+<code>sent</code> or <code>failed</code> status, and returns counts.
+Missing SMTP configuration returns
+<code>reason: smtp_not_configured</code>. Missing rendered subject/body
+or recipient is a failure, not delivery.</p>
+<p>SMTP settings are <code>SMTP_HOST</code>, <code>SMTP_PORT</code>,
+<code>SMTP_USERNAME</code>, <code>SMTP_PASSWORD</code>,
+<code>SMTP_FROM_EMAIL</code> and <code>SMTP_USE_TLS</code>. Keep secrets
+in protected process configuration. Inspect the actual setting
+names/defaults in that reference before selecting a mail server. This
+beta has no automatic failed-entry retry or native “Retry email” button:
+failed rows are not selected by the queued-only delivery loop. Preserve
+errors and resolve the cause through the owning deployment’s supported
+process; do not invent a retry or reset database rows by hand. The
+native notification “sent” acknowledgement is not an SMTP transmission
+receipt. External mail remains a separately selected deployment
+configuration, not a requirement to send email during synthetic
+development.</p>
+<h3 id="exercise-existing-local-public-intake-and-tracking">Exercise
+existing local public intake and tracking</h3>
+<p>This is the existing local contract, not a new internet portal
+deployment. Under the application’s configured portal posture, a
+synthetic client can submit
+<code>POST /desktop/v1/public/requests</code> with:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;requester&quot;</span><span class="fu">:</span><span class="st">&quot;Synthetic resident&quot;</span><span class="fu">,</span><span class="dt">&quot;requesterContact&quot;</span><span class="fu">:</span><span class="st">&quot;synthetic@example.invalid&quot;</span><span class="fu">,</span><span class="dt">&quot;summary&quot;</span><span class="fu">:</span><span class="st">&quot;Synthetic minutes request&quot;</span><span class="fu">,</span><span class="dt">&quot;deadline&quot;</span><span class="fu">:</span><span class="st">&quot;&quot;</span><span class="fu">}</span></span></code></pre></div>
+<p>Retain the returned tracking information privately.
+<code>POST /desktop/v1/public/lookup</code> requires
+<strong>both</strong> <code>trackingNumber</code> and matching
+<code>requesterContact</code>; it returns the permitted public status
+rather than staff notes. <code>/desktop/v1/public/messages</code>
+additionally requires <code>publicRequestMessage</code>. Read the
+status/response detail and treat a portal-mode or identity refusal as a
+refusal. Do not remove that gate, expose tracking/contact values in logs
+or assume that changing <code>PORTAL_MODE</code> commissions a public
+website. Named staff still use their own authenticated workspace.</p>
+<p>Source contracts: <code>app/desktop_bridge/schemas.py</code>,
+<code>app/requests/workflow.py</code>, notification service/router/SMTP
+delivery, and the public desktop bridge routes. Full outer command
+shapes and endpoint authentication remain in the Records API
+reference.</p>
+<h2 id="technical-specifications">Technical specifications</h2>
+<h3 id="runtime-and-storage">Runtime and storage</h3>
+<p>The accepted package targets <strong>Windows x64 fresh
+installation</strong>. Its native shell uses <strong>Rust 2021, Tauri 2
+and Microsoft WebView2</strong>; browser assets are JavaScript built
+with <strong>Vite 8.1.6</strong>. This describes the native desktop
+frontend; Station has a separate React operator, specified below or in
+its product manual. Canonical business workflows use bundled
+<strong>CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and
+Alembic</strong>, with <strong>PostgreSQL 17 / PostGIS</strong> and
+managed original files. The installed runtime tested here contains
+FastAPI 0.162.0. Package minimum Python requirements can differ from the
+bundled executable; the metadata reference preserves both. No stack
+rewrite is implied by the beta label.</p>
+<p>The native transport is fixed to loopback
+<code>127.0.0.1:15480</code>; PostgreSQL uses the configured local
+runtime port (default <code>15432</code>). Optional local model service
+defaults to <code>127.0.0.1:15434</code>. Those are deployment defaults,
+not internet endpoints. The runtime has health, module and readiness
+endpoints; readiness is stronger than process existence. The task queue
+is the existing local Core task infrastructure, not an assertion that a
+separate Redis service is required for this desktop composition.</p>
+<p>The default native profile is <code>%LOCALAPPDATA%\CivicSuite</code>;
+the historical directory name remains part of compatibility. Do not
+rename it to Townlight. A configured <code>TOWNLIGHT_PROFILE_ROOT</code>
+must be absolute. Local configuration and secrets live under that
+profile; protected managed files and database state must be backed up
+coherently. Source/runtime identity is distinct from a product’s display
+label.</p>
+<h3 id="data-and-consistency">Data and consistency</h3>
+<p>Requests; assignments and deadlines; search sessions; evidence
+attachments and original hashes; release copies; exemption decisions;
+messages; fee line items; response approvals; export artifacts and audit
+events.</p>
+<p>Versioned saves use expected prior revision identifiers where
+defined. Reopen and reconcile on conflict. Exact exports and handoffs
+use source IDs, current visibility, revision and SHA256. Review belongs
+to the saved revision and does not transfer silently to edited text.
+Database changes use the owning product’s migrations; a request or
+readiness check is not an authorization to mutate schema.</p>
+<h3 id="capacity-and-platform-statements">Capacity and platform
+statements</h3>
+<p>This beta has synthetic single-profile workflow evidence. It does not
+have a published benchmark for concurrent staff capacity, minimum
+RAM/CPU, large-source limits or a field SLA. Do not turn a developer
+machine’s specification into a supported minimum. The signed MSI is 2,082,697,216 bytes; allow additional disk for extracted runtime,
+database, originals, exports, media and backups. Select
+equipment/storage after sizing those actual workloads.</p>
+<p>The exact <a
+href="https://townlight.github.io/reference/runtime-payload-lock.json">runtime payload
+lock</a> records pinned files, sizes and hashes. The <a
+href="https://townlight.github.io/reference/component-metadata.json">component
+metadata</a> records shipped dependency declarations. These references
+are more precise than a manually copied dependency list. Third-party and
+historical license notices must accompany their matching payloads.</p>
+<h2 id="configuration-and-administration">Configuration and
+administration</h2>
+<h3 id="native-deployment-configuration">Native deployment
+configuration</h3>
+<p>Use Setup, Settings and System Health for supported staff operation.
+Administrators provision folders, backup storage, named accounts and the
+city profile. Select <code>inspections-preview</code> for the bounded
+desktop composition, including Access and Notice. Station remains a
+separate service boundary. Do not use a standalone product’s demo server
+as a substitute for the installed workspace.</p>
+<p>Technical deployments use <code>TOWNLIGHT_PRODUCT_PROFILE</code>,
+<code>TOWNLIGHT_PROFILE_ROOT</code>, <code>DATABASE_URL</code>,
+<code>TOWNLIGHT_RUNTIME_PORT</code>, <code>PORTAL_MODE</code> and the
+runtime-managed secret files. Treat database URLs and native session
+proofs as secrets. The installed native domain runtime explicitly
+refuses non-loopback binding. <code>PORTAL_MODE=private</code> is the
+accepted posture; changing it does not by itself commission an internet
+portal, authentication provider or reverse proxy.</p>
+<p>The isolated documentation exporter sets a fictional profile and
+unusable synthetic database origin only to read schemas; those values
+are not deployment configuration. Keep deployment values in the intended
+process/account scope. An already-running process does not automatically
+inherit later environment edits.</p>
+<h3 id="communications-and-review-configuration">Communications and
+review configuration</h3>
+<p>SMTP settings include host, port, username/password, sender address
+and TLS choice. Configure and verify actual delivery only for a
+deployment that selects external mail. Connector host allowlists and
+encrypted data-source configuration are separate controls. Records fee
+schedules concern the records workflow; they do not authorize Permitting
+to calculate an official permit fee. Keep resident portal posture and
+self-registration separate from named local staff setup.</p>
+<h2 id="api-and-integration-examples">API and integration examples</h2>
+<h3 id="native-command-example">Native command example</h3>
+<p>The following JavaScript belongs in the existing trusted Townlight
+frontend/development environment with <code>invoke</code> imported from
+<code>@tauri-apps/api/core</code>. It is not a command for an arbitrary
+web page or an instruction for nontechnical staff. IDs must come from
+records created in an isolated synthetic exercise.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { invoke } <span class="im">from</span> <span class="st">&#39;@tauri-apps/api/core&#39;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="fu">invoke</span>(<span class="st">&#39;records_domain_request&#39;</span><span class="op">,</span> {<span class="dt">request</span><span class="op">:</span> {<span class="dt">operation</span><span class="op">:</span> <span class="st">&#39;view&#39;</span><span class="op">,</span> <span class="dt">request_id</span><span class="op">:</span> requestId}})<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(result)<span class="op">;</span></span></code></pre></div>
+<h3 id="trusted-local-http-example">Trusted local HTTP example</h3>
+<p>An administrator/developer can inspect an already-configured isolated
+runtime from a trusted local process. This PowerShell example reads the
+signed-in synthetic profile’s existing proof into memory; it does not
+create a user, seed a session, reveal the proof in output or bypass a
+permission check. Do not use real city data in development examples. A
+read response does not prove approval or publication.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">$profilePath</span> <span class="op">=</span> <span class="fu">Join-Path</span> <span class="va">$env</span><span class="op">:</span><span class="va">LOCALAPPDATA</span> <span class="st">&#39;CivicSuite&#39;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">$sessionPath</span> <span class="op">=</span> <span class="fu">Join-Path</span> <span class="va">$profilePath</span> <span class="st">&#39;config\local-session.json&#39;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">$session</span> <span class="op">=</span> <span class="fu">Get-Content</span> <span class="op">-</span>LiteralPath <span class="va">$sessionPath</span> <span class="op">-</span>Raw <span class="op">|</span> <span class="fu">ConvertFrom-Json</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">$headers</span> <span class="op">=</span> @<span class="op">{</span> <span class="st">&#39;X-Townlight-Session&#39;</span> <span class="op">=</span> <span class="va">$session</span><span class="op">.</span><span class="fu">session_hash</span> <span class="op">}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Invoke-RestMethod</span> <span class="op">-</span>Uri <span class="st">&#39;http://127.0.0.1:15480/desktop/v1/records-state&#39;</span> <span class="op">-</span>Headers <span class="va">$headers</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">Remove-Variable</span> session<span class="op">,</span> headers</span></code></pre></div>
+<h3 id="a-synthetic-write-with-subsequent-readback">A synthetic write
+with subsequent readback</h3>
+<p>This example demonstrates the existing Meetings HTTP contract in an
+isolated exercise. It is intentionally fictional. It does not start a
+service. Its authentication setup is included so it can be run
+independently under the signed-in synthetic account. If a write times
+out, inspect current records before repeating it.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">$profilePath</span> <span class="op">=</span> <span class="fu">Join-Path</span> <span class="va">$env</span><span class="op">:</span><span class="va">LOCALAPPDATA</span> <span class="st">&#39;CivicSuite&#39;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$sessionPath</span> <span class="op">=</span> <span class="fu">Join-Path</span> <span class="va">$profilePath</span> <span class="st">&#39;config/local-session.json&#39;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">$session</span> <span class="op">=</span> <span class="fu">Get-Content</span> <span class="op">-</span>LiteralPath <span class="va">$sessionPath</span> <span class="op">-</span>Raw <span class="op">|</span> <span class="fu">ConvertFrom-Json</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">$headers</span> <span class="op">=</span> @<span class="op">{</span> <span class="st">&#39;X-Townlight-Session&#39;</span> <span class="op">=</span> <span class="va">$session</span><span class="op">.</span><span class="fu">session_hash</span> <span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">$body</span> <span class="op">=</span> @<span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  title <span class="op">=</span> <span class="st">&#39;Synthetic documentation exercise&#39;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  scheduled_start <span class="op">=</span> <span class="st">&#39;2026-11-05T18:00:00-07:00&#39;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  location <span class="op">=</span> <span class="st">&#39;Synthetic room&#39;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  meeting_type <span class="op">=</span> <span class="st">&#39;regular&#39;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="op">|</span> <span class="fu">ConvertTo-Json</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="va">$meeting</span> <span class="op">=</span> <span class="fu">Invoke-RestMethod</span> <span class="op">-</span>Method Post `</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">-</span>Uri <span class="st">&#39;http://127.0.0.1:15480/desktop/v1/meetings/meetings&#39;</span> `</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">-</span>Headers <span class="va">$headers</span> <span class="op">-</span>ContentType <span class="st">&#39;application/json&#39;</span> <span class="op">-</span>Body <span class="va">$body</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Invoke-RestMethod</span> `</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">-</span>Uri <span class="op">(</span><span class="st">&#39;http://127.0.0.1:15480/desktop/v1/meetings/meetings/&#39;</span> <span class="op">+</span> <span class="va">$meeting</span><span class="op">.</span><span class="fu">id</span><span class="op">)</span> `</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">-</span>Headers <span class="va">$headers</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">Remove-Variable</span> session<span class="op">,</span> headers</span></code></pre></div>
+<p>This write requires Meetings to be enabled and the signed-in staff
+role to permit it. It is a cross-suite integration example; for this
+product’s request models, use the complete technical reference
+below.</p>
+<h3 id="complete-technical-contract">Complete technical contract</h3>
+<p>Read the <a href="https://townlight.github.io/api/records.html">Records API
+reference</a> for every documented operation, request field, constraint,
+response declaration and source supplement. Download the <a
+href="https://townlight.github.io/api/records-openapi.json">OpenAPI JSON</a> for tools.
+For Station this is the suite-side schema only; its separate service
+contract is documented in the API supplement. The <a
+href="https://townlight.github.io/reference/index.html">reference directory</a> includes
+configuration/source inventories, dependency declarations, native
+command contracts, MCP signatures and candidate evidence.</p>
+<h2 id="mcp-and-automation-boundary">MCP and automation boundary</h2>
+<p>No direct product MCP server is exposed by the accepted Townlight
+desktop or Station boundary. Do not configure an invented
+<code>townlight mcp</code> command or assume an AI client has staff
+permissions. The integration surfaces for this beta are native IPC, the
+documented HTTP APIs, source bundle imports, exact exports and the
+existing Station CLI.</p>
+<p>The bundled transcription code includes a <strong>TextFlowKit MCP
+adapter</strong> as a separate source capability. It offers job-based
+<code>transcribe_media</code>, <code>get_transcript</code>,
+<code>list_jobs</code>, <code>get_job_status</code> and
+<code>export_transcript</code>, and additional tools declared in that
+adapter. It uses stdio first and optional Streamable HTTP, with the MCP
+SDK as an optional extra. It is not automatically launched,
+authenticated as Townlight staff or accepted as a Townlight product MCP
+deployment. This documentation does not add such a service.</p>
+<p>For a transcription client already provisioned separately, an
+illustrative tool call is:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;get_job_status&quot;</span><span class="fu">,</span><span class="dt">&quot;arguments&quot;</span><span class="fu">:{</span><span class="dt">&quot;job_id&quot;</span><span class="fu">:</span><span class="st">&quot;synthetic-existing-job-id&quot;</span><span class="fu">}}</span></span></code></pre></div>
+<p>Use a job ID returned by that transcription service. This example
+does not create a Townlight record or bypass its review/Records handoff.
+The exact optional adapter tool signatures are supplied in the <a
+href="https://townlight.github.io/reference/mcp.html">MCP source reference</a>. Station
+meeting capture does not become live speech recognition because this
+optional donor adapter exists.</p>
+<h2 id="security-and-permissions">Security and permissions</h2>
+<p>Use your own named account and save before leaving a screen. A saved
+draft is durable; unsaved form text may not be. If a write has an
+unknown result, reopen its record before repeating it.</p>
+<p>Read source jurisdiction, dates, citation, version and visibility. A
+copied source hash identifies exact bytes, not their legal
+applicability. If a source changes or permission is removed, resolve the
+source problem rather than substituting stale cached content.</p>
+<p>Keep originals and derivatives separate. Review the intended audience
+before export. A public summary excludes private fields only through the
+applicable copy contract and your review. A renamed private packet is
+still private content.</p>
+<p>Drafting, review, approval, attachment, export, fulfillment and
+publication are separate operations. A Townlight workpaper does not
+itself adopt law, issue a permit, impose a fine or release a records
+response. The responsible staff member records the applicable
+decision.</p>
+<p>The native session is validated and mapped to a persisted SQL
+identity. An editable actor/reviewer label is not authentication.
+Product/module permissions and source visibility apply at the server
+boundary. Revoked/unavailable authority fails closed for new Station
+operations; a previous permission result is not a perpetual
+authorization.</p>
+<p>Use protected local folders, account permissions and credential
+storage. Never include the native session file, database passwords,
+provider keys or unredacted support bundles in a public issue or
+generated public documentation. A local public view is not automatically
+a secured internet deployment. Keep network exposure and real equipment
+acceptance specific to the chosen beta site.</p>
+<h2 id="backup-recovery-and-maintenance">Backup recovery and
+maintenance</h2>
+<p>Save work and use Core’s canonical <strong>Backup Now</strong> before
+maintenance. That operation stops writers. Preserve the coherent
+profile/database/document backup and its receipt, then use
+<strong>Start</strong> to resume. A source export is not a full
+backup.</p>
+<p>Use <strong>Restore Latest Backup</strong> through the supported
+controls. If the result says <strong>Restore needs service
+start</strong>, use <strong>Start</strong>, then <strong>Check</strong>,
+and reopen a known record. Do not repeat restore merely because services
+need to start. The fresh-profile acceptance verified that a fulfilled
+request survived restore and a post-backup marker did not.</p>
+<p>Keep Station’s dedicated database and media evidence together in its
+own backup. Core’s native-profile backup must not be assumed to include
+an external Station data directory. Stop writers during a coordinated
+backup. Preserve failed media attempts and logs.</p>
+<p>On failure, record the time, selected composition,
+component/installer versions and exact message. Check System Health for
+stopped, starting, ready or failed dependencies. Use the existing Retry
+control after readiness; do not create duplicate business records to
+refresh a stale view. Share only a redacted diagnostic bundle. Preserve
+secrets, original evidence, recovery material and unrelated
+installations.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely meaning</th>
+<th>Next action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workspace absent</td>
+<td>Wrong product composition or unavailable canonical runtime.</td>
+<td>Check selected composition; activate through Finish Records
+Migration; wait for readiness.</td>
+</tr>
+<tr>
+<td>Cannot sign in / 401</td>
+<td>Missing or expired named account session.</td>
+<td>Sign in normally; reopen a Station launch ticket if applicable.</td>
+</tr>
+<tr>
+<td>Permission denied / 403</td>
+<td>Account, module, source or browser-origin permission.</td>
+<td>Ask the authorized administrator to inspect the intended permission;
+do not invent role headers.</td>
+</tr>
+<tr>
+<td>Save conflict / 409</td>
+<td>The saved revision, expected source hash or lifecycle changed.</td>
+<td>Keep edits, reopen current state and reconcile deliberately.</td>
+</tr>
+<tr>
+<td>Invalid input / 422</td>
+<td>Required field, format, geometry, source envelope or state is
+invalid.</td>
+<td>Read the field detail and correct the input/source; preserve
+originals.</td>
+</tr>
+<tr>
+<td>Service unavailable / 503</td>
+<td>Database, schema, connected source or configuration
+unavailable.</td>
+<td>Inspect System Health and the named dependency. Preserve work; retry
+only after readiness.</td>
+</tr>
+<tr>
+<td>Export refused</td>
+<td>Missing exact review, approval, audience or source
+authorization.</td>
+<td>Read the refusal and complete the owning product’s explicit
+decision.</td>
+</tr>
+<tr>
+<td>Restore needs service start</td>
+<td>The snapshot was restored but services have not resumed.</td>
+<td>Use Start, then Check and verify a saved record; do not blindly
+repeat restore.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="verified-workflows-and-limits">Verified workflows and
+limits</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Product</th>
+<th>Recorded result</th>
+<th>Precisely exercised</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Records</td>
+<td>PASS</td>
+<td>Intake, note, original attachment/readback, separate release copy,
+explicit release decision, draft/approval, approved response and release
+package exports, fulfillment/readback and native workspace.</td>
+</tr>
+</tbody>
+</table>
+<p>These results come from the identified signed candidate’s fresh
+normal-profile Sandbox exercise: real native IPC/HTTP/PostgreSQL and
+selected headless controls. All accounts, source bundles and media were
+synthetic. The guest install/uninstall and recovery passed, and the
+owned Sandbox stopped. No host installed application or standalone
+CivicCast was changed. This documentation task reuses those receipts; it
+does not claim a new software acceptance run.</p>
+<p>See the <a href="https://github.com/townlight/townlight/releases/download/townlight-beta-1-windows-1.7.0.1/ACCEPTANCE-Windows-1.7.0.1.md">Windows acceptance summary</a> for this MSI. The historical <a href="https://townlight.github.io/reference/sandbox-evidence-index.json">evidence index</a> applies to its original build.</p>
+<p>The limits remain: actual city field acceptance and equipment/network
+commissioning; Station automatic provisioning/SCM commissioning; every
+UI/role combination; field recognition accuracy; and historical in-place
+upgrades are not certified. They are not five invented feature
+requirements. Fresh-install controlled beta handoff remains the accepted
+scope. This package makes no city-deployment, publication or
+general-availability claim.</p>
+<h2 id="terms-of-service-and-license">Terms of service and license</h2>
+<h3 id="scope-and-status">Scope and status</h3>
+<p>These terms describe the Townlight Beta 1 software and this
+documentation package. This public Windows beta is for evaluation. No uptime commitment, support response time, indemnity,
+data-processing agreement or paid service is created by these documents.
+A separate signed agreement, if any, governs services it actually
+provides.</p>
+<h3 id="software-license-and-rights">Software license and rights</h3>
+<p>Current Townlight-owned distributions identified in this candidate
+use <strong>AGPL-3.0-only</strong>. The full license is supplied with
+this documentation and with the source companion. The license governs
+rights to run, copy, modify and convey the covered software; these
+operational terms do not add restrictions to those rights. Historical
+grants and dependency licenses retain their own terms. CivicCast remains
+a separate product and is not relicensed by this documentation work.</p>
+<p>When conveying covered software, retain applicable notices and
+provide the corresponding source and installation/build information
+required by the license. For a modified version supporting remote
+network interaction, follow section 13’s source-offer requirement. The
+companion archive identifies the source for this candidate; a link to a
+different public branch is not a substitute for the matching source.
+Read the supplied license for the complete conditions. See the <a
+href="https://www.gnu.org/licenses/agpl-3.0.html">GNU license
+reference</a> and <a
+href="https://www.gnu.org/licenses/gpl-faq.en.html">GNU licensing
+FAQ</a>.</p>
+<h3 id="data-ownership-and-access">Data ownership and access</h3>
+<p>Importing a document does not transfer its ownership or grant
+permission to publish it. The operating organization controls its
+accounts, access decisions, lawful source use, retention and
+review/release policy. Keep resident information, credentials, private
+notes and restricted evidence in their authorized locations.
+Documentation examples contain fictional data. No real city account,
+credential or record is required to exercise these examples in an
+isolated test environment.</p>
+<h3 id="local-operation-and-external-processors">Local operation and
+external processors</h3>
+<p>The accepted beta workflow is local and uses named staff accounts.
+Station has separate storage and credentials. Configure backup
+destinations and optional model/network providers deliberately. A
+configured external provider may receive submitted prompts, images or
+audio according to that configuration and provider’s terms; this
+documentation does not promise that every optional configuration is
+offline. An email outbox or local public view does not establish
+external delivery or an internet deployment. This static documentation
+site has no analytics, account collection or remote font dependency.</p>
+<h3 id="staff-decisions-and-source-applicability">Staff decisions and
+source applicability</h3>
+<p>Staff verify the jurisdiction, source currency, permissions,
+citations and proposed audience. Model output and generated guidance
+require review. No draft is automatically an official legal
+interpretation, zoning determination, permit approval, fee assessment,
+enforcement notice or records-release decision. Official permit fee
+authority remains with the adopted source and responsible organization;
+imported amounts do not become a new authoritative calculation.</p>
+<h3 id="beta-operation-and-recovery">Beta operation and recovery</h3>
+<p>Use the identified candidate in its supported fresh-install scope.
+Preserve backups and original evidence. Test physical equipment and
+chosen network/service configuration before relying on them. The
+supplied acceptance describes selected synthetic workflows, not every
+screen, vendor, field condition or upgrade. Operators decide whether a
+particular deployment meets their own operational obligations.</p>
+<h3 id="warranty-and-liability">Warranty and liability</h3>
+<p>The covered software’s warranty and liability conditions are those in
+sections 15–17 of the supplied AGPL and any applicable separate written
+undertaking. This documentation creates no additional warranty or
+limitation beyond those terms. Third-party software is subject to its
+retained license notices. Nothing here removes rights that applicable
+law makes nonwaivable.</p>
+<h3 id="support-and-incident-reporting">Support and incident
+reporting</h3>
+<p>Use the project’s existing SUPPORT and SECURITY guidance for its
+matching repository. Report reproducible behavior with the version,
+operation and redacted logs. Do not put credentials, resident records or
+unredacted evidence in a public issue. Coordinate sensitive reports
+through the channel designated in SECURITY. No new support address or
+service commitment is invented here.</p>
+<h3 id="ending-a-beta-exercise-and-document-changes">Ending a beta
+exercise and document changes</h3>
+<p>When an organization ends testing, it controls retention/export and
+removes access according to its policy. Uninstall may retain data; back
+up and inspect the selected removal options. Ending an exercise does not
+revoke rights already granted by AGPL. Later software/documentation
+versions must identify their changed candidate and scope; historical
+receipts retain their original identities. These terms do not claim that
+a city has accepted a contract merely by reading a manual.</p>
+<h2 id="glossary">Glossary</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approval</td>
+<td>An explicit authorized decision on the saved text/artifact. It is
+separate from saving or attachment.</td>
+</tr>
+<tr>
+<td>Canonical record</td>
+<td>The owning product’s retained identity and saved version, rather
+than an editable copied label.</td>
+</tr>
+<tr>
+<td>Composition</td>
+<td>The selected set of desktop modules; inspections-preview exposes the
+eight staff products.</td>
+</tr>
+<tr>
+<td>Corresponding source</td>
+<td>The source/build material matching the delivered covered program,
+subject to its license.</td>
+</tr>
+<tr>
+<td>Derivative / Records copy</td>
+<td>A separately prepared document with its own intended audience and
+hash.</td>
+</tr>
+<tr>
+<td>Hash / SHA256</td>
+<td>A fingerprint of exact bytes. It detects change; it does not
+establish legal authority.</td>
+</tr>
+<tr>
+<td>Idempotency</td>
+<td>Repeating the same identified request has the same intended effect;
+changing its payload can be refused.</td>
+</tr>
+<tr>
+<td>IPC</td>
+<td>The native desktop command boundary between its browser interface
+and Rust host.</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>Model Context Protocol; no direct Townlight product server is
+enabled by this beta.</td>
+</tr>
+<tr>
+<td>Original</td>
+<td>Retained source bytes. A reviewed derivative does not replace
+them.</td>
+</tr>
+<tr>
+<td>Provenance</td>
+<td>Source, version, date, actor and relationship information retained
+with evidence.</td>
+</tr>
+<tr>
+<td>Revision</td>
+<td>An immutable saved version. Later edits do not inherit an earlier
+review automatically.</td>
+</tr>
+<tr>
+<td>Snapshot</td>
+<td>A fixed audience-specific copy tied to a source/reviewed
+revision.</td>
+</tr>
+<tr>
+<td>Station</td>
+<td>Townlight’s separate media boundary using a pinned CivicCast-derived
+engine; standalone CivicCast remains separate.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="alphabetical-subject-index">Alphabetical subject index</h2>
 <ul>
-  <li><strong>Dashboard</strong> &mdash; Return to the main overview.</li>
-  <li><strong>Requests</strong> &mdash; View and manage all records requests.</li>
-  <li><strong>Search</strong> &mdash; Search across all ingested documents.</li>
-  <li><strong>Documents</strong> &mdash; Browse ingested documents by source.</li>
-  <li><strong>Reports</strong> &mdash; Compliance and workload reports.</li>
+<li><strong>Accounts and authentication</strong> — <a
+href="#security-and-permissions">Security and permissions</a>.</li>
+<li><strong>AGPL and source</strong> — <a
+href="#terms-of-service-and-license">Terms of service and
+license</a>.</li>
+<li><strong>API contracts</strong> — <a
+href="#api-and-integration-examples">API and integration
+examples</a>.</li>
+<li><strong>Architecture</strong> — <a
+href="#architecture">Architecture</a>.</li>
+<li><strong>Backup</strong> — <a
+href="#backup-recovery-and-maintenance">Backup recovery and
+maintenance</a>.</li>
+<li><strong>Beta version</strong> — <a href="#beta-identity">Beta
+identity</a>.</li>
+<li><strong>Configuration</strong> — <a
+href="#configuration-and-administration">Configuration and
+administration</a>.</li>
+<li><strong>Evidence and acceptance</strong> — <a
+href="#verified-workflows-and-limits">Verified workflows and
+limits</a>.</li>
+<li><strong>Fees and official decisions</strong> — <a
+href="#terms-of-service-and-license">Terms of service and
+license</a>.</li>
+<li><strong>First run</strong> — <a href="#first-run">First
+run</a>.</li>
+<li><strong>Handoffs and audience</strong> — <a
+href="#connected-workflows">Connected workflows</a>.</li>
+<li><strong>MCP</strong> — <a href="#mcp-and-automation-boundary">MCP
+and automation boundary</a>.</li>
+<li><strong>Originals and provenance</strong> — <a
+href="#security-and-permissions">Security and permissions</a>.</li>
+<li><strong>Recovery</strong> — <a
+href="#backup-recovery-and-maintenance">Backup recovery and
+maintenance</a>.</li>
+<li><strong>Staff procedures</strong> — <a href="#daily-workflow">Daily
+workflow</a>.</li>
+<li><strong>Station configuration</strong> — <a
+href="#configuration-and-administration">Configuration and
+administration</a>.</li>
+<li><strong>Technical stack</strong> — <a
+href="#technical-specifications">Technical specifications</a>.</li>
+<li><strong>Troubleshooting</strong> — <a
+href="#troubleshooting">Troubleshooting</a>.</li>
 </ul>
-
-<!-- SECTION 4 -->
-<h2 class="section-title" id="sec-4">4. Searching for Records</h2>
-
-<h3>How Search Works</h3>
-<p>Townlight Records uses hybrid search that combines two techniques: <strong>keyword search</strong> (traditional full-text matching) and <strong>semantic search</strong> (AI-powered meaning-based retrieval). This means you can search using natural language questions, not just exact keywords.</p>
-
-<h3>Performing a Search</h3>
-<ol>
-  <li>Select <strong>Search</strong> from the sidebar or use the search bar at the top of any page.</li>
-  <li>Type your search query. You can use natural language (e.g., "building permits issued in 2024 for Main Street") or keywords (e.g., "permit Main Street 2024").</li>
-  <li>Press <strong>Enter</strong> or select the search button.</li>
-  <li>Results appear ranked by relevance, with the most relevant documents at the top.</li>
-</ol>
-
-<h3>Understanding Search Results</h3>
-<p>Each result shows:</p>
+<h3 id="operating-subject-links">Operating subject links</h3>
 <ul>
-  <li><strong>Document title</strong> and file type (PDF, DOCX, etc.).</li>
-  <li><strong>Relevance score</strong> &mdash; a percentage indicating how closely the document matches your query.</li>
-  <li><strong>Highlighted excerpt</strong> &mdash; the portion of the document most relevant to your query, with matching terms highlighted.</li>
-  <li><strong>Source</strong> &mdash; the data source and department the document belongs to.</li>
-  <li><strong>Date</strong> &mdash; when the document was ingested into the system.</li>
+<li><strong>Configure templates and inspect the outbox</strong> — <a
+href="#configure-templates-and-inspect-the-outbox">Configure templates
+and inspect the outbox</a>.</li>
+<li><strong>Exercise existing local public intake and tracking</strong>
+— <a href="#exercise-existing-local-public-intake-and-tracking">Exercise
+existing local public intake and tracking</a>.</li>
+<li><strong>Fees messages notifications and local intake</strong> — <a
+href="#fees-messages-notifications-and-local-intake">Fees messages
+notifications and local intake</a>.</li>
+<li><strong>Record a fee line or waiver</strong> — <a
+href="#record-a-fee-line-or-waiver">Record a fee line or
+waiver</a>.</li>
+<li><strong>Save staff and requester messages</strong> — <a
+href="#save-staff-and-requester-messages">Save staff and requester
+messages</a>.</li>
 </ul>
-
-<h3>Refining Your Search</h3>
-<p>If your initial search returns too many or too few results:</p>
+<h2 id="source-and-document-control">Source and document control</h2>
+<p>This edition is authored from the immutable corresponding-source
+companion, the generated installed-domain schema and the retained
+workflow receipts. The current software versions and signed artifacts
+are unchanged. Public historical pages are not synchronized or published
+by this local documentation task.</p>
+<h3 id="workflow-subject-index">Workflow subject index</h3>
 <ul>
-  <li><strong>Be more specific</strong> &mdash; Add dates, names, or document types to narrow results.</li>
-  <li><strong>Use natural language</strong> &mdash; Instead of "variance," try "zoning variance applications denied in 2023."</li>
-  <li><strong>Filter by department</strong> &mdash; Use the department filter to limit results to a specific department's records.</li>
-  <li><strong>Filter by file type</strong> &mdash; Narrow to PDFs, spreadsheets, or other specific formats.</li>
-  <li><strong>Filter by date range</strong> &mdash; Limit results to documents from a specific time period.</li>
+<li><p><strong>Draft and approve</strong> — <a href="#workflow-5">Daily
+workflow, step 5</a>.</p></li>
+<li><p><strong>Export both artifacts</strong> — <a
+href="#workflow-6">Daily workflow, step 6</a>.</p></li>
+<li><p><strong>Find responsive evidence</strong> — <a
+href="#workflow-2">Daily workflow, step 2</a>.</p></li>
+<li><p><strong>Fulfill and retain</strong> — <a href="#workflow-7">Daily
+workflow, step 7</a>.</p></li>
+<li><p><strong>Preserve the original</strong> — <a
+href="#workflow-3">Daily workflow, step 3</a>.</p></li>
+<li><p><strong>Receive and identify the request</strong> — <a
+href="#workflow-1">Daily workflow, step 1</a>.</p></li>
+<li><p><strong>Record each release decision</strong> — <a
+href="#workflow-4">Daily workflow, step 4</a>.</p></li>
+<li><p><a href="https://townlight.github.io/reference/source-inventory.json">Source
+inventory and file hashes</a></p></li>
+<li><p><a href="https://townlight.github.io/reference/component-metadata.json">All
+component metadata</a></p></li>
+<li><p><a
+href="https://townlight.github.io/reference/desktop-domain-openapi.json">Installed
+domain OpenAPI</a></p></li>
+<li><p><a href="https://townlight.github.io/reference/workflow-matrix.json">Workflow
+matrix</a></p></li>
+<li><p><a href="https://townlight.github.io/reference/AGPL-3.0.txt">Full AGPL
+text</a></p></li>
 </ul>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  Search results are limited to documents within your department unless you have Reviewer or Admin access, which provides cross-department visibility.
-</div>
-
-<h3>Attaching Search Results to a Request</h3>
-<p>When you find a document that is responsive to a records request:</p>
-<ol>
-  <li>Select the <strong>Attach to Request</strong> button on the search result.</li>
-  <li>Choose the request from the dropdown list or enter the request ID.</li>
-  <li>Optionally add a <strong>relevance note</strong> explaining why this document is responsive.</li>
-  <li>Select <strong>Attach</strong>. The document now appears in the request's document list.</li>
-</ol>
-
-<!-- SECTION 5 -->
-<h2 class="section-title" id="sec-5">5. Managing Records Requests</h2>
-
-<h3>Creating a New Request</h3>
-<p>When a public records request arrives (by email, in person, or through your city's intake process):</p>
-<ol>
-  <li>Select <strong>Requests</strong> from the sidebar, then select <strong>New Request</strong>.</li>
-  <li>Fill in the required fields:
-    <ul>
-      <li><strong>Requester Name</strong> &mdash; The name of the person or organization making the request.</li>
-      <li><strong>Requester Email</strong> &mdash; Contact email address.</li>
-      <li><strong>Description</strong> &mdash; The full text of the records request as received.</li>
-      <li><strong>Statutory Deadline</strong> &mdash; The date by which your state's open records law requires a response. The system pre-fills this based on your state's default timeline, but you can adjust it.</li>
-    </ul>
-  </li>
-  <li>Select <strong>Create Request</strong>. The request is created with a status of <strong>Received</strong>.</li>
-</ol>
-
-<h3>Request Status Workflow</h3>
-<p>Every request moves through a defined workflow. The following table shows each status and what it means:</p>
-<table>
-  <tr><th>Status</th><th>Meaning</th><th>Who Acts</th></tr>
-  <tr><td>Received</td><td>The request has been logged but not yet assigned or acted upon.</td><td>Clerk</td></tr>
-  <tr><td>Clarification Needed</td><td>The request is unclear or incomplete; the requester has been asked for more information.</td><td>Clerk</td></tr>
-  <tr><td>Assigned</td><td>The request has been assigned to a specific staff member.</td><td>Clerk / Manager</td></tr>
-  <tr><td>Searching</td><td>Staff is actively searching for responsive documents.</td><td>Staff</td></tr>
-  <tr><td>In Review</td><td>Documents have been gathered and are being reviewed for exemptions and completeness.</td><td>Staff / Reviewer</td></tr>
-  <tr><td>Ready for Release</td><td>Documents have been reviewed and are ready for supervisor approval.</td><td>Reviewer</td></tr>
-  <tr><td>Drafted</td><td>A response letter has been drafted and is awaiting review.</td><td>Staff</td></tr>
-  <tr><td>Approved</td><td>The response letter and documents have been approved by a reviewer.</td><td>Reviewer</td></tr>
-  <tr><td>Fulfilled / Sent</td><td>The response has been sent to the requester.</td><td>Clerk</td></tr>
-  <tr><td>Rejected</td><td>The request was denied (with documented reasons and legal basis).</td><td>Reviewer</td></tr>
-  <tr><td>Closed</td><td>The request is complete and archived.</td><td>Clerk</td></tr>
-</table>
-
-<h3>Moving a Request Through the Workflow</h3>
-<p>To advance a request to its next status:</p>
-<ol>
-  <li>Open the request from the Requests list.</li>
-  <li>The available workflow actions appear as buttons in the sidebar (e.g., "Start Searching," "Submit for Review," "Approve").</li>
-  <li>Select the appropriate action. The system validates the transition and updates the status.</li>
-  <li>A timeline entry is automatically created recording the status change, your identity, and a timestamp.</li>
-</ol>
-
-<div class="callout warning">
-  <div class="callout-title">Warning</div>
-  You cannot skip statuses. The system enforces the defined workflow transitions. For example, you cannot move a request directly from "Received" to "Approved" &mdash; it must pass through the intermediate steps.
-</div>
-
-<h3>Assigning Requests</h3>
-<p>Clerks and managers can assign requests to specific staff members:</p>
-<ol>
-  <li>Open the request.</li>
-  <li>Select <strong>Assign</strong> and choose the staff member from the dropdown.</li>
-  <li>The assignee is notified and the request appears in their "My Assigned Requests" dashboard list.</li>
-</ol>
-
-<!-- SECTION 6 -->
-<h2 class="section-title" id="sec-6">6. Reviewing Exemption Flags</h2>
-
-<h3>What Exemption Flags Are</h3>
-<p>When documents are attached to a request, Townlight Records automatically scans them for content that may be exempt from disclosure under your state's open records law. These are presented as <strong>exemption flags</strong> &mdash; recommendations for your review, not automatic decisions.</p>
-
-<h3>Viewing Exemption Flags</h3>
-<p>Open a request and select the <strong>Exemptions</strong> tab. For each flag, you will see:</p>
-<ul>
-  <li>The <strong>highlighted text</strong> that the system flagged.</li>
-  <li>The <strong>exemption category</strong> (for example, "Social Security Number" or "Attorney-Client Privilege").</li>
-  <li>The <strong>state statute</strong> that may apply.</li>
-  <li>A <strong>confidence score</strong> showing how certain the AI is about this flag.</li>
-</ul>
-
-<h3>Exemption Categories</h3>
-<table>
-  <tr><th>Category</th><th>Description</th><th>Examples</th></tr>
-  <tr><td>PII (Personal Information)</td><td>Personally identifiable information that may need to be redacted for privacy.</td><td>Social Security numbers, driver's license numbers, personal phone numbers, dates of birth, home addresses, medical information</td></tr>
-  <tr><td>Statutory</td><td>Content that may be exempt by specific state statute.</td><td>Attorney-client privileged communications, law enforcement investigation records, trade secrets, sealed court records</td></tr>
-  <tr><td>Deliberative Process</td><td>Internal deliberations, draft documents, and policy discussions that may be exempt.</td><td>Pre-decisional memoranda, internal policy drafts, staff recommendations before a vote</td></tr>
-  <tr><td>Security</td><td>Information that could pose a security risk if disclosed.</td><td>Building security plans, IT infrastructure details, emergency response protocols, access codes</td></tr>
-  <tr><td>Personnel</td><td>Employee records that may be partially or fully exempt.</td><td>Performance evaluations, disciplinary records, medical leave records, personal contact information of employees</td></tr>
-</table>
-
-<h3>Understanding Confidence Scores</h3>
-<ul>
-  <li><strong>90&ndash;100%</strong> &mdash; Very high confidence. The AI strongly believes this is exempt (for example, a clearly formatted Social Security number).</li>
-  <li><strong>70&ndash;89%</strong> &mdash; Moderate confidence. The content likely qualifies, but context matters. Review carefully.</li>
-  <li><strong>Below 70%</strong> &mdash; Lower confidence. The system flagged it for caution, but it may not be exempt. Use your judgment.</li>
-</ul>
-
-<h3>Acting on Exemption Flags</h3>
-<p>For each flag, you have three options:</p>
-<ol>
-  <li><strong>Accept</strong> &mdash; You agree this content is exempt. It will be noted for redaction in the response documents.</li>
-  <li><strong>Reject</strong> &mdash; You disagree with the flag. The content will be included in the response as-is.</li>
-  <li><strong>Escalate</strong> &mdash; You are unsure and want a reviewer or city attorney to weigh in.</li>
-</ol>
-
-<div class="callout security">
-  <div class="callout-title">Security</div>
-  Never release documents with unreviewed exemption flags. Every flag must be accepted or rejected by a staff member before a response letter can be finalized. The system enforces this requirement.
-</div>
-
-<!-- SECTION 7 -->
-<h2 class="section-title" id="sec-7">7. Response Letters</h2>
-
-<h3>Generating a Response Letter</h3>
-<p>Once you have gathered all responsive documents and reviewed all exemption flags, you can generate a response letter:</p>
-<ol>
-  <li>Open the request and select the <strong>Response Letter</strong> tab.</li>
-  <li>Select <strong>Generate Draft</strong>. The system creates a draft letter using your city's response template, automatically populated with:
-    <ul>
-      <li>Requester name and contact information.</li>
-      <li>A description of the records requested.</li>
-      <li>A list of responsive documents being provided.</li>
-      <li>Citations for any exemptions applied, with the corresponding state statutes.</li>
-      <li>Fee information, if applicable.</li>
-    </ul>
-  </li>
-  <li>Review the draft carefully. You can edit any part of the letter directly in the editor.</li>
-  <li>Select <strong>Save Draft</strong> when you are satisfied with the letter.</li>
-</ol>
-
-<h3>Submitting for Review</h3>
-<p>After saving a draft:</p>
-<ol>
-  <li>Select <strong>Submit for Review</strong>. The request status changes to <strong>In Review</strong>.</li>
-  <li>A reviewer (Records Officer or authorized supervisor) is notified.</li>
-  <li>The reviewer can:
-    <ul>
-      <li><strong>Approve</strong> &mdash; The letter is approved for release. The status changes to <strong>Approved</strong>.</li>
-      <li><strong>Request Changes</strong> &mdash; The reviewer adds comments and returns the letter to the staff member for revision.</li>
-      <li><strong>Reject</strong> &mdash; The draft is rejected entirely. The staff member must create a new draft.</li>
-    </ul>
-  </li>
-</ol>
-
-<h3>Sending the Response</h3>
-<p>After a letter is approved:</p>
-<ol>
-  <li>Open the approved request.</li>
-  <li>Select <strong>Mark as Sent</strong> after you have delivered the response through your city's normal channels (email, postal mail, in-person pickup).</li>
-  <li>The request status changes to <strong>Fulfilled / Sent</strong>.</li>
-</ol>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  Townlight Records does not send response letters directly to requesters. You use your city's existing communication channels. The system tracks that the response was sent and records the date and method.
-</div>
-
-<!-- SECTION 8 -->
-<h2 class="section-title" id="sec-8">8. Timeline &amp; Messaging</h2>
-
-<h3>Viewing the Request Timeline</h3>
-<p>Every request has a <strong>Timeline</strong> tab that shows a chronological log of everything that has happened:</p>
-<ul>
-  <li>When the request was created and by whom.</li>
-  <li>Every status change, with timestamps and the staff member who made the change.</li>
-  <li>Documents that were attached or removed.</li>
-  <li>Exemption flags that were reviewed.</li>
-  <li>Messages sent to or received from the requester.</li>
-  <li>Internal notes added by staff.</li>
-</ul>
-<p>The timeline is read-only &mdash; you cannot edit or delete entries. This ensures a complete, tamper-proof record of every action taken on the request.</p>
-
-<h3>Adding Notes to the Timeline</h3>
-<ol>
-  <li>Open the request and go to the <strong>Timeline</strong> tab.</li>
-  <li>Select <strong>Add Note</strong>.</li>
-  <li>Type your note in the text field. You can document research findings, record phone conversations with the requester, or leave instructions for colleagues.</li>
-  <li>Select <strong>Save Note</strong>. The note appears in the timeline with your name and a timestamp.</li>
-</ol>
-
-<h3>Sending Messages to Requesters</h3>
-<p>You can send messages to the requester directly from within a request:</p>
-<ol>
-  <li>Open the request and go to the <strong>Messages</strong> tab.</li>
-  <li>Select <strong>New Message</strong>.</li>
-  <li>Type your message. Common uses include asking for clarification, providing status updates, or notifying the requester about fees.</li>
-  <li>Select <strong>Send</strong>. The message is logged in the timeline and the request's message history.</li>
-</ol>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  Messages sent through Townlight Records are recorded for compliance purposes. Use them for official communications related to the request. The system stores the message content, timestamp, and sender for the audit trail.
-</div>
-
-<!-- SECTION 9 -->
-<h2 class="section-title" id="sec-9">9. Fee Tracking</h2>
-
-<h3>Adding Fees</h3>
-<p>If your city charges fees for records requests (copying fees, research time, etc.):</p>
-<ol>
-  <li>Open the request and select the <strong>Fees</strong> tab.</li>
-  <li>Select <strong>Add Fee</strong>.</li>
-  <li>Enter the fee type (e.g., "Copying &mdash; Standard," "Research Time"), quantity, unit price, and any notes.</li>
-  <li>Select <strong>Save</strong>. The fee appears in the fee table with a running total.</li>
-</ol>
-
-<h3>Fee Summary</h3>
-<p>The Fees tab shows:</p>
-<ul>
-  <li>An itemized list of all fees for this request.</li>
-  <li>The total amount due.</li>
-  <li>Payment status (pending, paid, waived).</li>
-</ul>
-<p>Fee information is automatically included in generated response letters when applicable.</p>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  If your city's policy allows fee waivers for certain requesters (media, indigent requesters, etc.), you can mark individual fees as "Waived" with a reason. This is recorded in the audit trail.
-</div>
-
-<!-- SECTION 10 -->
-<h2 class="section-title" id="sec-10">10. Department Access</h2>
-
-<h3>How Department Scoping Works</h3>
-<p>Townlight Records uses department-based access control to ensure staff members see only the records relevant to their work:</p>
-<ul>
-  <li><strong>Staff</strong> and <strong>Read-Only</strong> users can only search documents and view requests within their assigned department.</li>
-  <li><strong>Reviewer</strong> and <strong>Admin</strong> users have cross-department visibility and can view all documents and requests.</li>
-  <li>Documents ingested from a data source are associated with the department that owns that data source.</li>
-</ul>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  If you cannot find a document you expect to see, it may belong to a different department's data source. Contact your Records Officer or a user with cross-department access for assistance.
-</div>
-
-<h3>Department Assignment</h3>
-<p>Your department assignment is configured by your IT administrator. If you need access to a different department's records, contact your administrator to request a department change or role upgrade.</p>
-
-<!-- SECTION 11 -->
-<h2 class="section-title" id="sec-11">11. Quick Reference</h2>
-
-<h3>Glossary</h3>
-<table>
-  <tr><th>Term</th><th>Definition</th></tr>
-  <tr><td>FOIA / Open Records Request</td><td>A formal request from a member of the public for government records. Name varies by state (FOIA, CORA, Public Records Act, etc.).</td></tr>
-  <tr><td>Responsive Document</td><td>A document that contains information relevant to a records request.</td></tr>
-  <tr><td>Exemption</td><td>A legal basis for withholding all or part of a record from public disclosure.</td></tr>
-  <tr><td>Redaction</td><td>The removal or obscuring of exempt information from a document before release.</td></tr>
-  <tr><td>Statutory Deadline</td><td>The legal timeframe within which your city must respond to a records request.</td></tr>
-  <tr><td>Hybrid Search</td><td>A search method that combines keyword matching with AI-powered semantic understanding.</td></tr>
-  <tr><td>RAG (Retrieval-Augmented Generation)</td><td>The AI technique used to find relevant documents and generate contextual responses.</td></tr>
-  <tr><td>Ingestion</td><td>The process of importing documents into Townlight Records for indexing and search.</td></tr>
-  <tr><td>Confidence Score</td><td>A percentage indicating how certain the AI is about an exemption flag or search result relevance.</td></tr>
-  <tr><td>Audit Trail</td><td>A tamper-proof log of every action taken in the system, used for compliance verification.</td></tr>
-</table>
-
-<h3>Keyboard Shortcuts</h3>
-<table>
-  <tr><th>Shortcut</th><th>Action</th></tr>
-  <tr><td><code>/</code> or <code>Ctrl+K</code></td><td>Focus the search bar</td></tr>
-  <tr><td><code>Ctrl+Enter</code></td><td>Submit the current form</td></tr>
-  <tr><td><code>Esc</code></td><td>Close the current modal or dialog</td></tr>
-  <tr><td><code>?</code></td><td>Show keyboard shortcuts help</td></tr>
-</table>
-
-<h3>Status Reference</h3>
-<table>
-  <tr><th>Status</th><th>Color</th><th>Phase</th></tr>
-  <tr><td>Received</td><td style="color:#1565c0;">&#9632; Blue</td><td>Intake</td></tr>
-  <tr><td>Clarification Needed</td><td style="color:#1565c0;">&#9632; Blue</td><td>Intake</td></tr>
-  <tr><td>Assigned</td><td style="color:#1565c0;">&#9632; Blue</td><td>Intake</td></tr>
-  <tr><td>Searching</td><td style="color:#e65100;">&#9632; Amber</td><td>Processing</td></tr>
-  <tr><td>In Review</td><td style="color:#6a1b9a;">&#9632; Purple</td><td>Review</td></tr>
-  <tr><td>Ready for Release</td><td style="color:#6a1b9a;">&#9632; Purple</td><td>Review</td></tr>
-  <tr><td>Drafted</td><td style="color:#e65100;">&#9632; Amber</td><td>Processing</td></tr>
-  <tr><td>Approved</td><td style="color:#2e7d32;">&#9632; Green</td><td>Completion</td></tr>
-  <tr><td>Fulfilled / Sent</td><td style="color:#2e7d32;">&#9632; Green</td><td>Completion</td></tr>
-  <tr><td>Rejected</td><td style="color:#c62828;">&#9632; Red</td><td>Terminal</td></tr>
-  <tr><td>Closed</td><td style="color:#616161;">&#9632; Gray</td><td>Terminal</td></tr>
-</table>
-
-
-<!-- ============================================================ -->
-<!--                 PART II: IT ADMINISTRATION                    -->
-<!-- ============================================================ -->
-<div class="part-divider" id="part2">
-  <h2>Part II: IT Administration Guide</h2>
-  <p>For System Administrators, IT Directors, and DevOps Staff</p>
-</div>
-
-<!-- SECTION 12 -->
-<h2 class="section-title" id="sec-12">12. System Architecture</h2>
-
-<p>Townlight Records is a self-contained, Docker-based application stack designed to run entirely on-premises. The architecture follows a three-tier design: a browser-based client layer, a Python application layer, and a data and AI layer. All components communicate over internal Docker networking with no external cloud dependencies.</p>
-
-<h3>12.1 Architecture Overview</h3>
-<p>The system comprises seven Docker services orchestrated by Docker Compose. The following diagram shows all components, their ports, internal modules, and data flow paths.</p>
-
-<!-- SVG DIAGRAM 1: SYSTEM ARCHITECTURE -->
-<div class="diagram-container">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" width="900" height="720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
-    </marker>
-    <marker id="arrowblue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#2c5f8a"/>
-    </marker>
-    <marker id="arrowgreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"/>
-    </marker>
-    <marker id="arroworange" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#e65100"/>
-    </marker>
-    <marker id="arrowpurple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#6a1b9a"/>
-    </marker>
-    <linearGradient id="tierClient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e3f2fd"/>
-      <stop offset="100%" stop-color="#bbdefb"/>
-    </linearGradient>
-    <linearGradient id="tierApp" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8eaf6"/>
-      <stop offset="100%" stop-color="#c5cae9"/>
-    </linearGradient>
-    <linearGradient id="tierData" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8f5e9"/>
-      <stop offset="100%" stop-color="#c8e6c9"/>
-    </linearGradient>
-    <filter id="shadow" x="-2%" y="-2%" width="104%" height="108%">
-      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
-    </filter>
-  </defs>
-
-  <!-- TIER BACKGROUNDS -->
-  <!-- Client Tier -->
-  <rect x="10" y="10" width="880" height="100" rx="8" fill="url(#tierClient)" stroke="#90caf9" stroke-width="1.5"/>
-  <text x="25" y="32" font-size="11" fill="#1565c0" font-weight="700" letter-spacing="0.1em">CLIENT LAYER</text>
-
-  <!-- Application Tier -->
-  <rect x="10" y="125" width="880" height="340" rx="8" fill="url(#tierApp)" stroke="#9fa8da" stroke-width="1.5"/>
-  <text x="25" y="147" font-size="11" fill="#283593" font-weight="700" letter-spacing="0.1em">APPLICATION LAYER</text>
-
-  <!-- Data Tier -->
-  <rect x="10" y="480" width="880" height="230" rx="8" fill="url(#tierData)" stroke="#a5d6a7" stroke-width="1.5"/>
-  <text x="25" y="502" font-size="11" fill="#2e7d32" font-weight="700" letter-spacing="0.1em">DATA &amp; AI LAYER</text>
-
-  <!-- ===== CLIENT LAYER ===== -->
-  <!-- User Icons -->
-  <g transform="translate(160,45)">
-    <circle cx="0" cy="0" r="10" fill="#1565c0" opacity="0.7"/>
-    <circle cx="0" cy="-5" r="4" fill="#fff"/>
-    <path d="M-7,5 Q0,12 7,5" fill="#fff" opacity="0.9"/>
-  </g>
-  <g transform="translate(200,45)">
-    <circle cx="0" cy="0" r="10" fill="#1565c0" opacity="0.7"/>
-    <circle cx="0" cy="-5" r="4" fill="#fff"/>
-    <path d="M-7,5 Q0,12 7,5" fill="#fff" opacity="0.9"/>
-  </g>
-  <g transform="translate(240,45)">
-    <circle cx="0" cy="0" r="10" fill="#1565c0" opacity="0.7"/>
-    <circle cx="0" cy="-5" r="4" fill="#fff"/>
-    <path d="M-7,5 Q0,12 7,5" fill="#fff" opacity="0.9"/>
-  </g>
-  <text x="200" y="75" text-anchor="middle" font-size="10" fill="#1565c0">Staff Users</text>
-
-  <!-- Browser Box -->
-  <rect x="320" y="35" width="420" height="55" rx="6" fill="#fff" stroke="#1565c0" stroke-width="2" filter="url(#shadow)"/>
-  <text x="530" y="58" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a5f">Browser (React 18 + shadcn/ui + Tailwind CSS)</text>
-  <text x="530" y="78" text-anchor="middle" font-size="11" fill="#5a6a7a">Single-Page Application &mdash; Port 8080</text>
-
-  <!-- ===== APPLICATION LAYER ===== -->
-  <!-- nginx box -->
-  <rect x="355" y="155" width="200" height="40" rx="5" fill="#fff" stroke="#283593" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="455" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#283593">nginx</text>
-  <text x="455" y="187" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Reverse Proxy &mdash; Port 8080</text>
-
-  <!-- FastAPI main box -->
-  <rect x="55" y="210" width="560" height="240" rx="8" fill="#fff" stroke="#1e3a5f" stroke-width="2" filter="url(#shadow)"/>
-  <text x="335" y="234" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a5f">FastAPI Application Server</text>
-  <text x="335" y="250" text-anchor="middle" font-size="10" fill="#5a6a7a">Port 8000</text>
-
-  <!-- Internal modules (2 rows of 4) -->
-  <!-- Row 1 -->
-  <rect x="75" y="262" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="135" y="284" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Auth Module</text>
-  <text x="135" y="294" text-anchor="middle" font-size="8" fill="#5a6a7a">(JWT, RBAC)</text>
-
-  <rect x="205" y="262" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="265" y="284" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Search API</text>
-  <text x="265" y="294" text-anchor="middle" font-size="8" fill="#5a6a7a">(Hybrid RAG)</text>
-
-  <rect x="335" y="262" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="395" y="284" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Workflow API</text>
-  <text x="395" y="294" text-anchor="middle" font-size="8" fill="#5a6a7a">(11 Statuses)</text>
-
-  <rect x="465" y="262" width="130" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="530" y="284" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Exemption Engine</text>
-  <text x="530" y="294" text-anchor="middle" font-size="8" fill="#5a6a7a">(180 Rules)</text>
-
-  <!-- Row 2 -->
-  <rect x="75" y="310" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="135" y="332" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Dept Scoping</text>
-
-  <rect x="205" y="310" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="265" y="332" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Compliance</text>
-  <text x="265" y="342" text-anchor="middle" font-size="8" fill="#5a6a7a">(Audit Logger)</text>
-
-  <rect x="335" y="310" width="120" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="395" y="332" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">LLM Abstraction</text>
-
-  <rect x="465" y="310" width="130" height="36" rx="4" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="1"/>
-  <text x="530" y="332" text-anchor="middle" font-size="10" font-weight="600" fill="#283593">Federation API</text>
-
-  <!-- Row 3 - Ingestion inside FastAPI -->
-  <rect x="75" y="358" width="250" height="36" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
-  <text x="200" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="#e65100">Document Ingestion Pipeline</text>
-
-  <rect x="340" y="358" width="130" height="36" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
-  <text x="405" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="#e65100">Embedding Service</text>
-
-  <rect x="480" y="358" width="120" height="36" rx="4" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
-  <text x="540" y="380" text-anchor="middle" font-size="10" font-weight="600" fill="#e65100">Chunking Engine</text>
-
-  <!-- Celery Worker -->
-  <rect x="660" y="220" width="200" height="50" rx="6" fill="#fff" stroke="#6a1b9a" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="760" y="244" text-anchor="middle" font-size="12" font-weight="700" fill="#6a1b9a">Celery Worker</text>
-  <text x="760" y="260" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Async Ingestion / Embedding</text>
-
-  <!-- Celery Beat -->
-  <rect x="660" y="285" width="200" height="45" rx="6" fill="#fff" stroke="#6a1b9a" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="760" y="305" text-anchor="middle" font-size="12" font-weight="700" fill="#6a1b9a">Celery Beat</text>
-  <text x="760" y="320" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Scheduled Tasks</text>
-
-  <!-- ===== DATA & AI LAYER ===== -->
-  <!-- PostgreSQL cylinder -->
-  <g transform="translate(130, 530)">
-    <ellipse cx="90" cy="0" rx="90" ry="18" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
-    <rect x="0" y="0" width="180" height="70" fill="#e8f5e9" stroke="none"/>
-    <line x1="0" y1="0" x2="0" y2="70" stroke="#2e7d32" stroke-width="1.5"/>
-    <line x1="180" y1="0" x2="180" y2="70" stroke="#2e7d32" stroke-width="1.5"/>
-    <ellipse cx="90" cy="70" rx="90" ry="18" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
-    <text x="90" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="#1b5e20">PostgreSQL 17</text>
-    <text x="90" y="52" text-anchor="middle" font-size="10" fill="#2e7d32">+ pgvector</text>
-    <text x="90" y="65" text-anchor="middle" font-size="9" fill="#5a6a7a">Port 5432 &mdash; 29 Tables</text>
-  </g>
-
-  <!-- Redis cylinder -->
-  <g transform="translate(400, 530)">
-    <ellipse cx="70" cy="0" rx="70" ry="16" fill="#ffcdd2" stroke="#c62828" stroke-width="1.5"/>
-    <rect x="0" y="0" width="140" height="65" fill="#ffebee" stroke="none"/>
-    <line x1="0" y1="0" x2="0" y2="65" stroke="#c62828" stroke-width="1.5"/>
-    <line x1="140" y1="0" x2="140" y2="65" stroke="#c62828" stroke-width="1.5"/>
-    <ellipse cx="70" cy="65" rx="70" ry="16" fill="#ffebee" stroke="#c62828" stroke-width="1.5"/>
-    <text x="70" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#b71c1c">Redis 7.2</text>
-    <text x="70" y="47" text-anchor="middle" font-size="10" fill="#c62828">Task Queue / Cache</text>
-    <text x="70" y="60" text-anchor="middle" font-size="9" fill="#5a6a7a">Port 6379</text>
-  </g>
-
-  <!-- Ollama box -->
-  <rect x="620" y="520" width="220" height="95" rx="8" fill="#fff" stroke="#e65100" stroke-width="2" filter="url(#shadow)"/>
-  <text x="730" y="548" text-anchor="middle" font-size="13" font-weight="700" fill="#e65100">Ollama</text>
-  <text x="730" y="565" text-anchor="middle" font-size="10" fill="#5a6a7a">Local LLM Runtime &mdash; Port 11434</text>
-  <rect x="640" y="575" width="90" height="26" rx="3" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
-  <text x="685" y="592" text-anchor="middle" font-size="9" font-weight="600" fill="#e65100">Gemma 4</text>
-  <rect x="738" y="575" width="90" height="26" rx="3" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
-  <text x="783" y="588" text-anchor="middle" font-size="8.5" font-weight="600" fill="#e65100">nomic-embed</text>
-  <text x="783" y="598" text-anchor="middle" font-size="8" fill="#e65100">-text</text>
-
-  <!-- ===== ARROWS ===== -->
-  <!-- Browser -> nginx (HTTP) -->
-  <line x1="530" y1="90" x2="455" y2="153" stroke="#2c5f8a" stroke-width="2" marker-end="url(#arrowblue)"/>
-  <text x="510" y="120" font-size="9" fill="#2c5f8a" font-weight="600">HTTP :8080</text>
-
-  <!-- nginx -> FastAPI -->
-  <line x1="455" y1="195" x2="380" y2="208" stroke="#2c5f8a" stroke-width="2" marker-end="url(#arrowblue)"/>
-  <text x="430" y="207" font-size="9" fill="#2c5f8a" font-weight="600">Proxy :8000</text>
-
-  <!-- FastAPI -> PostgreSQL (DB queries) -->
-  <line x1="220" y1="452" x2="220" y2="518" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrowgreen)"/>
-  <text x="232" y="490" font-size="9" fill="#2e7d32" font-weight="600">SQL / pgvector :5432</text>
-
-  <!-- FastAPI -> Redis (task dispatch) -->
-  <line x1="440" y1="452" x2="465" y2="518" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-  <text x="465" y="490" font-size="9" fill="#c62828" font-weight="600">Task Dispatch</text>
-
-  <!-- Redis -> Celery Worker -->
-  <line x1="540" y1="555" x2="660" y2="308" stroke="#6a1b9a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowpurple)"/>
-  <text x="610" y="420" font-size="9" fill="#6a1b9a" font-weight="600" transform="rotate(-50, 610, 420)">Task Consume :6379</text>
-
-  <!-- FastAPI -> Ollama (LLM calls) -->
-  <line x1="540" y1="400" x2="700" y2="518" stroke="#e65100" stroke-width="1.5" marker-end="url(#arroworange)"/>
-  <text x="640" y="460" font-size="9" fill="#e65100" font-weight="600">LLM / Embed :11434</text>
-
-  <!-- Celery Worker -> Ollama -->
-  <line x1="760" y1="270" x2="750" y2="518" stroke="#e65100" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arroworange)"/>
-  <text x="770" y="400" font-size="9" fill="#e65100" font-weight="600" transform="rotate(90, 770, 400)">LLM Calls</text>
-
-  <!-- Celery Worker -> PostgreSQL (embedding storage) -->
-  <line x1="660" y1="250" x2="310" y2="560" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowgreen)"/>
-  <text x="450" y="395" font-size="9" fill="#2e7d32" font-weight="600" transform="rotate(40, 450, 395)">Embedding Storage</text>
-
-  <!-- FastAPI <-> Celery connection indicator -->
-  <line x1="615" y1="300" x2="658" y2="260" stroke="#4a5568" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-</svg>
-<div class="diagram-caption">Figure 12-1. Townlight Records System Architecture &mdash; Docker Compose Stack</div>
-</div>
-
-<h3>12.2 Component Details</h3>
-<table>
-  <tr><th>Service</th><th>Technology</th><th>Port</th><th>Purpose</th></tr>
-  <tr><td>Frontend</td><td>React 18, shadcn/ui, Tailwind CSS</td><td>8080</td><td>Single-page application served through nginx</td></tr>
-  <tr><td>nginx</td><td>nginx (latest)</td><td>8080</td><td>Reverse proxy, static file serving, TLS termination</td></tr>
-  <tr><td>API</td><td>Python 3.12, FastAPI, Uvicorn</td><td>8000</td><td>Application server with all business logic modules</td></tr>
-  <tr><td>Worker</td><td>Celery 5.x</td><td>&mdash;</td><td>Asynchronous document ingestion, embedding generation, LLM processing</td></tr>
-  <tr><td>Beat</td><td>Celery Beat</td><td>&mdash;</td><td>Scheduled tasks (deadline monitoring, periodic re-indexing)</td></tr>
-  <tr><td>PostgreSQL</td><td>PostgreSQL 17 + pgvector</td><td>5432</td><td>Primary database (29 tables), vector storage for embeddings</td></tr>
-  <tr><td>Redis</td><td>Redis 7.2</td><td>6379</td><td>Celery task broker, session cache, rate limiting</td></tr>
-  <tr><td>Ollama</td><td>Ollama (latest)</td><td>11434</td><td>Local LLM runtime hosting Gemma 4 and nomic-embed-text</td></tr>
-</table>
-
-<h3>12.3 Application Modules</h3>
-<p>The FastAPI application server contains the following internal modules:</p>
-<table>
-  <tr><th>Module</th><th>Responsibility</th></tr>
-  <tr><td>Auth Module</td><td>User authentication via JWT tokens, role-based access control (RBAC) with 4 roles: Admin, Staff, Reviewer, Read-Only. Service account management for machine-to-machine API access.</td></tr>
-  <tr><td>Search API</td><td>Hybrid retrieval-augmented generation (RAG) combining semantic vector search (pgvector) with keyword full-text search. Source attribution, session context for iterative refinement.</td></tr>
-  <tr><td>Workflow API</td><td>Records request CRUD operations, status transitions through 11 defined statuses with validation, document association, deadline management.</td></tr>
-  <tr><td>Exemption Engine</td><td>Rules engine with 180 pre-loaded rules (regex patterns, keyword matching, statutory phrase detection) plus LLM-powered suggestion layer. Each exemption category is a separate detector.</td></tr>
-  <tr><td>Department Scoping</td><td>Row-level access control tying users, data sources, documents, and requests to departments. Enforces department boundaries for Staff and Read-Only roles.</td></tr>
-  <tr><td>Compliance Module</td><td>Middleware-based audit logger recording every API call. Hash-chained, append-only audit trail. Exportable as CSV/JSON for external review.</td></tr>
-  <tr><td>LLM Abstraction</td><td>Model-agnostic interface wrapping Ollama. Supports chat completion and embedding endpoints. Swap models without application code changes.</td></tr>
-  <tr><td>Federation API</td><td>REST endpoints for inter-instance communication. Allows one Townlight Records installation to query another with scoped, authenticated access via service account API keys.</td></tr>
-</table>
-
-<h3>12.4 Ingestion Pipeline</h3>
-<p>The document ingestion pipeline processes files from configured data sources through a two-track architecture. Files are routed based on type detection: standard document formats follow a fast track through native parsers, while scanned documents and images are routed through the LLM-powered track for multimodal text extraction.</p>
-
-<!-- SVG DIAGRAM 2: INGESTION PIPELINE -->
-<div class="diagram-container">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="900" height="480" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="pipeArrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4a5568"/>
-    </marker>
-    <marker id="pipeArrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#1565c0"/>
-    </marker>
-    <marker id="pipeArrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"/>
-    </marker>
-    <filter id="pipeShadow" x="-2%" y="-2%" width="104%" height="108%">
-      <feDropShadow dx="1" dy="1" stdDeviation="1.5" flood-opacity="0.1"/>
-    </filter>
-  </defs>
-
-  <!-- Background -->
-  <rect x="5" y="5" width="890" height="470" rx="8" fill="#fafbfc" stroke="#dde3ea" stroke-width="1"/>
-  <text x="20" y="28" font-size="14" font-weight="700" fill="#1e3a5f">Document Ingestion Pipeline</text>
-
-  <!-- Data Sources Box -->
-  <rect x="25" y="55" width="120" height="120" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" filter="url(#pipeShadow)"/>
-  <text x="85" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#1565c0">Data Sources</text>
-  <text x="85" y="100" text-anchor="middle" font-size="9.5" fill="#5a6a7a">File Shares</text>
-  <text x="85" y="115" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Uploads</text>
-  <text x="85" y="130" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Email Archives</text>
-  <text x="85" y="145" text-anchor="middle" font-size="9.5" fill="#5a6a7a">Network Drives</text>
-
-  <!-- Arrow to Decision -->
-  <line x1="145" y1="115" x2="195" y2="115" stroke="#4a5568" stroke-width="2" marker-end="url(#pipeArrow)"/>
-
-  <!-- Decision Diamond: File Type Detection -->
-  <polygon points="265,65 335,115 265,165 195,115" fill="#fff3e0" stroke="#e65100" stroke-width="2"/>
-  <text x="265" y="110" text-anchor="middle" font-size="10" font-weight="700" fill="#e65100">File Type</text>
-  <text x="265" y="124" text-anchor="middle" font-size="10" font-weight="700" fill="#e65100">Detection</text>
-
-  <!-- FAST TRACK (top branch) -->
-  <!-- Arrow up from diamond -->
-  <line x1="300" y1="85" x2="365" y2="60" stroke="#1565c0" stroke-width="2" marker-end="url(#pipeArrowBlue)"/>
-  <text x="345" y="55" font-size="9" fill="#1565c0" font-weight="700">FAST TRACK</text>
-
-  <!-- Parser box -->
-  <rect x="365" y="35" width="170" height="70" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5" filter="url(#pipeShadow)"/>
-  <text x="450" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#1565c0">Native Parsers</text>
-  <text x="450" y="72" text-anchor="middle" font-size="9" fill="#5a6a7a">PDF / DOCX / XLSX</text>
-  <text x="450" y="85" text-anchor="middle" font-size="9" fill="#5a6a7a">CSV / HTML / Email / Text</text>
-  <text x="450" y="98" text-anchor="middle" font-size="9" fill="#5a6a7a">(python-docx, openpyxl, etc.)</text>
-
-  <!-- Arrow from parser to text extraction -->
-  <line x1="535" y1="70" x2="580" y2="70" stroke="#1565c0" stroke-width="2" marker-end="url(#pipeArrowBlue)"/>
-
-  <!-- Text Extraction (fast) -->
-  <rect x="580" y="45" width="110" height="50" rx="5" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5"/>
-  <text x="635" y="67" text-anchor="middle" font-size="10" font-weight="600" fill="#0d47a1">Text</text>
-  <text x="635" y="82" text-anchor="middle" font-size="10" font-weight="600" fill="#0d47a1">Extraction</text>
-
-  <!-- LLM TRACK (bottom branch) -->
-  <!-- Arrow down from diamond -->
-  <line x1="300" y1="145" x2="365" y2="190" stroke="#e65100" stroke-width="2" marker-end="url(#pipeArrow)"/>
-  <text x="340" y="185" font-size="9" fill="#e65100" font-weight="700">LLM TRACK</text>
-
-  <!-- Gemma 4 box -->
-  <rect x="365" y="168" width="170" height="55" rx="6" fill="#fff3e0" stroke="#e65100" stroke-width="1.5" filter="url(#pipeShadow)"/>
-  <text x="450" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#e65100">Gemma 4 Multimodal</text>
-  <text x="450" y="207" text-anchor="middle" font-size="9" fill="#5a6a7a">Scanned Docs / Images</text>
-  <text x="450" y="218" text-anchor="middle" font-size="9" fill="#5a6a7a">Handwritten Text / Photos</text>
-
-  <!-- Tesseract fallback (side box) -->
-  <rect x="365" y="235" width="140" height="36" rx="4" fill="#fce4ec" stroke="#c62828" stroke-width="1" stroke-dasharray="4,2"/>
-  <text x="435" y="253" text-anchor="middle" font-size="9.5" font-weight="600" fill="#c62828">Tesseract OCR Fallback</text>
-  <text x="435" y="265" text-anchor="middle" font-size="8" fill="#c62828">(if LLM unavailable)</text>
-
-  <!-- Arrow: Gemma -> Tesseract fallback indicator -->
-  <line x1="450" y1="223" x2="435" y2="233" stroke="#c62828" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#pipeArrow)"/>
-
-  <!-- Arrow from Gemma to text extraction -->
-  <line x1="535" y1="195" x2="580" y2="195" stroke="#e65100" stroke-width="2" marker-end="url(#pipeArrow)"/>
-
-  <!-- Text Extraction (LLM) -->
-  <rect x="580" y="170" width="110" height="50" rx="5" fill="#ffe0b2" stroke="#e65100" stroke-width="1.5"/>
-  <text x="635" y="192" text-anchor="middle" font-size="10" font-weight="600" fill="#bf360c">Text</text>
-  <text x="635" y="207" text-anchor="middle" font-size="10" font-weight="600" fill="#bf360c">Extraction</text>
-
-  <!-- Convergence arrow down from fast track extraction -->
-  <line x1="635" y1="95" x2="635" y2="130" stroke="#4a5568" stroke-width="1.5"/>
-  <!-- Convergence arrow down from LLM track extraction -->
-  <line x1="635" y1="170" x2="635" y2="130" stroke="#4a5568" stroke-width="1.5"/>
-  <!-- Arrow right from convergence -->
-  <line x1="635" y1="130" x2="680" y2="130" stroke="#4a5568" stroke-width="2" marker-end="url(#pipeArrow)"/>
-
-  <!-- CONVERGENCE PIPELINE (bottom) -->
-  <!-- Sentence-Aware Chunking -->
-  <rect x="680" y="105" width="180" height="50" rx="6" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5" filter="url(#pipeShadow)"/>
-  <text x="770" y="127" text-anchor="middle" font-size="11" font-weight="700" fill="#6a1b9a">Sentence-Aware</text>
-  <text x="770" y="143" text-anchor="middle" font-size="11" font-weight="700" fill="#6a1b9a">Chunking</text>
-
-  <!-- Arrow down -->
-  <line x1="770" y1="155" x2="770" y2="185" stroke="#4a5568" stroke-width="2" marker-end="url(#pipeArrow)"/>
-
-  <!-- nomic-embed-text Embedding -->
-  <rect x="680" y="185" width="180" height="50" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5" filter="url(#pipeShadow)"/>
-  <text x="770" y="207" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d32">nomic-embed-text</text>
-  <text x="770" y="223" text-anchor="middle" font-size="10" fill="#5a6a7a">Embedding Generation</text>
-
-  <!-- Arrow down -->
-  <line x1="770" y1="235" x2="770" y2="265" stroke="#2e7d32" stroke-width="2" marker-end="url(#pipeArrowGreen)"/>
-
-  <!-- pgvector Storage (cylinder) -->
-  <g transform="translate(700, 270)">
-    <ellipse cx="70" cy="0" rx="70" ry="14" fill="#c8e6c9" stroke="#2e7d32" stroke-width="1.5"/>
-    <rect x="0" y="0" width="140" height="50" fill="#e8f5e9" stroke="none"/>
-    <line x1="0" y1="0" x2="0" y2="50" stroke="#2e7d32" stroke-width="1.5"/>
-    <line x1="140" y1="0" x2="140" y2="50" stroke="#2e7d32" stroke-width="1.5"/>
-    <ellipse cx="70" cy="50" rx="70" ry="14" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
-    <text x="70" y="25" text-anchor="middle" font-size="11" font-weight="700" fill="#1b5e20">pgvector</text>
-    <text x="70" y="42" text-anchor="middle" font-size="9" fill="#2e7d32">PostgreSQL Storage</text>
-  </g>
-
-  <!-- Legend -->
-  <rect x="25" y="380" width="850" height="85" rx="6" fill="#fff" stroke="#dde3ea" stroke-width="1"/>
-  <text x="40" y="400" font-size="10" font-weight="700" fill="#1e3a5f">Supported Formats</text>
-  <text x="40" y="418" font-size="9" fill="#1565c0" font-weight="600">Fast Track:</text>
-  <text x="108" y="418" font-size="9" fill="#5a6a7a">PDF (text-based), DOCX, XLSX, CSV, HTML, EML/MSG (email), TXT, RTF, JSON, XML</text>
-  <text x="40" y="436" font-size="9" fill="#e65100" font-weight="600">LLM Track:</text>
-  <text x="105" y="436" font-size="9" fill="#5a6a7a">Scanned PDF (image-only), TIFF, PNG, JPEG, BMP, GIF (document images)</text>
-  <text x="40" y="454" font-size="9" fill="#c62828" font-weight="600">OCR Fallback:</text>
-  <text x="120" y="454" font-size="9" fill="#5a6a7a">Tesseract 5 activates automatically when Ollama/Gemma 4 is unavailable or returns low-confidence results</text>
-</svg>
-<div class="diagram-caption">Figure 12-2. Two-Track Document Ingestion Pipeline</div>
-</div>
-
-<h3>12.5 Request Lifecycle Workflow</h3>
-<p>Records requests move through 11 defined statuses. Status transitions are validated by the workflow engine &mdash; invalid transitions are rejected. The following diagram shows all valid transitions, color-coded by processing phase.</p>
-
-<!-- SVG DIAGRAM 3: REQUEST LIFECYCLE -->
-<div class="diagram-container">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
-  <defs>
-    <marker id="lcArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#4a5568"/>
-    </marker>
-    <marker id="lcArrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#1565c0"/>
-    </marker>
-    <marker id="lcArrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#e65100"/>
-    </marker>
-    <marker id="lcArrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#6a1b9a"/>
-    </marker>
-    <marker id="lcArrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#2e7d32"/>
-    </marker>
-    <marker id="lcArrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-      <polygon points="0 0, 8 3, 0 6" fill="#c62828"/>
-    </marker>
-    <filter id="lcShadow" x="-3%" y="-5%" width="106%" height="115%">
-      <feDropShadow dx="1" dy="1" stdDeviation="1.5" flood-opacity="0.12"/>
-    </filter>
-  </defs>
-
-  <!-- Background -->
-  <rect x="5" y="5" width="890" height="510" rx="8" fill="#fafbfc" stroke="#dde3ea" stroke-width="1"/>
-  <text x="20" y="28" font-size="14" font-weight="700" fill="#1e3a5f">Request Lifecycle &mdash; 11-Status Workflow</text>
-
-  <!-- Legend -->
-  <g transform="translate(470, 12)">
-    <rect x="0" y="0" width="14" height="14" rx="3" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
-    <text x="20" y="12" font-size="9" fill="#5a6a7a">Intake</text>
-    <rect x="65" y="0" width="14" height="14" rx="3" fill="#fff3e0" stroke="#e65100" stroke-width="1.5"/>
-    <text x="85" y="12" font-size="9" fill="#5a6a7a">Processing</text>
-    <rect x="155" y="0" width="14" height="14" rx="3" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="1.5"/>
-    <text x="175" y="12" font-size="9" fill="#5a6a7a">Review</text>
-    <rect x="225" y="0" width="14" height="14" rx="3" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5"/>
-    <text x="245" y="12" font-size="9" fill="#5a6a7a">Completion</text>
-    <rect x="320" y="0" width="14" height="14" rx="3" fill="#f5f5f5" stroke="#616161" stroke-width="1.5"/>
-    <text x="340" y="12" font-size="9" fill="#5a6a7a">Terminal</text>
-  </g>
-
-  <!-- ===== STATUS NODES ===== -->
-
-  <!-- RECEIVED (Intake - Blue) -->
-  <rect x="50" y="65" width="150" height="42" rx="21" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="125" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="#1565c0">Received</text>
-
-  <!-- CLARIFICATION NEEDED (Intake - Blue) -->
-  <rect x="50" y="165" width="150" height="42" rx="21" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="125" y="185" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1565c0">Clarification</text>
-  <text x="125" y="198" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1565c0">Needed</text>
-
-  <!-- Bidirectional arrows: Received <-> Clarification -->
-  <line x1="100" y1="107" x2="100" y2="163" stroke="#1565c0" stroke-width="1.5" marker-end="url(#lcArrowBlue)"/>
-  <line x1="150" y1="163" x2="150" y2="107" stroke="#1565c0" stroke-width="1.5" marker-end="url(#lcArrowBlue)"/>
-
-  <!-- ASSIGNED (Intake - Blue) -->
-  <rect x="265" y="65" width="130" height="42" rx="21" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="330" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="#1565c0">Assigned</text>
-
-  <!-- Arrow: Received -> Assigned -->
-  <line x1="200" y1="86" x2="263" y2="86" stroke="#1565c0" stroke-width="2" marker-end="url(#lcArrowBlue)"/>
-
-  <!-- SEARCHING (Processing - Amber) -->
-  <rect x="460" y="65" width="130" height="42" rx="21" fill="#fff3e0" stroke="#e65100" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="525" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="#e65100">Searching</text>
-
-  <!-- Arrow: Assigned -> Searching -->
-  <line x1="395" y1="86" x2="458" y2="86" stroke="#e65100" stroke-width="2" marker-end="url(#lcArrowAmber)"/>
-
-  <!-- IN REVIEW (Review - Purple) -->
-  <rect x="655" y="65" width="130" height="42" rx="21" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="720" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="#6a1b9a">In Review</text>
-
-  <!-- Arrow: Searching -> In Review -->
-  <line x1="590" y1="86" x2="653" y2="86" stroke="#6a1b9a" stroke-width="2" marker-end="url(#lcArrowPurple)"/>
-
-  <!-- READY FOR RELEASE (Review - Purple) -->
-  <rect x="655" y="165" width="160" height="42" rx="21" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="735" y="185" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6a1b9a">Ready for</text>
-  <text x="735" y="198" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6a1b9a">Release</text>
-
-  <!-- Arrow: In Review -> Ready for Release -->
-  <line x1="720" y1="107" x2="720" y2="163" stroke="#6a1b9a" stroke-width="2" marker-end="url(#lcArrowPurple)"/>
-
-  <!-- DRAFTED (Processing - Amber) -->
-  <rect x="460" y="165" width="130" height="42" rx="21" fill="#fff3e0" stroke="#e65100" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="525" y="191" text-anchor="middle" font-size="12" font-weight="700" fill="#e65100">Drafted</text>
-
-  <!-- Arrow: Ready for Release -> Drafted -->
-  <line x1="655" y1="186" x2="592" y2="186" stroke="#e65100" stroke-width="2" marker-end="url(#lcArrowAmber)"/>
-
-  <!-- APPROVED (Completion - Green) -->
-  <rect x="460" y="270" width="130" height="42" rx="21" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="525" y="296" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d32">Approved</text>
-
-  <!-- Arrow: Drafted -> Approved -->
-  <line x1="525" y1="207" x2="525" y2="268" stroke="#2e7d32" stroke-width="2" marker-end="url(#lcArrowGreen)"/>
-
-  <!-- Arrow: Rejected -> Drafted (rejection loop) -->
-  <rect x="265" y="270" width="130" height="42" rx="21" fill="#ffebee" stroke="#c62828" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="330" y="296" text-anchor="middle" font-size="12" font-weight="700" fill="#c62828">Rejected</text>
-
-  <!-- Arrow: Drafted -> Rejected (review rejects) -->
-  <line x1="460" y1="195" x2="397" y2="273" stroke="#c62828" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#lcArrowRed)"/>
-
-  <!-- Arrow: Rejected -> Drafted (revision loop) -->
-  <line x1="395" y1="280" x2="460" y2="200" stroke="#e65100" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#lcArrowAmber)"/>
-  <text x="410" y="230" font-size="8" fill="#5a6a7a" font-style="italic">Revise</text>
-
-  <!-- FULFILLED (Completion - Green) -->
-  <rect x="460" y="365" width="160" height="42" rx="21" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="540" y="391" text-anchor="middle" font-size="12" font-weight="700" fill="#2e7d32">Fulfilled</text>
-
-  <!-- Arrow: Approved -> Fulfilled -->
-  <line x1="525" y1="312" x2="530" y2="363" stroke="#2e7d32" stroke-width="2" marker-end="url(#lcArrowGreen)"/>
-
-  <!-- CLOSED (Terminal - Gray) -->
-  <rect x="460" y="455" width="130" height="42" rx="21" fill="#f5f5f5" stroke="#616161" stroke-width="2" filter="url(#lcShadow)"/>
-  <text x="525" y="481" text-anchor="middle" font-size="12" font-weight="700" fill="#616161">Closed</text>
-
-  <!-- Arrow: Fulfilled -> Closed -->
-  <line x1="530" y1="407" x2="525" y2="453" stroke="#616161" stroke-width="2" marker-end="url(#lcArrow)"/>
-
-  <!-- Arrow: Rejected -> Closed (alternative path) -->
-  <path d="M 330 312 L 330 475 L 458 475" fill="none" stroke="#616161" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#lcArrow)"/>
-
-  <!-- Annotations -->
-  <text x="210" y="80" font-size="8" fill="#5a6a7a" font-style="italic">assign</text>
-  <text x="410" y="80" font-size="8" fill="#5a6a7a" font-style="italic">begin search</text>
-  <text x="603" y="80" font-size="8" fill="#5a6a7a" font-style="italic">submit review</text>
-  <text x="735" y="140" font-size="8" fill="#5a6a7a" font-style="italic">pass review</text>
-  <text x="605" y="180" font-size="8" fill="#5a6a7a" font-style="italic">draft letter</text>
-  <text x="540" y="252" font-size="8" fill="#5a6a7a" font-style="italic">approve</text>
-  <text x="545" y="345" font-size="8" fill="#5a6a7a" font-style="italic">mark sent</text>
-  <text x="540" y="440" font-size="8" fill="#5a6a7a" font-style="italic">close</text>
-  <text x="95" y="135" font-size="8" fill="#5a6a7a" font-style="italic">ask</text>
-  <text x="155" y="135" font-size="8" fill="#5a6a7a" font-style="italic">reply</text>
-</svg>
-<div class="diagram-caption">Figure 12-3. Records Request Lifecycle &mdash; 11-Status Workflow with Phase Color Coding</div>
-</div>
-
-<h3>12.6 Network Architecture</h3>
-<p>All services communicate over a single Docker bridge network (<code>townlight_records-net</code>). Only the nginx service exposes a port to the host. External access topology:</p>
-<table>
-  <tr><th>Service</th><th>Host Binding</th><th>Internal Only</th></tr>
-  <tr><td>nginx</td><td>0.0.0.0:8080</td><td>No (externally accessible)</td></tr>
-  <tr><td>FastAPI</td><td>&mdash;</td><td>Yes (nginx proxies to :8000)</td></tr>
-  <tr><td>PostgreSQL</td><td>&mdash;</td><td>Yes (:5432 internal)</td></tr>
-  <tr><td>Redis</td><td>&mdash;</td><td>Yes (:6379 internal)</td></tr>
-  <tr><td>Ollama</td><td>&mdash;</td><td>Yes (:11434 internal)</td></tr>
-  <tr><td>Celery Worker</td><td>&mdash;</td><td>Yes (no port)</td></tr>
-  <tr><td>Celery Beat</td><td>&mdash;</td><td>Yes (no port)</td></tr>
-</table>
-
-<div class="callout security">
-  <div class="callout-title">Security</div>
-  The system binds to <code>localhost</code> or a city-designated internal IP only. It must never be exposed to the public internet. HTTPS with self-signed or city-provided TLS certificates is recommended for all web interfaces.
-</div>
-
-
-<!-- SECTION 13 -->
-<h2 class="section-title" id="sec-13">13. Hardware Requirements</h2>
-
-<h3>Server Specifications</h3>
-<table>
-  <tr><th>Component</th><th>Minimum Spec</th><th>Recommended Spec</th></tr>
-  <tr><td>CPU</td><td>AMD Ryzen 7 (8-core)</td><td>AMD Ryzen 9 (12-16 core)</td></tr>
-  <tr><td>RAM</td><td>32 GB DDR4/DDR5</td><td>64 GB DDR5</td></tr>
-  <tr><td>Storage</td><td>1 TB NVMe SSD</td><td>2 TB NVMe SSD</td></tr>
-  <tr><td>GPU</td><td>Integrated (CPU inference)</td><td>Discrete AMD or NVIDIA with 8+ GB VRAM</td></tr>
-  <tr><td>Network</td><td>Gigabit Ethernet</td><td>Gigabit Ethernet</td></tr>
-  <tr><td>OS</td><td>Ubuntu 24.04 LTS</td><td>Ubuntu 24.04 LTS</td></tr>
-  <tr><td>Estimated Cost</td><td>~$800</td><td>~$1,200</td></tr>
-</table>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  The system must deliver usable response times (under 30 seconds for a typical query-and-retrieve cycle) on the minimum spec without a discrete GPU. GPU acceleration is a performance bonus, not a requirement.
-</div>
-
-<h3>Docker Resource Allocation</h3>
-<p>When running on Windows or macOS with Docker Desktop, allocate at least:</p>
-<ul>
-  <li><strong>Memory:</strong> 32 GB (Docker Desktop &rarr; Settings &rarr; Resources)</li>
-  <li><strong>CPU:</strong> All available cores</li>
-  <li><strong>Disk:</strong> 50 GB free for Docker images, volumes, and ingested data</li>
-</ul>
-
-<h3>GPU Acceleration</h3>
-<p>GPU acceleration is optional but significantly improves LLM inference speed:</p>
-<table>
-  <tr><th>GPU Type</th><th>Driver Requirement</th><th>Docker Compose Overlay</th></tr>
-  <tr><td>NVIDIA</td><td>CUDA drivers + NVIDIA Container Toolkit</td><td><code>docker-compose.nvidia.yml</code></td></tr>
-  <tr><td>AMD</td><td>ROCm drivers</td><td><code>docker-compose.amd.yml</code></td></tr>
-  <tr><td>Intel / DirectML</td><td>DirectML runtime (Windows)</td><td><code>docker-compose.directml.yml</code></td></tr>
-  <tr><td>None</td><td>&mdash;</td><td>Default (CPU inference)</td></tr>
-</table>
-
-<h3>Physical Deployment</h3>
-<ul>
-  <li><strong>Location:</strong> Locked office, server closet, or data center with physical access controls.</li>
-  <li><strong>Power:</strong> Uninterruptible power supply (UPS) recommended.</li>
-  <li><strong>Network:</strong> Static IP address, appropriate firewall rules, internal DNS entry.</li>
-</ul>
-
-<!-- SECTION 14 -->
-<h2 class="section-title" id="sec-14">14. Installation</h2>
-
-<h3>Prerequisites</h3>
-<ul>
-  <li>Docker Engine 24.0+ and Docker Compose v2 (included with Docker Desktop on Windows/macOS)</li>
-  <li>At least 32 GB RAM available to Docker</li>
-  <li>50 GB free disk space</li>
-  <li>Network access to Docker Hub during initial installation (for image pulls)</li>
-  <li>For GPU acceleration: appropriate drivers installed (AMD ROCm, NVIDIA CUDA, or DirectML)</li>
-</ul>
-
-<h3>14.1 Windows Installation</h3>
-<p>Open PowerShell as Administrator in the project directory and run:</p>
-<pre><code>.\install.ps1</code></pre>
-
-<p>The script performs the following steps:</p>
-<ol>
-  <li>Verifies Docker Desktop is installed and the daemon is running</li>
-  <li>Verifies Docker Compose v2 is available</li>
-  <li>Creates <code>.env</code> from <code>.env.example</code> and generates a cryptographically random JWT secret</li>
-  <li>Pauses for you to configure admin credentials in <code>.env</code></li>
-  <li>Runs hardware detection (<code>scripts/detect_hardware.ps1</code>) and writes <code>.env.hardware</code></li>
-  <li>Selects the appropriate Docker Compose overlay (GPU or host Ollama if applicable)</li>
-  <li>Pulls base Docker images and builds application images</li>
-  <li>Starts PostgreSQL and Redis; waits for database readiness (up to 60 seconds)</li>
-  <li>Runs Alembic database migrations</li>
-  <li>Starts all seven services</li>
-  <li>Waits for the API health endpoint to respond</li>
-  <li>Pulls the embedding model (<code>nomic-embed-text</code>)</li>
-  <li>Prints the recommended language model command and access URLs</li>
-</ol>
-
-<h3>14.2 Linux Installation (Ubuntu/Debian)</h3>
-<p>Run from the project directory:</p>
-<pre><code>chmod +x install.sh
-./install.sh</code></pre>
-
-<p>The Linux installer follows the same steps as the Windows installer but uses <code>scripts/detect_hardware.sh</code> for hardware detection and operates natively without Docker Desktop.</p>
-
-<h3>14.3 macOS Installation</h3>
-<p>Run from the project directory:</p>
-<pre><code>chmod +x install.sh
-./install.sh</code></pre>
-
-<p>The macOS installer uses Docker Desktop and follows the same workflow. GPU acceleration is not available on macOS; the system uses CPU inference only.</p>
-
-<div class="callout warning">
-  <div class="callout-title">Warning</div>
-  Do not skip the hardware detection step. The installer uses this information to select the correct Docker Compose overlay for your hardware. Running with the wrong overlay may cause the Ollama container to fail to start.
-</div>
-
-<h3>14.4 Post-Installation Verification</h3>
-<p>After installation completes, verify all services are healthy:</p>
-<pre><code># Check all containers are running
-docker compose ps
-
-# Verify API health
-curl http://localhost:8000/health
-
-# Verify frontend is accessible
-curl -I http://localhost:8080
-
-# Check Ollama models
-docker compose exec ollama ollama list</code></pre>
-
-<h3>14.5 Pulling the Language Model</h3>
-<p>The embedding model (<code>nomic-embed-text</code>) is pulled automatically during installation. The language model must be pulled separately:</p>
-<pre><code>docker compose exec ollama ollama pull gemma3:4b</code></pre>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  For systems with limited resources, the 4-billion parameter model (<code>gemma3:4b</code>) provides the best balance of quality and speed. Systems with 16+ GB VRAM can use larger variants.
-</div>
-
-
-<!-- SECTION 15 -->
-<h2 class="section-title" id="sec-15">15. Configuration Reference</h2>
-
-<h3>Environment Variables</h3>
-<p>All configuration is managed through the <code>.env</code> file in the project root. The following table documents all available variables:</p>
-
-<table>
-  <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
-  <tr><td><code>DATABASE_URL</code></td><td><code>postgresql+asyncpg://townlight_records:...@postgres:5432/townlight_records</code></td><td>PostgreSQL connection string</td></tr>
-  <tr><td><code>REDIS_URL</code></td><td><code>redis://redis:6379/0</code></td><td>Redis connection string</td></tr>
-  <tr><td><code>JWT_SECRET</code></td><td><em>(auto-generated)</em></td><td>Secret key for JWT token signing. Must be a cryptographically random string.</td></tr>
-  <tr><td><code>JWT_LIFETIME_SECONDS</code></td><td><code>3600</code></td><td>JWT token expiration in seconds (default: 1 hour)</td></tr>
-  <tr><td><code>ADMIN_EMAIL</code></td><td>&mdash;</td><td>Email address for the initial admin account</td></tr>
-  <tr><td><code>ADMIN_PASSWORD</code></td><td>&mdash;</td><td>Password for the initial admin account. Change after first login.</td></tr>
-  <tr><td><code>OLLAMA_BASE_URL</code></td><td><code>http://ollama:11434</code></td><td>Ollama API endpoint</td></tr>
-  <tr><td><code>LLM_MODEL</code></td><td><code>gemma3:4b</code></td><td>Default language model for chat completions</td></tr>
-  <tr><td><code>EMBEDDING_MODEL</code></td><td><code>nomic-embed-text</code></td><td>Model used for document embedding</td></tr>
-  <tr><td><code>CHUNK_SIZE</code></td><td><code>512</code></td><td>Target chunk size in tokens for document splitting</td></tr>
-  <tr><td><code>CHUNK_OVERLAP</code></td><td><code>50</code></td><td>Overlap in tokens between adjacent chunks</td></tr>
-  <tr><td><code>MAX_SEARCH_RESULTS</code></td><td><code>20</code></td><td>Maximum number of search results to return per query</td></tr>
-  <tr><td><code>SIMILARITY_THRESHOLD</code></td><td><code>0.3</code></td><td>Minimum cosine similarity score for vector search results</td></tr>
-  <tr><td><code>LOG_LEVEL</code></td><td><code>INFO</code></td><td>Application log level (DEBUG, INFO, WARNING, ERROR)</td></tr>
-  <tr><td><code>CORS_ORIGINS</code></td><td><code>http://localhost:8080</code></td><td>Allowed CORS origins (comma-separated)</td></tr>
-</table>
-
-<div class="callout security">
-  <div class="callout-title">Security</div>
-  Never commit the <code>.env</code> file to version control. The <code>.gitignore</code> file excludes it by default. Store a backup of your production <code>.env</code> in a secure location (e.g., password manager, encrypted volume).
-</div>
-
-
-<!-- SECTION 16 -->
-<h2 class="section-title" id="sec-16">16. User &amp; Department Administration</h2>
-
-<h3>Role Hierarchy</h3>
-<table>
-  <tr><th>Role</th><th>Level</th><th>Permissions</th></tr>
-  <tr><td>Admin</td><td>4</td><td>Full access: manage users, departments, data sources, models, exemption rules, system settings. Cross-department visibility.</td></tr>
-  <tr><td>Reviewer</td><td>3</td><td>Approve/reject response letters, review exemption flags, cross-department visibility.</td></tr>
-  <tr><td>Staff</td><td>2</td><td>Create/manage requests, search, attach documents, draft letters. Limited to assigned department.</td></tr>
-  <tr><td>Read-Only</td><td>1</td><td>View requests and documents within assigned department. Cannot create or modify.</td></tr>
-</table>
-
-<h3>Creating Users</h3>
-<pre><code>curl -X POST http://localhost:8000/auth/register \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "jsmith@yourcity.gov",
-    "password": "temporary-password-123",
-    "role": "staff",
-    "department_id": "dept-uuid-here"
-  }'</code></pre>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  Instruct new users to change their password after first login. Self-service password reset is planned for a future release.
-</div>
-
-<h3>Department Scoping Behavior</h3>
-<ul>
-  <li>Staff and Read-Only users can only search documents and view requests within their assigned department.</li>
-  <li>Reviewer and Admin users have cross-department visibility.</li>
-  <li>Documents ingested from a data source are associated with the department that owns that data source.</li>
-  <li>If a user has no department assigned, they cannot see any department-scoped content (except Admins, who see everything).</li>
-</ul>
-
-<h3>Service Accounts for Federation</h3>
-<p>Service accounts enable machine-to-machine API access for integrations with other municipal systems (e.g., a records management system pushing documents). Service accounts authenticate with API keys rather than JWT tokens.</p>
-<pre><code>curl -X POST http://localhost:8000/service-accounts/ \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{"name": "RMS Integration", "description": "Automated document feed from Records Management System"}'</code></pre>
-
-<div class="callout security">
-  <div class="callout-title">Security</div>
-  The API key is returned only once at creation time. It is stored as a bcrypt hash in the database and cannot be retrieved. Record it securely immediately. If lost, create a new service account.
-</div>
-
-
-<!-- SECTION 17 -->
-<h2 class="section-title" id="sec-17">17. Data Source Management</h2>
-
-<h3>Adding File Directory Sources</h3>
-<p>A directory data source points to a file system path accessible to the API container. This path must be mounted as a Docker volume.</p>
-
-<pre><code>curl -X POST http://localhost:8000/datasources/ \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "City Council Minutes",
-    "source_type": "directory",
-    "connection_config": {"path": "/data/council-minutes"},
-    "department_id": "dept-uuid-here"
-  }'</code></pre>
-
-<h3>Volume Mounting</h3>
-<p>Add the source directory as a volume mount in <code>docker-compose.override.yml</code>:</p>
-<pre><code>services:
-  api:
-    volumes:
-      - /path/on/host/council-minutes:/data/council-minutes:ro
-  worker:
-    volumes:
-      - /path/on/host/council-minutes:/data/council-minutes:ro</code></pre>
-
-<div class="callout note">
-  <div class="callout-title">Note</div>
-  Both the API and Worker containers need access to the data source path. Mount as read-only (<code>:ro</code>) when possible.
-</div>
-
-<h3>Triggering Ingestion</h3>
-<pre><code># Trigger ingestion for a specific data source
-curl -X POST http://localhost:8000/datasources/{source_id}/ingest \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;"
-
-# Check ingestion status
-curl http://localhost:8000/datasources/{source_id}/status \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;"</code></pre>
-
-<h3>Incremental Ingestion</h3>
-<p>Townlight Records tracks file modification timestamps. Subsequent ingestion runs only process new or modified files. Deleted files are marked as inactive but remain in the database for audit purposes.</p>
-
-<h3>Supported File Formats</h3>
-<table>
-  <tr><th>Track</th><th>Formats</th></tr>
-  <tr><td>Fast Track (native parsers)</td><td>PDF (text-based), DOCX, XLSX, CSV, HTML, EML, MSG, TXT, RTF, JSON, XML</td></tr>
-  <tr><td>LLM Track (Gemma 4 multimodal)</td><td>Scanned PDF, TIFF, PNG, JPEG, BMP, GIF</td></tr>
-</table>
-
-
-<!-- SECTION 18 -->
-<h2 class="section-title" id="sec-18">18. Model Management</h2>
-
-<h3>Listing Available Models</h3>
-<pre><code>docker compose exec ollama ollama list</code></pre>
-
-<h3>Pulling New Models</h3>
-<pre><code># Pull a language model
-docker compose exec ollama ollama pull gemma3:4b
-
-# Pull a larger model (requires more VRAM/RAM)
-docker compose exec ollama ollama pull gemma3:12b
-
-# Verify the model is available
-docker compose exec ollama ollama list</code></pre>
-
-<h3>Switching the Active Model</h3>
-<p>Update the <code>LLM_MODEL</code> variable in <code>.env</code> and restart the API service:</p>
-<pre><code># Edit .env: LLM_MODEL=gemma3:12b
-docker compose restart api worker</code></pre>
-
-<h3>Model Recommendations by Hardware</h3>
-<table>
-  <tr><th>Hardware Tier</th><th>Recommended Model</th><th>VRAM / RAM Needed</th></tr>
-  <tr><td>CPU-only, 32 GB RAM</td><td><code>gemma3:4b</code></td><td>~8 GB RAM</td></tr>
-  <tr><td>GPU with 8 GB VRAM</td><td><code>gemma3:4b</code></td><td>~4 GB VRAM</td></tr>
-  <tr><td>GPU with 12+ GB VRAM</td><td><code>gemma3:12b</code></td><td>~10 GB VRAM</td></tr>
-  <tr><td>GPU with 24+ GB VRAM</td><td><code>gemma3:27b</code></td><td>~20 GB VRAM</td></tr>
-</table>
-
-<div class="callout warning">
-  <div class="callout-title">Warning</div>
-  Do not remove the <code>nomic-embed-text</code> model. It is required for document embedding and search functionality. Removing it will break search until it is re-pulled.
-</div>
-
-
-<!-- SECTION 19 -->
-<h2 class="section-title" id="sec-19">19. Exemption Rules Administration</h2>
-
-<h3>Rules Overview</h3>
-<p>Townlight Records ships with approximately 180 pre-loaded exemption rules covering common exemption categories from all 50 state open records statutes. Each rule uses one of two detection methods:</p>
-<ul>
-  <li><strong>Regex:</strong> Regular expression pattern matching (e.g., Social Security number format <code>\d{3}-\d{2}-\d{4}</code>)</li>
-  <li><strong>Keyword:</strong> Keyword and phrase matching (e.g., "attorney-client privilege," "trade secret")</li>
-</ul>
-
-<h3>Managing Rules via API</h3>
-<pre><code># List all rules
-curl http://localhost:8000/exemptions/rules/ \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;"
-
-# Create a new rule
-curl -X POST http://localhost:8000/exemptions/rules/ \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "state_code": "CO",
-    "category": "personnel",
-    "rule_type": "keyword",
-    "rule_definition": "performance evaluation"
-  }'
-
-# Disable a rule
-curl -X PATCH http://localhost:8000/exemptions/rules/{rule_id} \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{"enabled": false}'</code></pre>
-
-<h3>Exemption Dashboard</h3>
-<p>The admin panel provides an Exemptions dashboard showing:</p>
-<ul>
-  <li>Total flags generated, broken down by status (accepted, rejected, pending).</li>
-  <li>Flag counts by category.</li>
-  <li>Acceptance rate percentage.</li>
-  <li>Active rules versus total rules.</li>
-</ul>
-<p>Use this dashboard to identify rules that are generating too many false positives (low acceptance rate) and consider disabling or refining them.</p>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  All changes to exemption rules are logged in the audit trail. This includes rule creation, modification, enabling, and disabling. The audit log records which admin made the change and when.
-</div>
-
-
-<!-- SECTION 20 -->
-<h2 class="section-title" id="sec-20">20. Compliance &amp; Audit</h2>
-
-<h3>Audit Trail Architecture</h3>
-<p>Townlight Records maintains a hash-chained, append-only audit log. Every API call is logged with:</p>
-<ul>
-  <li>Timestamp (UTC)</li>
-  <li>User identity (email, role)</li>
-  <li>Action performed (HTTP method, endpoint, parameters)</li>
-  <li>Result (success/failure, status code)</li>
-  <li>Hash of the previous entry (chain integrity)</li>
-</ul>
-
-<h3>Exporting Audit Logs</h3>
-<pre><code># Export audit logs as JSON
-curl "http://localhost:8000/admin/audit-logs?format=json&amp;start_date=2026-01-01&amp;end_date=2026-03-31" \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -o audit-export.json
-
-# Export as CSV
-curl "http://localhost:8000/admin/audit-logs?format=csv&amp;start_date=2026-01-01&amp;end_date=2026-03-31" \
-  -H "Authorization: Bearer &lt;admin-jwt-token&gt;" \
-  -o audit-export.csv</code></pre>
-
-<h3>Compliance Reporting</h3>
-<p>The system provides several built-in compliance reports:</p>
-<table>
-  <tr><th>Report</th><th>Description</th></tr>
-  <tr><td>Response Time Report</td><td>Average and median response times, broken down by department and time period. Identifies requests that exceeded statutory deadlines.</td></tr>
-  <tr><td>Exemption Accuracy Report</td><td>Flag acceptance/rejection rates by category, department, and time period. Helps assess whether AI flagging is systematically biased.</td></tr>
-  <tr><td>Workload Distribution</td><td>Request counts and processing times by staff member and department.</td></tr>
-  <tr><td>Disclosure Report</td><td>Summary of records released, withheld, and partially redacted for a given period.</td></tr>
-</table>
-
-<h3>Exemption Detection Auditability</h3>
-<p>The exemption engine is designed for transparency and external review:</p>
-<ul>
-  <li>Dashboard showing flag acceptance/rejection rates by category, department, and time period.</li>
-  <li>Export flag accuracy data for external review.</li>
-  <li>Configuration interface for adjusting exemption rules without code changes, with all changes logged.</li>
-  <li>Documentation of exemption rule sources with version tracking.</li>
-</ul>
-
-
-<!-- SECTION 21 -->
-<h2 class="section-title" id="sec-21">21. Security</h2>
-
-<h3>Authentication</h3>
-<ul>
-  <li><strong>JWT tokens</strong> for user authentication with configurable expiration.</li>
-  <li><strong>bcrypt</strong> password hashing with automatic salt generation.</li>
-  <li><strong>API keys</strong> for service accounts (machine-to-machine), stored as bcrypt hashes.</li>
-  <li>Session expiration after configurable inactivity period.</li>
-</ul>
-
-<h3>Authorization</h3>
-<ul>
-  <li>Role-based access control (RBAC) with 4 roles: Admin (level 4), Reviewer (3), Staff (2), Read-Only (1).</li>
-  <li>Every API endpoint requires a minimum role level; the <code>require_role</code> dependency checks the user's role against the hierarchy.</li>
-  <li>Department-scoped row-level access control for Staff and Read-Only roles.</li>
-</ul>
-
-<h3>Data Security</h3>
-<ul>
-  <li>All data stored in local PostgreSQL with filesystem-level encryption (LUKS, configured at OS level).</li>
-  <li>No plaintext credential storage &mdash; secrets managed via environment variables.</li>
-  <li>Audit logs are append-only and tamper-evident (hash-chained).</li>
-</ul>
-
-<h3>Network Security</h3>
-<ul>
-  <li>System binds to <code>localhost</code> or a city-designated internal IP only.</li>
-  <li>HTTPS with self-signed or city-provided TLS certificates for all web interfaces.</li>
-  <li>All outbound traffic is logged, allowlisted, and auditable.</li>
-  <li>No external cloud AI services &mdash; all LLM processing is local.</li>
-</ul>
-
-<div class="callout security">
-  <div class="callout-title">Security</div>
-  Townlight Records processes potentially sensitive government records. Ensure that the server is physically secured, network access is restricted to authorized personnel, and all security patches for the host operating system are applied promptly.
-</div>
-
-
-<!-- SECTION 22 -->
-<h2 class="section-title" id="sec-22">22. Backup &amp; Recovery</h2>
-
-<h3>Database Backup</h3>
-<pre><code># Full database backup (compressed custom format)
-docker compose exec -T postgres pg_dump -U townlight_records -Fc townlight_records > backup-$(date +%Y%m%d).dump
-
-# Backup with timestamp
-docker compose exec -T postgres pg_dump -U townlight_records -Fc townlight_records > townlight_records-backup-$(date +%Y%m%d-%H%M%S).dump</code></pre>
-
-<h3>Restoring from Backup</h3>
-<pre><code># Stop the application (keep database running)
-docker compose stop api worker beat
-
-# Restore the database
-docker compose exec -T postgres pg_restore -U townlight_records -d townlight_records --clean --if-exists < backup-20260401.dump
-
-# Restart services
-docker compose up -d</code></pre>
-
-<h3>Configuration Backup</h3>
-<p>Back up these files regularly:</p>
-<table>
-  <tr><th>File</th><th>Contents</th></tr>
-  <tr><td><code>.env</code></td><td>All environment configuration, including JWT secret</td></tr>
-  <tr><td><code>.env.hardware</code></td><td>Hardware detection results</td></tr>
-  <tr><td><code>docker-compose.override.yml</code></td><td>Custom volume mounts and service overrides</td></tr>
-</table>
-
-<h3>Backup Schedule Recommendations</h3>
-<table>
-  <tr><th>Frequency</th><th>What to Back Up</th><th>Retention</th></tr>
-  <tr><td>Daily</td><td>PostgreSQL database dump</td><td>30 days</td></tr>
-  <tr><td>Weekly</td><td>Full system backup (database + config + volumes)</td><td>12 weeks</td></tr>
-  <tr><td>Before upgrades</td><td>Full database dump + config files</td><td>Until upgrade verified</td></tr>
-</table>
-
-<div class="callout warning">
-  <div class="callout-title">Warning</div>
-  Always back up the database before performing any upgrade. Database migrations are forward-only and cannot be easily reversed without a backup.
-</div>
-
-
-<!-- SECTION 23 -->
-<h2 class="section-title" id="sec-23">23. Monitoring &amp; Troubleshooting</h2>
-
-<h3>Health Checks</h3>
-<pre><code># API health endpoint
-curl http://localhost:8000/health
-
-# Individual service checks
-docker compose exec postgres pg_isready -U townlight_records
-docker compose exec redis redis-cli ping
-docker compose exec ollama ollama list</code></pre>
-
-<h3>Admin Status Dashboard</h3>
-<p>The admin panel (<code>/admin</code>) displays a system status page showing:</p>
-<ul>
-  <li><strong>Database:</strong> Connection status (green/red indicator)</li>
-  <li><strong>Ollama:</strong> LLM runtime status and loaded models</li>
-  <li><strong>Redis:</strong> Task queue status</li>
-  <li><strong>User Count:</strong> Total registered users</li>
-  <li><strong>Audit Log Count:</strong> Total audit entries</li>
-  <li><strong>Version:</strong> Current application version</li>
-</ul>
-
-<h3>Viewing Logs</h3>
-<pre><code># All services
-docker compose logs -f
-
-# Specific service
-docker compose logs -f api
-docker compose logs -f worker
-
-# Last 100 lines
-docker compose logs --tail=100 api</code></pre>
-
-<h3>Common Issues</h3>
-<table>
-  <tr><th>Symptom</th><th>Likely Cause</th><th>Resolution</th></tr>
-  <tr><td>"Connection refused" on port 8080</td><td>nginx or API not running</td><td><code>docker compose up -d</code> and check logs</td></tr>
-  <tr><td>Search returns no results</td><td>No documents ingested, or embedding model missing</td><td>Verify data sources and run <code>ollama list</code> to check for <code>nomic-embed-text</code></td></tr>
-  <tr><td>Slow LLM responses (&gt;60s)</td><td>Insufficient RAM or CPU for the selected model</td><td>Switch to a smaller model or add GPU acceleration</td></tr>
-  <tr><td>Celery tasks stuck in "pending"</td><td>Redis connection issue or worker not running</td><td>Check Redis connectivity and restart worker: <code>docker compose restart worker</code></td></tr>
-  <tr><td>Database migration errors</td><td>Schema conflict from skipped version</td><td>Restore from backup and upgrade sequentially through each version</td></tr>
-  <tr><td>Ollama "model not found"</td><td>Model not pulled</td><td>Run <code>docker compose exec ollama ollama pull &lt;model&gt;</code></td></tr>
-  <tr><td>"Permission denied" on data source</td><td>Volume mount permissions</td><td>Verify the container user has read access to the mounted directory</td></tr>
-</table>
-
-<h3>Performance Monitoring</h3>
-<pre><code># Container resource usage
-docker stats
-
-# Database size
-docker compose exec postgres psql -U townlight_records -c "SELECT pg_size_pretty(pg_database_size('townlight_records'));"
-
-# Vector index size
-docker compose exec postgres psql -U townlight_records -c "SELECT pg_size_pretty(pg_total_relation_size('document_embeddings'));"</code></pre>
-
-
-<!-- SECTION 24 -->
-<h2 class="section-title" id="sec-24">24. Upgrading</h2>
-
-<h3>Upgrade Procedure</h3>
-<ol>
-  <li>Back up the database before any upgrade:
-    <pre><code>docker compose exec -T postgres pg_dump -U townlight_records -Fc townlight_records > pre-upgrade-backup.dump</code></pre>
-  </li>
-  <li>Pull the latest code:
-    <pre><code>git pull origin main</code></pre>
-  </li>
-  <li>Rebuild Docker images:
-    <pre><code>docker compose build</code></pre>
-  </li>
-  <li>Run database migrations:
-    <pre><code>docker compose run --rm api alembic upgrade head</code></pre>
-  </li>
-  <li>Restart all services:
-    <pre><code>docker compose up -d</code></pre>
-  </li>
-  <li>Verify health:
-    <pre><code>curl http://localhost:8000/health</code></pre>
-  </li>
-</ol>
-
-<div class="callout tip">
-  <div class="callout-title">Tip</div>
-  The API service automatically runs Alembic migrations on startup. However, running migrations explicitly as a separate step (step 4) allows you to catch migration errors before bringing the full stack online.
-</div>
-
-<h3>Database Migrations</h3>
-<p>Townlight Records uses Alembic for database schema migrations. Migration files are stored in <code>backend/alembic/versions/</code>. Key commands:</p>
-<pre><code># Apply all pending migrations
-docker compose exec api alembic upgrade head
-
-# Check current migration version
-docker compose exec api alembic current
-
-# View migration history
-docker compose exec api alembic history</code></pre>
-
-<h3>Version Compatibility</h3>
-<p>Always upgrade sequentially through minor versions. Skipping major versions may result in migration conflicts. Check the <code>CHANGELOG.md</code> for breaking changes between versions.</p>
-
-<h3>Rollback Procedure</h3>
-<ol>
-  <li>Stop all services: <code>docker compose down</code></li>
-  <li>Restore the database from backup:
-    <pre><code>docker compose up -d postgres
-docker compose exec -T postgres pg_restore -U townlight_records -d townlight_records --clean --if-exists < pre-upgrade-backup.dump</code></pre>
-  </li>
-  <li>Check out the previous version: <code>git checkout v1.0.0</code></li>
-  <li>Rebuild and restart: <code>docker compose build &amp;&amp; docker compose up -d</code></li>
-</ol>
-
-
-<!-- ============================================================ -->
-<!--                        APPENDICES                             -->
-<!-- ============================================================ -->
-<div class="part-divider" id="appendices">
-  <h2>Appendices</h2>
-</div>
-
-<!-- APPENDIX A -->
-<h2 class="section-title" id="appendix-a">A. API Endpoint Reference</h2>
-
-<h3>Authentication</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>POST</td><td><code>/auth/login</code></td><td>&mdash;</td><td>Authenticate and receive JWT token</td></tr>
-  <tr><td>POST</td><td><code>/auth/register</code></td><td>Admin</td><td>Create a new user account</td></tr>
-  <tr><td>GET</td><td><code>/users/me</code></td><td>Read-Only</td><td>Get current user profile</td></tr>
-</table>
-
-<h3>Records Requests</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>GET</td><td><code>/requests/</code></td><td>Staff</td><td>List all requests (department-scoped)</td></tr>
-  <tr><td>POST</td><td><code>/requests/</code></td><td>Staff</td><td>Create a new request</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}</code></td><td>Staff</td><td>Get request details</td></tr>
-  <tr><td>PATCH</td><td><code>/requests/{id}</code></td><td>Staff</td><td>Update request fields or status</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}/documents</code></td><td>Staff</td><td>List documents attached to request</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/documents</code></td><td>Staff</td><td>Attach a document to request</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/submit-review</code></td><td>Staff</td><td>Submit request for review</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/approve</code></td><td>Reviewer</td><td>Approve request for release</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/reject</code></td><td>Reviewer</td><td>Reject request</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}/timeline</code></td><td>Staff</td><td>Get request timeline events</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/timeline</code></td><td>Staff</td><td>Add a timeline event / note</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}/messages</code></td><td>Staff</td><td>Get request messages</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/messages</code></td><td>Staff</td><td>Send a message on request</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}/fees</code></td><td>Staff</td><td>Get request fee items</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/fees</code></td><td>Staff</td><td>Add a fee item</td></tr>
-  <tr><td>POST</td><td><code>/requests/{id}/response-letter</code></td><td>Staff</td><td>Generate a response letter draft</td></tr>
-  <tr><td>GET</td><td><code>/requests/{id}/response-letter</code></td><td>Staff</td><td>Get current response letter</td></tr>
-  <tr><td>PATCH</td><td><code>/requests/{id}/response-letter/{letter_id}</code></td><td>Staff</td><td>Update response letter (approve requires Reviewer)</td></tr>
-</table>
-
-<h3>Search</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>POST</td><td><code>/search/</code></td><td>Staff</td><td>Hybrid search across ingested documents</td></tr>
-  <tr><td>GET</td><td><code>/search/history</code></td><td>Staff</td><td>Get search history for current user</td></tr>
-</table>
-
-<h3>Documents &amp; Data Sources</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>GET</td><td><code>/documents/</code></td><td>Staff</td><td>List ingested documents</td></tr>
-  <tr><td>GET</td><td><code>/documents/{id}</code></td><td>Staff</td><td>Get document details and metadata</td></tr>
-  <tr><td>GET</td><td><code>/datasources/</code></td><td>Admin</td><td>List configured data sources</td></tr>
-  <tr><td>POST</td><td><code>/datasources/</code></td><td>Admin</td><td>Add a new data source</td></tr>
-  <tr><td>POST</td><td><code>/datasources/{id}/ingest</code></td><td>Admin</td><td>Trigger ingestion for data source</td></tr>
-  <tr><td>GET</td><td><code>/datasources/stats</code></td><td>Admin</td><td>Get ingestion statistics</td></tr>
-</table>
-
-<h3>Exemptions</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>GET</td><td><code>/exemptions/rules/</code></td><td>Admin</td><td>List all exemption rules</td></tr>
-  <tr><td>POST</td><td><code>/exemptions/rules/</code></td><td>Admin</td><td>Create a new exemption rule</td></tr>
-  <tr><td>PATCH</td><td><code>/exemptions/rules/{id}</code></td><td>Admin</td><td>Update/toggle an exemption rule</td></tr>
-  <tr><td>GET</td><td><code>/exemptions/dashboard</code></td><td>Admin</td><td>Get exemption dashboard statistics</td></tr>
-</table>
-
-<h3>Administration</h3>
-<table>
-  <tr><th>Method</th><th>Endpoint</th><th>Min Role</th><th>Description</th></tr>
-  <tr><td>GET</td><td><code>/admin/status</code></td><td>Admin</td><td>System health and service status</td></tr>
-  <tr><td>GET</td><td><code>/admin/audit-logs</code></td><td>Admin</td><td>Query and export audit logs</td></tr>
-  <tr><td>GET</td><td><code>/health</code></td><td>&mdash;</td><td>Unauthenticated health check endpoint</td></tr>
-  <tr><td>POST</td><td><code>/service-accounts/</code></td><td>Admin</td><td>Create a service account</td></tr>
-</table>
-
-
-<!-- APPENDIX B -->
-<h2 class="section-title" id="appendix-b">B. Database Schema Overview</h2>
-
-<p>Townlight Records uses PostgreSQL 17 with the pgvector extension for vector storage. The schema consists of 29 tables organized into the following functional groups:</p>
-
-<h3>Authentication &amp; Administration</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>users</code></td><td>User accounts with role enum (admin, staff, reviewer, read_only), department assignment, and fastapi-users fields</td></tr>
-  <tr><td><code>service_accounts</code></td><td>Machine-to-machine API key accounts with roles and bcrypt-hashed keys</td></tr>
-  <tr><td><code>departments</code></td><td>Department definitions for access scoping</td></tr>
-</table>
-
-<h3>Documents &amp; Ingestion</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>data_sources</code></td><td>Configured data source connections (directory paths, types, department ownership)</td></tr>
-  <tr><td><code>documents</code></td><td>Ingested document metadata (filename, file type, size, ingestion status, error messages)</td></tr>
-  <tr><td><code>document_chunks</code></td><td>Text chunks extracted from documents (content, position, chunk index)</td></tr>
-  <tr><td><code>document_embeddings</code></td><td>Vector embeddings for document chunks (pgvector column, model identifier)</td></tr>
-</table>
-
-<h3>Records Requests</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>records_requests</code></td><td>Public records requests with status workflow, requester info, deadlines, and assignment</td></tr>
-  <tr><td><code>request_documents</code></td><td>Many-to-many associations between requests and documents with inclusion decisions and relevance notes</td></tr>
-  <tr><td><code>document_cache</code></td><td>Cached document files per request for legal defensibility</td></tr>
-  <tr><td><code>request_timeline</code></td><td>Chronological event log for each request (status changes, notes, actions)</td></tr>
-  <tr><td><code>request_messages</code></td><td>Messages between staff and requesters</td></tr>
-  <tr><td><code>request_fees</code></td><td>Fee items associated with requests (type, amount, status)</td></tr>
-  <tr><td><code>response_letters</code></td><td>Draft and final response letters with approval status</td></tr>
-</table>
-
-<h3>Exemptions</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>exemption_rules</code></td><td>Configurable rules (state code, category, rule type, definition, enabled flag)</td></tr>
-  <tr><td><code>exemption_flags</code></td><td>Flags generated by the exemption engine (document, chunk, category, confidence, status)</td></tr>
-</table>
-
-<h3>Search &amp; Analytics</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>search_sessions</code></td><td>Search session context for iterative refinement</td></tr>
-  <tr><td><code>search_queries</code></td><td>Individual search queries with result counts and timing</td></tr>
-</table>
-
-<h3>Audit &amp; Compliance</h3>
-<table>
-  <tr><th>Table</th><th>Description</th></tr>
-  <tr><td><code>audit_log</code></td><td>Hash-chained, append-only audit trail of all system actions</td></tr>
-</table>
-
-
-<!-- APPENDIX C -->
-<h2 class="section-title" id="appendix-c">C. Supported Platforms</h2>
-
-<h3>Operating Systems</h3>
-<table>
-  <tr><th>Platform</th><th>Support Level</th><th>Notes</th></tr>
-  <tr><td>Ubuntu 24.04 LTS</td><td>Primary (recommended)</td><td>Full support including GPU acceleration</td></tr>
-  <tr><td>Debian 12 (Bookworm)</td><td>Primary</td><td>Full support including GPU acceleration</td></tr>
-  <tr><td>Windows 11 Pro/Enterprise</td><td>Supported</td><td>Requires Docker Desktop. GPU via CUDA (NVIDIA) or DirectML.</td></tr>
-  <tr><td>Windows 10 (21H2+)</td><td>Supported</td><td>Requires Docker Desktop with WSL 2 backend</td></tr>
-  <tr><td>macOS 13+ (Ventura)</td><td>Supported</td><td>Docker Desktop required. CPU inference only (no GPU acceleration).</td></tr>
-  <tr><td>RHEL 9 / Rocky Linux 9</td><td>Community</td><td>Should work with Docker CE; not formally tested</td></tr>
-</table>
-
-<h3>Browsers</h3>
-<table>
-  <tr><th>Browser</th><th>Minimum Version</th></tr>
-  <tr><td>Google Chrome</td><td>120+</td></tr>
-  <tr><td>Microsoft Edge</td><td>120+</td></tr>
-  <tr><td>Mozilla Firefox</td><td>120+</td></tr>
-  <tr><td>Safari</td><td>17+</td></tr>
-</table>
-
-<h3>Docker Requirements</h3>
-<table>
-  <tr><th>Component</th><th>Minimum Version</th></tr>
-  <tr><td>Docker Engine</td><td>24.0</td></tr>
-  <tr><td>Docker Compose</td><td>v2.20</td></tr>
-  <tr><td>Docker Desktop (Windows/macOS)</td><td>4.25</td></tr>
-</table>
-
-<!-- FOOTER -->
-<div style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid #dde3ea; text-align: center; color: #5a6a7a; font-size: 0.85rem;">
-  <p>&copy; 2026 Townlight Records Project &mdash; Unified Operations Manual v1.4.1</p>
-  <p>AI-Powered Open Records Support for American Cities</p>
-  <p style="margin-top: 0.5rem;">This document is confidential and intended for authorized municipal staff and IT personnel only.</p>
-</div>
-
-</div><!-- /.container -->
-</body>
-</html>
+<section aria-label="Resident portal"><p>The resident portal is deployed separately. See the <a href="https://townlight.github.io/manuals/portal.html">Townlight Portal Guide</a> for its workflow and acceptance limits.</p></section></main><footer>Townlight · AGPL-3.0-only · Candidate evidence applies only to its identified artifacts.</footer></body></html>
