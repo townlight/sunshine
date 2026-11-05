@@ -1,6 +1,6 @@
-Windows x64 Beta 1 · MSI 1.7.0.1
+Windows x64 Beta 1 · MSI 1.7.1.1
 
-The signed Windows x64 beta 1.7.0.1 passed the documented fresh Windows
+The signed Windows x64 beta 1.7.1.1 passed the documented fresh Windows
 Sandbox checks with synthetic data.
 
 - Townlight Records Manual
@@ -73,10 +73,10 @@ Beta identity
   Identity                         Value
   -------------------------------- -------------------------------------------------------------------------------
   Documentation                    Townlight Beta 1 naming, Access and Notice candidate
-  Intended installer version       1.7.0.1
+  Intended installer version       1.7.1.1
   Product component                townlight-records 1.8.0.dev2
   Principal import package         townlight_records
-  Native desktop source version    1.7.0-1
+  Native desktop source version    1.7.1-1
   Candidate hashes                 SHA-256 checksums and Windows acceptance summary
   Current owned software license   AGPL-3.0-only
   Acceptance composition           Fresh Windows x64 profile; inspections-preview; Station configured separately
@@ -359,7 +359,7 @@ This beta has synthetic single-profile workflow evidence. It does not
 have a published benchmark for concurrent staff capacity, minimum
 RAM/CPU, large-source limits or a field SLA. Do not turn a developer
 machine’s specification into a supported minimum. The signed MSI is
-2,082,697,216 bytes; allow additional disk for extracted runtime,
+2,081,316,864 bytes; allow additional disk for extracted runtime,
 database, originals, exports, media and backups. Select
 equipment/storage after sizing those actual workloads.
 
