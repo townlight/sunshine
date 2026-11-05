@@ -2,9 +2,9 @@ Townlight Records — specification and current source map
 
 Townlight Beta 1 component (AGPL-3.0-only): townlight-records
 1.8.0.dev2, principal import townlight_records, paired with
-townlight-core 1.3.0.dev2. Windows MSI 1.7.1.1 is published. Its exact
+townlight-core 1.3.0.dev2. Windows MSI 1.7.2.1 is published. Its exact
 acceptance summary is at
-https://github.com/townlight/townlight/releases/download/townlight-v1.7.1-beta.1/ACCEPTANCE-Windows-1.7.1.1.md;
+https://github.com/townlight/townlight/releases/download/townlight-windows-v1.7.2.1/ACCEPTANCE-Windows-1.7.2.1.md;
 standalone deployment remains separate.
 
 The complete retained design specification preserves its original text,

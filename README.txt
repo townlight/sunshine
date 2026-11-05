@@ -1,7 +1,7 @@
-Windows x64 Beta 1 · MSI 1.7.1.1
+Windows x64 Beta 1 · MSI 1.7.2.1
 
-The signed Windows x64 beta 1.7.1.1 passed the documented fresh Windows
-Sandbox checks with synthetic data.
+The signed Windows x64 beta 1.7.2.1 updates installer metadata while
+preserving the accepted signed application/runtime cabinet.
 
 - Townlight Records Manual
   - Contents
@@ -73,7 +73,7 @@ Beta identity
   Identity                         Value
   -------------------------------- -------------------------------------------------------------------------------
   Documentation                    Townlight Beta 1 naming, Access and Notice candidate
-  Intended installer version       1.7.1.1
+  Intended installer version       1.7.2.1
   Product component                townlight-records 1.8.0.dev2
   Principal import package         townlight_records
   Native desktop source version    1.7.1-1
@@ -89,9 +89,8 @@ First run
 
 1.  Download the signed MSI, matching source companion and checksums
     from the public Windows release.
-2.  Verify the MSI hash and Authenticode publisher before installing on
-    a fresh Windows profile. See the Windows acceptance summary for the
-    tested setup.
+2.  Verify the MSI hash and Authenticode publisher before installation.
+    See the Windows acceptance summary for the tested setup.
 3.  Launch Townlight under the intended named Windows account. Choose
     the storage folders. Select Townlight Inspections candidate
     (inspections-preview) for the bounded desktop composition, including
