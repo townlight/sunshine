@@ -1,6 +1,6 @@
-Windows x64 Beta 1 · MSI 1.7.2.1
+Windows x64 Beta 1 · MSI 1.8.0.1
 
-The signed Windows x64 beta 1.7.2.1 updates installer metadata while
+The signed Windows x64 beta 1.8.0.1 updates installer metadata while
 preserving the accepted signed application/runtime cabinet.
 
 - Townlight Records Manual
@@ -73,10 +73,10 @@ Beta identity
   Identity                         Value
   -------------------------------- -------------------------------------------------------------------------------
   Documentation                    Townlight Beta 1 naming, Access and Notice candidate
-  Intended installer version       1.7.2.1
+  Windows MSI version       1.8.0.1
   Product component                townlight-records 1.8.0.dev2
   Principal import package         townlight_records
-  Native desktop source version    1.7.1-1
+  Native desktop source version    1.8.0-1
   Candidate hashes                 SHA-256 checksums and Windows acceptance summary
   Current owned software license   AGPL-3.0-only
   Acceptance composition           Fresh Windows x64 profile; inspections-preview; Station configured separately
