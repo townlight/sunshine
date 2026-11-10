@@ -161,13 +161,15 @@ included with the same documentation companion.</p>
 </tr>
 <tr>
 <td>Acceptance composition</td>
-<td>Fresh Windows x64 profile; inspections-preview; Station configured
-separately</td>
+<td>Windows x64 fresh install and upgrade from 1.7.2.1. Select the full profile. Station uses separate configuration.</td>
 </tr>
 </tbody>
 </table>
-<p>Start a new installation with an empty database and fresh Windows profile. For an upgrade from Windows 1.7.2.1, keep the existing profile. The approved profile path is <code>%LOCALAPPDATA%\CivicSuite</code>. Keep existing profiles and backups.</p>
+
 <h2 id="first-run">First run</h2>
+<p><strong>Upgrade from 1.7.2.1.</strong> For the tested upgrade from 1.7.2.1, back up city data and settings, close Townlight, run the signed Windows 1.8.0.1 MSI, and reopen Townlight under the same Windows account with its existing profile. Keep the existing <code>%LOCALAPPDATA%\CivicSuite</code> directory. Upgrade paths from versions older than 1.7.2.1 are unverified. Station uses its separately configured service.</p>
+<h3>Fresh installation</h3>
+<p>Run the signed Windows 1.8.0.1 MSI and use an empty database and a new Townlight profile for first run.</p>
 <ol type="1">
 <li>Download the signed MSI, matching source companion and checksums from the <a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.0.1">public Windows release</a>.</li>
 <li>Verify the MSI hash and Authenticode publisher before installation. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">Windows acceptance summary</a> for the tested setup.</li>
@@ -400,8 +402,7 @@ shapes and endpoint authentication remain in the Records API
 reference.</p>
 <h2 id="technical-specifications">Technical specifications</h2>
 <h3 id="runtime-and-storage">Runtime and storage</h3>
-<p>The accepted package targets <strong>Windows x64 fresh
-installation</strong>. Its native shell uses <strong>Rust 2021, Tauri 2
+<p>The accepted package supports Windows x64 fresh installation and upgrade from 1.7.2.1. Its native shell uses <strong>Rust 2021, Tauri 2
 and Microsoft WebView2</strong>; browser assets are JavaScript built
 with <strong>Vite 8.1.6</strong>. This describes the native desktop
 frontend; Station has a separate React operator, specified below or in
@@ -615,7 +616,7 @@ backup.</p>
 controls. If the result says <strong>Restore needs service
 start</strong>, use <strong>Start</strong>, then <strong>Check</strong>,
 and reopen a known record. Do not repeat restore merely because services
-need to start. The fresh-profile acceptance verified that a fulfilled
+need to start. The <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows 1.6.0.1 Beta 1 fresh-install acceptance</a> verified that a fulfilled
 request survived restore and a post-backup marker did not.</p>
 <p>Keep Station’s dedicated database and media evidence together in its
 own backup. Core’s native-profile backup must not be assumed to include
@@ -696,6 +697,7 @@ repeat restore.</td>
 </table>
 <h2 id="verified-workflows-and-limits">Verified workflows and
 limits</h2>
+<p>The table records selected synthetic workflows from the original <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows 1.6.0.1 Beta 1</a> Sandbox run. Station’s later delivery has <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1-station-delivery">separate Windows 1.6.0.1 acceptance</a>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">Windows 1.8.0.1 acceptance summary</a> for the workflows and upgrade path exercised on the current MSI.</p>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -719,21 +721,8 @@ package exports, fulfillment/readback and native workspace.</td>
 </tr>
 </tbody>
 </table>
-<p>These results come from the identified signed candidate’s fresh
-normal-profile Sandbox exercise: real native IPC/HTTP/PostgreSQL and
-selected headless controls. All accounts, source bundles and media were
-synthetic. The guest install/uninstall and recovery passed, and the
-owned Sandbox stopped. No host installed application or standalone
-CivicCast was changed. This documentation task reuses those receipts; it
-does not claim a new software acceptance run.</p>
-<p>See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">Windows acceptance summary</a> for this MSI. The historical <a href="https://townlight.github.io/reference/sandbox-evidence-index.json">evidence index</a> applies to its original build.</p>
-<p>The limits remain: actual city field acceptance and equipment/network
-commissioning; Station automatic provisioning/SCM commissioning; every
-UI/role combination; field recognition accuracy; and historical in-place
-upgrades are not certified. They are not five invented feature
-requirements. Fresh-install controlled beta handoff remains the accepted
-scope. This package makes no city-deployment, publication or
-general-availability claim.</p>
+
+<p>The Windows 1.8.0.1 acceptance covers the tested installation paths and selected synthetic workflows, including Boards &amp; Commissions, Contracts, and Procurement. Earlier results apply to their original builds. City field acceptance, physical equipment and network commissioning, Station automatic provisioning, and comprehensive UI and role coverage remain outside the 1.8.0.1 checks.</p>
 <h2 id="terms-of-service-and-license">Terms of service and license</h2>
 <h3 id="scope-and-status">Scope and status</h3>
 <p>These terms describe the Townlight Beta 1 software and this
@@ -790,12 +779,7 @@ enforcement notice or records-release decision. Official permit fee
 authority remains with the adopted source and responsible organization;
 imported amounts do not become a new authoritative calculation.</p>
 <h3 id="beta-operation-and-recovery">Beta operation and recovery</h3>
-<p>Use the identified candidate in its supported fresh-install scope.
-Preserve backups and original evidence. Test physical equipment and
-chosen network/service configuration before relying on them. The
-supplied acceptance describes selected synthetic workflows, not every
-screen, vendor, field condition or upgrade. Operators decide whether a
-particular deployment meets their own operational obligations.</p>
+<p>Windows 1.8.0.1 was tested for fresh installation and in-place upgrade from 1.7.2.1. Upgrade paths from versions older than 1.7.2.1 are unverified. Station uses its separately configured service. Keep backups and original evidence. Test your physical equipment and network and service configuration before relying on them. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">acceptance summary</a> for the tested paths.</p>
 <h3 id="warranty-and-liability">Warranty and liability</h3>
 <p>The covered software’s warranty and liability conditions are those in
 sections 15–17 of the supplied AGPL and any applicable separate written
