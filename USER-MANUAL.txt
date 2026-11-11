@@ -1,6 +1,17 @@
-Windows x64 Beta 1 · MSI 1.8.0.1
 
-The signed Windows x64 beta 1.8.0.1 adds the three staff workspaces and
+## Shared meeting imports · Windows 1.8.1.1
+
+Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.
+
+[All 31 sources, formats and handoffs](https://townlight.github.io/manuals/meeting-imports.html) · [Installed acceptance](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md).
+
+Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to 1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an existing-city evaluation, back up city data and settings, close Townlight, keep the existing %LOCALAPPDATA%\CivicSuite profile, and use the same Windows account. Keep the prior installer and a restore path. Station continues to use its separately configured service.
+
+The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6 distributions. Its health version strings still report Runtime 0.3.0 and Meetings 1.0.5. Default-branch source corrects those display strings; the signed MSI and its exact build source remain unchanged.
+
+Windows x64 Beta 1 · MSI 1.8.1.1
+
+The signed Windows x64 beta 1.8.1.1 adds the three staff workspaces and
 automatically refreshes the bundled runtime when upgrading from 1.7.2.1.
 
 - Townlight Records Manual
@@ -73,13 +84,13 @@ Beta identity
   Identity                         Value
   -------------------------------- -------------------------------------------------------------------------------------------------------------------
   Documentation                    Townlight Beta 1 naming, Access and Notice candidate
-  Windows MSI version              1.8.0.1
+  Windows MSI version              1.8.1.1
   Product component                townlight-records 1.8.0.dev2
   Principal import package         townlight_records
-  Native desktop source version    1.8.0-1
+  Native desktop source version    1.8.1-1
   Candidate hashes                 SHA-256 checksums and Windows acceptance summary
   Current owned software license   AGPL-3.0-only
-  Acceptance composition           Windows x64 fresh install and upgrade from 1.7.2.1. Select the full profile. Station uses separate configuration.
+  Acceptance composition           Windows 1.8.1.1: fresh-install acceptance; upgrade to this version unverified. Select the full profile. Station uses separate configuration.
 
 Start a new installation with an empty database and fresh Windows
 profile. For an upgrade from Windows 1.7.2.1, keep the existing profile.
@@ -89,7 +100,7 @@ profiles and backups.
 First run
 
 Upgrade from 1.7.2.1. For the tested upgrade from 1.7.2.1, back up city
-data and settings, close Townlight, run the signed Windows 1.8.0.1 MSI,
+data and settings, close Townlight, run the signed Windows 1.8.1.1 MSI,
 and reopen Townlight under the same Windows account with its existing
 profile. Keep the existing %LOCALAPPDATA%\CivicSuite directory. Upgrade
 paths from versions older than 1.7.2.1 are unverified. Station uses its
@@ -97,7 +108,7 @@ separately configured service.
 
 Fresh installation
 
-Run the signed Windows 1.8.0.1 MSI and use an empty database and a new
+Run the signed Windows 1.8.1.1 MSI and use an empty database and a new
 Townlight profile for first run.
 
 1.  Download the signed MSI, matching source companion and checksums
@@ -591,7 +602,7 @@ Verified workflows and limits
 The table records selected synthetic workflows from the original Windows
 1.6.0.1 Beta 1 Sandbox run. Station’s later delivery has separate
 Windows 1.6.0.1 acceptance. See the Windows 1.8.0.1 acceptance summary
-for the workflows and upgrade path exercised on the current MSI.
+for the workflows and upgrade path exercised on the previous 1.8.0.1 MSI.
 
   Product   Recorded result   Precisely exercised
   --------- ----------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
