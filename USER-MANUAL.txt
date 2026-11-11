@@ -90,7 +90,7 @@ Beta identity
   Native desktop source version    1.8.1-1
   Candidate hashes                 SHA-256 checksums and Windows acceptance summary
   Current owned software license   AGPL-3.0-only
-  Acceptance composition           Windows x64 fresh install and upgrade from 1.7.2.1. Select the full profile. Station uses separate configuration.
+  Acceptance composition           Windows 1.8.1.1: fresh-install acceptance; upgrade to this version unverified. Select the full profile. Station uses separate configuration.
 
 Start a new installation with an empty database and fresh Windows
 profile. For an upgrade from Windows 1.7.2.1, keep the existing profile.
