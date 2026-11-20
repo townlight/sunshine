@@ -3,7 +3,7 @@
  * docs/generate-deliverables.js
  * Generates Rule 9 deliverables from README.md and USER-MANUAL.md.
  * Outputs: README.txt, README.docx, README.pdf, USER-MANUAL.txt, USER-MANUAL.docx, USER-MANUAL.pdf
- * Requires: docs/node_modules (docx@9.6.1, puppeteer) — already installed.
+ * Requires: Node >=22.12.0; run `npm ci` in docs/ to install the locked tools.
  *
  * Usage (from repo root):  node docs/generate-deliverables.js
  */
