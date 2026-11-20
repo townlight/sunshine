@@ -97,7 +97,20 @@ def main() -> int:
             token in text
             for token in ("Townlight Beta 1", "townlight-records", "1.8.0.dev2", "AGPL-3.0-only")
         ) and "naming" in lower and "candidate" in lower
-        if not (has_beta_label or has_naming_candidate_label or (has_legacy_warning and has_current_recovery_label)):
+        has_published_maintenance_label = all(
+            token in text
+            for token in (
+                "Windows 1.8.2.1", "townlight-records", "1.8.0.dev3",
+                "AGPL-3.0-only", "Acceptance and limits",
+            )
+        )
+        if has_published_maintenance_label and not rel.endswith(".txt"):
+            has_published_maintenance_label = all(
+                token in text for token in (
+                    "townlight-windows-v1.8.2.1", "ACCEPTANCE-Windows-1.8.2.1.md",
+                )
+            )
+        if not (has_beta_label or has_naming_candidate_label or has_published_maintenance_label or (has_legacy_warning and has_current_recovery_label)):
             fail(
                 f"{rel}: missing exact Beta 1 identity or historical recovery warning/label",
                 failures,
