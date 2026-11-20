@@ -87,7 +87,7 @@ Beta identity
 
   Principal import package            townlight_records
 
-  Native desktop source version       1.8.1-1
+  Native desktop source version       1.8.2-1
 
   Candidate hashes                    SHA-256 checksums and Windows acceptance summary
 

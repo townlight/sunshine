@@ -1,381 +1,442 @@
 {
-  "schema_version": 1,
-  "profile": "windows-local-1.0",
-  "product_profile": "inspections-preview",
-  "payloads": [
-    {
-      "id": "postgres-17-pgvector",
-      "label": "Portable PostgreSQL 17 with pgvector",
-      "source_dir": "postgres",
-      "status": "present",
-      "required_files": [
-        {
-          "path": "bin/pg_ctl.exe",
-          "size_bytes": 147728,
-          "sha256": "6650f51db462669dcad93437399d00c02f6e8c9f0044ef88f45eb982f77d5006"
-        },
-        {
-          "path": "bin/pg_controldata.exe",
-          "size_bytes": 123152,
-          "sha256": "b2f67d86eb198cb81d83f65e255aedf3f2486281fb98efdfb872c7969237dbdf"
-        },
-        {
-          "path": "bin/initdb.exe",
-          "size_bytes": 260368,
-          "sha256": "7d1a5d5972b93e8c9d7c1f16f545fa6c352cd86de249a71933657a3fbdabd0fe"
-        },
-        {
-          "path": "bin/postgres.exe",
-          "size_bytes": 9934096,
-          "sha256": "f3a31d1132b219c1f61a1fedbc10b1f765b2c0a7e0d53b69f5d4c8834b4b902a"
-        },
-        {
-          "path": "bin/zlib1.dll",
-          "size_bytes": 153360,
-          "sha256": "69a28bf8937890e33bc6f3641893be2e6920bfd170380593a64e9ad59822f2c6"
-        },
-        {
-          "path": "bin/vcruntime140.dll",
-          "size_bytes": 178616,
-          "sha256": "d1f4225df2cd877dbf130d5668a021dce3f94118455ff5ec952061c30afc9ce7"
-        },
-        {
-          "path": "bin/vcruntime140_1.dll",
-          "size_bytes": 50112,
-          "sha256": "a7146c08f89fe5b04541ab507cdb59ff7b44534d4ba3c668a426c6450a03434e"
-        },
-        {
-          "path": "bin/msvcp140.dll",
-          "size_bytes": 643512,
-          "sha256": "7c26614e1d733892c2deac7e245ce115504b1d80592dd0a01b08e3e5a55f89ca"
-        },
-        {
-          "path": "share/extension/vector.control",
-          "size_bytes": 149,
-          "sha256": "52c583fb0c22c616b21762c7b9d3079c02655b78b96d5689cd1e64449b9a575e"
-        },
-        {
-          "path": "lib/vector.dll",
-          "size_bytes": 292624,
-          "sha256": "afb34ba17143ba1ddfca70bbc644a7f103f899bbc32faeeb495289a4c6451429"
-        },
-        {
-          "path": "share/extension/postgis.control",
-          "size_bytes": 175,
-          "sha256": "2802c2bb571cf648daafb834a452a7dc884ef359116a1b17ab4c4acd6155e699"
-        },
-        {
-          "path": "lib/postgis-3.dll",
-          "size_bytes": 1793808,
-          "sha256": "70aa933675ad1e28d45938f32b8a46e1b9cb881f0aac894bd4af26b250851763"
-        }
-      ]
-    },
-    {
-      "id": "cpython-services",
-      "label": "Bundled CPython city services",
-      "source_dir": "python",
-      "status": "present",
-      "required_files": [
-        {
-          "path": "python.exe",
-          "size_bytes": 105816,
-          "sha256": "5341746f92483a93e44c313de830f2fba2956f0759094404a16b2fed06c9a2ed"
-        },
-        {
-          "path": "Lib/site-packages/townlight_core/__init__.py",
-          "size_bytes": 10845,
-          "sha256": "271ec6a8d23264747891f8909e8ed1986cb8b2d56098bcaf59e3550b1978e9c4"
-        },
-        {
-          "path": "Lib/site-packages/townlight_core/migrations/alembic.ini",
-          "size_bytes": 87,
-          "sha256": "9f91262372d5cf06551f80272b10a44c197be3ef3e7dcda228271d6346c4eee6"
-        },
-        {
-          "path": "Lib/site-packages/townlight_core/migrations/versions/townlight_core_0003_local_task_queue.py",
-          "size_bytes": 1909,
-          "sha256": "bc3d01f5e198904380fcc835b108a098ef9ba26f507c7d575219772adf5ab76f"
-        },
-        {
-          "path": "Lib/site-packages/townlight_records/main.py",
-          "size_bytes": 11505,
-          "sha256": "9daff4d0c0375eefedc6f111e83215c206d0379115eae306b80ad4862db08c3f"
-        },
-        {
-          "path": "Lib/site-packages/townlight_notice/main.py",
-          "size_bytes": 23999,
-          "sha256": "5074a5d9d80332f672401cfa37035d13ec4e5b9707b155ea154d1a689404c920"
-        },
-        {
-          "path": "Lib/site-packages/townlight_access/main.py",
-          "size_bytes": 18671,
-          "sha256": "0eb87c6acb2c97e6c43f928a457bb226a826d807a8bc3c5afc347bf88c8daf8e"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/__init__.py",
-          "size_bytes": 118,
-          "sha256": "fc9d25b5ab8993eaaf8476bd2aa51513d83aa63151868100a8f40c15f4819fb6"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/services.py",
-          "size_bytes": 24155,
-          "sha256": "2830069a2c2136c21a0acc9c488c599f72976579a8ab3e1f00b6e194c71032d7"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/migrate.py",
-          "size_bytes": 6334,
-          "sha256": "a7a90f0ead03886210f2a9d58f5967fa38f0ebc3780caa572dd17d978571087e"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_cutover.py",
-          "size_bytes": 4650,
-          "sha256": "e0c2f9b4ef95e913c8c096bf5bc472bde66ff1eab1d1775026e8923f900675e0"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_import.py",
-          "size_bytes": 8613,
-          "sha256": "7baa9f06e3d046711b4111bb2ba28e89adcaed156bd896ec3caeab03feb2622e"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_import_store.py",
-          "size_bytes": 16872,
-          "sha256": "e5f116e7620d86cca0b46f37561dd7b1f714c83178be681f51bd6a9db942edcd"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_import_access.py",
-          "size_bytes": 3191,
-          "sha256": "51ccf503c5901e60d836a657972539a880e723285482821d418065053addf8fa"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/native_accounts.py",
-          "size_bytes": 4090,
-          "sha256": "497fb326fccb61dec69b58daf35a382ab832adeed190e65d2a7f87098fb3c6e7"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_snapshot.py",
-          "size_bytes": 7630,
-          "sha256": "fdb4098bdfaa24f81118a7e41bce803c8414569644d47d5907d0daf68f994d32"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/records_demo.py",
-          "size_bytes": 7341,
-          "sha256": "fe5d902ba81e6c55bcce095ce7eb13071254c028c2dd730393a7cce10c6a7263"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/fixtures/redstone-valley-records-demo-v1.json",
-          "size_bytes": 6629,
-          "sha256": "859a65633f6f4575bb53f5db61a11b0a092cc1f9b145b828e70729cfd28e6a34"
-        },
-        {
-          "path": "Lib/site-packages/townlight_records/auth/native_identity.py",
-          "size_bytes": 2151,
-          "sha256": "bfef8b1b166fee96fc3274d77f27f9a03c441b3ceab9a0a54a09fa7f3ae5fb99"
-        },
-        {
-          "path": "Lib/site-packages/townlight_records/desktop_bridge/router.py",
-          "size_bytes": 33322,
-          "sha256": "a7bac9443fe9cc93ac0949902f01aed1ba501bda1494535e90ddd660c7537494"
-        },
-        {
-          "path": "Lib/site-packages/townlight_records/requests/artifacts.py",
-          "size_bytes": 12085,
-          "sha256": "01f049db7a2e4bcfdfb969cef1fe7c52fff2110ce0745e5ec370029dc4d955dd"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic/versions/027_import_artifact_order.py",
-          "size_bytes": 446,
-          "sha256": "38dba1eb3f6fa1a2444e716deb630cc83dcdff4bc1129ee62d2bdaba3116d042"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic.ini",
-          "size_bytes": 560,
-          "sha256": "b40ffe9d0492f76d67e378b1b6a8cda387b08287528f28f0901dde9c383c6a26"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic/env.py",
-          "size_bytes": 2922,
-          "sha256": "8928b9156c23c2d63337d21c908784f87077cb515c758d3ccf0d6f88ac07ce45"
-        },
-        {
-          "path": "Lib/site-packages/townlight_zoning/geo_import.py",
-          "size_bytes": 13686,
-          "sha256": "8926ce327572fe40e18e513c04928920a5d14306df6b003fd3e0a466914a5a26"
-        },
-        {
-          "path": "Lib/site-packages/townlight_zoning/connected_sources.py",
-          "size_bytes": 11235,
-          "sha256": "8bf1acad90f7f66e637a45727fc751a5d74f2c98f893c43f91a41914f8735883"
-        },
-        {
-          "path": "Lib/site-packages/townlight_zoning/migrations/versions/townlight_zoning_0006_cited_questions.py",
-          "size_bytes": 2398,
-          "sha256": "5195cf011c8c384b5c0a3b7cf7abc1b3414f59dc8e92a37c5248c6f8dfada527"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/zoning_bridge.py",
-          "size_bytes": 15192,
-          "sha256": "9bb3476d8f8365285cd486b86bdc27b0e28d34519610fdc379d2c58d42d2de54"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/zoning_records.py",
-          "size_bytes": 1700,
-          "sha256": "c4cb908e45e90baeaedff9fd4c668ca65229e129bc298b4d893d515046e73449"
-        },
-        {
-          "path": "Lib/site-packages/townlight_meetings/main.py",
-          "size_bytes": 148590,
-          "sha256": "411f2e69ac62e75e1b680ed7fd2954b159f6d0db1919da6ccceae9b646fdcb09"
-        },
-        {
-          "path": "Lib/site-packages/townlight_code/main.py",
-          "size_bytes": 88337,
-          "sha256": "08a9c16106b52ee8a5aeeee6ad00e1721c59e2c27c40d7e83b96b89256a15e3b"
-        },
-        {
-          "path": "Lib/site-packages/townlight_planning/workflow_store.py",
-          "size_bytes": 17298,
-          "sha256": "abf17394c1d03528208f26343afece0dd928e96920e9ecc7c46885d0f1543aef"
-        },
-        {
-          "path": "Lib/site-packages/townlight_planning/source_bundle.py",
-          "size_bytes": 6466,
-          "sha256": "f6547516067e27697dfcd6ba80de6e2ca03d1473370209aa354a5bf95b7db98a"
-        },
-        {
-          "path": "Lib/site-packages/townlight_planning/migrations/__init__.py",
-          "size_bytes": 2183,
-          "sha256": "d633520d0fcec8ca93f8f5dc22e206cc65ea5c646a8a61e89eb6614d51008986"
-        },
-        {
-          "path": "Lib/site-packages/townlight_planning/migrations/versions/townlight_planning_0002_workflows.py",
-          "size_bytes": 1093,
-          "sha256": "eba85cad351b499cd7456e68305309d92cb4c3087e355417df5259458d9c3f4f"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/planning_bridge.py",
-          "size_bytes": 14570,
-          "sha256": "9722286324a54d1dd831ae2f978c8337450b98bd90dee74fe15ff8cbd771992c"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/planning_connections.py",
-          "size_bytes": 2494,
-          "sha256": "116b2e0cf1d1acaba1d5135f746a91e283cbd5fb238631379a4672496d96ae77"
-        },
-        {
-          "path": "Lib/site-packages/townlight_records/requests/planning_sources.py",
-          "size_bytes": 1877,
-          "sha256": "34f8e3c602ac055998d2284a1aa137acf2c095bd601be1912a8cae58431b244d"
-        },
-        {
-          "path": "planning-candidate-provenance.json",
-          "size_bytes": 7297,
-          "sha256": "5f5505165c9b4851d7a0cd45bd8880fae0a5bb00082952388923f7c8649f2826"
-        },
-        {
-          "path": "Lib/site-packages/townlight_planning/migrations/versions/townlight_planning_0004_neighborhoods.py",
-          "size_bytes": 853,
-          "sha256": "5db83c05d550ab4f9f0a414c6f139fa454bdc03ae1c7963e55290ecbc8fd644a"
-        },
-        {
-          "path": "Lib/site-packages/townlight_permitting/workflow_store.py",
-          "size_bytes": 15521,
-          "sha256": "451c6ee455cf85d1b5a18a1e54ac02653b52a1d2e479adbe9213f086104ddd94"
-        },
-        {
-          "path": "Lib/site-packages/townlight_permitting/migrations/versions/townlight_permitting_0001_connected.py",
-          "size_bytes": 1343,
-          "sha256": "8ca41fd995d6c4b4ed938d6aa5b13467df6db04224344544a0ad38d40d420765"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/permitting_bridge.py",
-          "size_bytes": 9103,
-          "sha256": "3505589503441a72fe6c6094b6cd6d31a111ce633f912e85ccd72edd08cf2535"
-        },
-        {
-          "path": "permitting-candidate-provenance.json",
-          "size_bytes": 7299,
-          "sha256": "db50d81d87cfb31e70917a6f47fbb79d10b626157cdf4347886a9f44e1544fdf"
-        },
-        {
-          "path": "inspections-candidate-provenance.json",
-          "size_bytes": 7300,
-          "sha256": "e20cdd562b68804de02840b5574c86b777abf7f58b30f30ed5f31961051fa2ed"
-        },
-        {
-          "path": "Lib/site-packages/townlight_inspections/workflow_store.py",
-          "size_bytes": 17794,
-          "sha256": "1ebe80dee56578f11dd5aeac643a0b899325a2bc250af399600979075fa9911d"
-        },
-        {
-          "path": "Lib/site-packages/townlight_inspections/migrations/versions/townlight_inspections_0001_connected.py",
-          "size_bytes": 1350,
-          "sha256": "1f8aaf5660480513bf538ee1b4145e287f4fd29f4495ce3fdf6f0c13ee030494"
-        },
-        {
-          "path": "Lib/site-packages/townlight_runtime/inspections_bridge.py",
-          "size_bytes": 10132,
-          "sha256": "6c840905c53d00a5d7ab5f39b8ca276924098ff11929913fe9b02bba457bf553"
-        },
-        {
-          "path": "Lib/site-packages/textflowkit/core/whistle.py",
-          "size_bytes": 61157,
-          "sha256": "5ea2fb20699ee46e941e783d67448db310bc01a561edfbaf95dc95d9e4396199"
-        },
-        {
-          "path": "inspections/whistle/whistle.cact",
-          "size_bytes": 16919407,
-          "sha256": "b6e02f048568ac5d01a2042556c658061e699acbc0aa2a1439f52f3d461dffeb"
-        },
-        {
-          "path": "inspections/whistle/windows-x86_64/needle.exe",
-          "size_bytes": 1578768,
-          "sha256": "298d76c6ae944611369b3f04e5873b03f69f0d1d8d62c1363a535331d5efc76a"
-        },
-        {
-          "path": "inspections/reuse-manifest.json",
-          "size_bytes": 956,
-          "sha256": "5f1e2c95b0e77c5c9be4f9e50177e5062567c996aa56a4b54feb2969a11cb20a"
-        }
-      ]
-    },
-    {
-      "id": "ollama-runtime",
-      "label": "Native Ollama model runtime",
-      "source_dir": "ollama",
-      "status": "present",
-      "required_files": [
-        {
-          "path": "ollama.exe",
-          "size_bytes": 35691912,
-          "sha256": "e44b55b3f10310663ac058d82d0ee18eb2bee6b20ccd0e8d992b48095961d225"
-        }
-      ]
-    },
-    {
-      "id": "station-media",
-      "label": "Townlight Station media tools",
-      "source_dir": "station",
-      "status": "present",
-      "required_files": [
-        {
-          "path": "bin/ffmpeg.exe",
-          "size_bytes": 222245136,
-          "sha256": "dae849370e32a8ede00d7d2afb9c58144430291860874603f5a20782f037bcb5"
-        },
-        {
-          "path": "bin/ffprobe.exe",
-          "size_bytes": 222041872,
-          "sha256": "ac2c6e94ed1164fae6bc4046f7d4bf2a5185d9828a17c31710e0b1c38ad2d38e"
-        },
-        {
-          "path": "bin/FFMPEG-LICENSE.txt",
-          "size_bytes": 35147,
-          "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
-        }
-      ]
-    }
-  ],
-  "accepted_native_base_sha256": "173c032b874e2cf4091cd79213f53c0663d272070fc11712701892d490e09883",
-  "umbrella_source_commit": "0afd59de52cb7ecb317188a89bcd1fec8c578a24"
+    "schema_version":  1,
+    "profile":  "windows-local-1.0",
+    "product_profile":  "inspections-preview",
+    "generated_at":  "2026-11-20T05:46:36.4501367Z",
+    "payload_root":  "D:\\a\\townlight\\townlight\\townlight\\desktop\\runtime\\payload",
+    "postgres":  {
+                     "status":  "installed",
+                     "url":  "https://github.com/townlight/townlight/releases/download/windows-runtime-postgres-17.10-2/postgresql-17.10-2-windows-x64-binaries.zip",
+                     "path":  "D:\\a\\townlight\\townlight\\townlight\\desktop\\runtime\\payload\\postgres",
+                     "sha256":  "ef9b1e5e23d2e8a83914ba13d9dc536a72210fba53fd1808ff1f7e06bb22b106"
+                 },
+    "python":  {
+                   "status":  "installed",
+                   "url":  "https://www.python.org/ftp/python/3.13.5/python-3.13.5-embed-amd64.zip",
+                   "path":  "D:\\a\\townlight\\townlight\\townlight\\desktop\\runtime\\payload\\python",
+                   "packages":  {
+                                    "installed":  [
+                                                      "townlight_core",
+                                                      "townlight_records",
+                                                      "townlight_notice",
+                                                      "townlight_access",
+                                                      "townlight_runtime",
+                                                      "townlight_meetings",
+                                                      "townlight_code",
+                                                      "townlight_zoning",
+                                                      "townlight_planning",
+                                                      "townlight_permitting",
+                                                      "townlight_inspections",
+                                                      "townlight-inspection-transcriber",
+                                                      "townlight_station",
+                                                      "townlight_boards",
+                                                      "townlight_contracts",
+                                                      "townlight_procurement"
+                                                  ],
+                                    "pip":  {
+                                                "status":  "installed",
+                                                "url":  "https://raw.githubusercontent.com/pypa/get-pip/fa4e90301bf000c36309f3ad79c3ac720b55d6df/public/get-pip.py",
+                                                "sha256":  "f4448a01e3ab2914c65f4ca59d4cacba6b2dbde19a483fbac46587f8bbaff424"
+                                            }
+                                },
+                   "sha256":  "7d2650fd9d1b9d002d4a315d5f354247fd6a44f30517c7ef577b08f57a0fb6d9"
+               },
+    "ollama":  {
+                   "status":  "installed",
+                   "url":  "https://github.com/ollama/ollama/releases/download/v0.30.10/ollama-windows-amd64.zip",
+                   "path":  "D:\\a\\townlight\\townlight\\townlight\\desktop\\runtime\\payload\\ollama",
+                   "sha256":  "9606cee7501703a0969682667def313130f99ed73f44a88a7a8efe82d4b565f0",
+                   "version":  "v0.30.10"
+               },
+    "pgvector":  {
+                     "status":  "installed",
+                     "path":  "D:\\a\\townlight\\townlight\\townlight\\desktop\\runtime\\payload\\postgres",
+                     "tag":  "v0.8.2"
+                 },
+    "postgis":  [
+                    "7ba180ee2a352987b9a2f194673652c59483b55852295ccf401dceccd8765425",
+                    {
+                        "status":  "installed",
+                        "sha256":  "7ba180ee2a352987b9a2f194673652c59483b55852295ccf401dceccd8765425",
+                        "version":  "3.6.2"
+                    }
+                ],
+    "postgres_vcruntime":  {
+                               "status":  "installed",
+                               "source":  "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Redist\\MSVC\\14.52.37025\\x64\\Microsoft.VC145.CRT",
+                               "dlls":  [
+                                            "concrt140.dll",
+                                            "msvcp140.dll",
+                                            "msvcp140_1.dll",
+                                            "msvcp140_2.dll",
+                                            "msvcp140_atomic_wait.dll",
+                                            "msvcp140_codecvt_ids.dll",
+                                            "vccorlib140.dll",
+                                            "vcruntime140.dll",
+                                            "vcruntime140_1.dll",
+                                            "vcruntime140_threads.dll"
+                                        ]
+                           },
+    "python_vcruntime":  {
+                             "status":  "installed",
+                             "source":  "C:\\Program Files\\Microsoft Visual Studio\\18\\Enterprise\\VC\\Redist\\MSVC\\14.52.37025\\x64\\Microsoft.VC145.CRT",
+                             "dlls":  [
+                                          "concrt140.dll",
+                                          "msvcp140.dll",
+                                          "msvcp140_1.dll",
+                                          "msvcp140_2.dll",
+                                          "msvcp140_atomic_wait.dll",
+                                          "msvcp140_codecvt_ids.dll",
+                                          "vccorlib140.dll",
+                                          "vcruntime140.dll",
+                                          "vcruntime140_1.dll",
+                                          "vcruntime140_threads.dll"
+                                      ]
+                         },
+    "inspection_voice":  {
+                             "status":  "installed",
+                             "sha256":  "0325c199b215316d8cbb5374150867f7fe2352e6a640ce80218dbac57d569fa8",
+                             "source":  "https://github.com/townlight/townlight/releases/download/townlight-beta-1/Townlight-Beta-1-Inspection-Voice-Assets.zip"
+                         },
+    "payloads":  [
+                     {
+                         "id":  "postgres-17-pgvector",
+                         "label":  "Portable PostgreSQL 17 with pgvector",
+                         "source_dir":  "postgres",
+                         "status":  "present",
+                         "required_files":  [
+                                                {
+                                                    "path":  "bin/pg_ctl.exe",
+                                                    "size_bytes":  132096,
+                                                    "sha256":  "abe89b0767a8cd0f956059aa5a5a93cd1042efc6194d000c2501da3e23babbd2"
+                                                },
+                                                {
+                                                    "path":  "bin/pg_controldata.exe",
+                                                    "size_bytes":  107520,
+                                                    "sha256":  "eb48b96114795530ba9aec9920e86c41fced3bb19e4aa59781dcc4f45a31f9c3"
+                                                },
+                                                {
+                                                    "path":  "bin/initdb.exe",
+                                                    "size_bytes":  244736,
+                                                    "sha256":  "2556d079888bf9ebba6b8ba7d3e8c08c947e6e564ceb73054fe1929611c87d48"
+                                                },
+                                                {
+                                                    "path":  "bin/postgres.exe",
+                                                    "size_bytes":  9918464,
+                                                    "sha256":  "882a5a073a88817f6c6d4c8827df1e4269ff226d52cf6f47c9883e91088c6345"
+                                                },
+                                                {
+                                                    "path":  "bin/zlib1.dll",
+                                                    "size_bytes":  137728,
+                                                    "sha256":  "4d52d3360cac59297996f585b562e2477df66541cfa459c3234f78656566d5b3"
+                                                },
+                                                {
+                                                    "path":  "bin/vcruntime140.dll",
+                                                    "size_bytes":  176488,
+                                                    "sha256":  "eb1ee979bf02324712346e5bdbfc59c785388bc50d18cc2688aae4b0734915a0"
+                                                },
+                                                {
+                                                    "path":  "bin/vcruntime140_1.dll",
+                                                    "size_bytes":  50544,
+                                                    "sha256":  "a14b4a42a2c6df04d6d53a8340816023d953406f7f3d94996c7cab30c414ff63"
+                                                },
+                                                {
+                                                    "path":  "bin/msvcp140.dll",
+                                                    "size_bytes":  652136,
+                                                    "sha256":  "59d325227321d52b9a523ea401ce6787a5d59f78229a0ff3a6f124e5d3445685"
+                                                },
+                                                {
+                                                    "path":  "share/extension/vector.control",
+                                                    "size_bytes":  149,
+                                                    "sha256":  "52c583fb0c22c616b21762c7b9d3079c02655b78b96d5689cd1e64449b9a575e"
+                                                },
+                                                {
+                                                    "path":  "lib/vector.dll",
+                                                    "size_bytes":  278016,
+                                                    "sha256":  "1346ff194a8a96d7a023e1b2402a0730428dbe59dd8d7e379ba900e33f1db731"
+                                                },
+                                                {
+                                                    "path":  "share/extension/postgis.control",
+                                                    "size_bytes":  175,
+                                                    "sha256":  "2802c2bb571cf648daafb834a452a7dc884ef359116a1b17ab4c4acd6155e699"
+                                                },
+                                                {
+                                                    "path":  "lib/postgis-3.dll",
+                                                    "size_bytes":  1778176,
+                                                    "sha256":  "d594e475ad094b0dd7e314e5188c87ff4ea9b5b01c9e130da42cdba29a8f23f1"
+                                                }
+                                            ]
+                     },
+                     {
+                         "id":  "cpython-services",
+                         "label":  "Bundled CPython city services",
+                         "source_dir":  "python",
+                         "status":  "present",
+                         "required_files":  [
+                                                {
+                                                    "path":  "python.exe",
+                                                    "size_bytes":  105816,
+                                                    "sha256":  "5341746f92483a93e44c313de830f2fba2956f0759094404a16b2fed06c9a2ed"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_core/__init__.py",
+                                                    "size_bytes":  10446,
+                                                    "sha256":  "ad59c3087795970e90ae7b80df9e3a582a8e3be2a2e192f92b66380384c4712f"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_core/migrations/alembic.ini",
+                                                    "size_bytes":  87,
+                                                    "sha256":  "9f91262372d5cf06551f80272b10a44c197be3ef3e7dcda228271d6346c4eee6"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_core/migrations/versions/townlight_core_0003_local_task_queue.py",
+                                                    "size_bytes":  1865,
+                                                    "sha256":  "9d897f858df69832c76fba9b04631e88ab3517719adf7d3eb09c82ee6b0ed713"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_records/main.py",
+                                                    "size_bytes":  11505,
+                                                    "sha256":  "9daff4d0c0375eefedc6f111e83215c206d0379115eae306b80ad4862db08c3f"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_notice/main.py",
+                                                    "size_bytes":  23396,
+                                                    "sha256":  "a058e6ff635023fff9579dc7c91e5ce83e1b89951fdd4dc32e13a35314659350"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_access/main.py",
+                                                    "size_bytes":  18170,
+                                                    "sha256":  "d74349fbbfd7df528e9088b297ea40d1a36912b19afb93498a5e6e91320f4b33"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/__init__.py",
+                                                    "size_bytes":  118,
+                                                    "sha256":  "285fc771b909954a2466a01e836176b924a70a7a2fc08347c051e546edf90633"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/services.py",
+                                                    "size_bytes":  24265,
+                                                    "sha256":  "0b9b60834c5af94d38d64233beeb8679855eefa837fc054b187459236a13cfd5"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/migrate.py",
+                                                    "size_bytes":  6334,
+                                                    "sha256":  "a7a90f0ead03886210f2a9d58f5967fa38f0ebc3780caa572dd17d978571087e"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_cutover.py",
+                                                    "size_bytes":  4650,
+                                                    "sha256":  "e0c2f9b4ef95e913c8c096bf5bc472bde66ff1eab1d1775026e8923f900675e0"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_import.py",
+                                                    "size_bytes":  8613,
+                                                    "sha256":  "7baa9f06e3d046711b4111bb2ba28e89adcaed156bd896ec3caeab03feb2622e"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_import_store.py",
+                                                    "size_bytes":  16872,
+                                                    "sha256":  "e5f116e7620d86cca0b46f37561dd7b1f714c83178be681f51bd6a9db942edcd"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_import_access.py",
+                                                    "size_bytes":  3191,
+                                                    "sha256":  "51ccf503c5901e60d836a657972539a880e723285482821d418065053addf8fa"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/native_accounts.py",
+                                                    "size_bytes":  4090,
+                                                    "sha256":  "497fb326fccb61dec69b58daf35a382ab832adeed190e65d2a7f87098fb3c6e7"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_snapshot.py",
+                                                    "size_bytes":  7630,
+                                                    "sha256":  "fdb4098bdfaa24f81118a7e41bce803c8414569644d47d5907d0daf68f994d32"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/records_demo.py",
+                                                    "size_bytes":  7341,
+                                                    "sha256":  "fe5d902ba81e6c55bcce095ce7eb13071254c028c2dd730393a7cce10c6a7263"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/fixtures/redstone-valley-records-demo-v1.json",
+                                                    "size_bytes":  6629,
+                                                    "sha256":  "859a65633f6f4575bb53f5db61a11b0a092cc1f9b145b828e70729cfd28e6a34"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_records/auth/native_identity.py",
+                                                    "size_bytes":  2151,
+                                                    "sha256":  "bfef8b1b166fee96fc3274d77f27f9a03c441b3ceab9a0a54a09fa7f3ae5fb99"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_records/desktop_bridge/router.py",
+                                                    "size_bytes":  33322,
+                                                    "sha256":  "a7bac9443fe9cc93ac0949902f01aed1ba501bda1494535e90ddd660c7537494"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_records/requests/artifacts.py",
+                                                    "size_bytes":  12085,
+                                                    "sha256":  "01f049db7a2e4bcfdfb969cef1fe7c52fff2110ce0745e5ec370029dc4d955dd"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic/versions/027_import_artifact_order.py",
+                                                    "size_bytes":  430,
+                                                    "sha256":  "9ef98e386a1dc848a1fab6893b009198d70556020482df207618519a3301faf8"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic.ini",
+                                                    "size_bytes":  524,
+                                                    "sha256":  "60e69c28e3c87e101995977223073125b196202555e1fc18902feed2afdc7e7e"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/townlight_records_alembic/alembic/env.py",
+                                                    "size_bytes":  2847,
+                                                    "sha256":  "c403abba64900b265e11113b1bdeb2f0855f8c7a43c92deb985f75bee090eb00"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_zoning/geo_import.py",
+                                                    "size_bytes":  13349,
+                                                    "sha256":  "9c01bd1d76f48933efdbe9684a0eaed0623a5080a1d7eaff45fc726870062c02"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_zoning/connected_sources.py",
+                                                    "size_bytes":  10921,
+                                                    "sha256":  "a17d5e0563b770b684331d0f89076a1ca6d85fcd13989c3244bfae4d16be2f65"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_zoning/migrations/versions/townlight_zoning_0006_cited_questions.py",
+                                                    "size_bytes":  2333,
+                                                    "sha256":  "4c8b47cfa2cc6d922441ed890f81b425b6de2d11eaf187c119b1d3d93a96cf2a"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/zoning_bridge.py",
+                                                    "size_bytes":  15192,
+                                                    "sha256":  "9bb3476d8f8365285cd486b86bdc27b0e28d34519610fdc379d2c58d42d2de54"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/zoning_records.py",
+                                                    "size_bytes":  1700,
+                                                    "sha256":  "c4cb908e45e90baeaedff9fd4c668ca65229e129bc298b4d893d515046e73449"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_meetings/main.py",
+                                                    "size_bytes":  148590,
+                                                    "sha256":  "411f2e69ac62e75e1b680ed7fd2954b159f6d0db1919da6ccceae9b646fdcb09"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_code/main.py",
+                                                    "size_bytes":  86188,
+                                                    "sha256":  "cd10ec6e6e88d261a3622250c91fb5a28a0643c3c23695cb0aa495b464eaffce"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_planning/workflow_store.py",
+                                                    "size_bytes":  17021,
+                                                    "sha256":  "dc43cdab971861259f9ad39870db1663ee27bcff299abc9bdce86a90f5e97ee0"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_planning/source_bundle.py",
+                                                    "size_bytes":  6466,
+                                                    "sha256":  "f6547516067e27697dfcd6ba80de6e2ca03d1473370209aa354a5bf95b7db98a"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_planning/migrations/__init__.py",
+                                                    "size_bytes":  2134,
+                                                    "sha256":  "19963dd089e57018085ab6efa9c8f68277f9d9a84dde41c3180237bcf4b300ac"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_planning/migrations/versions/townlight_planning_0002_workflows.py",
+                                                    "size_bytes":  1068,
+                                                    "sha256":  "5e8f8634a59b30c1aa428e0391406035ac6f8784892c54c87dc1bdf766a21f62"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/planning_bridge.py",
+                                                    "size_bytes":  14570,
+                                                    "sha256":  "9722286324a54d1dd831ae2f978c8337450b98bd90dee74fe15ff8cbd771992c"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/planning_connections.py",
+                                                    "size_bytes":  2494,
+                                                    "sha256":  "116b2e0cf1d1acaba1d5135f746a91e283cbd5fb238631379a4672496d96ae77"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_records/requests/planning_sources.py",
+                                                    "size_bytes":  1877,
+                                                    "sha256":  "34f8e3c602ac055998d2284a1aa137acf2c095bd601be1912a8cae58431b244d"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_permitting/workflow_store.py",
+                                                    "size_bytes":  15263,
+                                                    "sha256":  "671a27bcea49a246db63232e987a3f9457073ad42067cad1c11f243b24536556"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_permitting/migrations/versions/townlight_permitting_0001_connected.py",
+                                                    "size_bytes":  1317,
+                                                    "sha256":  "2cf2b0ddc7ccb4610a63693777165a41b038f0122df1fb4e6b85f5d231d6aca0"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/permitting_bridge.py",
+                                                    "size_bytes":  9103,
+                                                    "sha256":  "3505589503441a72fe6c6094b6cd6d31a111ce633f912e85ccd72edd08cf2535"
+                                                },
+                                                {
+                                                    "path":  "inspections-candidate-provenance.json",
+                                                    "size_bytes":  4258,
+                                                    "sha256":  "f5d830ddd172aee470847b97d74e01a6d8fb754be0bdaae3065573d1667a0c4e"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_inspections/workflow_store.py",
+                                                    "size_bytes":  17493,
+                                                    "sha256":  "eddf9bee645c8a8cf873cf40fc77caa9c7629d8ee4ee0612e1c53541aff06316"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_inspections/migrations/versions/townlight_inspections_0001_connected.py",
+                                                    "size_bytes":  1324,
+                                                    "sha256":  "6f6f0843d131cd4c4f7ed8a2ea28a60715cb800430fcba81369d4cd85a7e6748"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_runtime/inspections_bridge.py",
+                                                    "size_bytes":  10132,
+                                                    "sha256":  "6c840905c53d00a5d7ab5f39b8ca276924098ff11929913fe9b02bba457bf553"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/townlight_planning/migrations/versions/townlight_planning_0004_neighborhoods.py",
+                                                    "size_bytes":  833,
+                                                    "sha256":  "1c466f2b928c0d9205eb878fdca3ba8576a010a4c835587d7577a9fbb66324ad"
+                                                },
+                                                {
+                                                    "path":  "Lib/site-packages/textflowkit/core/whistle.py",
+                                                    "size_bytes":  61157,
+                                                    "sha256":  "5ea2fb20699ee46e941e783d67448db310bc01a561edfbaf95dc95d9e4396199"
+                                                },
+                                                {
+                                                    "path":  "inspections/whistle/whistle.cact",
+                                                    "size_bytes":  16919407,
+                                                    "sha256":  "b6e02f048568ac5d01a2042556c658061e699acbc0aa2a1439f52f3d461dffeb"
+                                                },
+                                                {
+                                                    "path":  "inspections/whistle/windows-x86_64/needle.exe",
+                                                    "size_bytes":  1578768,
+                                                    "sha256":  "298d76c6ae944611369b3f04e5873b03f69f0d1d8d62c1363a535331d5efc76a"
+                                                },
+                                                {
+                                                    "path":  "inspections/reuse-manifest.json",
+                                                    "size_bytes":  956,
+                                                    "sha256":  "5f1e2c95b0e77c5c9be4f9e50177e5062567c996aa56a4b54feb2969a11cb20a"
+                                                }
+                                            ]
+                     },
+                     {
+                         "id":  "ollama-runtime",
+                         "label":  "Native Ollama model runtime",
+                         "source_dir":  "ollama",
+                         "status":  "present",
+                         "required_files":  [
+                                                {
+                                                    "path":  "ollama.exe",
+                                                    "size_bytes":  35691912,
+                                                    "sha256":  "e44b55b3f10310663ac058d82d0ee18eb2bee6b20ccd0e8d992b48095961d225"
+                                                }
+                                            ]
+                     }
+                 ]
 }

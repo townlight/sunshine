@@ -1,11 +1,11 @@
 {
-  "source_companion_sha256": "8a52c5560b9b632b45892a06f17a7fe83f49f330a55b4d64ab3a19ce29d1a633",
+  "source_companion_sha256": "bac6706de89549c9016c8c6e581538a629adbb28bc71e8659ea1e23e1209bc99",
   "source_companion_pending": false,
-  "basis": "Exact Windows 1.8.1.1 corresponding-source archives. Declarations are source references. The release acceptance records installed behavior.",
+  "basis": "Exact Windows 1.8.2.1 corresponding-source archives. Declarations are source references. The release acceptance records installed behavior.",
   "products": {
     "core": {
       "repository": "townlight/core",
-      "repository_head": "3021821bf9a92c790a399ad12aed821d65b09105",
+      "repository_head": "2f6ba9be4a95e3772dc47a3682ac780c5283b626",
       "working_tree_modified": false,
       "principal_import": "townlight_core",
       "source": [
@@ -5941,7 +5941,7 @@
     },
     "records": {
       "repository": "townlight/sunshine",
-      "repository_head": "e1b712091c38fadeb00c19233d7f2bf1280fc248",
+      "repository_head": "f63fe0e30a92eee2141ecc16bdbed6b2ad901f0e",
       "working_tree_modified": false,
       "principal_import": "townlight_records",
       "source": [
@@ -6590,7 +6590,7 @@
         },
         {
           "source": "backend/townlight_records/config.py",
-          "sha256": "85a45bbcfdd11a4b2c406a1f4297495b2e594e8ba758b5334aa0c1421171428c",
+          "sha256": "21bcc7433ed902a30dbf52da51d2583e097babce6d4e8c2857eddda4131b6c56",
           "bytes": 5720,
           "routes": [],
           "models": [
@@ -15759,13 +15759,13 @@
     },
     "meetings": {
       "repository": "townlight/meetings",
-      "repository_head": "77ae8781f4a414f6f85c35a7e4394e29b0e0f21d",
+      "repository_head": "93fea47d9528e283c5835a1ef568f3f0cfa1fd56",
       "working_tree_modified": false,
       "principal_import": "townlight_meetings",
       "source": [
         {
           "source": "townlight_meetings/__init__.py",
-          "sha256": "8222ea6324b101351522144baf63d9cf9359781fe8da2a5b591cc84da16846f5",
+          "sha256": "0e3a7b416d792c32b495b80099d9d46b76994ce48198a47037f172f003874f47",
           "bytes": 68,
           "routes": [],
           "models": [],
@@ -19781,7 +19781,7 @@
     },
     "code": {
       "repository": "townlight/ordinances",
-      "repository_head": "22d00f560cc45088a5b24a3f997787ee9c7a5e31",
+      "repository_head": "296c13ac9075ed2849098952dcb1fddfbf4e8cd4",
       "working_tree_modified": false,
       "principal_import": "townlight_code",
       "source": [
@@ -22589,7 +22589,7 @@
     },
     "zoning": {
       "repository": "townlight/zone",
-      "repository_head": "fb352955720db2e6e21caca816a8eb609a49f768",
+      "repository_head": "25e6034304d5ffe30e0f6aad58ad9f73dc78d5f4",
       "working_tree_modified": false,
       "principal_import": "townlight_zoning",
       "source": [
@@ -24555,7 +24555,7 @@
     },
     "planning": {
       "repository": "townlight/plan",
-      "repository_head": "7de514f1afd720f93bd70a4866c3389ef621dc49",
+      "repository_head": "9782f6941d55ed4156f412c04200b79c2070b416",
       "working_tree_modified": false,
       "principal_import": "townlight_planning",
       "source": [
@@ -26430,7 +26430,7 @@
     },
     "permitting": {
       "repository": "townlight/permit",
-      "repository_head": "224116d9c714f613646f2b6ce2cbb687cb5e0040",
+      "repository_head": "5a3e63694f2eeaa695f4da85ffc0d8308c5827b6",
       "working_tree_modified": false,
       "principal_import": "townlight_permitting",
       "source": [
@@ -27652,7 +27652,7 @@
     },
     "inspections": {
       "repository": "townlight/inspect",
-      "repository_head": "a6861f262328e7645557ad2a2600db4a12a5046c",
+      "repository_head": "cd36cae97cba32ac7681d5e9abef378c17241a77",
       "working_tree_modified": false,
       "principal_import": "townlight_inspections",
       "source": [
@@ -28975,7 +28975,7 @@
     },
     "access": {
       "repository": "townlight/access",
-      "repository_head": "f377a9a6e2a14d890333a20eab9277d644a9aaeb",
+      "repository_head": "6c4f2aefb587eba57f5daa3cff4779530e57a61d",
       "working_tree_modified": false,
       "principal_import": "townlight_access",
       "source": [
@@ -29750,7 +29750,7 @@
     },
     "notice": {
       "repository": "townlight/notice",
-      "repository_head": "4edf01296b0ad56a331e7fdd9b7c2d19c20b8e48",
+      "repository_head": "b93bd4c907b5cf59e12afc5332ed177ac3e12bfd",
       "working_tree_modified": false,
       "principal_import": "townlight_notice",
       "source": [
@@ -31985,13 +31985,13 @@
     },
     "runtime": {
       "repository": "townlight/townlight",
-      "repository_head": "0afd59de52cb7ecb317188a89bcd1fec8c578a24",
+      "repository_head": "993d47567799cd8f676fb514daea7edb3636eb0b",
       "working_tree_modified": false,
       "principal_import": "townlight_runtime",
       "source": [
         {
           "source": "desktop/runtime/python-services/townlight_runtime/__init__.py",
-          "sha256": "fc9d25b5ab8993eaaf8476bd2aa51513d83aa63151868100a8f40c15f4819fb6",
+          "sha256": "285fc771b909954a2466a01e836176b924a70a7a2fc08347c051e546edf90633",
           "bytes": 118,
           "routes": [],
           "models": [],
@@ -33773,8 +33773,8 @@
         },
         {
           "source": "desktop/runtime/python-services/townlight_runtime/municipal_staff.py",
-          "sha256": "a70b18a727d62f59a3666f7cea68a3b71f34e066222f685e48e36ec7550519aa",
-          "bytes": 13612,
+          "sha256": "53b4ed89bbf682643528cc23593aa1fc5b111ac8b1209125876d268e30ab018f",
+          "bytes": 13622,
           "routes": [
             {
               "method": "GET",
@@ -34832,26 +34832,26 @@
         },
         {
           "source": "desktop/runtime/python-services/townlight_runtime/services.py",
-          "sha256": "2830069a2c2136c21a0acc9c488c599f72976579a8ab3e1f00b6e194c71032d7",
-          "bytes": 24155,
+          "sha256": "0b9b60834c5af94d38d64233beeb8679855eefa837fc054b187459236a13cfd5",
+          "bytes": 24265,
           "routes": [
             {
               "method": "GET",
               "declared_path": "/health",
               "function": "runtime_health",
-              "line": 450
+              "line": 451
             },
             {
               "method": "GET",
               "declared_path": "/modules",
               "function": "runtime_health",
-              "line": 450
+              "line": 451
             },
             {
               "method": "GET",
               "declared_path": "/ready",
               "function": "domain_ready",
-              "line": 455
+              "line": 456
             }
           ],
           "models": [],
@@ -34898,31 +34898,31 @@
             },
             {
               "environment": "DATABASE_URL",
-              "line": 106
-            },
-            {
-              "environment": "DATABASE_URL",
-              "line": 151
+              "line": 152
             },
             {
               "environment": "TOWNLIGHT_RUNTIME_HOST",
-              "line": 490
+              "line": 491
             },
             {
               "environment": "TESTING",
-              "line": 116
+              "line": 117
             },
             {
               "environment": "TOWNLIGHT_CODE_SOURCE_REGISTRY_DB_URL",
-              "line": 245
+              "line": 246
             },
             {
               "environment": "DATABASE_URL",
-              "line": 305
+              "line": 306
             },
             {
               "environment": "TOWNLIGHT_RUNTIME_PORT",
-              "line": 493
+              "line": 494
+            },
+            {
+              "environment": "DATABASE_URL",
+              "line": 106
             }
           ]
         },
@@ -35577,8 +35577,8 @@
         },
         {
           "source": "desktop/src-tauri/src/domain_client.rs",
-          "sha256": "2730a1f7b703472058d9a0beed2be640aeb8f0ccb6433947c05c12744d7ca78a",
-          "bytes": 45633,
+          "sha256": "d3225b355aa7ecc950411955da9cf97d13496050fd108830f78c4419bfe972f3",
+          "bytes": 46447,
           "routes": [],
           "models": [],
           "configuration": []
@@ -35947,13 +35947,13 @@
     },
     "boards": {
       "repository": "townlight/boards",
-      "repository_head": "d14340b713c880908cc27e383a59271ed0471ac0",
+      "repository_head": "06df86606fe8249c49b1450ff13a40a5ab0aa1e5",
       "working_tree_modified": false,
       "principal_import": "townlight_boards",
       "source": [
         {
           "source": "townlight_boards/__init__.py",
-          "sha256": "440ba578a47b1c9fa1fcac47824b885c27e2667fc50b4c1fc129703016b06d6a",
+          "sha256": "7e519cfab5a8bc9834c3a32d05fac82b57dd944a81241af9b9529e093f913e00",
           "bytes": 59,
           "routes": [],
           "models": [],
@@ -36002,8 +36002,8 @@
         },
         {
           "source": "townlight_boards/board_registry.py",
-          "sha256": "4a105019c690fe8212fbfd2ef62a0da38371c9421865cae342c9ff1fab34c687",
-          "bytes": 1249,
+          "sha256": "1de909227b3f3c181d68f92d0c060753c288751e6671d65a71e17e297c554bb3",
+          "bytes": 1388,
           "routes": [],
           "models": [
             {
@@ -36043,68 +36043,68 @@
         },
         {
           "source": "townlight_boards/main.py",
-          "sha256": "6fbc305a8d6d3b38d97cbd352535a01b6f40cbe9eec64a08b353d1ca9417737e",
-          "bytes": 8193,
+          "sha256": "ef286cf1de2b6977f2e2be3133d4295f2e7cf1b5175226fc15563edc13c6698e",
+          "bytes": 8670,
           "routes": [
             {
               "method": "GET",
               "declared_path": "/",
               "function": "root",
-              "line": 60
+              "line": 63
             },
             {
               "method": "GET",
               "declared_path": "/health",
               "function": "health",
-              "line": 79
+              "line": 82
             },
             {
               "method": "GET",
               "declared_path": "/townlight_boards",
               "function": "public_townlight_boards_page",
-              "line": 91
+              "line": 94
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_boards/registry",
               "function": "board_registry",
-              "line": 98
+              "line": 101
             },
             {
               "method": "GET",
               "declared_path": "/api/v1/townlight_boards/registry/{board_id}",
               "function": "get_board_registry",
-              "line": 108
+              "line": 111
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_boards/terms",
               "function": "term_plan",
-              "line": 130
+              "line": 133
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_boards/vacancies",
               "function": "vacancy_checklist",
-              "line": 138
+              "line": 141
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_boards/attendance",
               "function": "attendance_summary",
-              "line": 146
+              "line": 149
             },
             {
               "method": "GET",
               "declared_path": "/api/v1/townlight_boards/attendance/{attendance_id}",
               "function": "get_attendance_review",
-              "line": 166
+              "line": 169
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_boards/export",
               "function": "records_export",
-              "line": 188
+              "line": 191
             }
           ],
           "models": [
@@ -36117,20 +36117,20 @@
                 {
                   "name": "board_id",
                   "type": "str",
-                  "line": 32
+                  "line": 35
                 },
                 {
                   "name": "board_name",
                   "type": "str",
-                  "line": 33
+                  "line": 36
                 },
                 {
                   "name": "liaison",
                   "type": "str",
-                  "line": 34
+                  "line": 37
                 }
               ],
-              "line": 31
+              "line": 34
             },
             {
               "name": "TermRequest",
@@ -36141,15 +36141,15 @@
                 {
                   "name": "member_name",
                   "type": "str",
-                  "line": 38
+                  "line": 41
                 },
                 {
                   "name": "term_end",
                   "type": "date",
-                  "line": 39
+                  "line": 42
                 }
               ],
-              "line": 37
+              "line": 40
             },
             {
               "name": "VacancyRequest",
@@ -36160,15 +36160,15 @@
                 {
                   "name": "board_name",
                   "type": "str",
-                  "line": 43
+                  "line": 46
                 },
                 {
                   "name": "vacancy_reason",
                   "type": "str",
-                  "line": 44
+                  "line": 47
                 }
               ],
-              "line": 42
+              "line": 45
             },
             {
               "name": "AttendanceRequest",
@@ -36179,20 +36179,20 @@
                 {
                   "name": "member_name",
                   "type": "str",
-                  "line": 48
+                  "line": 51
                 },
                 {
                   "name": "meetings_attended",
                   "type": "int",
-                  "line": 49
+                  "line": 52
                 },
                 {
                   "name": "meetings_held",
                   "type": "int",
-                  "line": 50
+                  "line": 53
                 }
               ],
-              "line": 47
+              "line": 50
             },
             {
               "name": "RecordsExportRequest",
@@ -36203,26 +36203,26 @@
                 {
                   "name": "board_id",
                   "type": "str",
-                  "line": 54
+                  "line": 57
                 },
                 {
                   "name": "title",
                   "type": "str",
-                  "line": 55
+                  "line": 58
                 },
                 {
                   "name": "format",
                   "type": "str",
-                  "line": 56
+                  "line": 59
                 }
               ],
-              "line": 53
+              "line": 56
             }
           ],
           "configuration": [
             {
               "environment": "TOWNLIGHT_BOARDS_ROSTER_DB_URL",
-              "line": 197
+              "line": 200
             }
           ]
         },
@@ -36269,8 +36269,8 @@
         },
         {
           "source": "townlight_boards/persistence.py",
-          "sha256": "9ea50efc00cdf8e05158663138bc3ad362e1776482b13ff0640c02be0f45de6d",
-          "bytes": 8063,
+          "sha256": "2d58640478825b5d31761e56b2963ed281f2a53fbbfc668e262b5465847b5f76",
+          "bytes": 8073,
           "routes": [],
           "models": [
             {
@@ -36330,7 +36330,7 @@
         },
         {
           "source": "townlight_boards/public_ui.py",
-          "sha256": "feb2530b3667adbf60086b2d2c652dc970406017333255a5c2807479d24cb160",
+          "sha256": "cfede9b40dca9bd82ec3fb5ca7c234f2cb2ccc86fe823d35c8d15203ee28bc6e",
           "bytes": 5515,
           "routes": [],
           "models": [],
@@ -36508,13 +36508,13 @@
     },
     "contracts": {
       "repository": "townlight/contracts",
-      "repository_head": "873de5bbff0f596b2c7cf20da4c68e94c3c3934c",
+      "repository_head": "216625f1020a7c25bfaec97d5f51ac4381b1fd75",
       "working_tree_modified": false,
       "principal_import": "townlight_contracts",
       "source": [
         {
           "source": "townlight_contracts/__init__.py",
-          "sha256": "47e1fe7a017a468c960391130c34ca9538c49966411c3c44d50db7e7ab64b79d",
+          "sha256": "cc8464526b905744f7ef55241612747b385aa2b29bdf4c39154094c512b348f9",
           "bytes": 61,
           "routes": [],
           "models": [],
@@ -36635,68 +36635,68 @@
         },
         {
           "source": "townlight_contracts/main.py",
-          "sha256": "b4d8761a480d53a05b246dea363c681d57d2d564ec7330d341771a40e67c6b23",
-          "bytes": 8506,
+          "sha256": "3953fb5710f99576d48b9f3fde6e58d1cf9c1d2182ebe88b341423c469c20f57",
+          "bytes": 8979,
           "routes": [
             {
               "method": "GET",
               "declared_path": "/",
               "function": "root",
-              "line": 60
+              "line": 63
             },
             {
               "method": "GET",
               "declared_path": "/health",
               "function": "health",
-              "line": 80
+              "line": 83
             },
             {
               "method": "GET",
               "declared_path": "/townlight_contracts",
               "function": "public_townlight_contracts_page",
-              "line": 92
+              "line": 95
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_contracts/registry",
               "function": "contract_registry",
-              "line": 99
+              "line": 102
             },
             {
               "method": "GET",
               "declared_path": "/api/v1/townlight_contracts/registry/{contract_id}",
               "function": "get_contract_registry",
-              "line": 109
+              "line": 112
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_contracts/clauses/lookup",
               "function": "clause_lookup",
-              "line": 131
+              "line": 134
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_contracts/expirations",
               "function": "expiration_plan",
-              "line": 139
+              "line": 142
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_contracts/renewals/summary",
               "function": "renewal_summary",
-              "line": 147
+              "line": 150
             },
             {
               "method": "GET",
               "declared_path": "/api/v1/townlight_contracts/renewals/{contract_id}",
               "function": "get_renewal_summary",
-              "line": 165
+              "line": 168
             },
             {
               "method": "POST",
               "declared_path": "/api/v1/townlight_contracts/export",
               "function": "records_export",
-              "line": 187
+              "line": 190
             }
           ],
           "models": [
@@ -36709,20 +36709,20 @@
                 {
                   "name": "contract_id",
                   "type": "str",
-                  "line": 32
+                  "line": 35
                 },
                 {
                   "name": "vendor_name",
                   "type": "str",
-                  "line": 33
+                  "line": 36
                 },
                 {
                   "name": "contract_type",
                   "type": "str",
-                  "line": 34
+                  "line": 37
                 }
               ],
-              "line": 31
+              "line": 34
             },
             {
               "name": "ClauseLookupRequest",
@@ -36733,15 +36733,15 @@
                 {
                   "name": "query",
                   "type": "str",
-                  "line": 38
+                  "line": 41
                 },
                 {
                   "name": "contract_text",
                   "type": "str",
-                  "line": 39
+                  "line": 42
                 }
               ],
-              "line": 37
+              "line": 40
             },
             {
               "name": "ExpirationRequest",
@@ -36752,15 +36752,15 @@
                 {
                   "name": "contract_id",
                   "type": "str",
-                  "line": 43
+                  "line": 46
                 },
                 {
                   "name": "expiration_date",
                   "type": "date",
-                  "line": 44
+                  "line": 47
                 }
               ],
-              "line": 42
+              "line": 45
             },
             {
               "name": "RenewalRequest",
@@ -36771,20 +36771,20 @@
                 {
                   "name": "contract_id",
                   "type": "str",
-                  "line": 48
+                  "line": 51
                 },
                 {
                   "name": "renewal_terms",
                   "type": "str",
-                  "line": 49
+                  "line": 52
                 },
                 {
                   "name": "department_notes",
                   "type": "str",
-                  "line": 50
+                  "line": 53
                 }
               ],
-              "line": 47
+              "line": 50
             },
             {
               "name": "RecordsExportRequest",
@@ -36795,26 +36795,26 @@
                 {
                   "name": "contract_id",
                   "type": "str",
-                  "line": 54
+                  "line": 57
                 },
                 {
                   "name": "title",
                   "type": "str",
-                  "line": 55
+                  "line": 58
                 },
                 {
                   "name": "format",
                   "type": "str",
-                  "line": 56
+                  "line": 59
                 }
               ],
-              "line": 53
+              "line": 56
             }
           ],
           "configuration": [
             {
               "environment": "TOWNLIGHT_CONTRACTS_REGISTRY_DB_URL",
-              "line": 196
+              "line": 199
             }
           ]
         },
@@ -36871,7 +36871,7 @@
         },
         {
           "source": "townlight_contracts/public_ui.py",
-          "sha256": "f7766c4b71b23b835171b980a93f104b4a6a25e5845bc2a0a0cabaea3b8b1ee4",
+          "sha256": "b2b302f14a4725b881f231239d66300f4b3ebaec263824386efe02ecf96e44e5",
           "bytes": 5634,
           "routes": [],
           "models": [],
@@ -37016,13 +37016,13 @@
     },
     "procurement": {
       "repository": "townlight/procure",
-      "repository_head": "f10cd99f65f5f867d331af3bd6e60742bca61268",
+      "repository_head": "a787a6eff3c0940681eadb70778ea3ac05df64d4",
       "working_tree_modified": false,
       "principal_import": "townlight_procurement",
       "source": [
         {
           "source": "townlight_procurement/__init__.py",
-          "sha256": "69fbaa7fba22edfb86fb9c4f795a158e416d3b6d1d684b3b5b4c44943ea91382",
+          "sha256": "3ac093afbf931254d9611196a267423f0724cad15a2a65d3a2389655a32d1fe7",
           "bytes": 62,
           "routes": [],
           "models": [],
@@ -37743,8 +37743,8 @@
         },
         {
           "source": "townlight_procurement/public_ui.py",
-          "sha256": "44ffb29e12b2d675ccfb5b561b6e8442bb3b5a349dbb611f93ae775c7ffdb7da",
-          "bytes": 5801,
+          "sha256": "480ed344725bb2d7ea1b06116109d58093263df51aa7869fe5fef13f8a34a3d3",
+          "bytes": 5804,
           "routes": [],
           "models": [],
           "configuration": []

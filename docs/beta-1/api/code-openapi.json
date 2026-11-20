@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Townlight Records",
-    "description": "Prepared source schema for the actual native composition; installed acceptance remains pending. Exported without lifespan, migrations or database/network access.",
-    "version": "1.8.0.dev2"
+    "description": "Source schema for the Windows 1.8.2.1 native composition; installed acceptance is reported separately. Exported without lifespan, migrations or database/network access.",
+    "version": "1.8.0.dev3"
   },
   "paths": {
     "/desktop/v1/code-sources/search": {
@@ -1840,6 +1840,32 @@
         ],
         "title": "AttachReleaseCopy"
       },
+      "AttendanceInput": {
+        "properties": {
+          "seat_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Seat Id"
+          },
+          "meeting_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Meeting Id"
+          },
+          "present": {
+            "type": "boolean",
+            "title": "Present"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "seat_id",
+          "meeting_id",
+          "present"
+        ],
+        "title": "AttendanceInput"
+      },
       "AuditChainVerification": {
         "properties": {
           "is_valid": {
@@ -1989,6 +2015,35 @@
         ],
         "title": "AuditView"
       },
+      "AwardInput": {
+        "properties": {
+          "proposal_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Proposal Id"
+          },
+          "decision_reference": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Decision Reference"
+          },
+          "decision_note": {
+            "type": "string",
+            "maxLength": 8000,
+            "minLength": 1,
+            "title": "Decision Note"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "proposal_id",
+          "decision_reference",
+          "decision_note"
+        ],
+        "title": "AwardInput"
+      },
       "BearerResponse": {
         "properties": {
           "access_token": {
@@ -2006,6 +2061,29 @@
           "token_type"
         ],
         "title": "BearerResponse"
+      },
+      "BoardInput": {
+        "properties": {
+          "board_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Board Name"
+          },
+          "liaison": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Liaison"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "board_name",
+          "liaison"
+        ],
+        "title": "BoardInput"
       },
       "Body_auth_jwt_login_auth_jwt_login_post": {
         "properties": {
@@ -5269,6 +5347,157 @@
         "title": "ImportBundleCreate",
         "description": "Request body for local fixture/file-drop import jobs."
       },
+      "ImportCommitInput": {
+        "properties": {
+          "connector": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Connector"
+          },
+          "source_url": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Source Url"
+          },
+          "input_format": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Input Format"
+          },
+          "content_base64": {
+            "type": "string",
+            "maxLength": 22369624,
+            "minLength": 1,
+            "title": "Content Base64"
+          },
+          "external_id": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "External Id"
+          },
+          "expected_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Expected Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "connector",
+          "source_url",
+          "input_format",
+          "content_base64",
+          "external_id",
+          "expected_sha256"
+        ],
+        "title": "ImportCommitInput"
+      },
+      "ImportLinkInput": {
+        "properties": {
+          "meeting_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Meeting Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "meeting_id"
+        ],
+        "title": "ImportLinkInput"
+      },
+      "ImportLinkSearch": {
+        "properties": {
+          "target_query": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "Target Query",
+            "default": ""
+          },
+          "meeting_query": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "Meeting Query",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ImportLinkSearch"
+      },
+      "ImportPreviewInput": {
+        "properties": {
+          "connector": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Connector"
+          },
+          "source_url": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Source Url"
+          },
+          "input_format": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Input Format"
+          },
+          "content_base64": {
+            "type": "string",
+            "maxLength": 22369624,
+            "minLength": 1,
+            "title": "Content Base64"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "connector",
+          "source_url",
+          "input_format",
+          "content_base64"
+        ],
+        "title": "ImportPreviewInput"
+      },
+      "ImportSourceInput": {
+        "properties": {
+          "connector": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Connector"
+          },
+          "source_url": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1,
+            "title": "Source Url"
+          },
+          "input_format": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Input Format"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "connector",
+          "source_url",
+          "input_format"
+        ],
+        "title": "ImportSourceInput"
+      },
       "InclusionStatus": {
         "type": "string",
         "enum": [
@@ -7924,6 +8153,42 @@
         ],
         "title": "Proposal"
       },
+      "ProposalInput": {
+        "properties": {
+          "vendor_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Vendor Name"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 8000,
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "staff_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Staff Score"
+          },
+          "staff_exceptions": {
+            "type": "string",
+            "maxLength": 8000,
+            "title": "Staff Exceptions",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "vendor_name",
+          "summary",
+          "staff_score"
+        ],
+        "title": "ProposalInput"
+      },
       "PublicExplore": {
         "properties": {
           "goal": {
@@ -8373,6 +8638,27 @@
           "created_at_unix_seconds"
         ],
         "title": "RecordsDocumentView"
+      },
+      "RecordsImportDocument": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          },
+          "document_index": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Document Index"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "request_id",
+          "document_index"
+        ],
+        "title": "RecordsImportDocument"
       },
       "RecordsOperationRead": {
         "properties": {
@@ -9702,6 +9988,36 @@
         ],
         "title": "RewriteResult"
       },
+      "RfpInput": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "procurement_type": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Procurement Type"
+          },
+          "city_need": {
+            "type": "string",
+            "maxLength": 8000,
+            "minLength": 1,
+            "title": "City Need"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "procurement_type",
+          "city_need"
+        ],
+        "title": "RfpInput"
+      },
       "Rule": {
         "properties": {
           "jurisdiction": {
@@ -10353,6 +10669,65 @@
         ],
         "title": "SearchSessionRead"
       },
+      "SeatInput": {
+        "properties": {
+          "board_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Board Id"
+          },
+          "seat_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Seat Name"
+          },
+          "member_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Name"
+          },
+          "term_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term Start"
+          },
+          "term_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Term End"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "board_id",
+          "seat_name"
+        ],
+        "title": "SeatInput"
+      },
       "SectionCreate": {
         "properties": {
           "section_id": {
@@ -10553,27 +10928,6 @@
         "title": "SectionVersionCreate",
         "description": "Request body for adding an immutable section version."
       },
-      "Selection": {
-        "properties": {
-          "recording_id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Recording Id"
-          },
-          "expected_sha256": {
-            "type": "string",
-            "pattern": "^[0-9a-f]{64}$",
-            "title": "Expected Sha256"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "recording_id",
-          "expected_sha256"
-        ],
-        "title": "Selection"
-      },
       "SentenceInput": {
         "properties": {
           "text": {
@@ -10725,6 +11079,69 @@
         },
         "type": "object",
         "title": "ServiceAccountUpdate"
+      },
+      "SignedAgreement": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "vendor_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Vendor Name"
+          },
+          "owner": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Owner"
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Start Date"
+          },
+          "expiration_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Expiration Date"
+          },
+          "renewal_due": {
+            "type": "string",
+            "format": "date",
+            "title": "Renewal Due"
+          },
+          "document_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Document Name"
+          },
+          "document_content": {
+            "type": "string",
+            "maxLength": 8388608,
+            "format": "base64",
+            "contentMediaType": "application/octet-stream",
+            "title": "Document Content"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "vendor_name",
+          "owner",
+          "start_date",
+          "expiration_date",
+          "renewal_due",
+          "document_name",
+          "document_content"
+        ],
+        "title": "SignedAgreement"
       },
       "Snapshot": {
         "properties": {
@@ -12063,6 +12480,27 @@
         ],
         "title": "SourceLink"
       },
+      "townlight_records__desktop_bridge__station__Selection": {
+        "properties": {
+          "recording_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Recording Id"
+          },
+          "expected_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Expected Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "recording_id",
+          "expected_sha256"
+        ],
+        "title": "Selection"
+      },
       "townlight_runtime__inspections_bridge__Search": {
         "properties": {
           "provider": {
@@ -12212,6 +12650,65 @@
           "query"
         ],
         "title": "Search"
+      },
+      "townlight_runtime__portal_publication__Selection": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "publish",
+              "withdraw"
+            ],
+            "title": "Action"
+          },
+          "approve_publication": {
+            "type": "boolean",
+            "title": "Approve Publication"
+          },
+          "archive_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Archive Id"
+          },
+          "meeting_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Meeting Id"
+          },
+          "recording_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Recording Id"
+          },
+          "request_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Request Id"
+          },
+          "release_copy_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Release Copy Id"
+          },
+          "expected_release_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Expected Release Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "action",
+          "approve_publication",
+          "archive_id",
+          "meeting_id",
+          "recording_id",
+          "request_id",
+          "release_copy_id",
+          "expected_release_sha256"
+        ],
+        "title": "Selection"
       },
       "townlight_runtime__zoning_bridge__Review": {
         "properties": {
