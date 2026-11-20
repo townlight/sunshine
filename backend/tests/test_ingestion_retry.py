@@ -8,30 +8,33 @@ from httpx import AsyncClient
 async def test_re_ingest_requires_failed_status(client: AsyncClient, admin_token: str):
     """POST /datasources/documents/{id}/re-ingest rejects non-failed docs."""
     import uuid
-    # Upload a file to create a document (will be in pending/completed state)
-    import tempfile
-    import os
-    with tempfile.NamedTemporaryFile(suffix=".txt", delete=False, mode="w") as f:
-        f.write("Test content for retry test")
-        tmp_path = f.name
+    from sqlalchemy import select
+    from tests.conftest import test_session_maker
+    from townlight_records.models.user import User
+    from townlight_records.models.document import DataSource, Document, IngestionStatus, SourceType
 
-    try:
-        with open(tmp_path, "rb") as f:
-            resp = await client.post(
-                "/datasources/upload",
-                files={"file": ("test-retry.txt", f, "text/plain")},
-                headers={"Authorization": f"Bearer {admin_token}"},
-            )
-        # Upload queues ingestion — doc may not exist yet in test DB
-        # Instead, test with a non-existent UUID
-        fake_id = str(uuid.uuid4())
-        resp = await client.post(
-            f"/datasources/documents/{fake_id}/re-ingest",
-            headers={"Authorization": f"Bearer {admin_token}"},
-        )
-        assert resp.status_code == 404
-    finally:
-        os.unlink(tmp_path)
+    # Seed the state this endpoint rejects directly. Uploading queues unrelated
+    # ingestion work and requires the optional standalone Redis deployment.
+    async with test_session_maker() as session:
+        user = (await session.execute(select(User))).scalars().first()
+        source = DataSource(name="retry-fixture-" + uuid.uuid4().hex,
+                            source_type=SourceType.MANUAL_DROP,
+                            connection_config={}, created_by=user.id)
+        session.add(source)
+        await session.flush()
+        document = Document(source_id=source.id, source_path="synthetic-retry.txt",
+                            filename="synthetic-retry.txt", file_type="txt",
+                            file_hash="a" * 64, ingestion_status=IngestionStatus.PENDING)
+        session.add(document)
+        await session.commit()
+        document_id = document.id
+    resp = await client.post(
+        f"/datasources/documents/{document_id}/re-ingest",
+        headers={"Authorization": f"Bearer {admin_token}"},
+    )
+    assert resp.status_code == 400
+    assert "Can only re-ingest failed documents" in resp.json()["detail"]
+
 
 
 @pytest.mark.asyncio
