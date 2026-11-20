@@ -109,9 +109,9 @@ TOWNLIGHT_CORE_BASELINE_REV: Final[str] = {
 # alembic_version_townlight_core so the upgrade path runs from a properly stamped
 # starting point — a real v1.3.0 operator's DB always has this row.
 TOWNLIGHT_CORE_V1_3_0_STARTING_REV: Final[str] = "townlight_core_0001"
-# Records convergence adds migrations 022 through 027 after first-login
+# Records adds migrations 022 through 028 after first-login
 # hardening. The historical v1.3.0 fixture still starts at 019.
-RECORDS_HEAD_REV: Final[str] = "027_import_artifact_order"
+RECORDS_HEAD_REV: Final[str] = "028_document_file_size_bigint"
 
 # v1.3.0 tag's records-side alembic head, captured 2026-04-25 from the v1.3.0
 # git worktree using a Postgres testcontainer + pg_dump --schema-only. Source of
