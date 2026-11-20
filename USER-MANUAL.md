@@ -80,7 +80,7 @@ Staff should begin with First run and Daily workflow. Administrators should also
 | Current owned software license | AGPL-3.0-only |
 | Acceptance composition | Windows 1.8.1.1: fresh-install acceptance; upgrade to this version unverified. Select the full profile. Station uses separate configuration. |
 
-Start a new installation with an empty database and fresh Windows profile. For an upgrade from Windows 1.7.2.1, keep the existing profile. The approved profile path is `%LOCALAPPDATA%\CivicSuite`. Keep existing profiles and backups.
+Start a new installation with an empty database and fresh Windows profile. The tested upgrade from Windows 1.7.2.1 was to 1.8.0.1, not 1.8.1.1. For existing-city evaluation, preserve the profile, city data, settings and a restore path. The approved profile path is `%LOCALAPPDATA%\CivicSuite`. Keep existing profiles and backups.
 
 ## First run
 
