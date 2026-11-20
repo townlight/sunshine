@@ -16,7 +16,7 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
@@ -24,42 +24,42 @@ jobs:
           cache-dependency-path: '**/pyproject.toml'
       - name: Install pinned shared Core
         run: python -m pip install git+https://github.com/townlight/core.git@3021821bf9a92c790a399ad12aed821d65b09105
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/townlight
           ref: 51b2e7af26e5e62eb598c1348a36b693a70a1a6f
           path: .ci-siblings/townlight
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/plan
           ref: 7de514f1afd720f93bd70a4866c3389ef621dc49
           path: .ci-siblings/plan
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/meetings
           ref: e0577a165cc8f09a3597ec3ce54ecc23168f8d62
           path: .ci-siblings/meetings
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/ordinances
           ref: 22d00f560cc45088a5b24a3f997787ee9c7a5e31
           path: .ci-siblings/ordinances
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/zone
           ref: fb352955720db2e6e21caca816a8eb609a49f768
           path: .ci-siblings/zone
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/core
           ref: 3021821bf9a92c790a399ad12aed821d65b09105
           path: .ci-siblings/core
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/notice
           ref: 4edf01296b0ad56a331e7fdd9b7c2d19c20b8e48
           path: .ci-siblings/notice
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           repository: townlight/access
           ref: f377a9a6e2a14d890333a20eab9277d644a9aaeb
