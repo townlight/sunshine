@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Townlight Records",
-    "description": "Source schema generated from the bundled Windows 1.8.1.1 native domain runtime without starting services.",
-    "version": "1.8.0.dev2"
+    "description": "Source schema for the Windows 1.8.2.1 native composition; installed acceptance is reported separately. Exported without lifespan, migrations or database/network access.",
+    "version": "1.8.0.dev3"
   },
   "paths": {
     "/auth/jwt/login": {
@@ -29466,6 +29466,9 @@
       }
     }
   },
-  "x-townlight-source-commit": "0afd59de52cb7ecb317188a89bcd1fec8c578a24",
-  "x-townlight-health-version-discrepancy": "Distribution Runtime 0.3.1 and Meetings 1.0.6; health strings Runtime 0.3.0 and Meetings 1.0.5 in the accepted MSI."
+  "x-townlight-component": {
+    "view": "suite",
+    "identity": "Desktop source 1.8.2-1; townlight-runtime 0.3.2",
+    "evidence": "source-schema-only"
+  }
 }

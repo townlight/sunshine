@@ -1,0 +1,107 @@
+{
+  "core": {
+    "repository": "townlight/core",
+    "commit": "2f6ba9be4a95e3772dc47a3682ac780c5283b626",
+    "archive": "core.zip",
+    "sha256": "24e0ed00d1e899df80f033a3629ab84f29e2816379246aa09ac78d4b367cc517",
+    "bytes": 26080559
+  },
+  "sunshine": {
+    "repository": "townlight/sunshine",
+    "commit": "f63fe0e30a92eee2141ecc16bdbed6b2ad901f0e",
+    "archive": "sunshine.zip",
+    "sha256": "443cc77417d1a8051c5b63c4f2543cca02bfa1bd1f5a908e3a1bacc7af2dec6d",
+    "bytes": 28166319
+  },
+  "meetings": {
+    "repository": "townlight/meetings",
+    "commit": "93fea47d9528e283c5835a1ef568f3f0cfa1fd56",
+    "archive": "meetings.zip",
+    "sha256": "ea83ef61382dc167911eac441e8dc90d8a3ec966907dc07605e30a9169acd572",
+    "bytes": 143465791
+  },
+  "ordinances": {
+    "repository": "townlight/ordinances",
+    "commit": "296c13ac9075ed2849098952dcb1fddfbf4e8cd4",
+    "archive": "ordinances.zip",
+    "sha256": "a48bc2375c00548f61fdd6e47fba255e5041d3912b3be132b06c0841519ce664",
+    "bytes": 63741421
+  },
+  "zone": {
+    "repository": "townlight/zone",
+    "commit": "25e6034304d5ffe30e0f6aad58ad9f73dc78d5f4",
+    "archive": "zone.zip",
+    "sha256": "207cdcd2e2d2dbc6469881d632886da56515326e6db1b896a11ea7a762238d7e",
+    "bytes": 14053802
+  },
+  "plan": {
+    "repository": "townlight/plan",
+    "commit": "9782f6941d55ed4156f412c04200b79c2070b416",
+    "archive": "plan.zip",
+    "sha256": "b9db033c11e2d6281e135584d6315f07a7c134c169e79cf8e72e539c06507659",
+    "bytes": 13938082
+  },
+  "notice": {
+    "repository": "townlight/notice",
+    "commit": "b93bd4c907b5cf59e12afc5332ed177ac3e12bfd",
+    "archive": "notice.zip",
+    "sha256": "32f181ecb9daa4b3b97bb0d87a1e71c074f05c598fc7191d93a2c876e1befd11",
+    "bytes": 2875213
+  },
+  "access": {
+    "repository": "townlight/access",
+    "commit": "6c4f2aefb587eba57f5daa3cff4779530e57a61d",
+    "archive": "access.zip",
+    "sha256": "dfdb06b04558be7d2b367b205f4c4ece1c49ec6303062560ad764623c74b294d",
+    "bytes": 1990897
+  },
+  "permit": {
+    "repository": "townlight/permit",
+    "commit": "5a3e63694f2eeaa695f4da85ffc0d8308c5827b6",
+    "archive": "permit.zip",
+    "sha256": "a2be4b5e3519168d80d5989cf9df1f320b55495065856774d319f95d1bd1df5b",
+    "bytes": 11264564
+  },
+  "inspect": {
+    "repository": "townlight/inspect",
+    "commit": "cd36cae97cba32ac7681d5e9abef378c17241a77",
+    "archive": "inspect.zip",
+    "sha256": "2d52a26a94b78fb4e5afc7639ef5275655b74be06d008792ac652437958868dd",
+    "bytes": 15030971
+  },
+  "station": {
+    "repository": "townlight/station",
+    "commit": "5e65aa40795933ce2f39b195f869dacb9d4aa6a8",
+    "archive": "station.zip",
+    "sha256": "67c8353e3b0683521ad2cdc053f3534bca5fa685569a918a74aa6e67d257fecc",
+    "bytes": 12544888
+  },
+  "boards": {
+    "repository": "townlight/boards",
+    "commit": "06df86606fe8249c49b1450ff13a40a5ab0aa1e5",
+    "archive": "boards.zip",
+    "sha256": "4f675fc681a0c57bd81d11aee582ea8e37704a1cc2a73891fe79caa67c7a620a",
+    "bytes": 3140007
+  },
+  "contracts": {
+    "repository": "townlight/contracts",
+    "commit": "216625f1020a7c25bfaec97d5f51ac4381b1fd75",
+    "archive": "contracts.zip",
+    "sha256": "5281a9f3500aca6e26c6f18539178ae4f3633ff17f6d3bd74bb5e48a3c7791ff",
+    "bytes": 2956576
+  },
+  "procure": {
+    "repository": "townlight/procure",
+    "commit": "a787a6eff3c0940681eadb70778ea3ac05df64d4",
+    "archive": "procure.zip",
+    "sha256": "52a987e5fc6f4c69d5f032de311f27bda344c7da1abb1d241386fe7dcca0b852",
+    "bytes": 4510122
+  },
+  "townlight": {
+    "repository": "townlight/townlight",
+    "commit": "993d47567799cd8f676fb514daea7edb3636eb0b",
+    "archive": "townlight.zip",
+    "sha256": "04bd8a5215b712c0b082c60e0a7c28e3ea9bf727fc0bf25ad9b611fe28cc6fd1",
+    "bytes": 123460333
+  }
+}

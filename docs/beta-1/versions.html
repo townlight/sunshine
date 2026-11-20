@@ -14,7 +14,7 @@ header .brand{display:inline-flex;align-items:center;max-width:100%;flex-shrink:
 <nav aria-label="Main"><a href="./manuals/suite.html">Suite manual</a>
 <a href="./versions.html">Versions and Windows release</a>
 <a href="./terms.html">Terms and license</a></nav></header>
-<main id="main" class="reading wrap"><p class="edition">Windows x64 Beta 1 · MSI 1.8.1.1</p>
+<main id="main" class="reading wrap"><section id="windows-maintenance"><h2>Windows 1.8.2.1 maintenance release</h2><p>Windows 1.8.2.1 packages the staff authorization, explicit database configuration and component metadata corrections. Its exact signed installed checks cover setup, the 1.8.1.1 upgrade, saved staff records, procurement/Contracts handoffs, backup/restore and uninstall retention. Unchanged module and 31-source/34-format import evidence remains attributed to the earlier build that produced it; this is not a new exhaustive test of every module or live provider.</p><p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city data and settings, close Townlight, run the signed MSI, and reopen it under the same Windows account with the existing %LOCALAPPDATA%\CivicSuite profile. Keep the prior installer and a restore path. Other upgrade paths are unverified. Station uses its separately configured service. The acceptance summary distinguishes new maintenance checks from reused workflow evidence.</p><p><a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.2.1">Release and downloads</a> · <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/ACCEPTANCE-Windows-1.8.2.1.md">Acceptance and limits</a></p></section><p class="edition">Windows x64 Beta 1 · MSI 1.8.2.1</p>
 <p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module. <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Acceptance and limits</a>.</p>
 
 <nav id="TOC" role="doc-toc">
@@ -24,7 +24,7 @@ versions</a></li>
 </ul>
 </nav>
 <h1 id="component-versions">Component versions</h1>
-<p>These components are included in the signed <a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.1.1">Windows x64 beta 1.8.1.1</a>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows acceptance summary</a> for the tested workflows.</p>
+<p>These components are included in the signed <a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.2.1">Windows x64 beta 1.8.2.1</a>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/ACCEPTANCE-Windows-1.8.2.1.md">Windows acceptance summary</a> for the tested workflows.</p>
 <table>
 <thead>
 <tr>
@@ -42,7 +42,7 @@ versions</a></li>
 <tr>
 <td>Townlight Records</td>
 <td><code>townlight-records</code></td>
-<td>1.8.0.dev2</td>
+<td>1.8.0.dev3</td>
 </tr>
 <tr>
 <td>Townlight Meetings</td>
@@ -89,17 +89,17 @@ versions</a></li>
 <td><code>townlight-station</code></td>
 <td>0.3.1</td>
 </tr>
-<tr><td>Boards &amp; Commissions</td><td><code>townlight-boards</code></td><td>0.2.0</td></tr>
-<tr><td>Contracts</td><td><code>townlight-contracts</code></td><td>0.2.0</td></tr>
-<tr><td>Procurement</td><td><code>townlight-procurement</code></td><td>0.3.0</td></tr>
-<tr><td>Local runtime</td><td><code>townlight-runtime</code></td><td>0.3.1</td></tr>
+<tr><td>Boards &amp; Commissions</td><td><code>townlight-boards</code></td><td>0.2.1</td></tr>
+<tr><td>Contracts</td><td><code>townlight-contracts</code></td><td>0.2.1</td></tr>
+<tr><td>Procurement</td><td><code>townlight-procurement</code></td><td>0.3.1</td></tr>
+<tr><td>Local runtime</td><td><code>townlight-runtime</code></td><td>0.3.2</td></tr>
 </tbody>
 </table>
-<p>Desktop source version <code>1.8.1-1</code>. Windows MSI version <code>1.8.1.1</code>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/SHA256SUMS-Windows-1.8.1.1.txt">SHA-256 checksums</a> and <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows acceptance summary</a>.</p>
+<p>Desktop source version <code>1.8.2-1</code>. Windows MSI version <code>1.8.2.1</code>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/SHA256SUMS-Windows-1.8.2.1.txt">SHA-256 checksums</a> and <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/ACCEPTANCE-Windows-1.8.2.1.md">Windows acceptance summary</a>.</p>
 <p>Historical releases retain their original package identities, version
 numbers and evidence. These candidate names do not rename historical
 artifacts.</p>
 <p>Station remains the existing Beta 1 Python service. Its separate Rust
 development line and standalone CivicCast are outside this
 migration.</p>
-<section id="meeting-imports"><h2>Shared meeting imports · Windows 1.8.1.1</h2><p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.</p><p><a href="https://townlight.github.io/manuals/meeting-imports.html">All 31 sources, formats, operator steps and integration contracts</a> · <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Installed acceptance and limits</a>.</p><p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to 1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an existing-city evaluation, back up city data and settings, close Townlight, keep the existing %LOCALAPPDATA%\CivicSuite profile, and use the same Windows account. Keep the prior installer and a restore path. Station continues to use its separately configured service.</p><p>The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6 distributions. Its health version strings still report Runtime 0.3.0 and Meetings 1.0.5. Default-branch source corrects those display strings; the signed MSI and its exact build source remain unchanged.</p></section></main><footer>Townlight · AGPL-3.0-only · Candidate evidence applies only to its identified artifacts.<span><a href="./brand/">Brand package</a></span><span><a href="./announcement.html">Announcement</a> · <a href="./support.html">Support and feedback</a></span></footer></body></html>
+<section id="meeting-imports"><h2>Shared meeting imports · Windows 1.8.1.1</h2><p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.</p><p><a href="https://townlight.github.io/manuals/meeting-imports.html">All 31 sources, formats, operator steps and integration contracts</a> · <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Installed acceptance and limits</a>.</p><p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city data and settings, close Townlight, run the signed MSI, and reopen it under the same Windows account with the existing %LOCALAPPDATA%\CivicSuite profile. Keep the prior installer and a restore path. Other upgrade paths are unverified. Station uses its separately configured service. The acceptance summary distinguishes new maintenance checks from reused workflow evidence.</p><p>Windows 1.8.2.1 contains Townlight Runtime 0.3.2 and Meetings 1.0.6, including corrected version displays.</p></section></main><footer>Townlight · AGPL-3.0-only · Candidate evidence applies only to its identified artifacts.<span><a href="./brand/">Brand package</a></span><span><a href="./announcement.html">Announcement</a> · <a href="./support.html">Support and feedback</a></span></footer></body></html>

@@ -7,9 +7,12 @@ main,.toc a,.hero h1{overflow-wrap:anywhere}
 @page{size:Letter;margin:.7in .65in .75in}
 @media print{html{scroll-behavior:auto}body{font:10.5pt/1.45 Arial,sans-serif;color:#172f39}header,footer,.search-area,.screen-only{display:none}.doclayout{display:block;padding:0;max-width:none}.toc{position:static;max-height:none;overflow:visible;font-size:10pt;break-after:page}.toc>h2{border:0}.toc ul{columns:2;column-gap:.3in}.toc li{break-inside:avoid}.docbody h1{font-size:30pt}.docbody h2{font-size:19pt;break-after:avoid;padding-top:.15in;margin-top:.35in}.docbody h3{font-size:12pt;break-after:avoid}.docbody h4{break-after:avoid}p{orphans:3;widows:3}pre{font-size:8.2pt;line-height:1.4;padding:.1in;break-inside:auto}table{font-size:8.4pt;line-height:1.35}th,td{padding:.06in .07in}tr{break-inside:avoid}.flow{max-height:6in;object-fit:contain;break-inside:avoid}a{color:#172f39;text-decoration:underline}.cover{break-after:page;padding-top:1in}.cover .edition{font-size:11pt}.cover h1{font-size:32pt}.cover .lead{font-size:14pt}.api-entry{break-inside:auto}.api-entry h3{break-after:avoid}.index-columns{columns:2}}
 
-pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.6rem;font-weight:600}details{margin:.5rem 0}header .brand{display:inline-flex;align-items:center;max-width:100%;flex-shrink:0}header .brand img{display:block;width:217px;max-width:100%;height:auto}</style><link rel="icon" href="../brand/favicon.svg" type="image/svg+xml"><link rel="icon" href="../brand/favicon.ico" sizes="16x16 32x32 48x48"><link rel="apple-touch-icon" href="../brand/png/townlight-hall-app-icon-180.png"><meta property="og:image" content="https://townlight.github.io/brand/png/townlight-hall-social-preview.png"><meta name="twitter:card" content="summary_large_image"></head><body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="../index.html"><img src="../brand/svg/townlight-hall-lockup.svg" alt="Townlight" width="217" height="45"></a><nav aria-label="Main"><a href="../manuals/suite.html">Suite manual</a><a href="../versions.html">Versions and release</a><a href="../reference/index.html">Technical reference</a></nav></header><main class="reading wrap" id="main"><h1>Townlight Records API reference</h1>
-<p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module. <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Acceptance and limits</a>.</p>
-<p>Townlight Records 1.8.0.dev2. The HTTP host is Townlight Records 1.8.0.dev2. Component package versions and the host API version are separate identities.</p>
+/* Townlight Open Hall documentation identity. Software adoption is separate. */
+header .brand{display:inline-flex;align-items:center;max-width:100%;flex-shrink:0}header .brand img{display:block;width:217px;max-width:100%;height:auto}
+
+pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.6rem;font-weight:600}details{margin:.5rem 0}</style></head><body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="../index.html">Townlight</a><nav aria-label="Main"><a href="../manuals/suite.html">Suite manual</a><a href="../versions.html">Versions and candidate</a><a href="../reference/index.html">Technical reference</a></nav></header><main class="reading wrap" id="main"><section id="windows-maintenance"><h2>Windows 1.8.2.1 maintenance release</h2><p>Windows 1.8.2.1 packages the staff authorization, explicit database configuration and component metadata corrections. Its exact signed installed checks cover setup, the 1.8.1.1 upgrade, saved staff records, procurement/Contracts handoffs, backup/restore and uninstall retention. Unchanged module and 31-source/34-format import evidence remains attributed to the earlier build that produced it; this is not a new exhaustive test of every module or live provider.</p><p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city data and settings, close Townlight, run the signed MSI, and reopen it under the same Windows account with the existing %LOCALAPPDATA%\CivicSuite profile. Keep the prior installer and a restore path. Other upgrade paths are unverified. Station uses its separately configured service. The acceptance summary distinguishes new maintenance checks from reused workflow evidence.</p><p><a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.2.1">Release and downloads</a> · <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/ACCEPTANCE-Windows-1.8.2.1.md">Acceptance and limits</a></p></section><h1>Townlight Records API reference</h1>
+<p>Windows 1.8.2.1 source API reference. Route and validation contracts are source evidence; installed acceptance is reported separately.</p>
+<p>Townlight Records 1.8.0.dev3. The HTTP host is Townlight Records 1.8.0.dev3. Component package versions and the host API version are separate identities.</p>
 <p>Generated from the actual native inspections-preview composition without application lifespan, migrations or database/network access. It describes route and validation contracts; it does not establish endpoint behavior, individual authorization or installed acceptance. Standalone product applications have separate deployment boundaries.</p>
 <p><a href="records-openapi.json">Machine-readable OpenAPI schema</a> · <a href="../manuals/records.html">Operating manual and limits</a></p>
 <h2 id="operations">HTTP operations</h2>
@@ -4419,7 +4422,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
     &quot;content&quot;: {
       &quot;application/json&quot;: {
         &quot;schema&quot;: {
-          &quot;$ref&quot;: &quot;#/components/schemas/Selection&quot;
+          &quot;$ref&quot;: &quot;#/components/schemas/townlight_records__desktop_bridge__station__Selection&quot;
         }
       }
     }
@@ -8752,6 +8755,34 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;AttachReleaseCopy&quot;
 }
 </pre></details>
+<details><summary>AttendanceInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;seat_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Seat Id&quot;
+    },
+    &quot;meeting_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Meeting Id&quot;
+    },
+    &quot;present&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;,
+      &quot;title&quot;: &quot;Present&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;seat_id&quot;,
+    &quot;meeting_id&quot;,
+    &quot;present&quot;
+  ],
+  &quot;title&quot;: &quot;AttendanceInput&quot;
+}
+</pre></details>
 <details><summary>AuditChainVerification</summary><pre>
 {
   &quot;properties&quot;: {
@@ -8907,6 +8938,37 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;AuditView&quot;
 }
 </pre></details>
+<details><summary>AwardInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;proposal_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Proposal Id&quot;
+    },
+    &quot;decision_reference&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Decision Reference&quot;
+    },
+    &quot;decision_note&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 8000,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Decision Note&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;proposal_id&quot;,
+    &quot;decision_reference&quot;,
+    &quot;decision_note&quot;
+  ],
+  &quot;title&quot;: &quot;AwardInput&quot;
+}
+</pre></details>
 <details><summary>BearerResponse</summary><pre>
 {
   &quot;properties&quot;: {
@@ -8925,6 +8987,31 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
     &quot;token_type&quot;
   ],
   &quot;title&quot;: &quot;BearerResponse&quot;
+}
+</pre></details>
+<details><summary>BoardInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;board_name&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Board Name&quot;
+    },
+    &quot;liaison&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Liaison&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;board_name&quot;,
+    &quot;liaison&quot;
+  ],
+  &quot;title&quot;: &quot;BoardInput&quot;
 }
 </pre></details>
 <details><summary>Body_auth_jwt_login_auth_jwt_login_post</summary><pre>
@@ -12347,6 +12434,167 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;description&quot;: &quot;Request body for local fixture/file-drop import jobs.&quot;
 }
 </pre></details>
+<details><summary>ImportCommitInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;connector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Connector&quot;
+    },
+    &quot;source_url&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 2048,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Source Url&quot;
+    },
+    &quot;input_format&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Input Format&quot;
+    },
+    &quot;content_base64&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 22369624,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Content Base64&quot;
+    },
+    &quot;external_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 2048,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;External Id&quot;
+    },
+    &quot;expected_sha256&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[a-f0-9]{64}$&quot;,
+      &quot;title&quot;: &quot;Expected Sha256&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;connector&quot;,
+    &quot;source_url&quot;,
+    &quot;input_format&quot;,
+    &quot;content_base64&quot;,
+    &quot;external_id&quot;,
+    &quot;expected_sha256&quot;
+  ],
+  &quot;title&quot;: &quot;ImportCommitInput&quot;
+}
+</pre></details>
+<details><summary>ImportLinkInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;meeting_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Meeting Id&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;meeting_id&quot;
+  ],
+  &quot;title&quot;: &quot;ImportLinkInput&quot;
+}
+</pre></details>
+<details><summary>ImportLinkSearch</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;target_query&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;title&quot;: &quot;Target Query&quot;,
+      &quot;default&quot;: &quot;&quot;
+    },
+    &quot;meeting_query&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;title&quot;: &quot;Meeting Query&quot;,
+      &quot;default&quot;: &quot;&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;title&quot;: &quot;ImportLinkSearch&quot;
+}
+</pre></details>
+<details><summary>ImportPreviewInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;connector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Connector&quot;
+    },
+    &quot;source_url&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 2048,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Source Url&quot;
+    },
+    &quot;input_format&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Input Format&quot;
+    },
+    &quot;content_base64&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 22369624,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Content Base64&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;connector&quot;,
+    &quot;source_url&quot;,
+    &quot;input_format&quot;,
+    &quot;content_base64&quot;
+  ],
+  &quot;title&quot;: &quot;ImportPreviewInput&quot;
+}
+</pre></details>
+<details><summary>ImportSourceInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;connector&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Connector&quot;
+    },
+    &quot;source_url&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 2048,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Source Url&quot;
+    },
+    &quot;input_format&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 60,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Input Format&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;connector&quot;,
+    &quot;source_url&quot;,
+    &quot;input_format&quot;
+  ],
+  &quot;title&quot;: &quot;ImportSourceInput&quot;
+}
+</pre></details>
 <details><summary>InclusionStatus</summary><pre>
 {
   &quot;type&quot;: &quot;string&quot;,
@@ -15118,6 +15366,44 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;Proposal&quot;
 }
 </pre></details>
+<details><summary>ProposalInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;vendor_name&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Vendor Name&quot;
+    },
+    &quot;summary&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 8000,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Summary&quot;
+    },
+    &quot;staff_score&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;maximum&quot;: 100.0,
+      &quot;minimum&quot;: 0.0,
+      &quot;title&quot;: &quot;Staff Score&quot;
+    },
+    &quot;staff_exceptions&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 8000,
+      &quot;title&quot;: &quot;Staff Exceptions&quot;,
+      &quot;default&quot;: &quot;&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;vendor_name&quot;,
+    &quot;summary&quot;,
+    &quot;staff_score&quot;
+  ],
+  &quot;title&quot;: &quot;ProposalInput&quot;
+}
+</pre></details>
 <details><summary>PublicExplore</summary><pre>
 {
   &quot;properties&quot;: {
@@ -15586,6 +15872,29 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
     &quot;created_at_unix_seconds&quot;
   ],
   &quot;title&quot;: &quot;RecordsDocumentView&quot;
+}
+</pre></details>
+<details><summary>RecordsImportDocument</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;request_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Request Id&quot;
+    },
+    &quot;document_index&quot;: {
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;minimum&quot;: 0.0,
+      &quot;title&quot;: &quot;Document Index&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;request_id&quot;,
+    &quot;document_index&quot;
+  ],
+  &quot;title&quot;: &quot;RecordsImportDocument&quot;
 }
 </pre></details>
 <details><summary>RecordsOperationRead</summary><pre>
@@ -16956,6 +17265,38 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;RewriteResult&quot;
 }
 </pre></details>
+<details><summary>RfpInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;title&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Title&quot;
+    },
+    &quot;procurement_type&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Procurement Type&quot;
+    },
+    &quot;city_need&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 8000,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;City Need&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;title&quot;,
+    &quot;procurement_type&quot;,
+    &quot;city_need&quot;
+  ],
+  &quot;title&quot;: &quot;RfpInput&quot;
+}
+</pre></details>
 <details><summary>Rule</summary><pre>
 {
   &quot;properties&quot;: {
@@ -17643,6 +17984,67 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;SearchSessionRead&quot;
 }
 </pre></details>
+<details><summary>SeatInput</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;board_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Board Id&quot;
+    },
+    &quot;seat_name&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Seat Name&quot;
+    },
+    &quot;member_name&quot;: {
+      &quot;anyOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;maxLength&quot;: 255,
+          &quot;minLength&quot;: 1
+        },
+        {
+          &quot;type&quot;: &quot;null&quot;
+        }
+      ],
+      &quot;title&quot;: &quot;Member Name&quot;
+    },
+    &quot;term_start&quot;: {
+      &quot;anyOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;format&quot;: &quot;date&quot;
+        },
+        {
+          &quot;type&quot;: &quot;null&quot;
+        }
+      ],
+      &quot;title&quot;: &quot;Term Start&quot;
+    },
+    &quot;term_end&quot;: {
+      &quot;anyOf&quot;: [
+        {
+          &quot;type&quot;: &quot;string&quot;,
+          &quot;format&quot;: &quot;date&quot;
+        },
+        {
+          &quot;type&quot;: &quot;null&quot;
+        }
+      ],
+      &quot;title&quot;: &quot;Term End&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;board_id&quot;,
+    &quot;seat_name&quot;
+  ],
+  &quot;title&quot;: &quot;SeatInput&quot;
+}
+</pre></details>
 <details><summary>SectionCreate</summary><pre>
 {
   &quot;properties&quot;: {
@@ -17847,29 +18249,6 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;description&quot;: &quot;Request body for adding an immutable section version.&quot;
 }
 </pre></details>
-<details><summary>Selection</summary><pre>
-{
-  &quot;properties&quot;: {
-    &quot;recording_id&quot;: {
-      &quot;type&quot;: &quot;string&quot;,
-      &quot;format&quot;: &quot;uuid&quot;,
-      &quot;title&quot;: &quot;Recording Id&quot;
-    },
-    &quot;expected_sha256&quot;: {
-      &quot;type&quot;: &quot;string&quot;,
-      &quot;pattern&quot;: &quot;^[0-9a-f]{64}$&quot;,
-      &quot;title&quot;: &quot;Expected Sha256&quot;
-    }
-  },
-  &quot;additionalProperties&quot;: false,
-  &quot;type&quot;: &quot;object&quot;,
-  &quot;required&quot;: [
-    &quot;recording_id&quot;,
-    &quot;expected_sha256&quot;
-  ],
-  &quot;title&quot;: &quot;Selection&quot;
-}
-</pre></details>
 <details><summary>SentenceInput</summary><pre>
 {
   &quot;properties&quot;: {
@@ -18030,6 +18409,71 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   },
   &quot;type&quot;: &quot;object&quot;,
   &quot;title&quot;: &quot;ServiceAccountUpdate&quot;
+}
+</pre></details>
+<details><summary>SignedAgreement</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;title&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Title&quot;
+    },
+    &quot;vendor_name&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Vendor Name&quot;
+    },
+    &quot;owner&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Owner&quot;
+    },
+    &quot;start_date&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;date&quot;,
+      &quot;title&quot;: &quot;Start Date&quot;
+    },
+    &quot;expiration_date&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;date&quot;,
+      &quot;title&quot;: &quot;Expiration Date&quot;
+    },
+    &quot;renewal_due&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;date&quot;,
+      &quot;title&quot;: &quot;Renewal Due&quot;
+    },
+    &quot;document_name&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 255,
+      &quot;minLength&quot;: 1,
+      &quot;title&quot;: &quot;Document Name&quot;
+    },
+    &quot;document_content&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;maxLength&quot;: 8388608,
+      &quot;format&quot;: &quot;base64&quot;,
+      &quot;contentMediaType&quot;: &quot;application/octet-stream&quot;,
+      &quot;title&quot;: &quot;Document Content&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;title&quot;,
+    &quot;vendor_name&quot;,
+    &quot;owner&quot;,
+    &quot;start_date&quot;,
+    &quot;expiration_date&quot;,
+    &quot;renewal_due&quot;,
+    &quot;document_name&quot;,
+    &quot;document_content&quot;
+  ],
+  &quot;title&quot;: &quot;SignedAgreement&quot;
 }
 </pre></details>
 <details><summary>Snapshot</summary><pre>
@@ -19427,6 +19871,29 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;SourceLink&quot;
 }
 </pre></details>
+<details><summary>townlight_records__desktop_bridge__station__Selection</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;recording_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Recording Id&quot;
+    },
+    &quot;expected_sha256&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9a-f]{64}$&quot;,
+      &quot;title&quot;: &quot;Expected Sha256&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;recording_id&quot;,
+    &quot;expected_sha256&quot;
+  ],
+  &quot;title&quot;: &quot;Selection&quot;
+}
+</pre></details>
 <details><summary>townlight_runtime__inspections_bridge__Search</summary><pre>
 {
   &quot;properties&quot;: {
@@ -19589,6 +20056,67 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;title&quot;: &quot;Search&quot;
 }
 </pre></details>
+<details><summary>townlight_runtime__portal_publication__Selection</summary><pre>
+{
+  &quot;properties&quot;: {
+    &quot;action&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;enum&quot;: [
+        &quot;publish&quot;,
+        &quot;withdraw&quot;
+      ],
+      &quot;title&quot;: &quot;Action&quot;
+    },
+    &quot;approve_publication&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;,
+      &quot;title&quot;: &quot;Approve Publication&quot;
+    },
+    &quot;archive_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Archive Id&quot;
+    },
+    &quot;meeting_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Meeting Id&quot;
+    },
+    &quot;recording_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Recording Id&quot;
+    },
+    &quot;request_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Request Id&quot;
+    },
+    &quot;release_copy_id&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;format&quot;: &quot;uuid&quot;,
+      &quot;title&quot;: &quot;Release Copy Id&quot;
+    },
+    &quot;expected_release_sha256&quot;: {
+      &quot;type&quot;: &quot;string&quot;,
+      &quot;pattern&quot;: &quot;^[0-9a-f]{64}$&quot;,
+      &quot;title&quot;: &quot;Expected Release Sha256&quot;
+    }
+  },
+  &quot;additionalProperties&quot;: false,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;required&quot;: [
+    &quot;action&quot;,
+    &quot;approve_publication&quot;,
+    &quot;archive_id&quot;,
+    &quot;meeting_id&quot;,
+    &quot;recording_id&quot;,
+    &quot;request_id&quot;,
+    &quot;release_copy_id&quot;,
+    &quot;expected_release_sha256&quot;
+  ],
+  &quot;title&quot;: &quot;Selection&quot;
+}
+</pre></details>
 <details><summary>townlight_runtime__zoning_bridge__Review</summary><pre>
 {
   &quot;properties&quot;: {
@@ -19620,4 +20148,4 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer;padding:.
   &quot;type&quot;: &quot;object&quot;,
   &quot;title&quot;: &quot;Review&quot;
 }
-</pre></details></main><footer>Townlight · AGPL-3.0-only · Source schema evidence only<span><a href="../brand/">Brand package</a></span><span><a href="../announcement.html">Announcement</a> · <a href="../support.html">Support and feedback</a></span></footer></body></html>
+</pre></details></main><footer>Townlight · AGPL-3.0-only · Source schema evidence only</footer></body></html>
