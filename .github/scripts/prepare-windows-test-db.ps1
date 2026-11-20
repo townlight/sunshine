@@ -1,4 +1,4 @@
-param([switch]$WithVector)
+param([switch]$WithVector, [switch]$WithPostgis)
 $ErrorActionPreference = 'Stop'
 $pgroot = $env:PGROOT
 if (-not $pgroot) { $pgroot = 'C:\Program Files\PostgreSQL\17' }
@@ -19,6 +19,18 @@ if ($WithVector) {
     if ($LASTEXITCODE -ne 0) { throw 'Windows pgvector build/install failed.' }
   } finally { Pop-Location }
 }
+if ($WithPostgis) {
+  $archive = Join-Path $env:RUNNER_TEMP 'postgis.zip'
+  Invoke-WebRequest -Uri 'https://download.osgeo.org/postgis/windows/pg17/archive/postgis-bundle-pg17-3.6.2x64.zip' -OutFile $archive
+  if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne '7ba180ee2a352987b9a2f194673652c59483b55852295ccf401dceccd8765425') { throw 'PostGIS hash mismatch.' }
+  $unpack = Join-Path $env:RUNNER_TEMP 'postgis'
+  Expand-Archive -LiteralPath $archive -DestinationPath $unpack
+  $bundle = Join-Path $unpack 'postgis-bundle-pg17-3.6.2x64'
+  foreach ($name in @('bin','lib','share')) {
+    Get-ChildItem -LiteralPath (Join-Path $bundle $name) -Force | Copy-Item -Destination (Join-Path $pgroot $name) -Recurse -Force
+  }
+}
+"PGBIN=$pgbin" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
 $cluster = Join-Path $env:RUNNER_TEMP 'townlight-test-pg'
 $password = [Guid]::NewGuid().ToString('N')
 Write-Output "::add-mask::$password"
@@ -35,3 +47,10 @@ $env:PGPASSWORD = $password
 if ($LASTEXITCODE -ne 0) { throw 'Private test database creation failed.' }
 "DATABASE_URL=postgresql+asyncpg://postgres:$password@127.0.0.1:55439/postgres" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
 "PLANNING_TEST_DATABASE_URL=postgresql+psycopg2://postgres:$password@127.0.0.1:55439/planning_p1p2_test" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+
+foreach ($name in @('townlight_meetings_windows_test','townlight_zoning_test')) {
+  & "$pgbin/createdb.exe" -h 127.0.0.1 -p 55439 -U postgres $name
+  if ($LASTEXITCODE -ne 0) { throw "Could not create $name" }
+}
+"TOWNLIGHT_MEETINGS_TEST_DATABASE_URL=postgresql+psycopg2://postgres:$password@127.0.0.1:55439/townlight_meetings_windows_test" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+"TOWNLIGHT_ZONING_TEST_DATABASE_URL=postgresql+psycopg2://postgres:$password@127.0.0.1:55439/townlight_zoning_test" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
