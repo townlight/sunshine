@@ -22,6 +22,9 @@ header .brand{display:inline-flex;align-items:center;max-width:100%;flex-shrink:
 <li><a href="#townlight-permitting-manual"
 id="toc-townlight-permitting-manual">Townlight Permitting Manual</a>
 <ul>
+<li><a href="#shared-meeting-imports-windows-1.8.1.1"
+id="toc-shared-meeting-imports-windows-1.8.1.1">Shared meeting imports ·
+Windows 1.8.1.1</a></li>
 <li><a href="#contents" id="toc-contents">Contents</a></li>
 <li><a href="#using-this-manual" id="toc-using-this-manual">Using this
 manual</a></li>
@@ -69,42 +72,138 @@ control</a></li>
 </ul></li>
 </ul>
 </nav>
+<p>Windows x64 Beta 1 · MSI 1.8.1.1</p>
+<p>Windows 1.8.1.1 adds shared meeting imports for 31 source families,
+with 34 supported source/format pairs. Installed Windows Sandbox checks
+exercised preview, save and durable readback using public captures and
+fixtures, plus the documented Townlight handoffs. These checks do not
+establish automatic discovery on every live portal or a complete retest
+of every module.</p>
+<ul>
+<li><a href="https://townlight.github.io/manuals/permitting.html#townlight-permitting-manual" id="toc-townlight-permitting-manual">Townlight
+Permitting Manual</a>
+<ul>
+<li><a href="https://townlight.github.io/manuals/permitting.html#contents" id="toc-contents">Contents</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#using-this-manual" id="toc-using-this-manual">Using
+this manual</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#beta-identity" id="toc-beta-identity">Beta
+identity</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#first-run" id="toc-first-run">First
+run</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#daily-workflow" id="toc-daily-workflow">Daily
+workflow</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#connected-workflows" id="toc-connected-workflows">Connected
+workflows</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#architecture" id="toc-architecture">Architecture</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#describe-a-project-and-read-source-grounded-guidance" id="toc-describe-a-project-and-read-source-grounded-guidance">Describe
+a project and read source grounded guidance</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#technical-specifications" id="toc-technical-specifications">Technical
+specifications</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#configuration-and-administration" id="toc-configuration-and-administration">Configuration
+and administration</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#api-and-integration-examples" id="toc-api-and-integration-examples">API
+and integration examples</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#mcp-and-automation-boundary" id="toc-mcp-and-automation-boundary">MCP
+and automation boundary</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#security-and-permissions" id="toc-security-and-permissions">Security
+and permissions</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#backup-recovery-and-maintenance" id="toc-backup-recovery-and-maintenance">Backup
+recovery and maintenance</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#troubleshooting" id="toc-troubleshooting">Troubleshooting</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#verified-workflows-and-limits" id="toc-verified-workflows-and-limits">Verified
+workflows and limits</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#terms-of-service-and-license" id="toc-terms-of-service-and-license">Terms
+of service and license</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#glossary" id="toc-glossary">Glossary</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#alphabetical-subject-index" id="toc-alphabetical-subject-index">Alphabetical
+subject index</a></li>
+<li><a href="https://townlight.github.io/manuals/permitting.html#source-and-document-control" id="toc-source-and-document-control">Source
+and document control</a></li>
+</ul></li>
+</ul>
 <h1 id="townlight-permitting-manual">Townlight Permitting Manual</h1>
+<h2 id="shared-meeting-imports-windows-1.8.1.1">Shared meeting imports ·
+Windows 1.8.1.1</h2>
+<p>Windows 1.8.1.1 adds shared meeting imports for 31 source families,
+with 34 supported source/format pairs. Installed Windows Sandbox checks
+exercised preview, save and durable readback using public captures and
+fixtures, plus the documented Townlight handoffs. These checks do not
+establish automatic discovery on every live portal or a complete retest
+of every module.</p>
+<p><a
+href="https://townlight.github.io/manuals/meeting-imports.html">All 31
+sources, formats and handoffs</a> · <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Installed
+acceptance</a>.</p>
+<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to
+1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested
+upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an
+existing-city evaluation, back up city data and settings, close
+Townlight, keep the existing %LOCALAPPDATA%profile, and use the same
+Windows account. Keep the prior installer and a restore path. Station
+continues to use its separately configured service.</p>
+<p>The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6
+distributions. Its health version strings still report Runtime 0.3.0 and
+Meetings 1.0.5. Default-branch source corrects those display strings;
+the signed MSI and its exact build source remain unchanged.</p>
 <p><strong>Townlight Beta 1</strong> · Naming candidate documentation
 edition 2 November 2026</p>
 <h2 id="contents">Contents</h2>
 <ul>
-<li><a href="#using-this-manual">Using this manual</a></li>
-<li><a href="#beta-identity">Beta identity</a></li>
-<li><a href="#first-run">First run</a></li>
-<li><a href="#daily-workflow">Daily workflow</a></li>
-<li><a href="#connected-workflows">Connected workflows</a></li>
-<li><a href="#architecture">Architecture</a></li>
 <li><a
-href="#describe-a-project-and-read-source-grounded-guidance">Describe a
-project and read source grounded guidance</a></li>
-<li><a href="#technical-specifications">Technical
+href="https://townlight.github.io/manuals/permitting.html#using-this-manual">Using
+this manual</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#beta-identity">Beta
+identity</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#first-run">First
+run</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#daily-workflow">Daily
+workflow</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#connected-workflows">Connected
+workflows</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#architecture">Architecture</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#describe-a-project-and-read-source-grounded-guidance">Describe
+a project and read source grounded guidance</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#technical-specifications">Technical
 specifications</a></li>
-<li><a href="#configuration-and-administration">Configuration and
-administration</a></li>
-<li><a href="#api-and-integration-examples">API and integration
-examples</a></li>
-<li><a href="#mcp-and-automation-boundary">MCP and automation
-boundary</a></li>
-<li><a href="#security-and-permissions">Security and
-permissions</a></li>
-<li><a href="#backup-recovery-and-maintenance">Backup recovery and
-maintenance</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#verified-workflows-and-limits">Verified workflows and
-limits</a></li>
-<li><a href="#terms-of-service-and-license">Terms of service and
-license</a></li>
-<li><a href="#glossary">Glossary</a></li>
-<li><a href="#alphabetical-subject-index">Alphabetical subject
-index</a></li>
-<li><a href="#source-and-document-control">Source and document
-control</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#configuration-and-administration">Configuration
+and administration</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#api-and-integration-examples">API
+and integration examples</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#mcp-and-automation-boundary">MCP
+and automation boundary</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#security-and-permissions">Security
+and permissions</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#backup-recovery-and-maintenance">Backup
+recovery and maintenance</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#troubleshooting">Troubleshooting</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#verified-workflows-and-limits">Verified
+workflows and limits</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#terms-of-service-and-license">Terms
+of service and license</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#glossary">Glossary</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#alphabetical-subject-index">Alphabetical
+subject index</a></li>
+<li><a
+href="https://townlight.github.io/manuals/permitting.html#source-and-document-control">Source
+and document control</a></li>
 </ul>
 <h2 id="using-this-manual">Using this manual</h2>
 <p>Townlight Permitting helps permit intake staff and development-review
@@ -154,7 +253,11 @@ included with the same documentation companion.</p>
 </tr>
 <tr>
 <td>Candidate hashes</td>
-<td><a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/SHA256SUMS-Windows-1.8.1.1.txt">SHA-256 checksums</a> and <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows acceptance summary</a></td>
+<td><a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/SHA256SUMS-Windows-1.8.1.1.txt">SHA-256
+checksums</a> and <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows
+acceptance summary</a></td>
 </tr>
 <tr>
 <td>Current owned software license</td>
@@ -162,18 +265,38 @@ included with the same documentation companion.</p>
 </tr>
 <tr>
 <td>Acceptance composition</td>
-<td>Windows 1.8.1.1: fresh-install acceptance; upgrade to this version unverified. Select the full profile. Station uses separate configuration.</td>
+<td>Windows 1.8.1.1: fresh-install acceptance; upgrade to this version
+unverified. Select the full profile. Station uses separate
+configuration.</td>
 </tr>
 </tbody>
 </table>
-
+<p>Start a new installation with an empty database and fresh Windows
+profile. The tested upgrade from Windows 1.7.2.1 was to 1.8.0.1, not
+1.8.1.1. For existing-city evaluation, preserve the profile, city data,
+settings and a restore path. The approved profile path is
+<code>%LOCALAPPDATA%\CivicSuite</code>. Keep existing profiles and
+backups.</p>
 <h2 id="first-run">First run</h2>
-<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to 1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an existing-city evaluation, back up city data and settings, close Townlight, keep the existing %LOCALAPPDATA%\CivicSuite profile, and use the same Windows account. Keep the prior installer and a restore path. Station continues to use its separately configured service.</p>
-<h3>Fresh installation</h3>
-<p>Run the signed Windows 1.8.1.1 MSI and use an empty database and a new Townlight profile for first run.</p>
+<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to
+1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested
+upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an
+existing-city evaluation, back up city data and settings, close
+Townlight, keep the existing %LOCALAPPDATA%profile, and use the same
+Windows account. Keep the prior installer and a restore path. Station
+continues to use its separately configured service.</p>
+<h3 id="fresh-installation">Fresh installation</h3>
+<p>Run the signed Windows 1.8.1.1 MSI and use an empty database and a
+new Townlight profile for first run.</p>
 <ol type="1">
-<li>Download the signed MSI, matching source companion and checksums from the <a href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.1.1">public Windows release</a>.</li>
-<li>Verify the MSI hash and Authenticode publisher before installation. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows acceptance summary</a> for the tested setup.</li>
+<li>Download the signed MSI, matching source companion and checksums
+from the <a
+href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.1.1">public
+Windows release</a>.</li>
+<li>Verify the MSI hash and Authenticode publisher before installation.
+See the <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows
+acceptance summary</a> for the tested setup.</li>
 <li>Launch Townlight under the intended named Windows account. Choose
 the storage folders. Select <strong>Townlight Inspections
 candidate</strong> (<code>inspections-preview</code>) for the bounded
@@ -196,41 +319,41 @@ Configure vision explicitly only if automatic photo drafting is
 selected.</li>
 </ol>
 <h2 id="daily-workflow">Daily workflow</h2>
-<p><a name="workflow-1"></a></p>
+<p><span id="workflow-1"></span></p>
 <h3 id="import-requirements">1. Import requirements</h3>
 <p>Open Requirement library and select the complete JSON
 RequirementBundle. Inspect jurisdiction, project type, effective/source
 dates, original filename/hash and material citations. Later revisions
 require the current revision and preserve history.</p>
-<p><a name="workflow-2"></a></p>
+<p><span id="workflow-2"></span></p>
 <h3 id="read-pathway-guidance">2. Read pathway guidance</h3>
 <p>Choose the retained requirement revision and matching project type.
 Inspect material requirements, pathway steps and source-backed
 timing/fee text. If authority is absent, seek the source; do not invent
 a requirement, date or fee.</p>
-<p><a name="workflow-3"></a></p>
+<p><span id="workflow-3"></span></p>
 <h3 id="prepare-intake">3. Prepare intake</h3>
 <p>Create the case with project, location, applicant contact and staff
 assignment. Assess materials as not reviewed, provided, missing or
 unclear. Keep private notes and the proposal separate from the public
 summary.</p>
-<p><a name="workflow-4"></a></p>
+<p><span id="workflow-4"></span></p>
 <h3 id="select-cited-context">4. Select cited context</h3>
 <p>Search Code and Zoning and choose the exact permitted versions.
 Source availability and expected hashes are checked during search, save
 and export.</p>
-<p><a name="workflow-5"></a></p>
+<p><span id="workflow-5"></span></p>
 <h3 id="save-and-review">5. Save and review</h3>
 <p>Save the intake, reopen it and reconcile revision conflicts. Record
 staff review with review notes. The trusted staff path derives the
 reviewer; later edits require a new review.</p>
-<p><a name="workflow-6"></a></p>
+<p><span id="workflow-6"></span></p>
 <h3 id="inspect-each-audience">6. Inspect each audience</h3>
 <p>A staff packet can contain private detail. A Records copy uses the
 separately reviewed public summary and excludes applicant contact,
 location, proposal, material notes and private staff notes. Preview it
 before creating it.</p>
-<p><a name="workflow-7"></a></p>
+<p><span id="workflow-7"></span></p>
 <h3 id="attach-and-verify">7. Attach and verify</h3>
 <p>Attach the exact hash-checked copy to an existing Records request.
 Reopen Records and inspect it. Records retains its separate release,
@@ -290,10 +413,10 @@ Universal vendor status mirroring and an internet applicant portal are
 outside this beta scope.</p>
 <h2 id="architecture">Architecture</h2>
 <figure>
-<img src="../assets/permitting-architecture.svg"
-alt="Townlight Permitting architecture and evidence flow" />
-<figcaption aria-hidden="true">Townlight Permitting architecture and
-evidence flow</figcaption>
+<img src="https://townlight.github.io/assets/permitting-architecture.svg" alt="Townlight Permitting architecture and evidence flow" />
+<figcaption aria-hidden="true">
+Townlight Permitting architecture and evidence flow
+</figcaption>
 </figure>
 <p>The drawing shows the principal staff/evidence path. Native commands
 carry trusted identity to Python business services; PostgreSQL and
@@ -353,17 +476,19 @@ requirement source models,
 view.</p>
 <h2 id="technical-specifications">Technical specifications</h2>
 <h3 id="runtime-and-storage">Runtime and storage</h3>
-<p>The Windows 1.8.1.1 package has fresh-install acceptance; an in-place upgrade to this version was not exercised. Its native shell uses <strong>Rust 2021, Tauri 2
-and Microsoft WebView2</strong>; browser assets are JavaScript built
-with <strong>Vite 8.1.6</strong>. This describes the native desktop
-frontend; Station has a separate React operator, specified below or in
-its product manual. Canonical business workflows use bundled
-<strong>CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and
-Alembic</strong>, with <strong>PostgreSQL 17 / PostGIS</strong> and
-managed original files. The installed runtime tested here contains
-FastAPI 0.162.0. Package minimum Python requirements can differ from the
-bundled executable; the metadata reference preserves both. No stack
-rewrite is implied by the beta label.</p>
+<p>The Windows 1.8.1.1 package has fresh-install acceptance; an in-place
+upgrade to this version was not exercised. Its native shell uses
+<strong>Rust 2021, Tauri 2 and Microsoft WebView2</strong>; browser
+assets are JavaScript built with <strong>Vite 8.1.6</strong>. This
+describes the native desktop frontend; Station has a separate React
+operator, specified below or in its product manual. Canonical business
+workflows use bundled <strong>CPython 3.13.5, FastAPI, Pydantic,
+SQLAlchemy and Alembic</strong>, with <strong>PostgreSQL 17 /
+PostGIS</strong> and managed original files. The installed runtime
+tested here contains FastAPI 0.162.0. Package minimum Python
+requirements can differ from the bundled executable; the metadata
+reference preserves both. No stack rewrite is implied by the beta
+label.</p>
 <p>The native transport is fixed to loopback
 <code>127.0.0.1:15480</code>; PostgreSQL uses the configured local
 runtime port (default <code>15432</code>). Optional local model service
@@ -394,13 +519,14 @@ statements</h3>
 <p>This beta has synthetic single-profile workflow evidence. It does not
 have a published benchmark for concurrent staff capacity, minimum
 RAM/CPU, large-source limits or a field SLA. Do not turn a developer
-machine’s specification into a supported minimum. The signed MSI is 2,081,316,864 bytes; allow additional disk for extracted runtime,
+machine’s specification into a supported minimum. The signed MSI is
+2,081,316,864 bytes; allow additional disk for extracted runtime,
 database, originals, exports, media and backups. Select
 equipment/storage after sizing those actual workloads.</p>
 <p>The exact <a
-href="../reference/runtime-payload-lock.json">runtime payload
-lock</a> records pinned files, sizes and hashes. The <a
-href="../reference/component-metadata.json">component
+href="https://townlight.github.io/reference/runtime-payload-lock.json">runtime
+payload lock</a> records pinned files, sizes and hashes. The <a
+href="https://townlight.github.io/reference/component-metadata.json">component
 metadata</a> records shipped dependency declarations. These references
 are more precise than a manually copied dependency list. Third-party and
 historical license notices must accompany their matching payloads.</p>
@@ -463,7 +589,7 @@ class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-
 <h3 id="complete-synthetic-source-bundle">Complete synthetic source
 bundle</h3>
 <p>The <a
-href="../reference/examples/synthetic-requirement-bundle.json">synthetic
+href="https://townlight.github.io/reference/examples/synthetic-requirement-bundle.json">synthetic
 Permitting bundle</a> is the retained fixture used by the beta staff
 exercise. It includes the complete supported source envelope rather than
 a shortened pseudo-payload. Keep its fictional source labels. For
@@ -505,15 +631,17 @@ role to permit it. It is a cross-suite integration example; for this
 product’s request models, use the complete technical reference
 below.</p>
 <h3 id="complete-technical-contract">Complete technical contract</h3>
-<p>Read the <a href="../api/permitting.html">Permitting API
+<p>Read the <a
+href="https://townlight.github.io/api/permitting.html">Permitting API
 reference</a> for every documented operation, request field, constraint,
 response declaration and source supplement. Download the <a
-href="../api/permitting-openapi.json">OpenAPI JSON</a> for
-tools. For Station this is the suite-side schema only; its separate
-service contract is documented in the API supplement. The <a
-href="../reference/index.html">reference directory</a> includes
-configuration/source inventories, dependency declarations, native
-command contracts, MCP signatures and candidate evidence.</p>
+href="https://townlight.github.io/api/permitting-openapi.json">OpenAPI
+JSON</a> for tools. For Station this is the suite-side schema only; its
+separate service contract is documented in the API supplement. The <a
+href="https://townlight.github.io/reference/index.html">reference
+directory</a> includes configuration/source inventories, dependency
+declarations, native command contracts, MCP signatures and candidate
+evidence.</p>
 <h2 id="mcp-and-automation-boundary">MCP and automation boundary</h2>
 <p>No direct product MCP server is exposed by the accepted Townlight
 desktop or Station boundary. Do not configure an invented
@@ -537,9 +665,9 @@ class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="
 <p>Use a job ID returned by that transcription service. This example
 does not create a Townlight record or bypass its review/Records handoff.
 The exact optional adapter tool signatures are supplied in the <a
-href="../reference/mcp.html">MCP source reference</a>. Station
-meeting capture does not become live speech recognition because this
-optional donor adapter exists.</p>
+href="https://townlight.github.io/reference/mcp.html">MCP source
+reference</a>. Station meeting capture does not become live speech
+recognition because this optional donor adapter exists.</p>
 <h2 id="security-and-permissions">Security and permissions</h2>
 <p>Use your own named account and save before leaving a screen. A saved
 draft is durable; unsaved form text may not be. If a write has an
@@ -580,7 +708,9 @@ backup.</p>
 controls. If the result says <strong>Restore needs service
 start</strong>, use <strong>Start</strong>, then <strong>Check</strong>,
 and reopen a known record. Do not repeat restore merely because services
-need to start. The <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows 1.6.0.1 Beta 1 fresh-install acceptance</a> verified that a fulfilled
+need to start. The <a
+href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows
+1.6.0.1 Beta 1 fresh-install acceptance</a> verified that a fulfilled
 request survived restore and a post-backup marker did not.</p>
 <p>Keep Station’s dedicated database and media evidence together in its
 own backup. Core’s native-profile backup must not be assumed to include
@@ -661,7 +791,14 @@ repeat restore.</td>
 </table>
 <h2 id="verified-workflows-and-limits">Verified workflows and
 limits</h2>
-<p>The table records selected synthetic workflows from the original <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows 1.6.0.1 Beta 1</a> Sandbox run. Station’s later delivery has <a href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1-station-delivery">separate Windows 1.6.0.1 acceptance</a>. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">Windows 1.8.0.1 acceptance summary</a> for the workflows and upgrade path exercised on the previous 1.8.0.1 MSI.</p>
+<p>The table records selected synthetic workflows from the original <a
+href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1">Windows
+1.6.0.1 Beta 1</a> Sandbox run. Station’s later delivery has <a
+href="https://github.com/townlight/townlight/releases/tag/townlight-beta-1-station-delivery">separate
+Windows 1.6.0.1 acceptance</a>. See the <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">Windows
+1.8.0.1 acceptance summary</a> for the workflows and upgrade path
+exercised on the previous 1.8.0.1 MSI.</p>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -686,15 +823,19 @@ workspace.</td>
 </tr>
 </tbody>
 </table>
-
-<p>The Windows 1.8.0.1 acceptance covers the tested installation paths and selected synthetic workflows, including Boards &amp; Commissions, Contracts, and Procurement. Earlier results apply to their original builds. City field acceptance, physical equipment and network commissioning, Station automatic provisioning, and comprehensive UI and role coverage remain outside the 1.8.0.1 checks.</p>
+<p>The Windows 1.8.0.1 acceptance covers the tested installation paths
+and selected synthetic workflows, including Boards &amp; Commissions,
+Contracts, and Procurement. Earlier results apply to their original
+builds. City field acceptance, physical equipment and network
+commissioning, Station automatic provisioning, and comprehensive UI and
+role coverage remain outside the 1.8.0.1 checks.</p>
 <h2 id="terms-of-service-and-license">Terms of service and license</h2>
 <h3 id="scope-and-status">Scope and status</h3>
 <p>These terms describe the Townlight Beta 1 software and this
-documentation package. This public Windows beta is for evaluation. No uptime commitment, support response time, indemnity,
-data-processing agreement or paid service is created by these documents.
-A separate signed agreement, if any, governs services it actually
-provides.</p>
+documentation package. This public Windows beta is for evaluation. No
+uptime commitment, support response time, indemnity, data-processing
+agreement or paid service is created by these documents. A separate
+signed agreement, if any, governs services it actually provides.</p>
 <h3 id="software-license-and-rights">Software license and rights</h3>
 <p>Current Townlight-owned distributions identified in this candidate
 use <strong>AGPL-3.0-only</strong>. The full license is supplied with
@@ -744,7 +885,13 @@ enforcement notice or records-release decision. Official permit fee
 authority remains with the adopted source and responsible organization;
 imported amounts do not become a new authoritative calculation.</p>
 <h3 id="beta-operation-and-recovery">Beta operation and recovery</h3>
-<p>Windows 1.8.0.1 was tested for fresh installation and in-place upgrade from 1.7.2.1. Upgrade paths from versions older than 1.7.2.1 are unverified. Station uses its separately configured service. Keep backups and original evidence. Test your physical equipment and network and service configuration before relying on them. See the <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">acceptance summary</a> for the tested paths.</p>
+<p>Windows 1.8.0.1 was tested for fresh installation and in-place
+upgrade from 1.7.2.1. Upgrade paths from versions older than 1.7.2.1 are
+unverified. Station uses its separately configured service. Keep backups
+and original evidence. Test your physical equipment and network and
+service configuration before relying on them. See the <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.0.1/ACCEPTANCE-Windows-1.8.0.1.md">acceptance
+summary</a> for the tested paths.</p>
 <h3 id="warranty-and-liability">Warranty and liability</h3>
 <p>The covered software’s warranty and liability conditions are those in
 sections 15–17 of the supplied AGPL and any applicable separate written
@@ -857,56 +1004,64 @@ engine; standalone CivicCast remains separate.</td>
 <h2 id="alphabetical-subject-index">Alphabetical subject index</h2>
 <ul>
 <li><strong>Accounts and authentication</strong> — <a
-href="#security-and-permissions">Security and permissions</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#security-and-permissions">Security
+and permissions</a>.</li>
 <li><strong>AGPL and source</strong> — <a
-href="#terms-of-service-and-license">Terms of service and
-license</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#terms-of-service-and-license">Terms
+of service and license</a>.</li>
 <li><strong>API contracts</strong> — <a
-href="#api-and-integration-examples">API and integration
-examples</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#api-and-integration-examples">API
+and integration examples</a>.</li>
 <li><strong>Architecture</strong> — <a
-href="#architecture">Architecture</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#architecture">Architecture</a>.</li>
 <li><strong>Backup</strong> — <a
-href="#backup-recovery-and-maintenance">Backup recovery and
-maintenance</a>.</li>
-<li><strong>Beta version</strong> — <a href="#beta-identity">Beta
+href="https://townlight.github.io/manuals/permitting.html#backup-recovery-and-maintenance">Backup
+recovery and maintenance</a>.</li>
+<li><strong>Beta version</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#beta-identity">Beta
 identity</a>.</li>
 <li><strong>Configuration</strong> — <a
-href="#configuration-and-administration">Configuration and
-administration</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#configuration-and-administration">Configuration
+and administration</a>.</li>
 <li><strong>Evidence and acceptance</strong> — <a
-href="#verified-workflows-and-limits">Verified workflows and
-limits</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#verified-workflows-and-limits">Verified
+workflows and limits</a>.</li>
 <li><strong>Fees and official decisions</strong> — <a
-href="#terms-of-service-and-license">Terms of service and
-license</a>.</li>
-<li><strong>First run</strong> — <a href="#first-run">First
+href="https://townlight.github.io/manuals/permitting.html#terms-of-service-and-license">Terms
+of service and license</a>.</li>
+<li><strong>First run</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#first-run">First
 run</a>.</li>
 <li><strong>Handoffs and audience</strong> — <a
-href="#connected-workflows">Connected workflows</a>.</li>
-<li><strong>MCP</strong> — <a href="#mcp-and-automation-boundary">MCP
+href="https://townlight.github.io/manuals/permitting.html#connected-workflows">Connected
+workflows</a>.</li>
+<li><strong>MCP</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#mcp-and-automation-boundary">MCP
 and automation boundary</a>.</li>
 <li><strong>Originals and provenance</strong> — <a
-href="#security-and-permissions">Security and permissions</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#security-and-permissions">Security
+and permissions</a>.</li>
 <li><strong>Recovery</strong> — <a
-href="#backup-recovery-and-maintenance">Backup recovery and
-maintenance</a>.</li>
-<li><strong>Staff procedures</strong> — <a href="#daily-workflow">Daily
+href="https://townlight.github.io/manuals/permitting.html#backup-recovery-and-maintenance">Backup
+recovery and maintenance</a>.</li>
+<li><strong>Staff procedures</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#daily-workflow">Daily
 workflow</a>.</li>
 <li><strong>Station configuration</strong> — <a
-href="#configuration-and-administration">Configuration and
-administration</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#configuration-and-administration">Configuration
+and administration</a>.</li>
 <li><strong>Technical stack</strong> — <a
-href="#technical-specifications">Technical specifications</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#technical-specifications">Technical
+specifications</a>.</li>
 <li><strong>Troubleshooting</strong> — <a
-href="#troubleshooting">Troubleshooting</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#troubleshooting">Troubleshooting</a>.</li>
 </ul>
 <h3 id="operating-subject-links">Operating subject links</h3>
 <ul>
 <li><strong>Describe a project and read source grounded
 guidance</strong> — <a
-href="#describe-a-project-and-read-source-grounded-guidance">Describe a
-project and read source grounded guidance</a>.</li>
+href="https://townlight.github.io/manuals/permitting.html#describe-a-project-and-read-source-grounded-guidance">Describe
+a project and read source grounded guidance</a>.</li>
 </ul>
 <h2 id="source-and-document-control">Source and document control</h2>
 <p>This edition is authored from the immutable corresponding-source
@@ -916,278 +1071,40 @@ are unchanged. Public historical pages are not synchronized or published
 by this local documentation task.</p>
 <h3 id="workflow-subject-index">Workflow subject index</h3>
 <ul>
-<li><p><strong>Attach and verify</strong> — <a href="#workflow-7">Daily
+<li><p><strong>Attach and verify</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#workflow-7">Daily
 workflow, step 7</a>.</p></li>
 <li><p><strong>Import requirements</strong> — <a
-href="#workflow-1">Daily workflow, step 1</a>.</p></li>
+href="https://townlight.github.io/manuals/permitting.html#workflow-1">Daily
+workflow, step 1</a>.</p></li>
 <li><p><strong>Inspect each audience</strong> — <a
-href="#workflow-6">Daily workflow, step 6</a>.</p></li>
-<li><p><strong>Prepare intake</strong> — <a href="#workflow-3">Daily
+href="https://townlight.github.io/manuals/permitting.html#workflow-6">Daily
+workflow, step 6</a>.</p></li>
+<li><p><strong>Prepare intake</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#workflow-3">Daily
 workflow, step 3</a>.</p></li>
 <li><p><strong>Read pathway guidance</strong> — <a
-href="#workflow-2">Daily workflow, step 2</a>.</p></li>
-<li><p><strong>Save and review</strong> — <a href="#workflow-5">Daily
+href="https://townlight.github.io/manuals/permitting.html#workflow-2">Daily
+workflow, step 2</a>.</p></li>
+<li><p><strong>Save and review</strong> — <a
+href="https://townlight.github.io/manuals/permitting.html#workflow-5">Daily
 workflow, step 5</a>.</p></li>
 <li><p><strong>Select cited context</strong> — <a
-href="#workflow-4">Daily workflow, step 4</a>.</p></li>
-<li><p><a href="../reference/source-inventory.json">Source
+href="https://townlight.github.io/manuals/permitting.html#workflow-4">Daily
+workflow, step 4</a>.</p></li>
+<li><p><a
+href="https://townlight.github.io/reference/source-inventory.json">Source
 inventory and file hashes</a></p></li>
-<li><p><a href="../reference/component-metadata.json">All
+<li><p><a
+href="https://townlight.github.io/reference/component-metadata.json">All
 component metadata</a></p></li>
 <li><p><a
-href="../reference/desktop-domain-openapi.json">Installed
+href="https://townlight.github.io/reference/desktop-domain-openapi.json">Installed
 domain OpenAPI</a></p></li>
-<li><p><a href="../reference/workflow-matrix.json">Workflow
+<li><p><a
+href="https://townlight.github.io/reference/workflow-matrix.json">Workflow
 matrix</a></p></li>
-<li><p><a href="../reference/AGPL-3.0.txt">Full AGPL
-text</a></p></li>
+<li><p><a href="https://townlight.github.io/reference/AGPL-3.0.txt">Full
+AGPL text</a></p></li>
 </ul>
-<section id="meeting-imports"><h2>Shared meeting imports · Windows 1.8.1.1</h2><p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module.</p><p><a href="https://townlight.github.io/manuals/meeting-imports.html">All 31 sources, formats, operator steps and integration contracts</a> · <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Installed acceptance and limits</a>.</p><p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to 1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an existing-city evaluation, back up city data and settings, close Townlight, keep the existing %LOCALAPPDATA%\CivicSuite profile, and use the same Windows account. Keep the prior installer and a restore path. Station continues to use its separately configured service.</p><p>The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6 distributions. Its health version strings still report Runtime 0.3.0 and Meetings 1.0.5. Default-branch source corrects those display strings; the signed MSI and its exact build source remain unchanged.</p></section><section id="import-source-matrix"><h2 id="shared-meeting-imports">Shared meeting imports</h2>
-<p>Use <strong>Meetings → Import meeting records</strong> in Windows
-1.8.1.1. Select a source and format, enter the original public URL, then
-choose <strong>Preview import</strong>. For a saved response, select the
-file before previewing. Choose a meeting and use <strong>Save selected
-meeting</strong>. Townlight records the source URL, format, stable
-source ID and capture hash with the canonical meeting. Reopening the
-same capture returns the existing meeting. A changed capture for that
-identity is reported for staff review.</p>
-<p>The source and format selector lists the supported reader pairs
-below. A public URL must serve the chosen format directly. Use a saved
-public response for POST-only listings, portals that require a browser
-session and sources whose page does not return the required response.
-The importer reads what a municipality publishes in that response.
-Fields and attachments vary by municipality and by meeting.</p>
-<table>
-<thead>
-<tr>
-<th>Source</th>
-<th>Input to preview</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Legistar</td>
-<td>Core-format JSON export</td>
-</tr>
-<tr>
-<td>PrimeGov</td>
-<td>Core-format JSON export or public portal meeting list JSON</td>
-</tr>
-<tr>
-<td>Granicus</td>
-<td>Core-format JSON export or public ViewPublisher HTML</td>
-</tr>
-<tr>
-<td>NovusAGENDA</td>
-<td>Core-format JSON export</td>
-</tr>
-<tr>
-<td>CivicPlus Agenda and Meeting Management Select</td>
-<td>Public Events JSON</td>
-</tr>
-<tr>
-<td>CivicPlus Agenda Center</td>
-<td>Public listing HTML</td>
-</tr>
-<tr>
-<td>Municode Meetings</td>
-<td>Public meetings HTML</td>
-</tr>
-<tr>
-<td>BoardBook</td>
-<td>Public organization HTML</td>
-</tr>
-<tr>
-<td>eSCRIBE</td>
-<td>Public calendar JSON</td>
-</tr>
-<tr>
-<td>Simbli</td>
-<td>Public meeting listing HTML</td>
-</tr>
-<tr>
-<td>iCompass CivicWeb</td>
-<td>Public meeting-type listing HTML</td>
-</tr>
-<tr>
-<td>iQM2</td>
-<td>Public meeting list HTML</td>
-</tr>
-<tr>
-<td>Granicus Swagit</td>
-<td>Public video archive HTML</td>
-</tr>
-<tr>
-<td>SuiteOne Media</td>
-<td>Public meeting archive HTML</td>
-</tr>
-<tr>
-<td>Granicus Peak</td>
-<td>Public agenda center ViewPublisher HTML</td>
-</tr>
-<tr>
-<td>Utah Public Notice Website</td>
-<td>Public notice detail HTML</td>
-</tr>
-<tr>
-<td>Destiny AgendaQuick</td>
-<td>Public meeting list HTML</td>
-</tr>
-<tr>
-<td>Town Hall Streams</td>
-<td>Public archive HTML</td>
-</tr>
-<tr>
-<td>TelVue</td>
-<td>Public playlist HTML</td>
-</tr>
-<tr>
-<td>CHAMP</td>
-<td>Public event JSON</td>
-</tr>
-<tr>
-<td>Hyland OnBase</td>
-<td>Public Agenda Online HTML</td>
-</tr>
-<tr>
-<td>Laserfiche WebLink</td>
-<td>Saved public dated document folder HTML</td>
-</tr>
-<tr>
-<td>TownCloud</td>
-<td>Saved public agenda table JSON or public agenda detail HTML</td>
-</tr>
-<tr>
-<td>Digital Towpath</td>
-<td>Public meeting detail HTML</td>
-</tr>
-<tr>
-<td>ClerkBase</td>
-<td>Public meeting document HTML</td>
-</tr>
-<tr>
-<td>Municipality-published calendar</td>
-<td>Public iCalendar feed</td>
-</tr>
-<tr>
-<td>Wistia</td>
-<td>Public media JSON</td>
-</tr>
-<tr>
-<td>Boardable</td>
-<td>Public Site meeting detail HTML</td>
-</tr>
-<tr>
-<td>gWorks FrontDesk</td>
-<td>Public city meetings JSON</td>
-</tr>
-<tr>
-<td>Diligent BoardDocs</td>
-<td>Unencrypted printed agenda PDF with numbered items</td>
-</tr>
-<tr>
-<td>Tyler Meeting Manager</td>
-<td>Saved public calendar JSON. Meeting information and item titles when
-present.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="staff-handoffs">Staff handoffs</h2>
-<ul>
-<li><strong>Core and Meetings.</strong> Core's existing vendor formats
-share the same preview and save path as the public readers. The saved
-meeting and any structured agenda items open in the regular Meetings
-workflow.</li>
-<li><strong>Records.</strong> In Meetings, load imported documents by
-meeting ID, choose a PDF and enter the destination Records request ID.
-The attachment retains the citation and file hash. An HTML viewer or a
-dead document link may need staff to obtain the PDF separately.</li>
-<li><strong>Notice and Access.</strong> Use <strong>Review imported
-text</strong> to start a Notice draft or accessibility review with the
-source citation. Use each workspace's normal review and save
-actions.</li>
-<li><strong>Station.</strong> In the configured Station operator page,
-select the saved meeting and stage a direct MP4. Use the private capture
-workflow to queue processing. Player-only references are visible without
-a staging action.</li>
-<li><strong>Code.</strong> Use the existing ordinance proposal and
-adoption workflow with the canonical imported meeting and agenda
-IDs.</li>
-<li><strong>Boards, Contracts, Procurement, Zoning, Planning, Permitting
-and Inspections.</strong> In the destination workspace use
-<strong>Imported meeting evidence</strong>. Select an existing staff
-record and the saved meeting, then save the citation. The destination's
-existing role and workflow apply.</li>
-</ul>
-<h2 id="shared-interface">Shared interface</h2>
-<p>The installed Townlight Python runtime exposes a read-only CLI.
-CivicCast and other local clients can consume its normalized JSON and
-apply their own access and persistence rules.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>python <span class="op">-</span>m townlight_runtime<span class="op">.</span><span class="fu">meeting_imports</span> champ PUBLIC_EVENT_URL saved-event<span class="op">.</span><span class="fu">json</span> <span class="op">--</span>format champ-event-json</span></code></pre></div>
-<p>Use <code>--fetch</code> in place of the saved file to read a
-supported public response.</p>
-<h2 id="interfaces-and-other-products">Interfaces and other
-products</h2>
-<p>The version-1 normalized JSON contract is shared by the Python
-function
-<code>townlight_runtime.meeting_imports.preview_export(connector, source_url, content, input_format=...)</code>
-and the CLI above. A saved response can also be read from stdin using
-<code>-</code>. Inputs are limited to 16 MiB. Preview is read-only; the
-consuming application owns persistence, staff authorization and its own
-data.</p>
-<p>The installed native HTTP bridge exposes
-<code>GET /desktop/v1/meetings/imports/sources</code>,
-<code>POST /desktop/v1/meetings/imports/preview</code>,
-<code>POST /desktop/v1/meetings/imports/fetch</code>,
-<code>POST /desktop/v1/meetings/imports/commit</code>, and
-meeting/link/document handoff operations in the <a
-href="https://townlight.github.io/api/suite-openapi.json">native API
-schema</a>. Use the existing <code>X-Townlight-Session</code>
-authentication, mapped staff roles and configured local PostgreSQL
-service. This is a native application interface; there is no independent
-anonymous importer HTTP service or importer MCP server.</p>
-<p><strong>CivicCast:</strong> opt in through its Townlight shared
-importer source setting and <code>TOWNLIGHT_IMPORT_PYTHON</code> (the
-absolute Python executable), <code>TOWNLIGHT_IMPORT_CONNECTOR</code>,
-<code>TOWNLIGHT_IMPORT_FORMAT</code>, <code>TOWNLIGHT_IMPORT_URL</code>
-and optional <code>TOWNLIGHT_IMPORT_CAPTURE</code>. The adapter saves
-normalized items through the existing AgendaStore. Structured agenda
-availability depends on the source response; a video listing can contain
-meeting metadata without agenda items. Existing sources remain the
-default.</p>
-<p><strong>CivicCast Brief:</strong> its existing PrimeGov and Granicus
-discovery routes can opt into the shared reader using
-<code>TOWNLIGHT_IMPORT_PYTHON</code>. Brief does not expose all 31
-sources as a new selection menu. Its existing caption/media workflow
-remains the consuming path. See each project's shared-import client
-documentation.</p>
-<p><strong>TownReporter, Describer Workbench and Textflowkit:</strong>
-no shared-import adapter was added to these products. TownReporter
-retains its own PrimeGov path. Describer Workbench and Textflowkit
-expose their existing transcription APIs/MCP interfaces, which do not
-constitute meeting-import integration. The shared engine ships inside
-Townlight Runtime; a standalone library is outside this release.</p>
-<h2 id="windows-acceptance-and-limits">Windows acceptance and
-limits</h2>
-<p>Windows 1.8.1.1 adds shared meeting imports for 31 source families,
-with 34 supported source/format pairs. Installed Windows Sandbox checks
-exercised preview, save and durable readback using public captures and
-fixtures, plus the documented Townlight handoffs. These checks do not
-establish automatic discovery on every live portal or a complete retest
-of every module.</p>
-<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to
-1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested
-upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an
-existing-city evaluation, back up city data and settings, close
-Townlight, keep the existing %LOCALAPPDATA%\CivicSuite profile, and use
-the same Windows account. Keep the prior installer and a restore path.
-Station continues to use its separately configured service.</p>
-<p>The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6
-distributions. Its health version strings still report Runtime 0.3.0 and
-Meetings 1.0.5. Default-branch source corrects those display strings;
-the signed MSI and its exact build source remain unchanged.</p>
-<p><a
-href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Exact
-Windows 1.8.1.1 acceptance and limits</a>.</p>
-</section></main><footer>Townlight · AGPL-3.0-only · Candidate evidence applies only to its identified artifacts.<span><a href="../brand/">Brand package</a></span><span><a href="../announcement.html">Announcement</a> · <a href="../support.html">Support and feedback</a></span></footer></body></html>
+</main><footer>Townlight · AGPL-3.0-only · Candidate evidence applies only to its identified artifacts.<span><a href="../brand/">Brand package</a></span><span><a href="../announcement.html">Announcement</a> · <a href="../support.html">Support and feedback</a></span></footer></body></html>
