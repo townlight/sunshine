@@ -22,7 +22,7 @@
     "@tiptap/starter-kit": "^3.31.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cron-parser": "^4.9.0",
+    "cron-parser": "^5.10.6",
     "lucide-react": "^0.500.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
