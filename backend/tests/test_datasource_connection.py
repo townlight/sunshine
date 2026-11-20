@@ -8,11 +8,11 @@ from httpx import AsyncClient
 
 
 @pytest.mark.asyncio
-async def test_test_connection_file_share_success(client: AsyncClient, admin_token: str):
+async def test_test_connection_file_share_success(client: AsyncClient, admin_token: str, tmp_path):
     """POST /datasources/test-connection succeeds for an accessible directory."""
     resp = await client.post(
         "/datasources/test-connection",
-        json={"source_type": "file_system", "path": "/tmp"},
+        json={"source_type": "file_system", "path": str(tmp_path)},
         headers={"Authorization": f"Bearer {admin_token}"},
     )
     assert resp.status_code == 200

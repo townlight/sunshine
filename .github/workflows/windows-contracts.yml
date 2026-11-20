@@ -75,6 +75,7 @@ jobs:
         run: ./.github/scripts/prepare-windows-test-db.ps1 -WithVector -WithPostgis
       - name: Run full Python suite on Windows
         env:
+          TOWNLIGHT_RECORDS_REPO_ROOT: ${{ github.workspace }}
           TOWNLIGHT_TEST_RUNTIME_ROOT: ${{ github.workspace }}/.ci-siblings/townlight/desktop/runtime/python-services
         run: python -X utf8 -m pytest tests -q -ra --junitxml=windows-contracts.xml
       - name: Preserve results
