@@ -355,7 +355,7 @@ class ManagedFileReceipt(NativePayload):
     stored_path: str = Field(min_length=1)
     file_name: str = Field(min_length=1, max_length=500)
     sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
-    size_bytes: int = Field(ge=0, le=2147483647, strict=True)
+    size_bytes: int = Field(ge=0, le=64 * 1024**3, strict=True)
 
 
 class AttachDocument(NativePayload):
