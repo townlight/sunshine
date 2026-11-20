@@ -14,11 +14,12 @@ header .brand{display:inline-flex;align-items:center;max-width:100%;flex-shrink:
 <nav aria-label="Main"><a href="../manuals/suite.html">Suite manual</a>
 <a href="../versions.html">Versions and Windows release</a>
 <a href="../terms.html">Terms and license</a></nav></header>
-<main id="main" class="reading wrap"><p class="edition">Windows x64 Beta 1 · MSI 1.8.1.1</p>
-<p>Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supported source/format pairs. Installed Windows Sandbox checks exercised preview, save and durable readback using public captures and fixtures, plus the documented Townlight handoffs. These checks do not establish automatic discovery on every live portal or a complete retest of every module. <a href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Acceptance and limits</a>.</p>
-
+<main id="main" class="reading wrap">
 <nav id="TOC" role="doc-toc">
 <ul>
+<li><a href="#windows-1.8.2.1-maintenance-release"
+id="toc-windows-1.8.2.1-maintenance-release">Windows 1.8.2.1 maintenance
+release</a></li>
 <li><a href="#townlight-permitting-manual"
 id="toc-townlight-permitting-manual">Townlight Permitting Manual</a>
 <ul>
@@ -72,7 +73,29 @@ control</a></li>
 </ul></li>
 </ul>
 </nav>
-<p>Windows x64 Beta 1 · MSI 1.8.1.1</p>
+<h2 id="windows-1.8.2.1-maintenance-release">Windows 1.8.2.1 maintenance
+release</h2>
+<p>Windows 1.8.2.1 packages the staff authorization, explicit database
+configuration and component metadata corrections. Its exact signed
+installed checks cover setup, the 1.8.1.1 upgrade, saved staff records,
+procurement/Contracts handoffs, backup/restore and uninstall retention.
+Unchanged module and 31-source/34-format import evidence remains
+attributed to the earlier build that produced it; this is not a new
+exhaustive test of every module or live provider.</p>
+<p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and
+an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city
+data and settings, close Townlight, run the signed MSI, and reopen it
+under the same Windows account with the existing
+<code>%LOCALAPPDATA%\CivicSuite</code> profile. Keep the prior installer
+and a restore path. Other upgrade paths are unverified. Station uses its
+separately configured service. The acceptance summary distinguishes new
+maintenance checks from reused workflow evidence.</p>
+<p><a
+href="https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.8.2.1">Release
+and downloads</a> · <a
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/ACCEPTANCE-Windows-1.8.2.1.md">Acceptance
+and limits</a>.</p>
+<p>Windows x64 Beta 1 · MSI 1.8.2.1</p>
 <p>Windows 1.8.1.1 adds shared meeting imports for 31 source families,
 with 34 supported source/format pairs. Installed Windows Sandbox checks
 exercised preview, save and durable readback using public captures and
@@ -135,17 +158,17 @@ href="https://townlight.github.io/manuals/meeting-imports.html">All 31
 sources, formats and handoffs</a> · <a
 href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Installed
 acceptance</a>.</p>
-<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to
-1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested
-upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an
-existing-city evaluation, back up city data and settings, close
-Townlight, keep the existing %LOCALAPPDATA%profile, and use the same
-Windows account. Keep the prior installer and a restore path. Station
-continues to use its separately configured service.</p>
-<p>The accepted MSI contains Townlight Runtime 0.3.1 and Meetings 1.0.6
-distributions. Its health version strings still report Runtime 0.3.0 and
-Meetings 1.0.5. Default-branch source corrects those display strings;
-the signed MSI and its exact build source remain unchanged.</p>
+<p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and
+an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city
+data and settings, close Townlight, run the signed MSI, and reopen it
+under the same Windows account with the existing
+<code>%LOCALAPPDATA%\CivicSuite</code> profile. Keep the prior installer
+and a restore path. Other upgrade paths are unverified. Station uses its
+separately configured service. The acceptance summary distinguishes new
+maintenance checks from reused workflow evidence.</p>
+<p>Windows 1.8.2.1 contains Townlight Runtime 0.3.2 and Meetings 1.0.6.
+Its current component sources and installed evidence are identified in
+the maintenance acceptance summary.</p>
 <p><strong>Townlight Beta 1</strong> · Naming candidate documentation
 edition 2 November 2026</p>
 <h2 id="contents">Contents</h2>
@@ -237,7 +260,7 @@ included with the same documentation companion.</p>
 </tr>
 <tr>
 <td>Windows MSI version</td>
-<td>1.8.1.1</td>
+<td>1.8.2.1</td>
 </tr>
 <tr>
 <td>Product component</td>
@@ -254,7 +277,7 @@ included with the same documentation companion.</p>
 <tr>
 <td>Candidate hashes</td>
 <td><a
-href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/SHA256SUMS-Windows-1.8.1.1.txt">SHA-256
+href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.2.1/SHA256SUMS-Windows-1.8.2.1.txt">SHA-256
 checksums</a> and <a
 href="https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md">Windows
 acceptance summary</a></td>
@@ -265,28 +288,30 @@ acceptance summary</a></td>
 </tr>
 <tr>
 <td>Acceptance composition</td>
-<td>Windows 1.8.1.1: fresh-install acceptance; upgrade to this version
-unverified. Select the full profile. Station uses separate
-configuration.</td>
+<td>Windows 1.8.2.1: fresh-install and 1.8.1.1 upgrade acceptance.
+Select the full profile. Station uses separate configuration.</td>
 </tr>
 </tbody>
 </table>
-<p>Start a new installation with an empty database and fresh Windows
-profile. The tested upgrade from Windows 1.7.2.1 was to 1.8.0.1, not
-1.8.1.1. For existing-city evaluation, preserve the profile, city data,
-settings and a restore path. The approved profile path is
-<code>%LOCALAPPDATA%\CivicSuite</code>. Keep existing profiles and
-backups.</p>
+<p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and
+an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city
+data and settings, close Townlight, run the signed MSI, and reopen it
+under the same Windows account with the existing
+<code>%LOCALAPPDATA%\CivicSuite</code> profile. Keep the prior installer
+and a restore path. Other upgrade paths are unverified. Station uses its
+separately configured service. The acceptance summary distinguishes new
+maintenance checks from reused workflow evidence.</p>
 <h2 id="first-run">First run</h2>
-<p>Windows 1.8.1.1 has fresh-install acceptance. An in-place upgrade to
-1.8.1.1 was not exercised. The previous Windows 1.8.0.1 release tested
-upgrade from 1.7.2.1; that result applies to 1.8.0.1. Before an
-existing-city evaluation, back up city data and settings, close
-Townlight, keep the existing %LOCALAPPDATA%profile, and use the same
-Windows account. Keep the prior installer and a restore path. Station
-continues to use its separately configured service.</p>
+<p>Windows 1.8.2.1 has signed installed acceptance for fresh setup and
+an in-place upgrade from Windows 1.8.1.1. Before upgrading, back up city
+data and settings, close Townlight, run the signed MSI, and reopen it
+under the same Windows account with the existing
+<code>%LOCALAPPDATA%\CivicSuite</code> profile. Keep the prior installer
+and a restore path. Other upgrade paths are unverified. Station uses its
+separately configured service. The acceptance summary distinguishes new
+maintenance checks from reused workflow evidence.</p>
 <h3 id="fresh-installation">Fresh installation</h3>
-<p>Run the signed Windows 1.8.1.1 MSI and use an empty database and a
+<p>Run the signed Windows 1.8.2.1 MSI and use an empty database and a
 new Townlight profile for first run.</p>
 <ol type="1">
 <li>Download the signed MSI, matching source companion and checksums
@@ -476,19 +501,18 @@ requirement source models,
 view.</p>
 <h2 id="technical-specifications">Technical specifications</h2>
 <h3 id="runtime-and-storage">Runtime and storage</h3>
-<p>The Windows 1.8.1.1 package has fresh-install acceptance; an in-place
-upgrade to this version was not exercised. Its native shell uses
-<strong>Rust 2021, Tauri 2 and Microsoft WebView2</strong>; browser
-assets are JavaScript built with <strong>Vite 8.1.6</strong>. This
-describes the native desktop frontend; Station has a separate React
-operator, specified below or in its product manual. Canonical business
-workflows use bundled <strong>CPython 3.13.5, FastAPI, Pydantic,
-SQLAlchemy and Alembic</strong>, with <strong>PostgreSQL 17 /
-PostGIS</strong> and managed original files. The installed runtime
-tested here contains FastAPI 0.162.0. Package minimum Python
-requirements can differ from the bundled executable; the metadata
-reference preserves both. No stack rewrite is implied by the beta
-label.</p>
+<p>The Windows 1.8.2.1 package has signed fresh-install and 1.8.1.1
+upgrade acceptance. Its native shell uses <strong>Rust 2021, Tauri 2 and
+Microsoft WebView2</strong>; browser assets are JavaScript built with
+<strong>Vite 8.1.6</strong>. This describes the native desktop frontend;
+Station has a separate React operator, specified below or in its product
+manual. Canonical business workflows use bundled <strong>CPython 3.13.5,
+FastAPI, Pydantic, SQLAlchemy and Alembic</strong>, with
+<strong>PostgreSQL 17 / PostGIS</strong> and managed original files.
+Bundled dependency versions are recorded with the release evidence.
+Package minimum Python requirements can differ from the bundled
+executable; the metadata reference preserves both. No stack rewrite is
+implied by the beta label.</p>
 <p>The native transport is fixed to loopback
 <code>127.0.0.1:15480</code>; PostgreSQL uses the configured local
 runtime port (default <code>15432</code>). Optional local model service
@@ -519,8 +543,8 @@ statements</h3>
 <p>This beta has synthetic single-profile workflow evidence. It does not
 have a published benchmark for concurrent staff capacity, minimum
 RAM/CPU, large-source limits or a field SLA. Do not turn a developer
-machine’s specification into a supported minimum. The signed MSI is
-2,081,316,864 bytes; allow additional disk for extracted runtime,
+machine’s specification into a supported minimum. The release download
+lists the exact MSI size; allow additional disk for extracted runtime,
 database, originals, exports, media and backups. Select
 equipment/storage after sizing those actual workloads.</p>
 <p>The exact <a
