@@ -419,7 +419,7 @@ jobs:
 
       - name: Set up Node 22
         # Matches the declared prerequisite in CONTRIBUTING.md ("Node.js 22+").
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
           cache: npm
