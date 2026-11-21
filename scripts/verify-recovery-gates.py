@@ -97,17 +97,47 @@ def main() -> int:
             token in text
             for token in ("Townlight Beta 1", "townlight-records", "1.8.0.dev2", "AGPL-3.0-only")
         ) and "naming" in lower and "candidate" in lower
-        has_published_maintenance_label = all(
-            token in text
-            for token in (
-                "Windows 1.8.2.1", "townlight-records", "1.8.0.dev3",
-                "AGPL-3.0-only", "Acceptance and limits",
+        has_published_maintenance_label = any(
+            all(
+                token in text
+                for token in tokens
+            )
+            for tokens in (
+                (
+                    "Windows 1.8.2.1", "townlight-records", "1.8.0.dev3",
+                    "AGPL-3.0-only", "Acceptance and limits",
+                ),
+                (
+                    "Windows 1.9.0.1", "townlight-records", "1.8.0.dev4",
+                    "AGPL-3.0-only", "Acceptance and limits",
+                ),
             )
         )
         if has_published_maintenance_label and not rel.endswith(".txt"):
             has_published_maintenance_label = all(
-                token in text for token in (
-                    "townlight-windows-v1.8.2.1", "ACCEPTANCE-Windows-1.8.2.1.md",
+                not all(token in text for token in tokens)
+                or all(token in text for token in required)
+                for tokens, required in (
+                    (
+                        (
+                            "Windows 1.8.2.1", "townlight-records", "1.8.0.dev3",
+                            "AGPL-3.0-only", "Acceptance and limits",
+                        ),
+                        (
+                            "townlight-windows-v1.8.2.1",
+                            "ACCEPTANCE-Windows-1.8.2.1.md",
+                        ),
+                    ),
+                    (
+                        (
+                            "Windows 1.9.0.1", "townlight-records", "1.8.0.dev4",
+                            "AGPL-3.0-only", "Acceptance and limits",
+                        ),
+                        (
+                            "townlight-windows-v1.9.0.1",
+                            "ACCEPTANCE-Windows-1.9.0.1.md",
+                        ),
+                    ),
                 )
             )
         if not (has_beta_label or has_naming_candidate_label or has_published_maintenance_label or (has_legacy_warning and has_current_recovery_label)):
