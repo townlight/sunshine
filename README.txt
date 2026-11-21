@@ -22,6 +22,9 @@ staff workflows.
 
 Windows x64 Beta 1 · MSI 1.9.1.1
 
+The previous Windows 1.9.0.1 acceptance remains available for its
+recorder and Records handoff evidence.
+
 Windows 1.8.1.1 adds shared meeting imports for 31 source families, with
 34 supported source/format pairs. Installed Windows Sandbox checks
 exercised preview, save and durable readback using public captures and
@@ -154,10 +157,11 @@ Townlight first run. Read the acceptance summary before upgrading.
 Fresh installation
 
 For a fresh setup, run the signed Windows 1.9.1.1 MSI and use an empty
-database and a new Townlight profile. For an upgrade from 1.9.1.1, back
+database and a new Townlight profile. For an upgrade from 1.9.0.1, back
 up city data and settings, close Townlight, run the MSI, then reopen
-Townlight under the same Windows account and profile. See the acceptance
-summary for which build was used and the limits of upgrade testing.
+Townlight under the same Windows account and profile. The upgrade was
+exercised on the earlier signed 1.9.1.1 iteration. See acceptance and
+limits for evidence by build.
 
 1.  Download the signed MSI, matching source companion and checksums
     from the public Windows release.
