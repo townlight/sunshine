@@ -5,7 +5,7 @@ from typing import Any
 
 from pgvector.sqlalchemy import Vector
 from sqlalchemy import (
-    Boolean, DateTime, Enum, ForeignKey, Index, Integer,
+    BigInteger, Boolean, DateTime, Enum, ForeignKey, Index, Integer,
     String, Text, TypeDecorator, func,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -116,7 +116,7 @@ class Document(Base):
     filename: Mapped[str] = mapped_column(String(500))
     file_type: Mapped[str] = mapped_column(String(50))
     file_hash: Mapped[str] = mapped_column(String(64), index=True)
-    file_size: Mapped[int] = mapped_column(Integer, default=0)
+    file_size: Mapped[int] = mapped_column(BigInteger, default=0)
     ingestion_status: Mapped[IngestionStatus] = mapped_column(Enum(IngestionStatus, name="ingestion_status", create_type=False, values_callable=lambda e: [m.value for m in e]), default=IngestionStatus.PENDING)
     ingestion_error: Mapped[str | None] = mapped_column(Text, nullable=True)
     chunk_count: Mapped[int] = mapped_column(Integer, default=0)
