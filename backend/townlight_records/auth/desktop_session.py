@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass
 import hashlib
 import hmac
@@ -49,6 +51,19 @@ class NativeDesktopPrincipal:
         return modules is None or module_id in modules
 
 
+_shared_staff = ContextVar("desktop_shared_staff", default=None)
+
+
+@contextmanager
+def shared_staff_scope(profile_root: Path, proof: str, principal: NativeDesktopPrincipal):
+    """Accept a host-authenticated staff identity only within its gated request."""
+    token = _shared_staff.set((profile_root, proof, principal))
+    try:
+        yield
+    finally:
+        _shared_staff.reset(token)
+
+
 def _json_file(path: Path) -> object:
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -70,6 +85,14 @@ def validate_native_session(
     denied = "Sign in with an authorized Townlight desktop account."
     if not isinstance(proof, str) or len(proof) != 64:
         raise PermissionError(denied)
+    shared = _shared_staff.get()
+    if shared is not None:
+        root, expected_proof, principal = shared
+        now = int(time.time()) if now_unix_seconds is None else now_unix_seconds
+        if (root != profile_root or not proof.isascii() or not hmac.compare_digest(proof, expected_proof)
+                or principal.expires_at_unix_seconds <= now):
+            raise PermissionError(denied)
+        return principal
     try:
         supplied = bytes.fromhex(proof)
         config = profile_root / "config"
