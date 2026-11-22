@@ -1,22 +1,12 @@
-Windows 1.9.1.1 Station recorder release
+Windows 1.9.2.1 shared staff release
 
-Station recorder in Windows 1.9.1.1
+The current Suite release lets named Records staff work from a Windows workstation through the city host, attach verified Station copies, and queue only separately approved release copies for portal delivery. This is a Suite integration, not a standalone Records release.
 
-Windows 1.9.1.1 improves the clerk workflows for Records, Meetings, and Code, adds Open Hall icons, and fixes the ten-second Station preview. Acceptance and limits.
+Acceptance used synthetic data and a test portal on the physical Windows host with a clean Windows Sandbox guest on the same PC. It does not establish two physical PCs, recovery on another computer or account, production portal or city network operation, direct MSI upgrade from an earlier version, new hardware or broadcast acceptance, or PDF/UA and full assistive-technology review.
 
-Windows 1.9.1.1 improves the clerk workflows for Records, Meetings, and Code, adds Open Hall icons, and fixes the ten-second Station preview.
+Release and downloads · Acceptance and limits · Windows staff workflow guide
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
-
-Release and downloads · Acceptance and limits.
-
-Windows 1.9.2.1 shared staff candidate
-
-The signed Suite candidate lets Records staff work from a Windows workstation with the city host, review current response drafts, and share verified Station recording copies. A fulfilled request alone does not authorize portal publication; staff must separately approve the exact portal selection. This integration is not a new standalone Records release, and the public Windows installer remains 1.9.1.1. See the 1.9.2.1 candidate guide, shared staff guide at the signed source commit, and Portal guide.
-
-If Records is unavailable, an administrator uses Prepare Records and checks the result before staff attach a completed Station recording. Review the private attachment on the selected Records request. Windows staff workflows.
-
-Windows x64 Beta 1 · MSI 1.9.1.1
+Windows x64 Beta 1 · MSI 1.9.2.1
 
 The previous Windows 1.9.0.1 acceptance remains available for its recorder and Records handoff evidence.
 
@@ -52,9 +42,9 @@ Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supp
 
 All 31 sources, formats and handoffs · Installed acceptance.
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
-Windows 1.9.1.1 contains Station 0.4.4, Records 1.8.0.dev4, Townlight Runtime 0.3.3 and Meetings 1.0.6. The release acceptance summary identifies the verified workflows and the builds that produced the evidence.
+The release acceptance summary and corresponding-source archive identify the exact packaged component sources, artifact hashes and installed evidence for Windows 1.9.2.1.
 
 Townlight Beta 1 · Naming candidate documentation edition 2 November 2026
 
@@ -88,35 +78,35 @@ Staff should begin with First run and Daily workflow. Administrators should also
 
 Beta identity
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Identity                            Value
-  ----------------------------------- ----------------------------------------------------------------------------------------------------------
+  ----------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------
   Documentation                       Townlight Beta 1 naming, Access and Notice candidate
 
-  Windows MSI version                 1.9.1.1
+  Windows MSI version                 1.9.2.1
 
   Product component                   townlight-records 1.8.0.dev4
 
   Principal import package            townlight_records
 
-  Native desktop source version       1.9.1-1
+  Native desktop source version       1.9.2-1
 
-  Candidate hashes                    SHA-256 checksums and Windows acceptance summary
+  Published MSI checksums             SHA-256 checksums and Windows acceptance summary
 
   Current owned software license      AGPL-3.0-only
 
-  Acceptance composition              Windows 1.9.1.1: physical Station preview, recording and playback verified. Station setup is integrated.
-  ----------------------------------------------------------------------------------------------------------------------------------------------
+  Acceptance composition              Windows 1.9.2.1: host and clean Windows Sandbox guest on same PC; synthetic data, test portal, shared workflows and same-machine cold recovery.
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
 First run
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
 Fresh installation
 
-For a fresh setup, run the signed Windows 1.9.1.1 MSI and use an empty database and a new Townlight profile. For an upgrade from 1.9.0.1, back up city data and settings, close Townlight, run the MSI, then reopen Townlight under the same Windows account and profile. The upgrade was exercised on the earlier signed 1.9.1.1 iteration. See acceptance and limits for evidence by build.
+For a fresh setup, run the signed Windows 1.9.2.1 MSI and use an empty database and a new Townlight profile. The current acceptance does not cover a direct MSI upgrade from an earlier version. Back up city data and settings and review the published acceptance before upgrading. See acceptance and limits for evidence by build.
 
 1.  Download the signed MSI, matching source companion and checksums from the public Windows release.
 2.  Verify the MSI hash and Authenticode publisher before installation. See the Windows acceptance summary for the tested setup.
@@ -229,7 +219,7 @@ Technical specifications
 
 Runtime and storage
 
-The Windows 1.9.1.1 package has physical Station camera and microphone acceptance. Its native shell uses Rust 2021, Tauri 2 and Microsoft WebView2; browser assets are JavaScript built with Vite 8.1.6. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic, with PostgreSQL 17 / PostGIS and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
+The 1.9.1.1 physical Station camera and microphone test applies only to that historical release. Current Windows 1.9.2.1 acceptance is documented in the release summary. Its native shell uses Rust 2021, Tauri 2 and Microsoft WebView2; browser assets are JavaScript built with Vite 8.1.6. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic, with PostgreSQL 17 / PostGIS and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
 
 The native transport is fixed to loopback 127.0.0.1:15480; PostgreSQL uses the configured local runtime port (default 15432). Optional local model service defaults to 127.0.0.1:15434. Those are deployment defaults, not internet endpoints. The runtime has health, module and readiness endpoints; readiness is stronger than process existence. The task queue is the existing local Core task infrastructure, not an assertion that a separate Redis service is required for this desktop composition.
 
@@ -407,7 +397,7 @@ Staff verify the jurisdiction, source currency, permissions, citations and propo
 
 Beta operation and recovery
 
-Back up city data and settings before upgrading from 1.9.0.1. Close Townlight, run the 1.9.1.1 MSI, then reopen under the same Windows account and existing profile. Station is configured during Townlight first run. Keep backups and original evidence. Test your physical equipment and network and service configuration before relying on them. See the acceptance summary for the tested paths.
+Back up city data and settings before any upgrade. The 1.9.2.1 acceptance does not cover direct MSI upgrade from an earlier version. Keep backups and original evidence, test equipment and service configuration before relying on them, and see the acceptance summary for the tested paths.
 
 Warranty and liability
 
@@ -543,6 +533,6 @@ Public meeting portal (separately deployed beta)
 
 Townlight’s separately deployed portal can publish a reviewed Meetings archive with an explicitly selected, verified Records release copy of the matching completed Station recording. Staff must separately approve publication; fulfilling a Records request does not make the copy public. Review public text and the selected file, then use the Wagtail superuser publication form. Explicit withdrawal hides the published meeting and file. An unsuccessful sync preserves the previous publication. Keep the private original and never expose the native session proof. See the portal guide for staff steps, setup, API, recovery and source obligations.
 
-Alongside the public Windows 1.9.1.1 release, the separately deployed portal uses this manual Wagtail workflow; that installer does not include or deploy the portal. The signed but unreleased 1.9.2.1 Suite candidate adds unattended queued publishing from the shared Windows host. Its guide requires separate approval of each packet or recording selection and confirms delivery, correction, or withdrawal in Meetings. It does not make a fulfilled Records request public automatically.
+Windows 1.9.2.1 includes the shared Windows host publisher; the separately deployed Townlight Portal server remains outside the MSI. Every packet or recording selection requires separate explicit approval, and delivery, correction or withdrawal is confirmed in Meetings. Fulfilling a Records request alone does not make it public.
 
 This portal beta is distributed separately from the desktop installer. The existing signed Beta 1 installer and historical Sandbox results do not establish that it contains or deploys this portal. CivicCast remains separate.
