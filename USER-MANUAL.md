@@ -198,6 +198,12 @@ Drafting, review, approval, attachment, export, fulfillment and publication are 
 
 Receives selected evidence from Meetings, Code, Zoning, Planning, Permitting, Inspections and Station. Station originals are locked private evidence. A product’s public copy remains subject to the Records response workflow.
 
+### Shared Windows staff and portal candidate — 1.9.2.1
+
+The signed Suite 1.9.2.1 candidate lets named Records Staff work from a Windows workstation with the city host. Staff can attach a completed private Station recording using its ID and verified hash, prepare separate original and release copies, and review the current response. Approval compares the current draft with the reviewed version, so a stale draft is refused. The existing City Staff and Local Admin roles keep only the actions already allowed to them; Code Staff receives no shared Meetings or Records authority.
+
+Fulfillment alone does not authorize publication. Staff separately approve the exact eligible release copy or council packet revision for the separately deployed portal. The host queues that action through sign-out, retries after an outage or restart, and reports confirmed status in Meetings; correction and withdrawal apply to the selected item. The public 1.9.1.1 installer still predates this shared-host publisher. Read the [1.9.2.1 candidate guide](https://townlight.github.io/manuals/windows-1.9.2.1-candidate.html), [shared staff guide at the signed source commit](https://github.com/townlight/townlight/blob/1bc45be5a14aa969e53b87b1cef1f278dadc79a4/docs/installer/windows-shared-staff.md), and [Portal guide at the final candidate documentation commit](https://github.com/townlight/townlight/blob/a35afc2bd7702a8ddbfabbd0ec3dbc75a3d581de/docs/portal/guide.md). Acceptance used a synthetic portal and a clean Windows Sandbox guest on the same physical host.
+
 | Direction | Material |
 |----|----|
 | Input | A request description and requester, authorized source documents, explicit cross-product evidence selections and a reviewer’s decisions. |
