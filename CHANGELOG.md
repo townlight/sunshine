@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Windows shared staff candidate source
+
+- Compare the current Records draft with the reviewed draft hash before accepting shared staff writes, so a stale review cannot approve a changed response. This correction is included through Records PR #154 in the signed Townlight Windows 1.9.2.1 candidate; it is not a new standalone Records release. See the [Suite candidate handoff](https://github.com/townlight/townlight/blob/main/release/CANDIDATE-Windows-1.9.2.1.md).
+
 ### Records fulfillment export freshness
 
 - Require completed response and release-package exports to match the current

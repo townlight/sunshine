@@ -11,6 +11,10 @@ Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the veri
 
 [Release and downloads](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.1.1) · [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md).
 
+## Windows 1.9.2.1 shared staff candidate
+
+The signed Suite candidate lets Records staff work from a Windows workstation with the city host, review current response drafts, and share verified Station recording copies. A fulfilled request alone does not authorize portal publication; staff must separately approve the exact portal selection. This integration is not a new standalone Records release, and the public Windows installer remains 1.9.1.1. See the [1.9.2.1 candidate guide](https://townlight.github.io/manuals/windows-1.9.2.1-candidate.html), [shared staff guide at the signed source commit](https://github.com/townlight/townlight/blob/1bc45be5a14aa969e53b87b1cef1f278dadc79a4/docs/installer/windows-shared-staff.md), and [Portal guide](https://github.com/townlight/townlight/blob/a35afc2bd7702a8ddbfabbd0ec3dbc75a3d581de/docs/portal/guide.md).
+
 If Records is unavailable, an administrator uses **Prepare Records** and checks the result before staff attach a completed Station recording. Review the private attachment on the selected Records request. [Windows staff workflows](https://townlight.github.io/manuals/windows-staff-workflows.html).
 
 Windows x64 Beta 1 · MSI 1.9.1.1
@@ -543,5 +547,7 @@ Previous editions are retained under `docs/history/pre-townlight-beta-1/`. They 
 ## Public meeting portal (separately deployed beta)
 
 Townlight's separately deployed portal can publish a reviewed Meetings archive with an explicitly selected, verified Records release copy of the matching completed Station recording. Staff must separately approve publication; fulfilling a Records request does not make the copy public. Review public text and the selected file, then use the Wagtail superuser publication form. Explicit withdrawal hides the published meeting and file. An unsuccessful sync preserves the previous publication. Keep the private original and never expose the native session proof. See the [portal guide](https://github.com/townlight/townlight/blob/main/docs/portal/guide.md) for staff steps, setup, API, recovery and source obligations.
+
+Alongside the public Windows 1.9.1.1 release, the separately deployed portal uses this manual Wagtail workflow; that installer does not include or deploy the portal. The signed but unreleased 1.9.2.1 Suite candidate adds unattended queued publishing from the shared Windows host. Its guide requires separate approval of each packet or recording selection and confirms delivery, correction, or withdrawal in Meetings. It does not make a fulfilled Records request public automatically.
 
 This portal beta is distributed separately from the desktop installer. The existing signed Beta 1 installer and historical Sandbox results do not establish that it contains or deploys this portal. CivicCast remains separate.
