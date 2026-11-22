@@ -144,10 +144,12 @@ class FeeWaiverPayload(NativePayload):
 class DraftPayload(NativePayload):
     responseDraft: str = Field(min_length=1)
     citation: str = ""
+    expectedResponseSha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
 class ApprovalPayload(NativePayload):
     approvalNote: str = ""
+    expectedResponseSha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
 class AssignCommand(NativePayload):

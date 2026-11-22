@@ -615,6 +615,11 @@ async def native_request_operation(
     req = await session.get(RecordsRequest, request_id, with_for_update=True)
     if req is None:
         raise HTTPException(404, "Records request not found.")
+    expected = getattr(command.payload, "expectedResponseSha256", None)
+    if expected is not None:
+        current = artifacts.text_hash(req.response_draft or "")
+        if current != expected:
+            raise HTTPException(409, {"current_response_sha256": current})
     try:
         message = await apply_command(session, req, RecordsActor(actor, request.state.native_role), command)
     except ValueError as error:
