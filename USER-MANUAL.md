@@ -1,8 +1,10 @@
-## Windows 1.9.1.1 Station recorder release
+## Windows 1.9.2.1 shared staff release
 
-## Windows 1.9.1.1 meeting recorder
+Named Records staff can work from a Windows workstation through the city host, attach verified Station copies, and queue only separately approved release copies for portal delivery. This is a Suite integration, not a standalone Records release.
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading. [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md).
+Acceptance used synthetic data and a test portal on the physical Windows host with a clean Windows Sandbox guest on the same PC. It does not establish two physical PCs, recovery on another computer or account, production portal or city network operation, direct MSI upgrade from an earlier version, new hardware or broadcast acceptance, or PDF/UA and full assistive-technology review.
+
+[Release and downloads](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.2.1) · [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md) · [Windows staff workflow guide](https://townlight.github.io/manuals/windows-staff-workflows.html)
 
 ### Clerk and operator
 
@@ -30,15 +32,17 @@ flowchart LR
 ```
 
 
-Windows 1.9.1.1 improves the clerk workflows for Records, Meetings, and Code, adds Open Hall icons, and fixes the ten-second Station preview.
+See the Windows 1.9.2.1 release acceptance for the exact installed checks, artifact identity and limits.
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
-[Release and downloads](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.1.1) · [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md).
+[Release and downloads](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.2.1) · [Acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md).
+
+Acceptance used synthetic data and a test portal on the physical Windows host with a clean Windows Sandbox guest on the same PC. It does not establish two physical PCs, recovery on another computer or account, production portal or city network operation, direct MSI upgrade from an earlier version, new hardware or broadcast acceptance, or PDF/UA and full assistive-technology review.
 
 If Records is unavailable, an administrator uses **Prepare Records** and checks the result before staff attach a completed Station recording. Review the private attachment on the selected Records request. [Windows staff workflows](https://townlight.github.io/manuals/windows-staff-workflows.html).
 
-Windows x64 Beta 1 · MSI 1.9.1.1
+Windows x64 Beta 1 · MSI 1.9.2.1
 
 The previous [Windows 1.9.0.1 acceptance](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.0.1/ACCEPTANCE-Windows-1.9.0.1.md) remains available for its recorder and Records handoff evidence.
 
@@ -74,9 +78,9 @@ Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supp
 
 [All 31 sources, formats and handoffs](https://townlight.github.io/manuals/meeting-imports.html) · [Installed acceptance](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.8.1.1/ACCEPTANCE-Windows-1.8.1.1.md).
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
-Windows 1.9.1.1 contains Station 0.4.4, Records 1.8.0.dev4, Townlight Runtime 0.3.3 and Meetings 1.0.6. The release acceptance summary identifies the verified workflows and the builds that produced the evidence.
+The release acceptance summary and corresponding-source archive identify the exact packaged component sources, artifact hashes and installed evidence for Windows 1.9.2.1.
 
 
 **Townlight Beta 1** · Naming candidate documentation edition 2 November 2026
@@ -114,26 +118,26 @@ Staff should begin with First run and Daily workflow. Administrators should also
 | Identity | Value |
 |----|----|
 | Documentation | Townlight Beta 1 naming, Access and Notice candidate |
-| Windows MSI version | 1.9.1.1 |
+| Windows MSI version | 1.9.2.1 |
 | Product component | townlight-records 1.8.0.dev4 |
 | Principal import package | townlight_records |
-| Native desktop source version | 1.9.1-1 |
-| Candidate hashes | [SHA-256 checksums](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/SHA256SUMS-Windows-1.9.1.1.txt) and [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md) |
+| Native desktop source version | 1.9.2-1 |
+| Published MSI checksums | [SHA-256 checksums](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/SHA256SUMS-Windows-1.9.2.1.txt) and [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md) |
 | Current owned software license | AGPL-3.0-only |
-| Acceptance composition | Windows 1.9.1.1: physical Station preview, recording and playback verified. Station setup is integrated. |
+| Acceptance composition | Windows 1.9.2.1: host and clean Windows Sandbox guest on same PC; synthetic data, test portal, shared workflows and same-machine cold recovery. |
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
 ## First run
 
-Windows 1.9.1.1 is a signed public beta. See the acceptance summary for the verified workflows and artifact identities. Set up Station during Townlight first run. Read the acceptance summary before upgrading.
+Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
 
 ### Fresh installation
 
-For a fresh setup, run the signed Windows 1.9.1.1 MSI and use an empty database and a new Townlight profile. For an upgrade from 1.9.0.1, back up city data and settings, close Townlight, run the MSI, then reopen Townlight under the same Windows account and profile. The upgrade was exercised on the earlier signed 1.9.1.1 iteration. See [acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md) for evidence by build.
+For a fresh setup, run the signed Windows 1.9.2.1 MSI and use an empty database and a new Townlight profile. The current acceptance does not cover a direct MSI upgrade from an earlier version. Back up city data and settings and review the published acceptance before upgrading. See [acceptance and limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md) for evidence by build.
 
-1.  Download the signed MSI, matching source companion and checksums from the [public Windows release](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.1.1).
-2.  Verify the MSI hash and Authenticode publisher before installation. See the [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md) for the tested setup.
+1.  Download the signed MSI, matching source companion and checksums from the [public Windows release](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.2.1).
+2.  Verify the MSI hash and Authenticode publisher before installation. See the [Windows acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md) for the tested setup.
 3.  Launch Townlight under the intended named Windows account. Choose the storage folders. Select **Townlight Inspections candidate** (`inspections-preview`) for the bounded desktop composition, including Access and Notice. A narrower default selection will not expose all workspaces.
 4.  Enter the city profile, time zone and contacts. Create the first named local administrator, sign in and choose protected backup storage. **Continue without local AI** is valid for the deterministic workflows.
 5.  Run Health Check and wait for readiness. Open Townlight. In System Health select **Finish Records Migration** to activate the canonical Python/PostgreSQL runtime. Do not fabricate migration receipts or seed accounts.
@@ -198,11 +202,11 @@ Drafting, review, approval, attachment, export, fulfillment and publication are 
 
 Receives selected evidence from Meetings, Code, Zoning, Planning, Permitting, Inspections and Station. Station originals are locked private evidence. A product’s public copy remains subject to the Records response workflow.
 
-### Shared Windows staff and portal candidate — 1.9.2.1
+### Windows 1.9.2.1 shared staff and portal release
 
-The signed Suite 1.9.2.1 candidate lets named Records Staff work from a Windows workstation with the city host. Staff can attach a completed private Station recording using its ID and verified hash, prepare separate original and release copies, and review the current response. Approval compares the current draft with the reviewed version, so a stale draft is refused. The existing City Staff and Local Admin roles keep only the actions already allowed to them; Code Staff receives no shared Meetings or Records authority.
+The signed Windows 1.9.2.1 release lets named Records Staff work from a Windows workstation with the city host. Staff can attach a completed private Station recording using its ID and verified hash, prepare separate original and release copies, and review the current response. Approval compares the current draft with the reviewed version, so a stale draft is refused. The existing City Staff and Local Admin roles keep only the actions already allowed to them; Code Staff receives no shared Meetings or Records authority.
 
-Fulfillment alone does not authorize publication. Staff separately approve the exact eligible release copy or council packet revision for the separately deployed portal. The host queues that action through sign-out, retries after an outage or restart, and reports confirmed status in Meetings; correction and withdrawal apply to the selected item. The public 1.9.1.1 installer still predates this shared-host publisher. Read the [1.9.2.1 candidate guide](https://townlight.github.io/manuals/windows-1.9.2.1-candidate.html), [shared staff guide at the signed source commit](https://github.com/townlight/townlight/blob/1bc45be5a14aa969e53b87b1cef1f278dadc79a4/docs/installer/windows-shared-staff.md), and [Portal guide at the final candidate documentation commit](https://github.com/townlight/townlight/blob/a35afc2bd7702a8ddbfabbd0ec3dbc75a3d581de/docs/portal/guide.md). Acceptance used a synthetic portal and a clean Windows Sandbox guest on the same physical host.
+Fulfillment alone does not authorize publication. Staff separately approve the exact eligible release copy or council packet revision for the separately deployed portal. The host queues that action through sign-out, retries after an outage or restart, and reports confirmed status in Meetings; correction and withdrawal apply to the selected item. The shared-host publisher is included in Windows 1.9.2.1; the Townlight Portal server remains a separate deployment. Read the [Windows 1.9.2.1 staff workflow guide](https://townlight.github.io/manuals/windows-staff-workflows.html), [shared staff guide at the signed source commit](https://github.com/townlight/townlight/blob/1bc45be5a14aa969e53b87b1cef1f278dadc79a4/docs/installer/windows-shared-staff.md), and [Portal guide at the final candidate documentation commit](https://github.com/townlight/townlight/blob/1bc45be5a14aa969e53b87b1cef1f278dadc79a4/docs/portal/guide.md). Acceptance used a synthetic portal and a clean Windows Sandbox guest on the same physical host.
 
 | Direction | Material |
 |----|----|
@@ -270,7 +274,7 @@ Source contracts: `app/desktop_bridge/schemas.py`, `app/requests/workflow.py`, n
 
 ### Runtime and storage
 
-The Windows 1.9.1.1 package has physical Station camera and microphone acceptance. Its native shell uses **Rust 2021, Tauri 2 and Microsoft WebView2**; browser assets are JavaScript built with **Vite 8.1.6**. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled **CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic**, with **PostgreSQL 17 / PostGIS** and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
+The 1.9.1.1 physical Station camera and microphone test applies only to that historical release. Current Windows 1.9.2.1 acceptance is documented in the release summary. Its native shell uses **Rust 2021, Tauri 2 and Microsoft WebView2**; browser assets are JavaScript built with **Vite 8.1.6**. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled **CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic**, with **PostgreSQL 17 / PostGIS** and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
 
 The native transport is fixed to loopback `127.0.0.1:15480`; PostgreSQL uses the configured local runtime port (default `15432`). Optional local model service defaults to `127.0.0.1:15434`. Those are deployment defaults, not internet endpoints. The runtime has health, module and readiness endpoints; readiness is stronger than process existence. The task queue is the existing local Core task infrastructure, not an assertion that a separate Redis service is required for this desktop composition.
 
@@ -444,7 +448,7 @@ Staff verify the jurisdiction, source currency, permissions, citations and propo
 
 ### Beta operation and recovery
 
-Back up city data and settings before upgrading from 1.9.0.1. Close Townlight, run the 1.9.1.1 MSI, then reopen under the same Windows account and existing profile. Station is configured during Townlight first run. Keep backups and original evidence. Test your physical equipment and network and service configuration before relying on them. See the [acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.1.1/ACCEPTANCE-Windows-1.9.1.1.md) for the tested paths.
+Back up city data and settings before any upgrade. The 1.9.2.1 acceptance does not cover direct MSI upgrade from an earlier version. Keep backups and original evidence, test equipment and service configuration before relying on them, and see the [acceptance summary](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md) for the tested paths.
 
 ### Warranty and liability
 
