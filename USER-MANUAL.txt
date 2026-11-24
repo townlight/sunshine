@@ -1,4 +1,12 @@
-Windows 1.9.2.1 shared staff release
+Windows 1.9.3.2 current release
+
+Townlight for Windows 1.9.3.2 is the current signed public beta. See the release notes and acceptance record.
+
+For an existing city, make and verify a backup, close Townlight, run the signed Windows 1.9.3.2 MSI, then reopen Townlight under the same Windows account and existing profile. Direct upgrade is tested from 1.9.3.1; earlier paths have separate prior evidence.
+
+Authorized Records staff signed into the shared Windows workstation should open Records Requests and an existing saved request. Beside the private managed document, choose Download private attachment, then choose a new destination file or cancel. Townlight compares the byte count and SHA-256 before saving and reports the destination, count, and hash; protect the workstation copy as private Records evidence, with review and publication kept separate.
+
+Windows 1.9.2.1 historical shared staff release
 
 Named Records staff can work from a Windows workstation through the city host, attach verified Station copies, and queue only separately approved release copies for portal delivery. This is a Suite integration, not a standalone Records release.
 
@@ -29,17 +37,13 @@ Use Check recorder readiness, Back up Station, and Restore Station backup in Set
         Private -->|Explicit hash-verified attachment| Records[Records managed copy]
         Records --> Review[Separate review and release decision]
 
-See the Windows 1.9.2.1 release acceptance for the exact installed checks, artifact identity and limits.
-
-Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
-
 Release and downloads · Acceptance and limits.
 
 Acceptance used synthetic data and a test portal on the physical Windows host with a clean Windows Sandbox guest on the same PC. It does not establish two physical PCs, recovery on another computer or account, production portal or city network operation, direct MSI upgrade from an earlier version, new hardware or broadcast acceptance, or PDF/UA and full assistive-technology review.
 
 If Records is unavailable, an administrator uses Prepare Records and checks the result before staff attach a completed Station recording. Review the private attachment on the selected Records request. Windows staff workflows.
 
-Windows x64 Beta 1 · MSI 1.9.2.1
+Windows x64 Beta 1 · MSI 1.9.3.2
 
 The previous Windows 1.9.0.1 acceptance remains available for its recorder and Records handoff evidence.
 
@@ -75,9 +79,7 @@ Windows 1.8.1.1 adds shared meeting imports for 31 source families, with 34 supp
 
 All 31 sources, formats and handoffs · Installed acceptance.
 
-Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
-
-The release acceptance summary and corresponding-source archive identify the exact packaged component sources, artifact hashes and installed evidence for Windows 1.9.2.1.
+The release acceptance summary and corresponding-source archive identify the exact packaged component sources, artifact hashes and installed evidence for Windows 1.9.3.2.
 
 Townlight Beta 1 · Naming candidate documentation edition 2 November 2026
 
@@ -111,41 +113,37 @@ Staff should begin with First run and Daily workflow. Administrators should also
 
 Beta identity
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------------
   Identity                            Value
-  ----------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------
-  Documentation                       Townlight Beta 1 naming, Access and Notice candidate
+  ----------------------------------- ---------------------------------------------------------------------------------
+  Documentation                       Townlight Beta 1
 
-  Windows MSI version                 1.9.2.1
+  Windows MSI version                 1.9.3.2
 
   Product component                   townlight-records 1.8.0.dev4
 
   Principal import package            townlight_records
 
-  Native desktop source version       1.9.2-1
+  Native desktop source version       1.9.3-2
 
   Published MSI checksums             SHA-256 checksums and Windows acceptance summary
 
   Current owned software license      AGPL-3.0-only
 
-  Acceptance composition              Windows 1.9.2.1: host and clean Windows Sandbox guest on same PC; synthetic data, test portal, shared workflows and same-machine cold recovery.
-  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
+  Acceptance composition              Signed 1.9.3.2 setup, backup/restore, uninstall, and adjacent upgrade verified.
+  ---------------------------------------------------------------------------------------------------------------------
 
 First run
 
-Windows 1.9.2.1 is the signed public Townlight beta. Set up Station during first run and read the current acceptance summary before evaluating or upgrading.
-
 Fresh installation
 
-For a fresh setup, run the signed Windows 1.9.2.1 MSI and use an empty database and a new Townlight profile. The current acceptance does not cover a direct MSI upgrade from an earlier version. Back up city data and settings and review the published acceptance before upgrading. See acceptance and limits for evidence by build.
+For a new city, install the signed Townlight Windows 1.9.3.2 MSI and complete first-run under the intended named Windows account with an empty database and a new profile. Current release acceptance: ACCEPTANCE-Windows-1.9.3.2.md.
 
 1.  Download the signed MSI, matching source companion and checksums from the public Windows release.
 2.  Verify the MSI hash and Authenticode publisher before installation. See the Windows acceptance summary for the tested setup.
-3.  Launch Townlight under the intended named Windows account. Choose the storage folders. Select Townlight Inspections candidate (inspections-preview) for the bounded desktop composition, including Access and Notice. A narrower default selection will not expose all workspaces.
+3.  Launch Townlight under the intended Windows account and choose storage folders. On the setup screen, choose the full bundled profile labeled Townlight Inspections candidate; it includes Records, Meetings, Code, Access, Notice, Zoning, Planning, Permitting, Inspections, Boards & Commissions, Contracts, Procurement, Data, Budget, and Grants.
 4.  Enter the city profile, time zone and contacts. Create the first named local administrator, sign in and choose protected backup storage. Continue without local AI is valid for the deterministic workflows.
-5.  Run Health Check and wait for readiness. Open Townlight. In System Health select Finish Records Migration to activate the canonical Python/PostgreSQL runtime. Do not fabricate migration receipts or seed accounts.
+5.  Select Run Health Check, then choose Finish setup; in System Health, if Prepare Records appears, choose it and follow its prompts, otherwise skip it.
 6.  Create named staff through Settings. Import authorized sources using each product’s source library. All examples in this package are synthetic; they are not municipal authority.
 7.  Set up Station during first run with the full profile or with Meetings and Records selected. On an existing installation, open Settings → Modules → Townlight Station → Set up meeting recording. Configure vision explicitly only if automatic photo drafting is selected.
 
@@ -258,7 +256,7 @@ Technical specifications
 
 Runtime and storage
 
-The 1.9.1.1 physical Station camera and microphone test applies only to that historical release. Current Windows 1.9.2.1 acceptance is documented in the release summary. Its native shell uses Rust 2021, Tauri 2 and Microsoft WebView2; browser assets are JavaScript built with Vite 8.1.6. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic, with PostgreSQL 17 / PostGIS and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
+The 1.9.1.1 physical Station camera and microphone test applies only to that historical release. Current Windows 1.9.3.2 acceptance is documented in the release summary. Its native shell uses Rust 2021, Tauri 2 and Microsoft WebView2; browser assets are JavaScript built with Vite 8.1.6. This describes the native desktop frontend; Station has a separate React operator, specified below or in its product manual. Canonical business workflows use bundled CPython 3.13.5, FastAPI, Pydantic, SQLAlchemy and Alembic, with PostgreSQL 17 / PostGIS and managed original files. Bundled dependency versions are recorded with the release evidence. Package minimum Python requirements can differ from the bundled executable; the metadata reference preserves both. No stack rewrite is implied by the beta label.
 
 The native transport is fixed to loopback 127.0.0.1:15480; PostgreSQL uses the configured local runtime port (default 15432). Optional local model service defaults to 127.0.0.1:15434. Those are deployment defaults, not internet endpoints. The runtime has health, module and readiness endpoints; readiness is stronger than process existence. The task queue is the existing local Core task infrastructure, not an assertion that a separate Redis service is required for this desktop composition.
 
@@ -380,7 +378,7 @@ Troubleshooting
   ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Symptom                       Likely meaning                                                           Next action
   ----------------------------- ------------------------------------------------------------------------ --------------------------------------------------------------------------------------------------
-  Workspace absent              Wrong product composition or unavailable canonical runtime.              Check selected composition; activate through Finish Records Migration; wait for readiness.
+  Workspace absent              Wrong product composition or unavailable canonical runtime.              Check selected composition; activate through Prepare Records; wait for readiness.
 
   Cannot sign in / 401          Missing or expired named account session.                                Sign in normally; reopen a Station launch ticket if applicable.
 
@@ -436,7 +434,7 @@ Staff verify the jurisdiction, source currency, permissions, citations and propo
 
 Beta operation and recovery
 
-Back up city data and settings before any upgrade. The 1.9.2.1 acceptance does not cover direct MSI upgrade from an earlier version. Keep backups and original evidence, test equipment and service configuration before relying on them, and see the acceptance summary for the tested paths.
+For an existing city, make and verify a backup, close Townlight, run the signed Windows 1.9.3.2 MSI, then reopen Townlight under the same Windows account and existing profile. Direct upgrade is tested from 1.9.3.1; earlier paths have separate prior evidence.
 
 Warranty and liability
 
