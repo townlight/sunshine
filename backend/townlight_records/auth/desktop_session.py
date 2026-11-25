@@ -15,7 +15,9 @@ import time
 _ROLE_MODULES: dict[str, frozenset[str] | None] = {
     "local-admin": None,
     "city-staff": None,
-    "clerk": frozenset({"townlight_meetings", "townlight_notice", "townlight_access"}),
+    "clerk": frozenset(
+        {"townlight_meetings", "townlight_notice", "townlight_access", "townlight_311", "townlight_comms", "townlight_parks"}
+    ),
     "records-staff": frozenset({"townlight_records"}),
     "code-staff": frozenset({"townlight_code"}),
 }
