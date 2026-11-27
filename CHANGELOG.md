@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Native staff account reconciliation source candidate
+
+- Correct the private Records source candidate to 1.8.0.dev7 with a committed native-account reconciliation that runs only after validated mapping and rolls back on failure. This prevents fresh staff accounts from self-blocking during internal source lookup while preserving native-role and module restrictions. Source-candidate correction only; installed acceptance is pending a new signed Suite.
+
 ### Windows shared staff candidate source
 
 - Compare the current Records draft with the reviewed draft hash before accepting shared staff writes, so a stale review cannot approve a changed response. This correction is included in the published Townlight Windows 1.9.2.1 Suite release; it is not a new standalone Records release. See the [signed release](https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.9.2.1) and its [acceptance limits](https://github.com/townlight/townlight/releases/download/townlight-windows-v1.9.2.1/ACCEPTANCE-Windows-1.9.2.1.md).
