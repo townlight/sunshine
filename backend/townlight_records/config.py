@@ -13,7 +13,7 @@ from townlight_core.security import (
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode
 
-APP_VERSION = "1.8.0.dev5"
+APP_VERSION = "1.8.0.dev6"
 
 _INSECURE_SECRETS = DEFAULT_INSECURE_SECRET_VALUES
 _INSECURE_ENCRYPTION_KEYS = DEFAULT_INSECURE_FERNET_KEY_VALUES

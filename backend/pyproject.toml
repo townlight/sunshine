@@ -1,6 +1,6 @@
 [project]
 name = "townlight-records"
-version = "1.8.0.dev5"
+version = "1.8.0.dev6"
 description = "Open-source AI-powered open records support for American cities"
 requires-python = ">=3.12"
 license = "AGPL-3.0-only"

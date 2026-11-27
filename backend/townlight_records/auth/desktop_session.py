@@ -16,7 +16,17 @@ _ROLE_MODULES: dict[str, frozenset[str] | None] = {
     "local-admin": None,
     "city-staff": None,
     "clerk": frozenset(
-        {"townlight_meetings", "townlight_notice", "townlight_access", "townlight_311", "townlight_comms", "townlight_parks"}
+        {
+            "townlight_meetings",
+            "townlight_notice",
+            "townlight_access",
+            "townlight_311",
+            "townlight_comms",
+            "townlight_parks",
+            "townlight_utilities",
+            "townlight_library",
+            "townlight_elections",
+        }
     ),
     "records-staff": frozenset({"townlight_records"}),
     "code-staff": frozenset({"townlight_code"}),
