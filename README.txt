@@ -538,3 +538,10 @@ Townlight’s separately deployed portal can publish a reviewed Meetings archive
 Windows 1.9.2.1 includes the shared Windows host publisher; the separately deployed Townlight Portal server remains outside the MSI. Every packet or recording selection requires separate explicit approval, and delivery, correction or withdrawal is confirmed in Meetings. Fulfilling a Records request alone does not make it public.
 
 This portal beta is distributed separately from the desktop installer. The existing signed Beta 1 installer and historical Sandbox results do not establish that it contains or deploys this portal. CivicCast remains separate.
+
+Windows 1.11.0.1 department integration
+
+On the Windows 1.11.0.1 beta, approved Library programs and Elections information publish through Communications with a Records archive for each revision. Records roles govern archive access. Utilities public replies appear in 311 request history. Hosted fresh testing verified all three workflows, and the two-PC test verified the Library archive after desktop exit. Full two-PC acceptance remains open.
+
+Signed beta release: https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.11.0.1
+Department workflow guide: https://github.com/townlight/townlight/blob/main/docs/windows-utilities-library-elections.md
