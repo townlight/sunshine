@@ -115,6 +115,10 @@ def main() -> int:
                     "Windows 1.9.3.2", "townlight-records", "1.8.0.dev4",
                     "AGPL-3.0-only", "Acceptance and limits",
                 ),
+                (
+                    "Windows 1.10.0.1", "townlight-records", "1.8.0.dev5",
+                    "AGPL-3.0-only", "Acceptance and limits",
+                ),
             )
         )
         if has_published_maintenance_label and not rel.endswith(".txt"):
@@ -150,6 +154,16 @@ def main() -> int:
                         (
                             "townlight-windows-v1.9.3.2",
                             "ACCEPTANCE-Windows-1.9.3.2.md",
+                        ),
+                    ),
+                    (
+                        (
+                            "Windows 1.10.0.1", "townlight-records", "1.8.0.dev5",
+                            "AGPL-3.0-only", "Acceptance and limits",
+                        ),
+                        (
+                            "townlight-windows-v1.10.0.1",
+                            "ACCEPTANCE-Windows-1.10.0.1.md",
                         ),
                     ),
                 )
