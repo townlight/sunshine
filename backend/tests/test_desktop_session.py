@@ -107,3 +107,104 @@ def test_corrupt_native_state_fails_closed(native_profile, filename, contents):
     (root / filename).write_text(contents, encoding="utf-8")
     with pytest.raises(PermissionError):
         validate_native_session(proof, profile_root=root, now_unix_seconds=1000)
+
+
+@pytest.mark.asyncio
+async def test_concurrent_native_identity_reconciliation_commits_once(db_session_factory, tmp_path):
+    import asyncio
+    import time
+    from types import SimpleNamespace
+
+    from sqlalchemy import func, select
+    from townlight_runtime.native_accounts import accounts, provision_accounts
+
+    from townlight_records.auth.desktop_session import NativeDesktopPrincipal, shared_staff_scope
+    from townlight_records.auth.native_identity import mapped_native_actor
+    from townlight_records.models.user import User
+
+    config = tmp_path / "config"
+    config.mkdir(parents=True, exist_ok=True)
+    (config / "first-admin.json").write_text(json.dumps({
+        "email": "admin@native-test.invalid",
+        "display_name": "Admin",
+        "role": "local-admin",
+    }), encoding="utf-8")
+    staff_path = config / "staff-users.json"
+    staff_path.write_text("[]", encoding="utf-8")
+
+    async with db_session_factory() as session:
+        connection = await session.connection()
+        await connection.run_sync(lambda conn: accounts.create(conn, checkfirst=True))
+        await provision_accounts(session, tmp_path)
+        await session.commit()
+
+    clerk_email = "clerk@native-test.invalid"
+    staff_path.write_text(json.dumps([{
+        "email": clerk_email,
+        "display_name": "Clerk",
+        "role": "clerk",
+        "active": True,
+    }]), encoding="utf-8")
+
+    async with db_session_factory() as session_one, db_session_factory() as session_two:
+        clerk_query = select(User).where(func.lower(User.email) == clerk_email)
+        assert await session_one.scalar(clerk_query) is None
+        assert await session_two.scalar(clerk_query) is None
+
+        principal = NativeDesktopPrincipal(
+            email=clerk_email,
+            display_name="Clerk",
+            role="clerk",
+            expires_at_unix_seconds=int(time.time()) + 300,
+        )
+        proof = "a" * 64
+
+        async def identity_sync(session):
+            await provision_accounts(session, tmp_path)
+
+        request = SimpleNamespace(
+            app=SimpleNamespace(state=SimpleNamespace(
+                desktop_profile_root=tmp_path,
+                desktop_domain_enabled=True,
+                desktop_enabled_modules={"townlight_comms", "townlight_library"},
+                desktop_identity_sync=identity_sync,
+            )),
+            state=SimpleNamespace(),
+        )
+
+        async def resolve_actor(session, module_id):
+            actor = await mapped_native_actor(request, session, proof, module_id)
+            return actor.id
+
+        with shared_staff_scope(tmp_path, proof, principal):
+            actor_ids = await asyncio.wait_for(asyncio.gather(
+                resolve_actor(session_one, "townlight_comms"),
+                resolve_actor(session_two, "townlight_library"),
+            ), timeout=5)
+
+        assert actor_ids[0] == actor_ids[1]
+        await session_one.rollback()
+        await session_two.rollback()
+
+    async with db_session_factory() as session:
+        users = (await session.scalars(
+            select(User).where(func.lower(User.email) == clerk_email)
+        )).all()
+        assert len(users) == 1
+        account_count = await session.scalar(
+            select(func.count()).select_from(accounts).where(
+                func.lower(accounts.c.email) == clerk_email
+            )
+        )
+        assert account_count == 1
+        account_user_id = await session.scalar(
+            select(accounts.c.user_id).where(
+                func.lower(accounts.c.email) == clerk_email
+            )
+        )
+        assert account_user_id == actor_ids[0]
+        assert users[0].id == actor_ids[0]
+
+        with shared_staff_scope(tmp_path, proof, principal):
+            retried = await mapped_native_actor(request, session, proof, "townlight_comms")
+        assert retried.id == actor_ids[0]

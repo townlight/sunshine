@@ -542,3 +542,10 @@ Workflow subject index
 - Full AGPL text
 
 The resident portal is deployed separately. See the Townlight Portal Guide for its workflow and acceptance limits.
+
+Windows 1.11.0.1 department integration
+
+On the Windows 1.11.0.1 beta, approved Library programs and Elections information publish through Communications with a Records archive for each revision. Records roles govern archive access. Utilities public replies appear in 311 request history. Hosted fresh testing verified all three workflows, and the two-PC test verified the Library archive after desktop exit. Full two-PC acceptance remains open.
+
+Signed beta release: https://github.com/townlight/townlight/releases/tag/townlight-windows-v1.11.0.1
+Department workflow guide: https://github.com/townlight/townlight/blob/main/docs/windows-utilities-library-elections.md

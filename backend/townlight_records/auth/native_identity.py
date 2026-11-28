@@ -27,8 +27,21 @@ async def mapped_native_actor(request, session, proof, module_id: str) -> User:
             await sync(session)
             await session.flush()
             user = await session.scalar(select(User).where(func.lower(User.email) == principal.email))
+            # Validate before commit so reconciliation writes are only durable
+            # when the mapped actor is safe to use. Committing here prevents an
+            # outer request's uncommitted native_account_links write from
+            # self-deadlocking a nested Library request that reconciles the
+            # same fresh actor on its own SQL session.
+            if (user is None or not user.is_active or user.must_change_password
+                    or user.role != expected_role):
+                raise ValueError
+            await session.commit()
         except ValueError:
+            await session.rollback()
             raise HTTPException(403, "Native identity reconciliation requires administrator attention.") from None
+        except Exception:
+            await session.rollback()
+            raise
     if (user is None or not user.is_active or user.must_change_password or user.role != expected_role):
         raise HTTPException(403, "The native account has no valid mapped identity.")
     request.state.native_actor_id = user.id
